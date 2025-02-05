@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=1400"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>신세계 관리자</title>
+    <!-- CSS files -->
+    <link href="/resources/static/dist/css/tabler.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/tabler-vendors.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/>
+    <link rel="shortcut icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <script src="/resources/static/dist/js/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/resources/static/dist/libs/litepicker/dist/litepicker.js?1674944402"></script>
+    <script src="/resources/static/dist/js/jquery.validate.js"></script>
+    <!-- Tabler Core -->
+    
+    <script src="/resources/static/dist/js/common.js"></script>
+    <style>
+    :root {
+        --theme-admin-type: #cf3f42;
+        /* #cf3f42 통합관리자 컬러 코드*/
+        /* #4b9b52 협력회사 컬러 코드 */
+        /* #214c9c 고객사 컬러 코드 */
+    }
+    </style>
+</head>
+<body>
+
+<div class="popup-wrapper">
+    <h2 class="popup-title">교환관리</h2>
+    <form action="">
+    <div class="row">
+        <div class="content-area">
+            <div class="card table-mb-card">
+                <div class="table-responsive">
+                    <table class="table table-vcenter table-line card-table label-control text-center table-mb">
+                        <colgroup>
+                            <col style="width:100px;">
+                            <col style="width:100px;">
+                            <col style="width:75px;">
+                            <col>
+                            <col style="width:60px;">
+                            <col style="width:75px;">
+                            <col style="width:75px;">
+                            <col style="width:75px;">
+                            <col style="width:75px;">
+                            <col style="width:70px;">
+                            <col style="width:70px;">
+                        </colgroup>
+                        <thead class="dark">
+                            <tr>
+                                <th>번호</th>
+                                <th>협력회사</th>
+                                <th>상품별<br/>주문번호</th>
+                                <th>상품</th>
+                                <th>수량</th>
+                                <th>판매가</th>
+                                <th>(+) 개별<br/> 배송비</th>
+                                <th>(-) 상품별<br/> 쿠폰할인</th>
+                                <th>(=)  주문<br/>금액</th>
+                                <th>주문<br/>상태</th>
+                                <th>반품/교환<br/>상태</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>O000000002800871-01</td>
+                                <td><a href="javascript:;" class="link">㈜베네파트너</a></td>
+                                <td>3201150</td>
+                                <td class="text-start">
+                                    <a href="javascript:;" class="link">P0000001234</a>
+                                    <a href="javascript:;" class="link">
+                                    [테팔] 팬&냄비 PTFE IH 뉴 셰프터치 2종세트 (프라이팬 20cm + 28cm)<br/>
+                                    ㆍ기본세트 / 블랙
+                                    </a>
+                                </td>
+                                <td>2</td>
+                                <td class="text-end">80,000</td>
+                                <td class="text-end">+5,000</td>
+                                <td class="text-end">-10,000</td>
+                                <td class="text-end">150,000</td>
+                                <td>주문취소</td>
+                                <td>-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-container">
+            <div class="card form_area">
+                <div class="card-header"><h3 class="card-title">교환상태</h3></div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="form_item size_xl">
+                            <div class="card">
+                                <div class="card-header">
+                                    <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs" role="tablist">
+                                        <li class="nav-item" role="presentation">
+                                            <a href="#tap1" class="nav-link active" data-bs-toggle="tab" aria-selected="true" role="tab" tabindex="-1">01. 교환신청/취소</a>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <a href="#tap2" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1">02. 교환진행/불가</a>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <a href="#tap3" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1">03. 교환거부/완료</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="card-body">
+                                    <div class="tab-content">
+                                        <!-- 교환신청/취소 -->
+                                        <div class="tab-pane active show" id="tap1" role="tabpanel">
+                                            <small class="form-hint">
+                                                ! 교환신청은 고객 및 통합관리만 신청이 가능합니다.<br/>
+                                                ! 교환신청 후 교환진행 전 단계까지 신청철회가 가능합니다.
+                                            </small>
+                                            <div class="row m-0 mt-2">
+                                                <div class="form_item">
+                                                    <div class="subheader mb-1">제품사진</div>
+                                                    <div class="subcontent">
+                                                        <div class="input-group">
+                                                            <label class="btn btn-sm btn-secondary">
+                                                                <input type="file" onchange="FileUploader.handleFileUpload(event, 'returnStatus')" max-size="10" max-count="5" class="hidden_input">
+                                                                제품사진 첨부하기
+                                                            </label>
+                                                            <span class="input-group-text"><span class="count multiple_count">0</span>개(<span class="size multiple_size">0MB</span>)</span>
+                                                        </div>
+                                                        <div class="file_photo_view multiple_preview">
+                                                            <!-- <div class="item">
+                                                                <div class="thum"><img src="../../assets/images/card_kb.jpg"/></div>
+                                                                <button type="button" class="remove_btn">파일삭제</button>
+                                                            </div> -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form_item">
+                                                    <div class="subheader mb-1 required">교환신청 사유</div>
+                                                    <div class="subcontent">
+                                                        <div class="input-group">
+                                                            <select name="" id="" class="form-select select-display">
+                                                                <option value="단순변심에 의한 취소" selected>단순변심에 의한 취소</option>
+                                                                <option value="재 주문">재 주문</option>
+                                                                <option value="사이트/색상 변경">사이트/색상 변경</option>
+                                                                <option value="최저가 아님">최저가 아님</option>
+                                                                <option value="직접입력" select-display="return_reason_input">직접입력</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="input-group return_reason_input" style="display: none;"><!-- 직접입력 -->
+                                                            <input type="text" class="form-control" placeholder="사유를 직접입력해주세요.">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="list-btns justify-content-between mt-3">
+                                                <div>
+                                                    <button type="button" class="btn btn-primary">교환취소</button>
+                                                </div>
+                                                <div>
+                                                    <button type="button" class="btn btn-primary">교환신청</button>
+                                                    <button type="button" class="btn btn-secondary" onclick="window.close();">닫기</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- //교환신청/취소 -->
+                                        <!-- 교환진행/불가 -->
+                                        <div class="tab-pane" id="tap2" role="tabpanel">
+                                            <small class="form-hint">
+                                                ! 교환진행 시 협력회사에서 고객에게 직접 연락하여 교환주소 및 배송비 등 을 협의해주세요.<br/>
+                                                ! 협력회사 교환불가 처리에 대한 최종결정은 신세계담당자가 진행합니다.<br/>
+                                                ! 신세계담당자가 최종 교환불가 확정 시 고객에게 교환불가 사유를 안내합니다.
+                                            </small>
+                                            <div class="row m-0 mt-2">
+                                                <div class="form_item">
+                                                    <div class="subheader mb-1 required">교환불가 사유</div>
+                                                    <div class="subcontent">
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control" placeholder="교환불가 사유를 입력해주세요.">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="list-btns justify-content-between mt-3">
+                                                <div>
+                                                    <button type="button" class="btn btn-primary">불가확정</button>
+                                                </div>
+                                                <div>
+                                                    <button type="button" class="btn btn-primary">교환불가</button>
+                                                    <button type="button" class="btn btn-primary">교환진행</button>
+                                                    <button type="button" class="btn btn-secondary" onclick="window.close();">닫기</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- //교환진행/불가 -->
+                                        <!-- 교환거부/완료 -->
+                                        <div class="tab-pane" id="tap3" role="tabpanel">
+                                            <small class="form-hint">
+                                                ! 협력회사 교환거부 처리에 대한 최종결정은 신세계담당자가 진행합니다.<br/>
+                                                ! 신세계담당자가 최종 교환거부 확정 시 고객에게 교환불가 사유를 안내합니다.
+                                            </small>
+                                            <div class="row m-0 mt-2">
+                                                <div class="form_item">
+                                                    <div class="subheader mb-1">제품사진</div>
+                                                    <div class="subcontent">
+                                                        <div class="input-group">
+                                                            <label class="btn btn-sm btn-secondary">
+                                                                <input type="file" onchange="FileUploader.handleFileUpload(event, 'returnRefusal')" max-size="10" max-count="5" class="hidden_input">
+                                                                제품사진 첨부하기
+                                                            </label>
+                                                            <span class="input-group-text"><span class="count multiple_count">0</span>개(<span class="size multiple_size">0MB</span>)</span>
+                                                        </div>
+                                                        <div class="file_photo_view multiple_preview">
+                                                            <!-- <div class="item">
+                                                                <div class="thum"><img src="../../assets/images/card_kb.jpg"/></div>
+                                                                <button type="button" class="remove_btn">파일삭제</button>
+                                                            </div> -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form_item">
+                                                    <div class="subheader mb-1 required">교환거부사유</div>
+                                                    <div class="subcontent">
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control" placeholder="교환거부 사유를 입력해주세요.">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="list-btns justify-content-between mt-3">
+                                                <div>
+                                                    <button type="button" class="btn btn-primary">거부확정</button>
+                                                </div>
+                                                <div>
+                                                    <button type="button" class="btn btn-primary">교환거부</button>
+                                                    <button type="button" class="btn btn-primary">교환완료</button>
+                                                    <button type="button" class="btn btn-secondary" onclick="window.close();">닫기</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- //교환거부/완료 -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-area">
+            <div class="card form_area">
+                <div class="card-header"><h3 class="card-title">이력관리</h3></div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-vcenter table-line card-table text-center table-mb tr_hover">
+                            <thead class="dark">
+                                <tr>
+                                    <th>번호</th>
+                                    <th>상태</th>
+                                    <th>사유</th>
+                                    <th>처리자</th>
+                                    <th>거래일(처리일)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>교환신청</td>
+                                    <td class="text-start">사이즈 교환 요청</td>
+                                    <td>user_id</td>
+                                    <td>2024-09-26 11:11:11</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+</div>
+<script src="/resources/static/dist/js/tabler.min.js"></script>
+
+
+<script>
+FileUploader.initPhotoCollection('returnStatus');
+FileUploader.initPhotoCollection('returnRefusal');
+const returnStatus = FileUploader.getPhotoCollection('returnStatus');
+const returnRefusal = FileUploader.getPhotoCollection('returnRefusal');
+
+
+console.log(returnStatus);//교환신청 취소 담긴파일 확인
+console.log(returnRefusal);//교환거부완료 취소 담긴파일 확인
+</script>
+</body>
+</html>

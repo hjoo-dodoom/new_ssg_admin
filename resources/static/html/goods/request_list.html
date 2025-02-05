@@ -1,0 +1,875 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=1400"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>신세계 관리자</title>
+    <!-- CSS files -->
+    <link href="/resources/static/dist/css/tabler.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/tabler-vendors.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/>
+    <link rel="shortcut icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <script src="/resources/static/dist/js/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/resources/static/dist/libs/litepicker/dist/litepicker.js?1674944402"></script>
+    <script src="/resources/static/dist/js/jquery.validate.js"></script>
+    <!-- Tabler Core -->
+    
+    <script src="/resources/static/dist/js/common.js"></script>
+    <style>
+    :root {
+        --theme-admin-type: #cf3f42;
+        /* #cf3f42 통합관리자 컬러 코드*/
+        /* #4b9b52 협력회사 컬러 코드 */
+        /* #214c9c 고객사 컬러 코드 */
+    }
+    </style>
+</head>
+<body>
+
+<!-- 공통영역1 -->
+<aside id="header" class="navbar navbar-vertical navbar-expand-lg header_left"></aside>
+<script>
+    //html include
+    //헤더&푸터 개발 완료시 삭제해주세요
+    function includeFile(path, targetId) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', path, true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById(targetId).innerHTML = xhr.responseText;
+        }
+    };
+    xhr.send();
+    }
+    var includePath = "/resources/static/layout/header.html";
+    includeFile(includePath, 'header');
+</script>
+<!-- //공통영역1 -->
+
+<div class="page-wrapper">
+    <!-- 공통영역2 -->
+    <div class="member_info">
+        <div class="info">
+            <span class="login_session">로그인 유지시간 <strong>30:00</strong> <button type="button" class="btn btn-xs btn-primary">연장</button></span>
+            <span>관리권한 : 최상위관리자</span>
+            <span>방문횟수 : 1,000</span>
+            <span>최근방문IP : 12.1.123.12</span>
+            <button type="button" class="btn btn-xs btn-secondary">메뉴얼다운로드</button>
+            <button type="button" class="btn btn-xs btn-secondary">기본양식다운로드</button>
+            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/admin_modify_pop.html', '900', '640')">관리자정보수정</button>
+            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/terms_pop.html', '600', '540')">이용약관</button>
+        </div>
+        <div>
+            <a href="javascript:;" class="logout">홍길동(admin_01)님 로그아웃</a>
+            <a href="javascript:;" class="home">홈으로</a>
+        </div>
+    </div>
+
+    <!-- 페이지 히스토리 탭 -->
+    <div class="page-history">
+        <div class="history_toggle">
+            <label class="form-check form-switch">
+                <span class="form-check-label">History</span>
+                <input id="historyUse" class="form-check-input" type="checkbox" >
+            </label>
+        </div>
+        <button class="close_all" type="button" title="히스토리 모두 삭제" onclick="historyRemoveAll();">히스토리 모두 삭제</button>
+    </div>
+    <!-- //공통영역2 -->
+
+    <div class="page-header d-print-none">
+        <div class="container-xl">
+            <div class="row g-2 align-items-center">
+                <div class="col">
+                    <!-- Page pre-title -->
+                    <div class="page-pretitle">
+                        홈 > 상품 > 상품목록 > 상품승인목록
+                    </div>
+                    <h2 class="page-title">
+                    상품승인목록
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page body -->
+    <div class="page-body search_left">
+        <div class="container-xl">
+            <div class="row row-cards aside_wrap">
+
+                <!-- 검색시작 -->
+                <div class="aside-search" id="asideSearch">
+                    <form action="" class="card">
+                        <div class="card-body">
+                            <div class="display_type">
+                                <button type="button" class="left active" title="검색영역 좌측배치">검색영역 좌측배치</button>
+                                <button type="button" class="top " title="검색영역 상단배치">검색영역 상단배치</button>
+                                <button type="button" class="right" title="검색영역 우측배치">검색영역 우측배치</button>
+                            </div>
+                            <div class="search_options">
+                                <div class="option_item">
+                                    <div class="subheader">고객사</div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <select class="form-select col-6">
+                                                <option value="">전체</option>
+                                                <option value="2">정상승인</option>
+                                                <option value="1">가승인</option>
+                                                <option value="3">정지</option>
+                                                <option value="4">만료</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-6">
+                                            <select class="form-select col-6">
+                                                <option value="">전체</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12">
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox">
+                                            <span class="form-check-label">제외</span>
+                                        </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="option_item">
+                                    <div class="subheader">협력회사</div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <select class="form-select col-6">
+                                                <option value="sellName" selected="">업체명</option>
+                                                <option value="sellId">아이디</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-6">
+                                            <input type="text" class="form-control">
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="partnerOption">
+                                                <span class="form-check-label">매장제외</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="option_item">
+                                    <div class="subheader">가격대</div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <select class="form-select col-6">
+                                                <option value="prPriceBuy" selected="">제안가</option>
+                                                <option value="prPriceSell">판매가</option>
+                                                <option value="prPriceInterSell">인터넷가</option>
+                                                <option value="prPriceOpenSell">소비자가</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-5-5">
+                                            <input type="text" class="form-control">
+                                        </div>
+                                        <div class="col-1 text-center tilde">
+                                            ~
+                                        </div>
+                                        <div class="col-5-5">
+                                            <input type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="option_item">
+                                    <div class="subheader">판매가/마진율</div>
+                                    <div class="row">
+                                        <div class="col-5-5">
+                                            <input type="text" class="form-control">
+                                        </div>
+                                        <div class="col-1 text-center tilde">
+                                            ~
+                                        </div>
+                                        <div class="col-5-5">
+                                            <input type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="option_item">
+                                    <div class="subheader">몰 구분</div>
+                                    <div>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="giftcode" checked="">
+                                            <span class="form-check-label">전체</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="giftcode" value="1">
+                                            <span class="form-check-label">폐쇄몰</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="giftcode" value="2">
+                                            <span class="form-check-label">포인트몰</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="giftcode" value="3">
+                                            <span class="form-check-label">사은품몰</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="option_item">
+                                    <div class="subheader">상품등록</div>
+                                    <div>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="copyYn" checked="">
+                                            <span class="form-check-label">전체</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="copyYn" value="1">
+                                            <span class="form-check-label">복사상품</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="copyYn" value="0">
+                                            <span class="form-check-label">원본상품</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="option_item">
+                                    <div class="subheader">배송형식</div>
+                                    <div>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="srchShipType" checked="">
+                                            <span class="form-check-label">전체</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="srchShipType" value="1">
+                                            <span class="form-check-label">개별배송</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="srchShipType" value="2">
+                                            <span class="form-check-label">일괄배송</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="option_item">
+                                    <div class="subheader">배송비부담</div>
+                                    <div>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="srchShipcharge_type" checked="">
+                                            <span class="form-check-label">전체</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="srchShipcharge_type" value="1">
+                                            <span class="form-check-label">무료</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="srchShipcharge_type" value="2">
+                                            <span class="form-check-label">기본배송비</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="srchShipcharge_type" value="3">
+                                            <span class="form-check-label">상품별 별도 배송비</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="option_item aside_50">
+                                    <div class="subheader">포인트사용</div>
+                                    <div>
+                                        <select class="form-select">
+                                            <option value="">전체</option>
+                                            <option value="1">모두사용</option>
+                                            <option value="2">포인트불가</option>
+                                            <option value="3">포인트만</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="option_item aside_50">
+                                    <div class="subheader">승인</div>
+                                    <div>
+                                        <select class="form-select" disabled>
+                                            <option value="">전체</option>
+                                            <option value="1" selected="">승인</option>
+                                            <option value="2">대기</option>
+                                            <option value="3">반송</option>
+                                            <option value="4">판매종료</option>
+                                            <option value="5">일시품절</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="option_item aside_50">
+                                    <div class="subheader">과세</div>
+                                    <div>
+                                        <select class="form-select">
+                                            <option value="">전체</option>
+                                            <option value="1">과세</option>
+                                            <option value="2">면세</option>
+                                            <option value="3">유가증권</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="option_item aside_50">
+                                    <div class="subheader">옵션(재고관리)</div>
+                                    <div>
+                                        <select class="form-select">
+                                            <option value="">전체</option>
+                                            <option value="1">상시판매</option>
+                                            <option value="4">단품수량품(색상, 사이즈)</option>
+                                            <option value="2">수량품</option>
+                                            <option value="3">단가수량품</option>
+                                            <option value="5">일시품절</option>
+                                            <option value="6">판매종료</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="option_item">
+                                    <div class="subheader">검색</div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <select class="form-select">
+                                                <option value="prdNm" selected="">상품명</option>
+                                                <option value="prdCode">상품코드</option>
+                                                <option value="modelNm">모델명</option>
+                                                <option value="sellNm">협력회사명</option>
+                                                <option value="ptnNm">고객사명</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-6">
+                                            <input type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="option_item">
+                                    <div class="subheader">검색</div>
+                                    <div>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" name="notPtnProduct">
+                                            <span class="form-check-label">미배정상품</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" name="lockyn">
+                                            <span class="form-check-label">잠긴상품</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="search_btns">
+                                <button class="btn btn-primary">
+                                    검색
+                                </button>
+                                <a href="#" class="btn btn-secondary">
+                                    검색 초기화
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                    
+                </div>
+                <!-- //검색시작 -->
+
+                <!-- 콘텐츠 시작 -->
+                <div class="content-area">
+                    <div class="cates_list">
+                        <div class="item"><a href="javascript:;" class="active">전체상품</a></div>
+                        <div class="item"><a href="javascript:;">가전/IR</a></div>
+                        <div class="item"><a href="javascript:;">생활/주방/가구/건강</a></div>
+                        <div class="item"><a href="javascript:;">스포츠/레저/자동차</a></div>
+                        <div class="item"><a href="javascript:;">의류/잡화</a></div>
+                        <div class="item"><a href="javascript:;">화장품/이미용</a></div>
+                        <div class="item"><a href="javascript:;">유아동/도서/문구</a></div>
+                        <div class="item"><a href="javascript:;">식품</a></div>
+                        <div class="item"><a href="javascript:;">상품권</a></div>
+                        <div class="item"><a href="javascript:;">MRO</a></div>
+                    </div>
+
+                    <div class="list-btns justify-content-between mb-1">
+                        <div>
+                            <a href="/resources/static/html/goods/goods_reg.html" class="btn btn-secondary">상품삭제</a>
+                            <a href="/resources/static/html/goods/goods_reg.html" class="btn btn-warning">상품잠금</a>
+                            <a href="/resources/static/html/goods/goods_reg.html" class="btn btn-secondary">상품잠금해제</a>
+                        </div>
+                    </div>
+                    <div class="list-btns justify-content-between mb-1">
+                        <div>
+                            <div class="list_count">* 전체 : <strong class="text-primary">111,592</strong>건 / 검색 : <strong class="text-primary">50</strong>건</div>
+                        </div>
+                        <div>
+                            <a href="javascript:;" class="icon_btn clib ms-2 float-start">제안저장</a>
+                            <a href="javascript:;" class="icon_btn excel ms-2 float-start">엑셀저장</a>
+                            <a href="javascript:;" class="icon_btn excel ms-2 float-start">엑셀저장(옵션별)</a>
+                            <a href="javascript:;" class="icon_btn excel ms-2 float-start">엑셀저장(상세제외)</a>
+                            <select class="form-select ms-2 float-start w-auto">
+                                <option selected>등록일 역순 ⬆</option>
+                                <option>등록일 순 ⬇</option>
+                                <option>수정일 역순⬆</option>
+                                <option>수정일 순 ⬇</option>
+                                <option>접속일 역순⬆</option>
+                                <option>접속일 순 ⬇</option>
+                            </select>
+                            <select class="form-select ms-2 float-start w-auto">
+                                <option selected>20개씩 보기</option>
+                                <option>30개씩 보기</option>
+                                <option>50개씩 보기</option>
+                                <option>100개씩 보기</option>
+                                <option>200개씩 보기</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="card table-mb-card">
+                        <div class="list-btns justify-content-between table_actions">
+                            <div>
+                                <div class="list_count">
+                                    <span class="check_pred_action">선택한 상품을</span>
+                                    <select class="form-select w-auto d-inline-block ms-1">
+                                        <option value="">상품상태</option>
+                                        <option value="1">승인</option>
+                                        <option value="2">대기</option>
+                                        <option value="3">반송</option>
+                                        <option value="4">판매종료</option>
+                                        <option value="5">일시품절</option>
+                                    </select>
+                                    <button type="button" class="btn btn-sm ms-1 btn-outline-secondary">일괄처리</button>
+                                </div>
+                            </div>
+                            <div>
+                                <select class="form-select w-auto d-inline-block ms-1">
+                                    <option>고객사</option>
+                                </select>
+                                <button type="button" class="btn btn-sm ms-1 btn-outline-secondary">쇼핑몰 복사</button>
+                                <button type="button" class="btn btn-sm ms-1 btn-outline-secondary">쇼핑몰 판매 삭제</button>
+                                <button type="button" class="btn btn-sm ms-1 btn-outline-secondary">쇼핑몰 판매</button>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-vcenter table-line card-table text-center table-mb label-control tr_hover">
+                                <thead>
+                                    <tr>
+                                        <th class="check-all-box">
+                                            <label class="form-check form-check-inline m-0">
+                                                <input class="form-check-input check-all" type="checkbox">
+                                            </label>
+                                        </th>
+                                        <th>승인</th>
+                                        <th>구분</th>
+                                        <th>카테고리</th>
+                                        <th>상품코드</th>
+                                        <th>상품명</th>
+                                        <th>상품가</th>
+                                        <th>협력회사명</th>
+                                        <th>옵션</th>
+                                        <th>배송</th>
+                                        <th>과세</th>
+                                        <th>포인트</th>
+                                        <th style="min-width:80px;max-width:80px;width:80px;">쇼핑몰</th>
+                                        <th style="min-width:60px;max-width:60px;width:60px;">상태</th>
+                                        <th style="min-width:80px;max-width:80px;width:80px;">최종등록일</th>
+                                        <th style="min-width:80px;max-width:80px;width:80px;">최종수정일</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- 
+                                        상태에 따라 tr class
+                                        border_blue, border_red, border_green
+                                        bg_blue, bg_red, bg_yellow, bg_gray
+                                    -->
+                                    <tr>
+                                        <td colspan="16" class="list-empty">
+                                            내역이 존재하지 않습니다.
+                                        </td>
+                                    </tr>
+                                    <tr class="border_blue bold">
+                                        <td>
+                                            <label class="form-check form-check-inline m-0">
+                                                <input class="form-check-input" type="checkbox">
+                                            </label>
+                                        </td>
+                                        <td>대기</td>
+                                        <td>폐쇄몰</td>
+                                        <td>가전/IT>생활가전>청소기</td>
+                                        <td>
+                                            <a href="/resources/static/html/goods/goods_reg.html" class="list_link">12341234123</a>
+                                            <div class="thum_hover">
+                                                <img src="/resources/static/dist/img/img2.jpg" alt="">
+                                            </div>
+                                        </td>
+                                        <td><a href="/resources/static/html/goods/goods_reg.html" class="list_link prd_name">[카페]카페머그 45ml [카페]카페머그 45ml [카페]카페머그 45ml[카페45ml [카페]카페머그 45ml[카페]카페머그 45ml [카페]카페머그 45ml [카페]카페머그 45ml</a></td>
+                                        <td>
+                                            <ul class="list_prc">
+                                                <li>제안가: 100,000</li>
+                                                <li>판매가: 100,000</li>
+                                                <li>인터넷가: 100,000</li>
+                                                <li>소비자가: 100,000</li>
+                                            </ul>
+                                            <div class="hover">
+                                                <div class="m">마진율: 10%</div>
+                                                <div class="s">할인율: 30%</div>
+                                            </div>
+                                        </td>
+                                        <td>11</td>
+                                        <td>수량품</td>
+                                        <td>개별배송</td>
+                                        <td>과세</td>
+                                        <td>모두사용</td>
+                                        <td>고객사(3)<br/><button type="button" class="btn btn-xs btn-secondary">상세</button></td>
+                                        <td>
+                                            <button type="button" class="btn btn-xs btn-info d-inline-block mt-1">미리</button>
+                                            <button type="button" class="btn btn-xs btn-success d-inline-block mt-1">상태</button>
+                                            <button type="button" class="btn btn-xs btn-primary d-inline-block mt-1">제안</button>
+                                        </td>
+                                        <td>2024-01-01 11:11:11</td>
+                                        <td>2024-01-01 11:11:11</td>
+                                    </tr>
+                                    <tr class="bg_blue bold">
+                                        <td>
+                                            <label class="form-check form-check-inline m-0">
+                                                <input class="form-check-input" type="checkbox">
+                                            </label>
+                                        </td>
+                                        <td>대기</td>
+                                        <td>폐쇄몰</td>
+                                        <td>가전/IT>생활가전>청소기</td>
+                                        <td>
+                                            <a href="/resources/static/html/goods/goods_reg.html" class="list_link">12341234123</a>
+                                            <div class="thum_hover">
+                                                <img src="/resources/static/dist/img/img2.jpg" alt="">
+                                            </div>
+                                        </td>
+                                        <td><a href="/resources/static/html/goods/goods_reg.html" class="list_link prd_name">[카페]카페머그 45ml [카페]카페머그 45ml [카페]카페머그 45ml[카페45ml [카페]카페머그 45ml[카페]카페머그 45ml [카페]카페머그 45ml [카페]카페머그 45ml</a></td>
+                                        <td>
+                                            <ul class="list_prc">
+                                                <li>제안가: 100,000</li>
+                                                <li>판매가: 100,000</li>
+                                                <li>인터넷가: 100,000</li>
+                                                <li>소비자가: 100,000</li>
+                                            </ul>
+                                            <div class="hover">
+                                                <div class="m">마진율: 10%</div>
+                                                <div class="s">할인율: 30%</div>
+                                            </div>
+                                        </td>
+                                        <td>11</td>
+                                        <td>수량품</td>
+                                        <td>개별배송</td>
+                                        <td>과세</td>
+                                        <td>모두사용</td>
+                                        <td>고객사(3)<br/><button type="button" class="btn btn-xs btn-secondary">상세</button></td>
+                                        <td>
+                                            <button type="button" class="btn btn-xs btn-info d-inline-block mt-1">미리</button>
+                                            <button type="button" class="btn btn-xs btn-success d-inline-block mt-1">상태</button>
+                                            <button type="button" class="btn btn-xs btn-primary d-inline-block mt-1">제안</button>
+                                        </td>
+                                        <td>2024-01-01 11:11:11</td>
+                                        <td>2024-01-01 11:11:11</td>
+                                    </tr>
+                                    <tr class="bg_pink bold">
+                                        <td>
+                                            <label class="form-check form-check-inline m-0">
+                                                <input class="form-check-input" type="checkbox">
+                                            </label>
+                                        </td>
+                                        <td>대기</td>
+                                        <td>폐쇄몰</td>
+                                        <td>가전/IT>생활가전>청소기</td>
+                                        <td>
+                                            <a href="/resources/static/html/goods/goods_reg.html" class="list_link">12341234123</a>
+                                            <div class="thum_hover">
+                                                <img src="/resources/static/dist/img/img2.jpg" alt="">
+                                            </div>
+                                        </td>
+                                        <td><a href="/resources/static/html/goods/goods_reg.html" class="list_link prd_name">[카페]카페머그 45ml [카페]카페머그 45ml [카페]카페머그 45ml[카페45ml [카페]카페머그 45ml[카페]카페머그 45ml [카페]카페머그 45ml [카페]카페머그 45ml</a></td>
+                                        <td>
+                                            <ul class="list_prc">
+                                                <li>제안가: 100,000</li>
+                                                <li>판매가: 100,000</li>
+                                                <li>인터넷가: 100,000</li>
+                                                <li>소비자가: 100,000</li>
+                                            </ul>
+                                            <div class="hover">
+                                                <div class="m">마진율: 10%</div>
+                                                <div class="s">할인율: 30%</div>
+                                            </div>
+                                        </td>
+                                        <td>11</td>
+                                        <td>수량품</td>
+                                        <td>개별배송</td>
+                                        <td>과세</td>
+                                        <td>모두사용</td>
+                                        <td>고객사(3)<br/><button type="button" class="btn btn-xs btn-secondary">상세</button></td>
+                                        <td>
+                                            <button type="button" class="btn btn-xs btn-info d-inline-block mt-1">미리</button>
+                                            <button type="button" class="btn btn-xs btn-success d-inline-block mt-1">상태</button>
+                                            <button type="button" class="btn btn-xs btn-primary d-inline-block mt-1">제안</button>
+                                        </td>
+                                        <td>2024-01-01 11:11:11</td>
+                                        <td>2024-01-01 11:11:11</td>
+                                    </tr>
+                                    <tr class="bg_yellow bold">
+                                        <td>
+                                            <label class="form-check form-check-inline m-0">
+                                                <input class="form-check-input" type="checkbox">
+                                            </label>
+                                        </td>
+                                        <td>대기</td>
+                                        <td>폐쇄몰</td>
+                                        <td>가전/IT>생활가전>청소기</td>
+                                        <td>
+                                            <a href="/resources/static/html/goods/goods_reg.html" class="list_link">12341234123</a>
+                                            <div class="thum_hover">
+                                                <img src="/resources/static/dist/img/img2.jpg" alt="">
+                                            </div>
+                                        </td>
+                                        <td><a href="/resources/static/html/goods/goods_reg.html" class="list_link prd_name">[카페]카페머그 45ml [카페]카페머그 45ml [카페]카페머그 45ml[카페45ml [카페]카페머그 45ml[카페]카페머그 45ml [카페]카페머그 45ml [카페]카페머그 45ml</a></td>
+                                        <td>
+                                            <ul class="list_prc">
+                                                <li>제안가: 100,000</li>
+                                                <li>판매가: 100,000</li>
+                                                <li>인터넷가: 100,000</li>
+                                                <li>소비자가: 100,000</li>
+                                            </ul>
+                                            <div class="hover">
+                                                <div class="m">마진율: 10%</div>
+                                                <div class="s">할인율: 30%</div>
+                                            </div>
+                                        </td>
+                                        <td>11</td>
+                                        <td>수량품</td>
+                                        <td>개별배송</td>
+                                        <td>과세</td>
+                                        <td>모두사용</td>
+                                        <td>고객사(3)<br/><button type="button" class="btn btn-xs btn-secondary">상세</button></td>
+                                        <td>
+                                            <button type="button" class="btn btn-xs btn-info d-inline-block mt-1">미리</button>
+                                            <button type="button" class="btn btn-xs btn-success d-inline-block mt-1">상태</button>
+                                            <button type="button" class="btn btn-xs btn-primary d-inline-block mt-1">제안</button>
+                                        </td>
+                                        <td>2024-01-01 11:11:11</td>
+                                        <td>2024-01-01 11:11:11</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label class="form-check form-check-inline m-0">
+                                                <input class="form-check-input" type="checkbox">
+                                            </label>
+                                        </td>
+                                        <td>대기</td>
+                                        <td>폐쇄몰</td>
+                                        <td>가전/IT>생활가전>청소기</td>
+                                        <td>
+                                            <a href="/resources/static/html/goods/goods_reg.html" class="list_link">12341234123</a>
+                                            <div class="thum_hover">
+                                                <img src="/resources/static/dist/img/img2.jpg" alt="">
+                                            </div>
+                                        </td>
+                                        <td><a href="/resources/static/html/goods/goods_reg.html" class="list_link prd_name">[카페]카페머그 45ml [카페]카페머그 45ml [카페]카페머그 45ml[카페45ml [카페]카페머그 45ml[카페]카페머그 45ml [카페]카페머그 45ml [카페]카페머그 45ml</a></td>
+                                        <td>
+                                            <ul class="list_prc">
+                                                <li>제안가: 100,000</li>
+                                                <li>판매가: 100,000</li>
+                                                <li>인터넷가: 100,000</li>
+                                                <li>소비자가: 100,000</li>
+                                            </ul>
+                                            <div class="hover">
+                                                <div class="m">마진율: 10%</div>
+                                                <div class="s">할인율: 30%</div>
+                                            </div>
+                                        </td>
+                                        <td>11</td>
+                                        <td>수량품</td>
+                                        <td>개별배송</td>
+                                        <td>과세</td>
+                                        <td>모두사용</td>
+                                        <td>고객사(3)<br/><button type="button" class="btn btn-xs btn-secondary">상세</button></td>
+                                        <td>
+                                            <button type="button" class="btn btn-xs btn-info d-inline-block mt-1">미리</button>
+                                            <button type="button" class="btn btn-xs btn-success d-inline-block mt-1">상태</button>
+                                            <button type="button" class="btn btn-xs btn-primary d-inline-block mt-1">제안</button>
+                                        </td>
+                                        <td>2024-01-01 11:11:11</td>
+                                        <td>2024-01-01 11:11:11</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label class="form-check form-check-inline m-0">
+                                                <input class="form-check-input" type="checkbox">
+                                            </label>
+                                        </td>
+                                        <td>대기</td>
+                                        <td>폐쇄몰</td>
+                                        <td>가전/IT>생활가전>청소기</td>
+                                        <td>
+                                            <a href="/resources/static/html/goods/goods_reg.html" class="list_link">12341234123</a>
+                                            <div class="thum_hover">
+                                                <img src="/resources/static/dist/img/img2.jpg" alt="">
+                                            </div>
+                                        </td>
+                                        <td><a href="/resources/static/html/goods/goods_reg.html" class="list_link prd_name">[카페]카페머그 45ml [카페]카페머그 45ml [카페]카페머그 45ml[카페45ml [카페]카페머그 45ml[카페]카페머그 45ml [카페]카페머그 45ml [카페]카페머그 45ml</a></td>
+                                        <td>
+                                            <ul class="list_prc">
+                                                <li>제안가: 100,000</li>
+                                                <li>판매가: 100,000</li>
+                                                <li>인터넷가: 100,000</li>
+                                                <li>소비자가: 100,000</li>
+                                            </ul>
+                                            <div class="hover">
+                                                <div class="m">마진율: 10%</div>
+                                                <div class="s">할인율: 30%</div>
+                                            </div>
+                                        </td>
+                                        <td>11</td>
+                                        <td>수량품</td>
+                                        <td>개별배송</td>
+                                        <td>과세</td>
+                                        <td>모두사용</td>
+                                        <td>고객사(3)<br/><button type="button" class="btn btn-xs btn-secondary">상세</button></td>
+                                        <td>
+                                            <button type="button" class="btn btn-xs btn-info d-inline-block mt-1">미리</button>
+                                            <button type="button" class="btn btn-xs btn-success d-inline-block mt-1">상태</button>
+                                            <button type="button" class="btn btn-xs btn-primary d-inline-block mt-1">제안</button>
+                                        </td>
+                                        <td>2024-01-01 11:11:11</td>
+                                        <td>2024-01-01 11:11:11</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="list-btns justify-content-between table_actions">
+                            <div>
+                                <div class="list_count">
+                                    <span class="check_pred_action">선택한 상품을</span>
+                                    <select class="form-select w-auto d-inline-block ms-1">
+                                        <option value="">상품상태</option>
+                                        <option value="1">승인</option>
+                                        <option value="2">대기</option>
+                                        <option value="3">반송</option>
+                                        <option value="4">판매종료</option>
+                                        <option value="5">일시품절</option>
+                                    </select>
+                                    <button type="button" class="btn btn-sm ms-1 btn-outline-secondary">일괄처리</button>
+                                </div>
+                            </div>
+                            <div>
+                                <select class="form-select w-auto d-inline-block ms-1">
+                                    <option>고객사</option>
+                                </select>
+                                <button type="button" class="btn btn-sm ms-1 btn-outline-secondary">쇼핑몰 복사</button>
+                                <button type="button" class="btn btn-sm ms-1 btn-outline-secondary">쇼핑몰 판매 삭제</button>
+                                <button type="button" class="btn btn-sm ms-1 btn-outline-secondary">쇼핑몰 판매</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ip_pagenation display-flex justify-content-center mt-4">
+                        <div class="pg_btn disabled">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                                <!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevrons-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M11 7l-5 5l5 5"></path>
+                                    <path d="M17 7l-5 5l5 5"></path>
+                                    </svg>
+                            </a>
+                        </div>
+                        <div class="pg_btn disabled">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                                <!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M15 6l-6 6l6 6"></path>
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="pg_ip">
+                            <input type="tel" value="1" class="form-control"> / 250
+                        </div>
+                        <div class="pg_btn">
+                            <a class="page-link" href="#">
+                                <!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M9 6l6 6l-6 6"></path>
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="pg_btn">
+                            <a class="page-link" href="#">
+                                <!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevrons-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M7 7l5 5l-5 5"></path>
+                                <path d="M13 7l5 5l-5 5"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="display-flex justify-content-center">
+                        <ul class="pagination mt-4">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                                    <!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevrons-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <path d="M11 7l-5 5l5 5"></path>
+                                        <path d="M17 7l-5 5l5 5"></path>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                                    <!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <path d="M15 6l-6 6l6 6"></path>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">4</a></li>
+                            <li class="page-item"><a class="page-link" href="#">5</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">
+                                    <!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <path d="M9 6l6 6l-6 6"></path>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">
+                                    <!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevrons-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <path d="M7 7l5 5l-5 5"></path>
+                                        <path d="M13 7l5 5l-5 5"></path>
+                                    </svg>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- 콘텐츠 끝 -->
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 공통영역 -->
+    <div id="footer"></div>
+    <script>
+        //헤더&푸터 개발 완료시 삭제해주세요
+        var includePath = "/resources/static/layout/footer.html";
+        includeFile(includePath, 'footer');
+    </script>
+    <!-- //공통영역 -->
+</div>
+<script src="/resources/static/dist/js/tabler.min.js"></script>
+</body>
+</html>

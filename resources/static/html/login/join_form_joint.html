@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=1400"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>신세계 관리자</title>
+    <!-- CSS files -->
+    <link href="/resources/static/dist/css/tabler.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/tabler-vendors.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/>
+    <link rel="shortcut icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <script src="/resources/static/dist/js/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/resources/static/dist/libs/litepicker/dist/litepicker.js?1674944402"></script>
+    <script src="/resources/static/dist/js/jquery.validate.js"></script>
+    <!-- Tabler Core -->
+    
+    <script src="/resources/static/dist/js/common.js"></script>
+</head>
+<body>
+<style>
+:root {
+	--theme-admin-type: #72aa2a;
+    /* #f54e42법인영업 컬러 코드*/
+    /* #72aa2a 협력회사 컬러 코드 */
+    /* #214c9c 고객사 컬러 코드 */
+}
+</style>
+<div class="page page-center login_page">
+    <div class="container container-narrow">
+        임시 링크 ▶
+        <a href="/resources/static/html/login/login.html">법인영업 로그인</a> /
+        <a href="/resources/static/html/login/login_joint.html">협력회사 로그인</a> /
+        <a href="/resources/static/html/login/login_client.html">고객사 로그인</a>
+        <div class="row align-items-center">
+            <div class="col-lg-12 card card-md">
+                <div class="card-body py-4 p-sm-4">
+                    <h2 class="text-center">협력회사 등록</h2>
+                </div>
+                <div class="hr-text hr-text-center hr-text-spaceless color-theme-admin-type">JOIN</div>
+                <div class="card-body">
+                    <ul class="steps steps-counter mb-3">
+                        <li class="step-item">01. 약관동의</li>
+                        <li class="step-item active">02. 정보입력</li>
+                        <li class="step-item">03. 가입완료</li>
+                    </ul>
+                    <h4>협력회사 정보</h4>
+                    <div class="mb-2">
+                        <label class="subheader mb-1 required">협력회사명</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control ps-1">
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <label class="subheader mb-1 required">사업자등록번호</label>
+                        <div class="input-group">
+                            <input type="tel" class="form-control ps-1">
+                        </div>
+                        <small class="form-hint">* 숫자만 입력</small>
+                    </div>
+                    <div class="mb-2">
+                        <label class="subheader mb- required1">주요 브랜드</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control ps-1">
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <label class="subheader mb-1 required">주요 상품</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control ps-1">
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <div class="subheader mb-1 required">주소</div>
+                        <div class="subcontent">
+                            <div class="input-group w-50">
+                                <input type="text" id="i_post_code" name="i_post_code" class="form-control" placeholder="우편번호" readonly="" onclick="execDaumPostcode()">
+                                <button class="btn bg-secondary text-light btn-sm" type="button" onclick="execDaumPostcode()">주소검색</button>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" id="i_address_basic" name="i_address_basic" class="form-control" placeholder="입력주소" readonly="" onclick="execDaumPostcode()">
+                            </div>
+                            <div class="input-group">
+                                <input type="text" id="i_address_detail" name="i_address_detail" class="form-control" placeholder="상세주소">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <label class="subheader mb-1 required">택배사선택</label>
+                        <div class="input-group">
+                            <select name="" id="" class="form-control">
+                                <option value="">선택</option>
+                                <option value="대한통운">대한통운</option> 
+                                <option value="한진택배">한진택배</option>
+                                <option value="로젠택배">로젠택배</option>
+                                <option value="KGB택배">KGB택배</option>
+                                <option value="CJ GLS">CJ GLS</option>
+                                <option value="롯데택배">롯데택배(현대)</option> 
+                                <option value="대신택배">대신택배</option>
+                                <option value="경동택배">경동택배</option>
+                                <option value="일양로지스택배">일양로지스택배</option>
+                                <option value="건영택배">건영택배</option>
+                                <option value="천일택배">천일택배</option>
+                                <option value="업체직배">업체직배</option>
+                                <option value="우리택배(구호남택배)">우리택배(구호남택배)</option>
+                                <option value="신세계직배">신세계직배</option>
+                                <option value="우체국택배">우체국택배</option>
+                                <option value="합동택배">합동택배</option>
+                                <option value="위니온로지스">위니온로지스</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <label class="subheader mb-1 required">배송비설정</label>
+                        <p class="text-muted">법인영업몰의 기본 배송비는 “무료배송”이 원칙 입니다</p>
+                        <div class="input-group">
+                            <span class="input-group-text text">상품별배송비</span>
+                            <input type="tel" class="form-control" data-amount-comma>
+                            <span class="input-group-text text">원 (배송비 부과되는 상품에 적용)</span>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-text text">무료배송조건</span>
+                            <input type="tel" class="form-control" data-amount-comma>
+                            <span class="input-group-text text">원 이상 주문 시 무료배송비로 적용</span>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-text text">발주 후 배송 기간</span>
+                            <input type="tel" class="form-control">
+                            <span class="input-group-text text">일</span>
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <label class="subheader mb-1">대표자명</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control ps-1">
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <label class="subheader mb-1">법인등록번호</label>
+                        <div class="input-group">
+                            <input type="tel" class="form-control ps-1">
+                        </div>
+                        <small class="form-hint">* 숫자만 입력</small>
+                    </div>
+                    <div class="mb-2">
+                        <label class="subheader mb-1">업태</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control ps-1">
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <label class="subheader mb-1">업종</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control ps-1">
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <label class="subheader mb-1">대표전화</label>
+                        <div class="input-group">
+                            <input type="tel" class="form-control ps-1">
+                        </div>
+                        <small class="form-hint">* 숫자만 입력</small>
+                    </div>
+                    <div class="mb-2">
+                        <label class="subheader mb-1">FAX</label>
+                        <div class="input-group">
+                            <input type="tel" class="form-control ps-1">
+                        </div>
+                        <small class="form-hint">* 숫자만 입력</small>
+                    </div>
+                    <div class="mb-2">
+                        <label class="subheader mb-1">협력회사 소개</label>
+                        <div class="input-group">
+                            <textarea name="" id="" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <h4>관리자 정보</h4>
+                    <div class="mb-2">
+                        <label class="subheader mb-1 required">아이디</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control ps-1">
+                        </div>
+                        <small class="form-hint">* 2~30자 사이로 영문/숫자 조합해 주세요</small>
+                    </div>
+                    
+                    <div class="mb-2">
+                        <label class="subheader mb-1 required">비밀번호</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control ps-1">
+                        </div>
+                        <small class="form-hint">* 8~20자 사이 영문, 숫자, 특수문자 조합해 주세요</small>
+                        <small class="form-hint">*사용가능 특수문자 : ＂~ ! @ # $ % ^ * _ . – () +”</small>
+                    </div>
+                    <div class="mb-2">
+                        <label class="subheader mb-1 required">비밀번호 확인</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control ps-1">
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <label class="subheader mb-1 required">담당자명</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control ps-1">
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <label class="subheader mb-1">휴대폰번호</label>
+                        <div class="input-group">
+                            <input type="tel" class="form-control ps-1" maxlength="11">
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <label class="subheader mb-1">이메일주소</label>
+                        <div class="input-group">
+                            <input type="email" class="form-control ps-1">
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <a href="/resources/static/html/login/join_comp_joint.html" class="btn btn-theme-admin-type w-100">
+                            확인
+                        </a>
+                        <a href="/resources/static/html/login/login_joint.html" class="btn btn-secondary w-100 mt-2">
+                            취소
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div id="daumAdressLayer" >
+<button type="button" id="btnCloseLayer" onclick="closeDaumPostcode()">닫기버튼</button>
+</div>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+//주소 api
+var element_layer = document.getElementById('daumAdressLayer');
+
+function closeDaumPostcode() {
+    element_layer.style.display = 'none';
+}
+
+function execDaumPostcode() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+            // 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+            var addr = ''; // 주소 변수
+            var extraAddr = ''; // 참고항목 변수
+
+            //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                addr = data.roadAddress;
+            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                addr = data.jibunAddress;
+            }
+
+            // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+            if(data.userSelectedType === 'R'){
+                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                    extraAddr += data.bname;
+                }
+                // 건물명이 있고, 공동주택일 경우 추가한다.
+                if(data.buildingName !== '' && data.apartment === 'Y'){
+                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                if(extraAddr !== ''){
+                    extraAddr = ' (' + extraAddr + ')';
+                }
+                // 조합된 참고항목을 해당 필드에 넣는다.
+                document.getElementById("i_address_basic").value = extraAddr;
+
+            } else {
+                document.getElementById("i_address_basic").value = '';
+            }
+
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            document.getElementById('i_post_code').value = data.zonecode;
+            document.getElementById("i_address_basic").value = addr;
+            // 커서를 상세주소 필드로 이동한다.
+            document.getElementById("i_address_detail").focus();
+
+            // iframe을 넣은 element를 안보이게 한다.
+            // (autoClose:false 기능을 이용한다면, 아래 코드를 제거해야 화면에서 사라지지 않는다.)
+            element_layer.style.display = 'none';
+        },
+        width : '100%',
+        height : '100%',
+        maxSuggestItems : 5
+    }).embed(element_layer);
+
+    // iframe을 넣은 element를 보이게 한다.
+    element_layer.style.display = 'block';
+
+    // iframe을 넣은 element의 위치를 화면의 가운데로 이동시킨다.
+    // initLayerPosition();
+}
+
+// 브라우저의 크기 변경에 따라 레이어를 가운데로 이동시키고자 하실때에는
+// resize이벤트나, orientationchange이벤트를 이용하여 값이 변경될때마다 아래 함수를 실행 시켜 주시거나,
+// 직접 element_layer의 top,left값을 수정해 주시면 됩니다.
+function initLayerPosition(){
+    var width = 300; //우편번호서비스가 들어갈 element의 width
+    var height = 400; //우편번호서비스가 들어갈 element의 height
+    var borderWidth = 1; //샘플에서 사용하는 border의 두께
+
+    // 위에서 선언한 값들을 실제 element에 넣는다.
+    element_layer.style.width = width + 'px';
+    element_layer.style.height = height + 'px';
+    element_layer.style.border = borderWidth + 'px solid';
+    // 실행되는 순간의 화면 너비와 높이 값을 가져와서 중앙에 뜰 수 있도록 위치를 계산한다.
+    element_layer.style.left = (((window.innerWidth || document.documentElement.clientWidth) - width)/2 - borderWidth) + 'px';
+    element_layer.style.top = (((window.innerHeight || document.documentElement.clientHeight) - height)/2 - borderWidth) + 'px';
+}
+</script>
+<script src="/resources/static/dist/js/tabler.min.js"></script>
+</body>
+</html>

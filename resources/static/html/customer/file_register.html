@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=1400"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>신세계 관리자</title>
+    <!-- CSS files -->
+    <link href="/resources/static/dist/css/tabler.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/tabler-vendors.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/>
+    <link rel="shortcut icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <script src="/resources/static/dist/js/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/resources/static/dist/libs/litepicker/dist/litepicker.js?1674944402"></script>
+    <script src="/resources/static/dist/js/jquery.validate.js"></script>
+    <!-- Tabler Core -->
+    <script src="/resources/static/dist/js/ckeditor/ckeditor.js"></script>
+    <script src="/resources/static/dist/js/common.js"></script>
+    <style>
+    :root {
+        --theme-admin-type: #cf3f42;
+        /* #cf3f42 통합관리자 컬러 코드*/
+        /* #4b9b52 협력회사 컬러 코드 */
+        /* #214c9c 고객사 컬러 코드 */
+    }
+    </style>
+</head>
+<body>
+<aside id="header" class="navbar navbar-vertical navbar-expand-lg header_left"></aside>
+<script>
+    //html include
+    function includeFile(path, targetId) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', path, true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById(targetId).innerHTML = xhr.responseText;
+        }
+    };
+    xhr.send();
+    }
+    var includePath = "/resources/static/layout/header.html";
+    includeFile(includePath, 'header');
+</script>
+
+<div class="page-wrapper">
+    <!-- 공통영역2 -->
+    <div class="member_info">
+        <div class="info">
+            <span>관리권한 : 최상위관리자</span>
+            <!-- 통합관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <!-- 협력관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <!-- 고객사관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <span class="login_session">로그인 유지시간 <strong>30:00</strong> <button type="button" class="btn btn-xs btn-primary">연장</button></span>
+            <button type="button" class="btn btn-xs btn-secondary">관리자 매뉴얼 보기</button><!-- 공통 -->
+            <button type="button" class="btn btn-xs btn-secondary">기본양식다운로드</button><!-- 통합,협력사만 -->
+            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/admin_modify_pop.html', '900', '640')">관리자정보수정</button><!-- 공통 -->
+            <button type="button" class="btn btn-xs btn-secondary">보안체크</button><!-- 협력사만 -->
+            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/terms_pop.html', '600', '540')">이용약관</button><!-- 협력사만 -->
+        </div>
+        <div>
+            <a href="javascript:;" class="logout">홍길동(admin_01)님 로그아웃</a>
+            <a href="javascript:;" class="home">홈으로</a>
+        </div>
+    </div>
+
+    <!-- 페이지 히스토리 탭 -->
+    <div class="page-history">
+        <div class="history_toggle">
+            <label class="form-check form-switch">
+                <span class="form-check-label">History</span>
+                <input id="historyUse" class="form-check-input" type="checkbox" >
+            </label>
+        </div>
+        <button class="close_all" type="button" title="히스토리 모두 삭제" onclick="historyRemoveAll();">히스토리 모두 삭제</button>
+    </div>
+    <!-- //공통영역2 -->
+
+    <div class="page-header d-print-none">
+        <div class="container-xl">
+            <div class="row g-2 align-items-center">
+                <div class="col">
+                    <!-- Page pre-title -->
+                    <div class="page-pretitle">
+                        홈 > 고객센터 > 게시판 > 파일게시판 > 파일게시판등록
+                    </div>
+                    <h2 class="page-title">
+                        파일게시판 등록
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page body -->
+    <div class="page-body">
+        <div class="container-xl form-container grid_grid4">
+            <form action="">
+            <div class="list-btns justify-content-between align-items-center mb-3">
+                <div>
+                    <div class="display_type mb-0">
+                        <button type="button" class="grid4 active" title="폼 그리드 1x4">폼 그리드 1x4</button>
+                        <button type="button" class="grid3 " title="폼 그리드 1x3">폼 그리드 1x3</button>
+                        <button type="button" class="grid2" title="폼 그리드 1x2">폼 그리드 1x2</button>
+                    </div>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-secondary">임시저장</button>
+                    <button type="submit" class="btn btn-primary">등록</button>
+                    <a href="/resources/static/html/customer/file_list.html" class="btn btn-secondary">목록</a>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card form_area">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form_item">
+                                    <div class="subheader mb-1">작성자</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" value="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">다운권한</div>
+                                    <div class="subcontent">
+                                        <div class="subcontent">
+                                            <div>
+                                                <label class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox">
+                                                    <span class="form-check-label">공지</span>
+                                                </label>
+                                                <label class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox">
+                                                    <span class="form-check-label">시스템공지</span>
+                                                </label>
+                                                <label class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox">
+                                                    <span class="form-check-label">운영</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">공지</div>
+                                    <div class="subcontent">
+                                        <div class="subcontent">
+                                            <div>
+                                                <label class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox">
+                                                    <span class="form-check-label">시스템</span>
+                                                </label>
+                                                <label class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox">
+                                                    <span class="form-check-label">공지</span>
+                                                </label>
+                                                <label class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox">
+                                                    <span class="form-check-label">중요</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">상단고정</div>
+                                    <div class="subcontent">
+                                        <div class="subcontent">
+                                            <div>
+                                                <label class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" name="">
+                                                    <span class="form-check-label">상단고정</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item size_xl">
+                                    <div class="subheader mb-1">제목</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" value="24년 차세대 시스템에 등록되어 있는 계약서 공유합니다.">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item size_lg">
+                                    <div class="subheader mb-1">첨부파일</div>
+                                    <div class="subcontent" id="uploadFiles">
+                                        <!-- 업로드된 파일이 없는 경우 -->
+                                        <div class="input-group">
+                                            <input type="file" class="form-control" data-file-size="" onchange="updateFileSize(this);">
+                                            <span class="input-group-text text">0 MB</span>
+                                            <button class="btn btn-xs btn-warning" type="button" onclick="removeFile(this)">삭제</button>
+                                            <button class="btn btn-xs btn-primary" type="button" onclick="addFile()">추가</button>
+                                        </div>
+                                    </div>
+                                    <small class="form-hint text-danger mt-2">※ 첨부파일 전체 파일용량은 400M 입니다</small>
+                                    <script>
+                                        let fileSizeTotal = 0;
+                                    
+                                        function updateFileSize(elm) {
+                                            const file = elm.files[0];
+                                            if (file) {
+                                                const fileSize = file.size / (1024 * 1024); // MB 단위로 변환
+                                                elm.setAttribute('data-file-size', fileSize.toFixed(2));
+                                                const fileSizeText = `${fileSize.toFixed(2)} MB`;
+                                                const inputGroup = elm.closest('.input-group');
+                                                const fileSizeSpan = inputGroup.querySelector('.input-group-text');
+                                                fileSizeSpan.textContent = fileSizeText;
+                                                updateTotalFileSize();
+                                            }
+                                        }
+                                    
+                                        function updateTotalFileSize() {
+                                            fileSizeTotal = 0;
+                                            document.querySelectorAll('#uploadFiles .input-group').forEach(function(item) {
+                                                let fileItem;
+                                                const inputFile = item.querySelector('input[type="file"]');
+                                                const inputText = item.querySelector('input[type="text"]');
+                                                if (inputText) {
+                                                    fileItem = inputText;
+                                                } else if (inputFile) {
+                                                    fileItem = inputFile;
+                                                };
+                                                const fileSize = parseFloat(fileItem.getAttribute('data-file-size')) || 0;
+                                                fileSizeTotal += fileSize;
+                                            });
+                                            console.log(fileSizeTotal)
+                                            if (fileSizeTotal > 400) {
+                                                alert('총 파일 용량이 400MB를 초과합니다. 파일을 제거하거나 용량을 줄여주세요.');
+                                            }
+                                        }
+                                    
+                                        window.onload = function() {
+                                            updateTotalFileSize();
+                                        };
+                                    
+                                        function addFile() {
+                                            const uploadFiles = document.getElementById('uploadFiles');
+                                            const fileHtml = `
+                                                <div class="input-group">
+                                                    <input type="file" class="form-control" data-file-size="" onchange="updateFileSize(this);">
+                                                    <span class="input-group-text text">0 MB</span>
+                                                    <button class="btn btn-xs btn-warning" type="button" onclick="removeFile(this)">삭제</button>
+                                                </div>
+                                            `;
+                                            uploadFiles.insertAdjacentHTML('beforeend', fileHtml);
+                                        }
+                                    
+                                        //업로드 있었던 파일 삭제
+                                        function removeUploadedFile(button) {
+                                            const inputGroup = button.closest('.input-group');
+                                            const inputFile = inputGroup.querySelector('input[type="file"]');
+                                            const inputUploadedFileName = inputGroup.querySelector('input[type="text"]');
+                                            const fileSize = parseFloat(inputUploadedFileName.getAttribute('data-file-size'));
+                                            const fileSizeSpan = inputGroup.querySelector('.input-group-text');
+                                            fileSizeSpan.textContent = '0MB';
+                                            fileSizeTotal -= fileSize;
+                                            inputFile.style.display = 'block';
+                                            inputUploadedFileName.remove();
+                                            button.remove();
+                                            updateTotalFileSize();
+                                        }
+                                    
+                                        function removeFile(button) {
+                                            const uploadFiles = document.getElementById('uploadFiles');
+                                            const inputGroup = button.closest('.input-group');
+                                            const inputFile = inputGroup.querySelector('input[type="file"]');
+                                            const fileSize = parseFloat(inputFile.getAttribute('data-file-size')) || 0;
+                                            const fileSizeSpan = inputGroup.querySelector('.input-group-text');
+                                            const inputGroups = Array.from(uploadFiles.children);
+                                            const index = inputGroups.indexOf(inputGroup);
+                                            if (index === 0) {//첫번째 input이면 삭제 안하고 값만 초기화함.
+                                                if(inputGroup.querySelector('input[type="text"]')){
+                                                    //첫번째 첨부파일이면서 기존파일 업로드가 있는경우 return false
+                                                    alert(`첫번째 첨부파일의 경우 기존파일 삭제만 가능합니다.`)
+                                                    return false;
+                                                }
+                                                inputGroup.querySelector('input').value = '';
+                                                fileSizeSpan.textContent = '0MB';
+                                            } else {
+                                                inputGroup.remove();
+                                            }
+                                            fileSizeTotal -= fileSize;
+                                            updateTotalFileSize();
+                                        }
+                                    </script>
+                                </div>
+                                <div class="form_item size_xl">
+                                    <div class="subheader mb-1">내용</div>
+                                    <div class="subcontent">
+                                        <textarea class="ckeditor" name="editor1"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-btns justify-content-between align-items-center mt-2">
+                    <div>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-secondary">임시저장</button>
+                        <button type="submit" class="btn btn-primary">등록</button>
+                        <a href="/resources/static/html/customer/file_list.html" class="btn btn-secondary">목록</a>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 공통영역 -->
+    <div id="footer"></div>
+    <script>
+        //헤더&푸터 개발 완료시 삭제해주세요
+        var includePath = "/resources/static/layout/footer.html";
+        includeFile(includePath, 'footer');
+    </script>
+    <!-- //공통영역 -->
+</div>
+
+<script src="/resources/static/dist/js/tabler.min.js"></script>
+</body>
+</html>

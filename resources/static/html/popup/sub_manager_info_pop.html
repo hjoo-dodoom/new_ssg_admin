@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=1400"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>신세계 관리자</title>
+    <!-- CSS files -->
+    <link href="/resources/static/dist/css/tabler.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/tabler-vendors.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/>
+    <link rel="shortcut icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <script src="/resources/static/dist/js/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/resources/static/dist/libs/litepicker/dist/litepicker.js?1674944402"></script>
+    <script src="/resources/static/dist/js/jquery.validate.js"></script>
+    <!-- Tabler Core -->
+    
+    <script src="/resources/static/dist/js/common.js"></script>
+    <style>
+    :root {
+        --theme-admin-type: #cf3f42;
+        /* #cf3f42 통합관리자 컬러 코드*/
+        /* #4b9b52 협력회사 컬러 코드 */
+        /* #214c9c 고객사 컬러 코드 */
+    }
+    </style>
+</head>
+<body>
+
+<div class="popup-wrapper">
+    <h2 class="popup-title">하위관리자 정보</h2>
+
+    <div class="row">
+        <form action="">
+        <div class="text_box">
+            <p class="text-muted fs-5 my-1">※아이디는 2~30자 영문, 숫자 조합</p>
+            <p class="text-muted fs-5 my-1">※비밀번호는 8~20자, 허용 특수문자 : ~!@#$%^&*()-+</p>
+            <p class="text-muted fs-5 my-1">※비밀번호는 변경하실 경우만 입력해주세요</p>
+            <p class="text-danger fs-5 my-1">※최상위관리자는 일반관리자 등록/수정/삭제할 수 있는 권한이 부여됩니다.</p>
+            <p class="text-danger fs-5 my-1">※관리자 정보 수정은 담당자명 또는 아이디를 선택해주세요.</p>
+        </div>
+
+        <div class="d-flex my-3">
+            <div class="col">
+                <button type="button" id="btnRegister" onclick="formSelectRegister();"
+                    class="btn bg-primary text-light w-100 rounded-0">
+                    등록
+                </button>
+            </div>
+            <div class="col">
+                <button type="button" id="btnModify"
+                    class="btn bg-secondary cursor-default text-light w-100 rounded-0"
+                    onclick="alert('관리자 정보 수정은 담당자명 또는 아이디를 선택해주세요.')">
+                    수정
+                </button>
+            </div>
+        </div>
+
+        <div class="form-container grid_grid2">
+            <!--form-container.grid_grid2 
+                form-container.grid_grid3
+                form-container.grid_grid4 -->
+            <div class="col-12">
+                <div class="card form_area">
+                    <input type="hidden" id="managerIdInput">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="form_item">
+                                <div class="subheader mb-1">권한</div>
+                                <div class="subcontent">
+                                    <div>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="admin_type" id="adminType1">
+                                            <span class="form-check-label">최상위관리자</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="admin_type" id="adminType2">
+                                            <span class="form-check-label">일반관리자</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form_item" id="idItem">
+                                <div class="subheader mb-1 required">아이디</div>
+                                <div class="subcontent">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" value="" id="managerInputId">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form_item">
+                                <div class="subheader mb-1 required">비밀번호</div>
+                                <div class="subcontent">
+                                    <div class="input-group">
+                                        <input type="password" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form_item">
+                                <div class="subheader mb-1 required">담당자명</div>
+                                <div class="subcontent">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" value="" id="managerInputName">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form_item">
+                                <div class="subheader mb-1 required">휴대폰번호</div>
+                                <div class="subcontent">
+                                    <div class="input-group">
+                                        <input type="tel" class="form-control" value="" maxlength="11" id="managerInputPhone">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form_item">
+                                <div class="subheader mb-1">전화번호</div>
+                                <div class="subcontent">
+                                    <div class="input-group">
+                                        <input type="tel" class="form-control" value="" id="managerInputTel">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form_item">
+                                <div class="subheader mb-1">이메일주소</div>
+                                <div class="subcontent">
+                                    <div class="input-group">
+                                        <input type="email" class="form-control" value="" id="managerInputEmail">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form_item">
+                                <div class="subheader mb-1">상태</div>
+                                <div class="subcontent">
+                                    <div>
+                                        <label class="form-check form-check-inline ms-2">
+                                            <input class="form-check-input" type="radio" name="display_type" id="displayType1">
+                                            <span class="form-check-label">정상승인</span>
+                                        </label>
+                                        <label class="form-check form-check-inline ms-2">
+                                            <input class="form-check-input" type="radio" name="display_type" id="displayType2">
+                                            <span class="form-check-label">정지</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="list-btns justify-content-between mt-2">
+            <div>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary" id="formSubmitRegister">등록</button>
+                <button type="submit" class="btn btn-primary" id="formSubmitModify" style="display:none;">수정</button>
+            </div>
+        </div>
+        </form>
+        
+        <div class="content-area">
+            <div class="card table-mb-card">
+                <div class="table-responsive">
+                    <table class="table table-vcenter table-line card-table text-center table-mb tr_hover">
+                        <caption>하위관리자 리스트(0)</caption>
+                        <thead>
+                            <tr>
+                                <th>번호</th>
+                                <th>담당자명</th>
+                                <th>아이디</th>
+                                <th>상태</th>
+                                <th>관리권한</th>
+                                <th>휴대폰번호</th>
+                                <th style="max-width: 75px;min-width: 75px;width: 75px;">삭제</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="8" class="list-empty">
+                                    등록된 항목이 없습니다.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td><a href="javascript:;" class="list_link" data-manager-id="1" onclick="insertManagerForm(this);">홍**</a></td>
+                                <td><a href="javascript:;" class="list_link" data-manager-id="1" onclick="insertManagerForm(this);">abcd0010</a></td>
+                                <td>정상승인</td>
+                                <td>최상위관리자</td>
+                                <td>010-****-1234</td>
+                                <td><button type="button" class="btn btn-xs btn-warning">삭제</button></td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td><a href="javascript:;" class="list_link" data-manager-id="2" onclick="insertManagerForm(this);">홍**</a></td>
+                                <td><a href="javascript:;" class="list_link" data-manager-id="2" onclick="insertManagerForm(this);">abcd0010</a></td>
+                                <td>정지</td>
+                                <td>최상위관리자</td>
+                                <td>010-****-1234</td>
+                                <td><button type="button" class="btn btn-xs btn-warning">삭제</button></td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td><a href="javascript:;" class="list_link" data-manager-id="3" onclick="insertManagerForm(this);">홍**</a></td>
+                                <td><a href="javascript:;" class="list_link" data-manager-id="3" onclick="insertManagerForm(this);">abcd0010</a></td>
+                                <td>정지</td>
+                                <td>최상위관리자</td>
+                                <td>010-****-1234</td>
+                                <td><button type="button" class="btn btn-xs btn-warning">삭제</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="list-btns justify-content-between mt-3">
+        <div>
+        </div>
+        <div>
+            <button type="button" class="btn btn-secondary" onclick="window.close();">닫기</button>
+        </div>
+    </div>
+</div>
+<script src="/resources/static/dist/js/tabler.min.js"></script>
+<script>
+const btnRegister = document.getElementById('btnRegister');
+const btnModify = document.getElementById('btnModify');
+const idItem = document.getElementById('idItem');
+const formArea = document.querySelector('.form_area');
+const formSubmitRegister = document.getElementById('formSubmitRegister');
+const formSubmitModify = document.getElementById('formSubmitModify');
+
+//폼 초기화
+function formClear(){
+    formArea.querySelectorAll('input').forEach(input => {
+        if (input.type !== 'checkbox' && input.type !== 'radio') {
+            input.value = '';
+        } else {
+            input.checked = false;
+        }
+    });
+}
+
+function formSelectRegister(){
+    //폼 아이디 초기화
+    const managerIdInput = document.getElementById('managerIdInput');
+    managerIdInput.value = '';
+
+    //아이디 인풋 활성화
+    const managerInputId = document.getElementById('managerInputId');
+    managerInputId.removeAttribute('readonly');
+
+    //상단 탭메뉴 활성화
+    btnRegister.classList.remove('bg-secondary');
+    btnRegister.classList.add('bg-primary');
+    btnModify.classList.remove('bg-primary');
+    btnModify.classList.add('bg-secondary');
+
+    formClear();//폼초기화
+
+    //폼 등록,수정버튼 display
+    formSubmitRegister.style.display = 'block';
+    formSubmitModify.style.display = 'none';
+}
+
+
+//임시 스크립트
+function insertManagerForm(button) {
+    const managerInputId = document.getElementById('managerInputId');
+    const managerInputName = document.getElementById('managerInputName');
+    const managerInputPhone = document.getElementById('managerInputPhone');
+    const managerInputTel = document.getElementById('managerInputTel');
+    const managerInputEmail = document.getElementById('managerInputEmail');
+    const adminType1 = document.getElementById('adminType1');
+    const adminType2 = document.getElementById('adminType2');
+    const displayType1 = document.getElementById('displayType1');
+    const displayType2 = document.getElementById('displayType2');
+
+    //클릭한 데이터 아이디 삽입
+    const managerIdInput = document.getElementById('managerIdInput');
+    managerId = button.getAttribute('data-manager-id');
+    managerIdInput.value = managerId;
+
+    //폼 초기화
+    formClear();
+
+    //데이터 삽입
+    adminType1.checked = true;
+    managerInputId.value = 'admin111'
+    managerInputName.value = '홍길동'
+    managerInputPhone.value = '01012341234'
+    managerInputTel.value = '0212341234'
+    managerInputEmail.value = 'aaa@naver.com'
+    displayType2.checked = true;
+
+    //아이디 인풋 활성화
+    managerInputId.setAttribute('readonly', true);
+
+    //상단 탭메뉴 활성화
+    btnRegister.classList.add('bg-secondary');
+    btnRegister.classList.remove('bg-primary');
+    btnModify.classList.add('bg-primary');
+    btnModify.classList.remove('bg-secondary');
+
+
+    //폼 등록,수정버튼 display
+    formSubmitModify.style.display = 'block';
+    formSubmitRegister.style.display = 'none';
+}
+</script>
+</body>
+</html>

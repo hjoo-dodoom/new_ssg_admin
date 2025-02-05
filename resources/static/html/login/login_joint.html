@@ -1,0 +1,1576 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=1400"/>
+<meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+<title>신세계 관리자</title>
+<!-- CSS files -->
+<link href="/resources/static/dist/css/tabler.css" rel="stylesheet"/>
+<link href="/resources/static/dist/css/tabler-vendors.css" rel="stylesheet"/>
+<link href="/resources/static/dist/css/style.css" rel="stylesheet"/>
+<link href="/resources/static/dist/css/login.css" rel="stylesheet"/>
+<link href="/resources/static/dist/css/swiper.min.css" rel="stylesheet"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/>
+<link rel="shortcut icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+<script src="/resources/static/dist/js/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="/resources/static/dist/libs/litepicker/dist/litepicker.js?1674944402"></script>
+<script src="/resources/static/dist/js/jquery.validate.js"></script>
+<script src="/resources/static/dist/js/swiper.min.js"></script>
+    <!-- Tabler Core -->
+
+<script src="/resources/static/dist/js/common.js"></script>
+</head>
+<body class="login_page">
+<style>
+:root {
+	--theme-admin-type: #2D2D2D;
+    /* #D80C18 통합관리자 컬러 코드*/
+    /* #2D2D2D 협력회사 컬러 코드 */
+    /* #BEA36B 고객사 컬러 코드 */
+}
+</style>
+
+<!-- 관리자 공통팝업 -->
+<div class="popup_notice type1" style="top:70px;left:20px;width:500px;z-index:999999;display:none;">
+	<div id="" class="popup_nbox" style="max-height:550px;">
+		<div class="tit">신한은행 협력사 공지</div>	
+		<div class="cnt">
+			신한은행 기프트몰을 찾아주셔서<br>
+			감사드립니다.<br>
+			해당 사이트에서 각 지점에서 필요로 하신 상품을 선택, <br>
+			결제까지 가능합니다.<br>
+			결제방법은 법인카드로 가능하며 30만원이<br>
+			결제방법은 법인카드로 가능하며 30만원이<br>
+			결제방법은 법인카드로 가능하며 30만원이<br>
+			결제방법은 법인카드로 가능하며 30만원이<br>
+			결제방법은 법인카드로 가능하며 30만원이<br>
+			결제방법은 법인카드로 가능하며 30만원이<br>
+			결제방법은 법인카드로 가능하며 30만원이<br>
+			결제방법은 법인카드로 가능하며 30만원이<br>
+			결제방법은 법인카드로 가능하며 30만원이<br>
+			결제방법은 법인카드로 가능하며 30만원이<br>
+			결제방법은 법인카드로 가능하며 30만원이<br>
+			초과시 공인인증서를 요구할 수 있으니 수량을 <br>
+			조절하시어 분할 결제 하시면 됩니다.<br>
+			기타 문의사항은 아래 연락처로 연락주세요.<br>
+			문의 : 02-3406-6998 (평일 : 9:30 ~ 5:30)
+		</div>
+	</div>
+	<div class="popup_nbtn">
+        <div class="check_today">
+            <label class="checkbox"><input type="checkbox"><span class="ck_icon"></span> 24시간동안 팝업 안열기</label>
+        </div>
+		<button type="button" class="ppn_close" onclick="document.querySelector('.popup_notice.type1').style.display = 'none'">닫기</button>
+	</div>
+</div>
+
+<div class="popup_notice type2" style="top:70px;left:330px;width:500px;z-index:999999;display:none;">
+	<div id="" class="popup_nbox" style="max-height:550px;">
+		<div class="tit">신한은행 협력사 공지</div>	
+		<div class="cnt">
+			신한은행 기프트몰을 찾아주셔서<br>
+			감사드립니다.<br>
+			해당 사이트에서 각 지점에서 필요로 하신 상품을 선택, <br>
+			결제까지 가능합니다.<br>
+			결제방법은 법인카드로 가능하며 30만원이<br>
+			결제방법은 법인카드로 가능하며 30만원이<br>
+			결제방법은 법인카드로 가능하며 30만원이<br>
+			결제방법은 법인카드로 가능하며 30만원이<br>
+			결제방법은 법인카드로 가능하며 30만원이<br>
+			결제방법은 법인카드로 가능하며 30만원이<br>
+			결제방법은 법인카드로 가능하며 30만원이<br>
+			결제방법은 법인카드로 가능하며 30만원이<br>
+			결제방법은 법인카드로 가능하며 30만원이<br>
+			결제방법은 법인카드로 가능하며 30만원이<br>
+			결제방법은 법인카드로 가능하며 30만원이<br>
+			초과시 공인인증서를 요구할 수 있으니 수량을 <br>
+			조절하시어 분할 결제 하시면 됩니다.<br>
+			기타 문의사항은 아래 연락처로 연락주세요.<br>
+			문의 : 02-3406-6998 (평일 : 9:30 ~ 5:30)
+		</div>
+	</div>
+	<div class="popup_nbtn">
+		<div class="check_today">
+            <label class="checkbox"><input type="checkbox"><span class="ck_icon"></span> 24시간동안 팝업 안열기</label>
+        </div>
+		<button type="button" class="ppn_close" onclick="document.querySelector('.popup_notice.type2').style.display = 'none'">닫기</button>
+	</div>
+</div>
+
+<div class="popup_notice type3" style="top:70px;left:720px;width:500px;z-index:999999;display:none;">
+	<div id="" class="popup_nbox" style="max-height:550px;">
+		<div class="tit">신한은행 협력사 공지</div>	
+		<div class="cnt">
+			신한은행 기프트몰을 찾아주셔서<br>
+			감사드립니다.<br>
+			해당 사이트에서 각 지점에서 필요로 하신 상품을 선택, <br>
+			결제까지 가능합니다.<br>
+			결제방법은 법인카드로 가능하며 30만원이<br>
+			결제방법은 법인카드로 가능하며 30만원이<br>
+			결제방법은 법인카드로 가능하며 30만원이<br>
+			결제방법은 법인카드로 가능하며 30만원이<br>
+			결제방법은 법인카드로 가능하며 30만원이<br>
+			결제방법은 법인카드로 가능하며 30만원이<br>
+			결제방법은 법인카드로 가능하며 30만원이<br>
+			결제방법은 법인카드로 가능하며 30만원이<br>
+			결제방법은 법인카드로 가능하며 30만원이<br>
+			결제방법은 법인카드로 가능하며 30만원이<br>
+			결제방법은 법인카드로 가능하며 30만원이<br>
+			초과시 공인인증서를 요구할 수 있으니 수량을 <br>
+			조절하시어 분할 결제 하시면 됩니다.<br>
+			기타 문의사항은 아래 연락처로 연락주세요.<br>
+			문의 : 02-3406-6998 (평일 : 9:30 ~ 5:30)
+		</div>
+	</div>
+	<div class="popup_nbtn">
+		<div class="check_today">
+            <label class="checkbox"><input type="checkbox"><span class="ck_icon"></span> 24시간동안 팝업 안열기</label>
+        </div>
+		<button type="button" class="ppn_close" onclick="document.querySelector('.popup_notice.type3').style.display = 'none'">닫기</button>
+	</div>
+</div>
+<!-- //관리자 공통팝업 -->
+
+<div style="position:fixed;left:10px;top:10px;z-index:100;color:#fff;">
+    임시 링크 ▶
+    <a href="/resources/static/html/login/login.html" style="color:#fff;">통합관리자 로그인</a> /
+    <a href="/resources/static/html/login/login_joint.html" style="color:#fff;">협력회사 로그인</a> /
+        <a href="/resources/static/html/login/login_client.html" style="color:#fff;">고객사 로그인</a>
+</div>
+
+<div class="admin_login">
+    <div class="login_banner">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <div class="banner" style="background-image: url('/resources/static/dist/img/login_banner1.jpg');"></div>
+            </div>
+            <div class="swiper-slide">
+                <div class="banner" style="background-image: url('/resources/static/dist/img/login_banner1.jpg');"></div>
+            </div>
+            <div class="swiper-slide">
+                <div class="banner" style="background-image: url('/resources/static/dist/img/login_banner1.jpg');"></div>
+            </div>
+        </div>
+        <div class="swiper-pagination"></div>
+        <script>
+            var swiper = new Swiper(".login_banner", {
+                pagination: {
+                el: ".swiper-pagination",
+                },
+            });
+        </script>
+    </div>
+    <div class="login_content">
+        <div class="content">
+            <div class="al_title"> 
+                <h2>법인영업몰 <strong>협력회사관리자</strong></h2>
+                <p>협력회사 관리자를 위한 시스템입니다.<br/>불법 사용 시 법적 제재를 받을 수 있습니다.</p>
+            </div>
+            <div class="al_form">
+                <div class="item">
+                    <div class="input-group">
+                        <input type="text" class="id" placeholder="아이디를 입력하세요">
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="input-group">
+                        <input type="text" class="password" placeholder="비밀번호를 입력하세요">
+                    </div>
+                </div>
+
+                <!-- 외부로그인시에만 -->
+                <div class="item">
+                    <div class="input-group">
+                        <input type="tel" class="phone" placeholder="휴대폰번호를 입력하세요">
+                        <button id="sendSms" class="btn" type="button">인증번호 받기</button>
+                        <button id="reSendSms" class="btn" type="button" style="display:none;">재발송 하기</button>
+                        <script>
+                            let countdownInterval;
+                            const certifyNumberBox = document.getElementById('certifyNumberBox');
+                        
+                            function startCountdown(buttonId, reButtonId, countdownId) {
+                                const button = document.getElementById(buttonId);
+                                const reButton = document.getElementById(reButtonId);
+                                const countdownSpan = document.getElementById(countdownId);
+                                button.style.display = 'none';
+                                reButton.style.display = 'block';
+                                certifyNumberBox.style.display = 'block';
+                                let secondsLeft = 180;
+                        
+                                countdownInterval = setInterval(function() {
+                                    secondsLeft--;
+                                    const minutes = Math.floor(secondsLeft / 60);
+                                    const seconds = secondsLeft % 60;
+                                    countdownSpan.textContent = minutes +`${minutes}:${(seconds < 10 ? '0' : '')}${seconds}`;
+                        
+                                    if (secondsLeft <= 0) {
+                                        clearInterval(countdownInterval);
+                                        countdownSpan.textContent = '3:00';
+                                        alert('시간이 만료되었습니다. 다시 시도해주세요.');
+                                    }
+                                }, 1000);
+                            }
+                        
+                            document.getElementById('sendSms').addEventListener('click', function() {
+                                clearInterval(countdownInterval);
+                                startCountdown('sendSms', 'reSendSms', 'countDown');
+                            });
+                        
+                            document.getElementById('reSendSms').addEventListener('click', function() {
+                                clearInterval(countdownInterval);
+                                startCountdown('sendSms', 'reSendSms', 'countDown');
+                            });
+                        
+                            document.getElementById('loginSubmit').addEventListener('click', function() {
+                                clearInterval(countdownInterval);
+                                document.getElementById('countDown').textContent = '0:00';
+                                alert('인증 확인!');
+                            });
+                        </script>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="input-group">
+                        <div class="count_wrap">
+                            <input type="tel" class="certify" placeholder="인증번호를 입력하세요">
+                            <span id="countDown" class="count">3:00</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- //외부로그인시에만 -->
+            </div>
+            <div class="al_btns">
+                <button type="button" id="loginSubmit" class="btn btn_lg submit" onclick="location.href = '/resources/static/html/main/main.html'">로그인</button>
+            </div>
+            <div class="login_links">
+                <div class="item"><a href="javascript:;" onclick="showModal('jointJoin');">협력회사 등록</a></div>
+                <div class="item"><a href="javascript:;" onclick="showModal('findIdPassword');" >아이디/비밀번호 찾기</a></div>
+            </div>
+            <div class="al_btns">
+                <button type="button" class="btn">법인영업 오피스 바로가기</button>
+            </div>
+        </div>
+        <div class="copy">Copyright © Shinsegae. All Right Reserved.</div>
+    </div>
+</div>
+
+
+
+<!-- 로그인실패 -->
+<div class="modal modal-blur fade " id="LoginFail" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop='static'><!-- data-bs-backdrop='static' 백그라운드 클릭시 모달 안닫힘 -->
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">로그인 실패</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body">
+                    <div class="text-center">
+                        <svg  xmlns="http://www.w3.org/2000/svg" style="width:55px;height:55px;"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#777"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-user-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" /><path d="M6 21v-2a4 4 0 0 1 4 -4h3.5" /><path d="M22 22l-5 -5" /><path d="M17 22l5 -5" /></svg>
+                        <p class="keep-all mt-3">비밀번호 <span class="color-theme-admin-type">입력 실패 횟수가 5회</span> 초과되었거나,<br/>
+                        <span class="color-theme-admin-type">비정상적인 접속 시도</span>로 고객님의 계정을<br/> 안전하게 보호하기 위해, 잠김 처리되었습니다.<br/>
+                        개인 정보보호를 위해 본인확인(휴대폰 인증) 이후에 로그인이 가능합니다.<br/>
+                        가입 여부 및 본인 확인을 통해서 새로운 비밀번호를 등록하여<br/>
+                        로그인해 주시면 됩니다.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="al_btns">
+                    <button type="button" class="btn" data-bs-dismiss="modal">취소</button>
+                    <button type="button" class="btn submit" onclick="showModal('LoginCertify');" data-bs-dismiss="modal">본인확인(휴대폰인증)</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- //로그인실패 -->
+
+
+<!-- 90일 계정잠김 -->
+<div class="modal modal-blur fade " id="memberLock" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop='static'><!-- data-bs-backdrop='static' 백그라운드 클릭시 모달 안닫힘 -->
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">로그인 실패</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body">
+                    <div class="text-center">
+                        <svg  xmlns="http://www.w3.org/2000/svg" style="width:55px;height:55px;" width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#777"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-user-shield"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 21v-2a4 4 0 0 1 4 -4h2" /><path d="M22 16c0 4 -2.5 6 -3.5 6s-3.5 -2 -3.5 -6c1 0 2.5 -.5 3.5 -1.5c1 1 2.5 1.5 3.5 1.5z" /><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" /></svg>
+                        <p class="keep-all mt-3">비밀번호 <span class="color-theme-admin-type">90일 이상 접속을 하지않아 잠금처리</span> 되었습니다.<br/>
+                        관리자에게 잠금해제 요청 또는 휴대폰인증으로 해제 가능합니다.<br/> 인증페이지로 이동하시겠습니까?</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="al_btns">
+                    <button type="button" class="btn" data-bs-dismiss="modal">취소</button>
+                    <button type="button" class="btn submit" onclick="showModal('LoginCertify');" data-bs-dismiss="modal">본인확인(휴대폰인증)</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- //90일 계정잠김 -->
+
+<!-- 본인인증 -->
+<div class="modal modal-blur fade " id="LoginCertify" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop='static'><!-- data-bs-backdrop='static' 백그라운드 클릭시 모달 안닫힘 -->
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">본인인증 & 비밀번호 변경</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="">
+            <div class="modal-body">
+                <div class="card-body">
+                    <p class="keep-all">* 본인확인(휴대폰 인증) 이후 새로운 비밀번호를 등록하여 로그인이 가능합니다.</p>
+                    <div class="al_form">
+                        <div class="item">
+                            <div class="input-group">
+                                <input type="text" placeholder="아이디">
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="input-group">
+                                <input type="tel" placeholder="휴대폰인증" maxlength="11">
+                                <button id="sendSmsCertify" class="btn" type="button">인증발송</button>
+                                <button id="reSendSmsCertify" class="btn" type="button" style="display:none;">재발송</button>
+                            </div>
+                            <small>* 휴대폰번호 '-'없이 입력</small>
+                        </div>
+                        <div class="item">
+                            <div class="input-group">
+                                <div class="count_wrap">
+                                    <input type="tel" placeholder="인증번호" >
+                                    <span id="countDownCertify" class="count">3:00</span>
+                                </div>
+                                <button id="checkSmsCertify" class="btn" type="button">인증확인</button>
+                            </div>
+                        </div>
+                        <div class="item certify_complete" style="display:none;">
+                            <div class="input-group">
+                                <input type="password" placeholder="신규 비밀번호" >
+                            </div>
+                            <small>* 비밀번호는 8~12자 이내로 영문, 숫자를 조합하셔서 작성하시면 됩니다.</small>
+                        </div>
+                        <div class="item certify_complete" style="display:none;">
+                            <div class="input-group">
+                                <input type="password" placeholder="신규 비밀번호 확인" >
+                            </div>
+                            <small>* 확인을 위해 신규 비밀번호를 다시 한번 기입해 주세요</small>
+                        </div>
+                    </div>
+                    <script>
+                        let countdownIntervalCertify;
+                    
+                        function startCountdownCertify(buttonId, reButtonId, countdownId) {
+                            const button = document.getElementById(buttonId);
+                            const reButton = document.getElementById(reButtonId);
+                            const countdownSpan = document.getElementById(countdownId);
+                            button.style.display = 'none';
+                            reButton.style.display = 'block';
+                            let secondsLeft = 180;
+                    
+                            countdownIntervalCertify = setInterval(function() {
+                                secondsLeft--;
+                                const minutes = Math.floor(secondsLeft / 60);
+                                const seconds = secondsLeft % 60;
+                                countdownSpan.textContent = `${minutes}:${(seconds < 10 ? '0' : '')}${seconds}`;
+                    
+                                if (secondsLeft <= 0) {
+                                    clearInterval(countdownIntervalCertify);
+                                    countdownSpan.textContent = '3:00';
+                                    alert('시간이 만료되었습니다. 다시 시도해주세요.');
+                                }
+                            }, 1000);
+                        }
+                    
+                        document.getElementById('sendSmsCertify').addEventListener('click', function() {
+                            clearInterval(countdownIntervalCertify);
+                            startCountdownCertify('sendSmsCertify', 'reSendSmsCertify', 'countDownCertify');
+                        });
+                    
+                        document.getElementById('reSendSmsCertify').addEventListener('click', function() {
+                            clearInterval(countdownIntervalCertify);
+                            startCountdownCertify('sendSmsCertify', 'reSendSmsCertify', 'countDownCertify');
+                        });
+                    
+                        document.getElementById('checkSmsCertify').addEventListener('click', function() {
+                            clearInterval(countdownIntervalCertify);
+                            document.getElementById('countDownCertify').textContent = '0:00';
+                            alert('인증 확인!');
+                            document.querySelectorAll('.certify_complete').forEach(function(item){
+                                item.style.display = 'block';
+                            });
+                        });
+                    </script>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="al_btns">
+                    <button type="button" class="btn" data-bs-dismiss="modal">취소</button>
+                    <button type="button" class="btn submit" onclick="hideModal('LoginCertify');">확인</button>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- //본인인증 -->
+
+
+
+<!-- 첫로그인 약관동의 -->
+<div class="modal modal-blur fade " id="firstLoginTerms" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop='static'><!-- data-bs-backdrop='static' 백그라운드 클릭시 모달 안닫힘 -->
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">약관동의</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body label-control">
+                    <div class="mb-3">
+                        <div class="input-group">
+                            <label class="form-selectgroup-item flex-fill">
+                                <input type="checkbox" name="" value="" class="form-selectgroup-input check-all">
+                                <div class="form-selectgroup-label d-flex align-items-center p-3">
+                                    <div class="me-3">
+                                        <span class="form-selectgroup-check"></span>
+                                    </div>
+                                    <div class="form-check-label text-start">
+                                    개인정보이용약관, 개인정보수집 및 이용에 대한 안내,<br/>개인정보의 취급위탁 동의에 모두 동의합니다.
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <div class="input-group align-items-center">
+                            <label class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox">
+                                <span class="form-check-label">개인정보이용약관에 동의합니다.</span>
+                            </label>
+                            <button type="button" class="btn btn-outline-dark btn-sm ms-auto" onclick="showModal('terms1');">
+                            자세히보기
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <div class="input-group align-items-center">
+                            <label class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox">
+                                <span class="form-check-label">개인정보의 취급위탁 동의에 동의합니다.</span>
+                            </label>
+                            <button type="button" class="btn btn-outline-dark btn-sm ms-auto" onclick="showModal('terms2');">
+                                자세히보기
+                            </button>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="input-group align-items-center">
+                            <label class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox">
+                                <span class="form-check-label">개인정보 제3자제공 동의에 동의합니다.</span>
+                            </label>
+                            <button type="button" class="btn btn-outline-dark btn-sm ms-auto" onclick="showModal('terms3');">
+                                자세히보기
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="al_btns">
+                    <button type="button" class="btn" data-bs-dismiss="modal">취소</button>
+                    <button type="button" class="btn submit" onclick="showModal('LoginCertify');" data-bs-dismiss="modal">다음</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- //첫로그인 약관동의 -->
+
+<!-- 개인정보이용약관 -->
+<div class="modal modal-blur fade " id="terms1" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">개인정보이용약관</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body">
+                    <div class="terms_scroll">
+                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
+                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
+                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
+                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
+                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
+                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
+                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
+                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
+                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
+                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
+                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="al_btns">
+                    <button type="button" class="btn submit" data-bs-dismiss="modal">확인</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- //개인정보이용약관 -->
+<!-- 취급위탁동의 -->
+<div class="modal modal-blur fade " id="terms2" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">개인정보의 취급위탁 동의</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body">
+                    <div class="terms_scroll">
+                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
+                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
+                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
+                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
+                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
+                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
+                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
+                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
+                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
+                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
+                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="al_btns">
+                    <button type="button" class="btn submit" data-bs-dismiss="modal">확인</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- //취급위탁동의 -->
+<!-- 개인정보 제3자제공 -->
+<div class="modal modal-blur fade " id="terms3" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">개인정보 제3자제공</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body">
+                    <div class="terms_scroll">
+                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
+                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
+                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
+                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
+                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
+                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
+                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
+                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
+                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
+                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
+                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="al_btns">
+                    <button type="button" class="btn submit" data-bs-dismiss="modal">확인</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- //개인정보이용약관 -->
+
+
+
+<!-- 30일 비밀번호 변경 -->
+<div class="modal modal-blur fade " id="monthPasswordChange" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop='static'><!-- data-bs-backdrop='static' 백그라운드 클릭시 모달 안닫힘 -->
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">소중한 개인정보를 보호하기 위해 비밀번호를 변경해주세요.</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="">
+            <div class="modal-body">
+                <div class="card-body">
+                    <p class="keep-all">회원님께서는 오랜 기간 비밀번호를 바꾸지 않으셨습니다.<br/>
+                    동일한 비밀번호를 장기간 사용할 경우 개인정보 노출의 위험이 있습니다.</p>
+                    <div class="al_form">
+                        <div class="item">
+                            <div class="input-group">
+                                <input type="password" placeholder="신규 비밀번호">
+                            </div>
+                            <small>* 비밀번호는 8~12자 이내로 영문, 숫자를 조합하셔서 작성하시면 됩니다.</small>
+                        </div>
+                        <div class="item">
+                            <div class="input-group">
+                                <input type="password" placeholder="신규 비밀번호 확인">
+                            </div>
+                            <small>* 확인을 위해 신규 비밀번호를 다시 한번 기입해 주세요</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="al_btns">
+                    <button type="button" class="btn" data-bs-dismiss="modal">다음에 변경하기</button>
+                    <button type="button" class="btn submit" onclick="hideModal('LoginCertify');">비밀번호 변경하기</button>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- //본인인증 -->
+
+
+<!-- 아이디 찾기/비밀번호 재설정 -->
+<div class="modal modal-blur fade " id="findIdPassword" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop='static'><!-- data-bs-backdrop='static' 백그라운드 클릭시 모달 안닫힘 -->
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">아이디 찾기/비밀번호 재설정</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="">
+            <div class="modal-body">
+                <div class="card-body">
+                    <p class="keep-all">* 정보 입력 후 아이디 확인, 비밀번호 재설정을 할 수 있습니다</p>
+                    <p class="keep-all">* 담당자명과 휴대폰인증으로 아이디 조회가 가능합니다</p>
+                    <div class="al_form">
+                        <div class="item">
+                            <div class="input-group">
+                                <input type="text" placeholder="담당자명">
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="input-group">
+                                <input type="tel" placeholder="휴대폰인증" maxlength="11">
+                                <button id="sendSmsFind" class="btn" type="button">인증발송</button>
+                                <button id="reSendSmsFind" class="btn" type="button" style="display:none;">재발송</button>
+                            </div>
+                            <small>* 휴대폰번호 '-'없이 입력</small>
+                        </div>
+                        <div class="item">
+                            <div class="input-group">
+                                <div class="count_wrap">
+                                    <input type="tel" placeholder="인증번호" >
+                                    <span id="countDownFind" class="count">3:00</span>
+                                </div>
+                                <button id="checkSmsFind" class="btn" type="button">인증확인</button>
+                            </div>
+                        </div>
+                        <div class="al_btns mt-3">
+                            <button type="button" class="btn submit" id="searchIdBtn" disabled="">아이디 검색</button>
+                        </div>
+
+                        <div id="idResult" class="mt-4" style="display: none;">
+                            <div class="item">
+                                <div class="tit">아이디</div>
+                                <div class="input-group">
+                                    <input type="password" placeholder="adbc1234" >
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="tit">가입일</div>
+                                <div class="input-group">
+                                    <input type="password" placeholder="2024-07-30" >
+                                </div>
+                            </div>
+                            <div class="al_btns mt-3">
+                                <button type="button" class="btn">로그인</button>
+                                <button type="button" class="btn submit" onclick="hideModal('findIdPassword');showModal('resetPassword');">비밀번호 재설정</button>
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+                        let countdownIntervalFind;
+                    
+                        function startCountdownFind(buttonId, reButtonId, countdownId) {
+                            const button = document.getElementById(buttonId);
+                            const reButton = document.getElementById(reButtonId);
+                            const countdownSpan = document.getElementById(countdownId);
+                            button.style.display = 'none';
+                            reButton.style.display = 'block';
+                            let secondsLeft = 180;
+                    
+                            countdownIntervalFind = setInterval(function() {
+                                secondsLeft--;
+                                const minutes = Math.floor(secondsLeft / 60);
+                                const seconds = secondsLeft % 60;
+                                countdownSpan.textContent = `${minutes}:${(seconds < 10 ? '0' : '')}${seconds}`;
+                    
+                                if (secondsLeft <= 0) {
+                                    clearInterval(countdownIntervalFind);
+                                    countdownSpan.textContent = '3:00';
+                                    alert('시간이 만료되었습니다. 다시 시도해주세요.');
+                                }
+                            }, 1000);
+                        }
+                    
+                        document.getElementById('sendSmsFind').addEventListener('click', function() {
+                            clearInterval(countdownIntervalFind);
+                            startCountdownFind('sendSmsFind', 'reSendSmsFind', 'countDownFind');
+                        });
+                    
+                        document.getElementById('reSendSmsFind').addEventListener('click', function() {
+                            clearInterval(countdownIntervalFind);
+                            startCountdownFind('sendSmsFind', 'reSendSmsFind', 'countDownFind');
+                        });
+                    
+                        document.getElementById('checkSmsFind').addEventListener('click', function() {
+                            clearInterval(countdownIntervalFind);
+                            document.getElementById('countDownFind').textContent = '0:00';
+                            alert('인증 확인!');
+                            document.getElementById('searchIdBtn').removeAttribute("disabled");
+                        });
+                        document.getElementById('searchIdBtn').addEventListener('click', function() {
+                            document.getElementById('idResult').style.display = 'block';
+                        });
+                    </script>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- //아이디 찾기/비밀번호 재설정 -->
+
+
+
+<!-- 아이디 찾기/비밀번호 재설정 -->
+<div class="modal modal-blur fade " id="resetPassword" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop='static'><!-- data-bs-backdrop='static' 백그라운드 클릭시 모달 안닫힘 -->
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">비밀번호 재설정</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="">
+            <div class="modal-body">
+                <div class="card-body">
+                    <div class="al_form">
+                        <div class="item">
+                            <div class="input-group">
+                                <input type="password" placeholder="신규 비밀번호">
+                            </div>
+                            <small>* 비밀번호는 8~12자 이내로 영문, 숫자를 조합하셔서 작성하시면 됩니다.</small>
+                        </div>
+                        <div class="item">
+                            <div class="input-group">
+                                <input type="password" placeholder="신규 비밀번호 확인">
+                            </div>
+                            <small>* 확인을 위해 신규 비밀번호를 다시 한번 기입해 주세요</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="al_btns">
+                    <button type="button" class="btn submit" onclick="hideModal('resetPassword');">비밀번호 변경하기</button>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- //아이디 찾기/비밀번호 재설정 -->
+
+
+
+<!-- 협력회사 등록 -->
+<div class="modal modal-blur fade " id="jointJoin" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop='static'><!-- data-bs-backdrop='static' 백그라운드 클릭시 모달 안닫힘 -->
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">협력회사 등록</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="">
+            <div class="modal-body">
+                <div class="card-body">
+                    <div>
+                        <div class="al_form">
+                            <div class="al_tit">협력회사 등록</div>
+                            <div class="item">
+                                <div class="tit required">사업자번호</div>
+                                <div class="input-group">
+                                    <input type="text" placeholder="">
+                                </div>
+                                <small>*협력회사 상담신청 후 승인된 협력회사만 등록이 가능합니다.</small>
+                                <small>*관리자 승인 후 시스템 이용이 가능합니다.</small>
+                                <small>*미 신청한 협력회사는 상담신청 후 이용해주세요.</small>
+                                <a href="https://www.ssgb2e.com/about/biPtnCounsel.ss" target="_blank" class="link"><small>상담신청 바로가기 →</small></a>
+                            </div>
+                        </div>
+                        <div class="al_btns mt-3">
+                            <button type="button" class="btn submit" onclick="hideModal('jointJoin');showModal('joinTerms');">협력회사 등록하기</button>
+                        </div>
+                    </div>
+                    <hr class="my-4">
+                    <div>
+                        <div class="al_form">
+                            <div class="al_tit">신세계백화점 매장 등록</div>
+                            <div class="item">
+                                <div class="tit required">사업자번호</div>
+                                <div class="input-group">
+                                    <input type="text" placeholder="">
+                                </div>
+                                <small>* 신세계백화점 점포로 입점된 매장만 등록이 가능합니다.</small>
+                                <small>* 관리자 승인 후 시스템 이용이 가능합니다.</small>
+                            </div>
+                        </div>
+                        <div class="al_btns mt-3">
+                            <button type="button" class="btn submit" onclick="hideModal('jointJoin');showModal('joinTermsOff');">신세계백화점 매장 등록하기</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- //관리자 등록 -->
+
+
+
+<!-- 협력회사 -->
+<!-- 협력회사 등록 약관 -->
+<div class="modal modal-blur fade " id="joinTerms" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop='static'><!-- data-bs-backdrop='static' 백그라운드 클릭시 모달 안닫힘 -->
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">협력회사 등록</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="">
+            <div class="modal-body">
+                <div class="card-body">
+                    <ul class="steps steps-counter mb-3">
+                        <li class="step-item active">01. 약관동의</li>
+                        <li class="step-item">02. 정보입력</li>
+                        <li class="step-item">03. 가입완료</li>
+                    </ul>
+                    <div class="mb-2">
+                        <div class="label-control mb-2">
+                            <label class="form-check">
+                                <input class="form-check-input check-all mt-1" type="checkbox">
+                                <strong class="form-check-label fs-4">개인정보 이용약관 ,개인정보수집 및 이용에 대한 안내에 모두 동의합니다.</strong>
+                            </label>
+                            <div class="mt-3">
+                                <label class="form-check mb-1">
+                                    <input class="form-check-input" type="checkbox">
+                                    <strong class="form-check-label">개인정보 이용약관</strong>
+                                </label>
+                                <div class="join_terms_cnt">
+                                    개인정보 이용약관개인정보 이용약관개인정보 이용약관<br>
+                                    개인정보 이용약관개인정보 이용약관개인정보 이용약관<br>
+                                    개인정보 이용약관개인정보 이용약관개인정보 이용약관<br>
+                                    개인정보 이용약관개인정보 이용약관개인정보 이용약관<br>
+                                    개인정보 이용약관개인정보 이용약관개인정보 이용약관<br>
+                                    개인정보 이용약관개인정보 이용약관개인정보 이용약관<br>
+                                    개인정보 이용약관개인정보 이용약관개인정보 이용약관<br>
+                                    개인정보 이용약관개인정보 이용약관개인정보 이용약관
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <label class="form-check mb-1">
+                                    <input class="form-check-input" type="checkbox">
+                                    <strong class="form-check-label">개인정보수집 및 이용에 대한 안내</strong>
+                                </label>
+                                <div class="join_terms_cnt">
+                                    개인정보수집 및 이용에 대한 안내개인정보수집 및 이용에 대한 안내<br>
+                                    개인정보수집 및 이용에 대한 안내개인정보수집 및 이용에 대한 안내<br>
+                                    개인정보수집 및 이용에 대한 안내개인정보수집 및 이용에 대한 안내<br>
+                                    개인정보수집 및 이용에 대한 안내개인정보수집 및 이용에 대한 안내<br>
+                                    개인정보수집 및 이용에 대한 안내개인정보수집 및 이용에 대한 안내<br>
+                                    개인정보수집 및 이용에 대한 안내개인정보수집 및 이용에 대한 안내<br>
+                                    개인정보수집 및 이용에 대한 안내개인정보수집 및 이용에 대한 안내<br>
+                                    개인정보수집 및 이용에 대한 안내개인정보수집 및 이용에 대한 안내<br>
+                                    개인정보수집 및 이용에 대한 안내개인정보수집 및 이용에 대한 안내<br>
+                                    개인정보수집 및 이용에 대한 안내개인정보수집 및 이용에 대한 안내
+                                </div>
+                            </div>
+                        </div>
+                        <small>※ 이용 약관과 개인 정보 수집 및 이용안내에 동의하지 않으시면 서비스를 이용할 수 없습니다.</small>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="al_btns">
+                    <button type="button" class="btn" data-bs-dismiss="modal">취소</button>
+                    <button type="button" class="btn submit" onclick="hideModal('joinTerms');showModal('joinForm');">다음</button>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- //협력회사 등록 약관 -->
+
+
+<!-- 협력회사 등록 폼 -->
+<div class="modal modal-blur fade " id="joinForm" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop='static'><!-- data-bs-backdrop='static' 백그라운드 클릭시 모달 안닫힘 -->
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">협력회사 등록</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="">
+                <div class="modal-body">
+                    <div class="card-body">
+                        <ul class="steps steps-counter mb-3">
+                            <li class="step-item">01. 약관동의</li>
+                            <li class="step-item active">02. 정보입력</li>
+                            <li class="step-item">03. 가입완료</li>
+                        </ul>
+                        <div class="al_form">
+                            <div class="al_tit">협력회사 정보</div>
+                            <div class="item">
+                                <div class="tit required">협력회사명</div>
+                                <div class="input-group">
+                                    <input type="text">
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="tit required">사업자등록번호</div>
+                                <div class="input-group">
+                                    <input type="tel">
+                                </div>
+                                <small>* 숫자만 입력</small>
+                            </div>
+                            <div class="item">
+                                <div class="tit required">주요 브랜드</div>
+                                <div class="input-group">
+                                    <input type="text">
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="tit required">주요 상품</div>
+                                <div class="input-group">
+                                    <input type="text">
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="tit required">주소</div>
+                                <div class="input-group w-50">
+                                    <input type="text" id="i_post_code" name="i_post_code" placeholder="우편번호" readonly="" onclick="execDaumPostcode()">
+                                    <button class="btn" type="button" onclick="execDaumPostcode()">주소검색</button>
+                                </div>
+                                <div class="input-group">
+                                    <input type="text" id="i_address_basic" name="i_address_basic" placeholder="입력주소" readonly="" onclick="execDaumPostcode()">
+                                </div>
+                                <div class="input-group">
+                                    <input type="text" id="i_address_detail" name="i_address_detail" placeholder="상세주소">
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="tit required">택배사 선택</div>
+                                <div class="input-group">
+                                    <select name="" id="">
+                                        <option value="">선택</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="tit required">배송비설정</div>
+                                <small>법인영업몰의 기본 배송비는 “무료배송”이 원칙 입니다</small>
+                                <div class="input-group">
+                                    <span class="input-group-text text">상품별배송비</span>
+                                    <input type="tel" data-amount-comma="">
+                                    <span class="input-group-text text">원 (배송비 부과되는 상품에 적용)</span>
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-text text">무료배송조건</span>
+                                    <input type="tel" data-amount-comma="">
+                                    <span class="input-group-text text">원 이상 주문 시 무료배송비로 적용</span>
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-text text">발주 후 배송 기간</span>
+                                    <input type="tel" data-amount-comma="">
+                                    <span class="input-group-text text">일</span>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="tit">대표자명</div>
+                                <div class="input-group">
+                                    <input type="text">
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="tit">법인등록번호</div>
+                                <div class="input-group">
+                                    <input type="tel">
+                                </div>
+                                <small>* 숫자만 입력</small>
+                            </div>
+                            <div class="item">
+                                <div class="tit">업태</div>
+                                <div class="input-group">
+                                    <input type="text">
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="tit">업종</div>
+                                <div class="input-group">
+                                    <input type="text">
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="tit">대표전화</div>
+                                <div class="input-group">
+                                    <input type="tel">
+                                </div>
+                                <small>* 숫자만 입력</small>
+                            </div>
+                            <div class="item">
+                                <div class="tit">FAX</div>
+                                <div class="input-group">
+                                    <input type="tel">
+                                </div>
+                                <small>* 숫자만 입력</small>
+                            </div>
+                            <div class="item">
+                                <div class="tit">협력회사 소개</div>
+                                <div class="input-group">
+                                    <textarea name="" id=""></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="my-4">
+                        <div class="al_form">
+                            <div class="al_tit">관리자 정보</div>
+                            <div class="item">
+                                <div class="tit required">아이디</div>
+                                <div class="input-group">
+                                    <input type="text">
+                                </div>
+                                <small>* 2~30자 사이로 영문/숫자 조합해 주세요</small>
+                            </div>
+                            <div class="item">
+                                <div class="tit required">비밀번호</div>
+                                <div class="input-group">
+                                    <input type="password">
+                                </div>
+                                <small>* 8~20자 사이 영문, 숫자, 특수문자 조합해 주세요</small>
+                                <small>*사용가능 특수문자 : ＂~ ! @ # $ % ^ * _ . – () +”</small>
+                            </div>
+                            <div class="item">
+                                <div class="tit required">비밀번호 확인</div>
+                                <div class="input-group">
+                                    <input type="password">
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="tit required">담당자명</div>
+                                <div class="input-group">
+                                    <input type="text">
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="tit">휴대폰번호</div>
+                                <div class="input-group">
+                                    <input type="tel">
+                                </div>
+                                <small>* 숫자만 입력</small>
+                            </div>
+                            <div class="item">
+                                <div class="tit">이메일주소</div>
+                                <div class="input-group">
+                                    <input type="email">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="al_btns">
+                        <button type="button" class="btn submit" onclick="hideModal('joinForm');showModal('joinComp');">확인</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- //협력회사 등록 폼 -->
+
+
+<!-- 협력회사 등록 완료 -->
+<div class="modal modal-blur fade " id="joinComp" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop='static'><!-- data-bs-backdrop='static' 백그라운드 클릭시 모달 안닫힘 -->
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">협력회사 등록</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="">
+                <div class="modal-body">
+                    <div class="card-body">
+                        <ul class="steps steps-counter mb-3">
+                            <li class="step-item">01. 약관동의</li>
+                            <li class="step-item">02. 정보입력</li>
+                            <li class="step-item active">03. 가입완료</li>
+                        </ul>
+                        <div class="mt-4 text-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-green icon-lg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path><path d="M9 12l2 2l4 -4"></path></svg>
+                            <h3>협력회사 등록이 완료되었습니다<br><br>
+
+                            관리자 승인 후 시스템을 이용하실 수 있으며,<br>
+                            승인 안내는 알림톡으로 발송됩니다.
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="al_btns">
+                        <button type="button" class="btn submit" onclick="hideModal('joinComp');">확인</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- //협력회사 등록 완료 -->
+<!-- //협력회사 -->
+
+
+
+<!-- 백화점 -->
+<!-- 신세계백화점 매장 등록 약관 -->
+<div class="modal modal-blur fade " id="joinTermsOff" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop='static'><!-- data-bs-backdrop='static' 백그라운드 클릭시 모달 안닫힘 -->
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">신세계백화점 매장 등록</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="">
+            <div class="modal-body">
+                <div class="card-body">
+                    <ul class="steps steps-counter mb-3">
+                        <li class="step-item active">01. 약관동의</li>
+                        <li class="step-item">02. 정보입력</li>
+                        <li class="step-item">03. 가입완료</li>
+                    </ul>
+                    <div class="mb-2">
+                        <div class="label-control mb-2">
+                            <label class="form-check">
+                                <input class="form-check-input check-all mt-1" type="checkbox">
+                                <strong class="form-check-label fs-4">개인정보 이용약관 ,개인정보수집 및 이용에 대한 안내에 모두 동의합니다.</strong>
+                            </label>
+                            <div class="mt-3">
+                                <label class="form-check mb-1">
+                                    <input class="form-check-input" type="checkbox">
+                                    <strong class="form-check-label">개인정보 이용약관</strong>
+                                </label>
+                                <div class="join_terms_cnt">
+                                    개인정보 이용약관개인정보 이용약관개인정보 이용약관<br>
+                                    개인정보 이용약관개인정보 이용약관개인정보 이용약관<br>
+                                    개인정보 이용약관개인정보 이용약관개인정보 이용약관<br>
+                                    개인정보 이용약관개인정보 이용약관개인정보 이용약관<br>
+                                    개인정보 이용약관개인정보 이용약관개인정보 이용약관<br>
+                                    개인정보 이용약관개인정보 이용약관개인정보 이용약관<br>
+                                    개인정보 이용약관개인정보 이용약관개인정보 이용약관<br>
+                                    개인정보 이용약관개인정보 이용약관개인정보 이용약관
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <label class="form-check mb-1">
+                                    <input class="form-check-input" type="checkbox">
+                                    <strong class="form-check-label">개인정보수집 및 이용에 대한 안내</strong>
+                                </label>
+                                <div class="join_terms_cnt">
+                                    개인정보수집 및 이용에 대한 안내개인정보수집 및 이용에 대한 안내<br>
+                                    개인정보수집 및 이용에 대한 안내개인정보수집 및 이용에 대한 안내<br>
+                                    개인정보수집 및 이용에 대한 안내개인정보수집 및 이용에 대한 안내<br>
+                                    개인정보수집 및 이용에 대한 안내개인정보수집 및 이용에 대한 안내<br>
+                                    개인정보수집 및 이용에 대한 안내개인정보수집 및 이용에 대한 안내<br>
+                                    개인정보수집 및 이용에 대한 안내개인정보수집 및 이용에 대한 안내<br>
+                                    개인정보수집 및 이용에 대한 안내개인정보수집 및 이용에 대한 안내<br>
+                                    개인정보수집 및 이용에 대한 안내개인정보수집 및 이용에 대한 안내<br>
+                                    개인정보수집 및 이용에 대한 안내개인정보수집 및 이용에 대한 안내<br>
+                                    개인정보수집 및 이용에 대한 안내개인정보수집 및 이용에 대한 안내
+                                </div>
+                            </div>
+                        </div>
+                        <small>※ 이용 약관과 개인 정보 수집 및 이용안내에 동의하지 않으시면 서비스를 이용할 수 없습니다.</small>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="al_btns">
+                    <button type="button" class="btn" data-bs-dismiss="modal">취소</button>
+                    <button type="button" class="btn submit" onclick="hideModal('joinTermsOff');showModal('joinFormOff');">다음</button>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- //신세계백화점 매장 등록 약관 -->
+
+
+<!-- 신세계백화점 매장 등록 폼 -->
+<div class="modal modal-blur fade " id="joinFormOff" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop='static'><!-- data-bs-backdrop='static' 백그라운드 클릭시 모달 안닫힘 -->
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">신세계백화점 매장 등록</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="">
+                <div class="modal-body">
+                    <div class="card-body">
+                        <ul class="steps steps-counter mb-3">
+                            <li class="step-item">01. 약관동의</li>
+                            <li class="step-item active">02. 정보입력</li>
+                            <li class="step-item">03. 가입완료</li>
+                        </ul>
+                        <div class="al_form">
+                            <div class="al_tit">협력회사 정보</div>
+                            <div class="item">
+                                <div class="tit required">협력회사명</div>
+                                <div class="input-group">
+                                    <input type="text">
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="tit required">사업자등록번호</div>
+                                <div class="input-group">
+                                    <input type="tel">
+                                </div>
+                                <small>* 숫자만 입력</small>
+                            </div>
+                            <div class="item">
+                                <div class="tit required">MD등록번호</div>
+                                <div class="input-group">
+                                    <input type="tel">
+                                </div>
+                                <small>* 6자리 숫자 입력</small>
+                            </div>
+                            <div class="item">
+                                <div class="tit required">브랜드명</div>
+                                <div class="input-group">
+                                    <input type="text">
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="tit required">주요 상품</div>
+                                <div class="input-group">
+                                    <input type="text">
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="tit required">주소</div>
+                                <div class="input-group w-50">
+                                    <input type="text" id="i_post_code" name="i_post_code" placeholder="우편번호" readonly="" onclick="execDaumPostcode()">
+                                    <button class="btn" type="button" onclick="execDaumPostcode()">주소검색</button>
+                                </div>
+                                <div class="input-group">
+                                    <input type="text" id="i_address_basic" name="i_address_basic" placeholder="입력주소" readonly="" onclick="execDaumPostcode()">
+                                </div>
+                                <div class="input-group">
+                                    <input type="text" id="i_address_detail" name="i_address_detail" placeholder="상세주소">
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="tit required">택배사 선택</div>
+                                <div class="input-group">
+                                    <select name="" id="">
+                                        <option value="">선택</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="tit required">배송비설정</div>
+                                <small>법인영업몰의 기본 배송비는 “무료배송”이 원칙 입니다</small>
+                                <div class="input-group">
+                                    <span class="input-group-text text">상품별배송비</span>
+                                    <input type="tel" data-amount-comma="">
+                                    <span class="input-group-text text">원 (배송비 부과되는 상품에 적용)</span>
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-text text">무료배송조건</span>
+                                    <input type="tel" data-amount-comma="">
+                                    <span class="input-group-text text">원 이상 주문 시 무료배송비로 적용</span>
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-text text">발주 후 배송 기간</span>
+                                    <input type="tel" data-amount-comma="">
+                                    <span class="input-group-text text">일</span>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="tit">대표자명</div>
+                                <div class="input-group">
+                                    <input type="text">
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="tit">법인등록번호</div>
+                                <div class="input-group">
+                                    <input type="tel">
+                                </div>
+                                <small>* 숫자만 입력</small>
+                            </div>
+                            <div class="item">
+                                <div class="tit">업태</div>
+                                <div class="input-group">
+                                    <input type="text">
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="tit">업종</div>
+                                <div class="input-group">
+                                    <input type="text">
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="tit">대표전화</div>
+                                <div class="input-group">
+                                    <input type="tel">
+                                </div>
+                                <small>* 숫자만 입력</small>
+                            </div>
+                            <div class="item">
+                                <div class="tit">FAX</div>
+                                <div class="input-group">
+                                    <input type="tel">
+                                </div>
+                                <small>* 숫자만 입력</small>
+                            </div>
+                            <div class="item">
+                                <div class="tit">협력회사 소개</div>
+                                <div class="input-group">
+                                    <textarea name="" id=""></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="my-4">
+                        <div class="al_form">
+                            <div class="al_tit">관리자 정보</div>
+                            <div class="item">
+                                <div class="tit required">아이디</div>
+                                <div class="input-group">
+                                    <input type="text">
+                                </div>
+                                <small>* 2~30자 사이로 영문/숫자 조합해 주세요</small>
+                            </div>
+                            <div class="item">
+                                <div class="tit required">비밀번호</div>
+                                <div class="input-group">
+                                    <input type="password">
+                                </div>
+                                <small>* 8~20자 사이 영문, 숫자, 특수문자 조합해 주세요</small>
+                                <small>*사용가능 특수문자 : ＂~ ! @ # $ % ^ * _ . – () +”</small>
+                            </div>
+                            <div class="item">
+                                <div class="tit required">비밀번호 확인</div>
+                                <div class="input-group">
+                                    <input type="password">
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="tit required">담당자명</div>
+                                <div class="input-group">
+                                    <input type="text">
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="tit">휴대폰번호</div>
+                                <div class="input-group">
+                                    <input type="tel">
+                                </div>
+                                <small>* 숫자만 입력</small>
+                            </div>
+                            <div class="item">
+                                <div class="tit">이메일주소</div>
+                                <div class="input-group">
+                                    <input type="email">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="al_btns">
+                        <button type="button" class="btn submit" onclick="hideModal('joinFormOff');showModal('joinCompOff');">확인</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- //신세계백화점 매장 등록 폼 -->
+
+
+<!-- 신세계백화점 매장 등록 완료 -->
+<div class="modal modal-blur fade " id="joinCompOff" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop='static'><!-- data-bs-backdrop='static' 백그라운드 클릭시 모달 안닫힘 -->
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">신세계백화점 매장 등록</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="">
+                <div class="modal-body">
+                    <div class="card-body">
+                        <ul class="steps steps-counter mb-3">
+                            <li class="step-item">01. 약관동의</li>
+                            <li class="step-item">02. 정보입력</li>
+                            <li class="step-item active">03. 가입완료</li>
+                        </ul>
+                        <div class="mt-4 text-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-green icon-lg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path><path d="M9 12l2 2l4 -4"></path></svg>
+                            <h3>협력회사 등록이 완료되었습니다<br><br>
+
+                            관리자 승인 후 시스템을 이용하실 수 있으며,<br>
+                            승인 안내는 알림톡으로 발송됩니다.
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="al_btns">
+                        <button type="button" class="btn submit" onclick="hideModal('joinCompOff');">확인</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- //신세계백화점 매장 완료 -->
+<!-- //신세계백화점 매장 -->
+
+<div id="daumAdressLayer" >
+<button type="button" id="btnCloseLayer" onclick="closeDaumPostcode()">닫기버튼</button>
+</div>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+//주소 api
+var element_layer = document.getElementById('daumAdressLayer');
+
+function closeDaumPostcode() {
+    element_layer.style.display = 'none';
+}
+
+function execDaumPostcode() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+            // 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+            var addr = ''; // 주소 변수
+            var extraAddr = ''; // 참고항목 변수
+
+            //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                addr = data.roadAddress;
+            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                addr = data.jibunAddress;
+            }
+
+            // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+            if(data.userSelectedType === 'R'){
+                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                    extraAddr += data.bname;
+                }
+                // 건물명이 있고, 공동주택일 경우 추가한다.
+                if(data.buildingName !== '' && data.apartment === 'Y'){
+                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                if(extraAddr !== ''){
+                    extraAddr = ' (' + extraAddr + ')';
+                }
+                // 조합된 참고항목을 해당 필드에 넣는다.
+                document.getElementById("i_address_basic").value = extraAddr;
+
+            } else {
+                document.getElementById("i_address_basic").value = '';
+            }
+
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            document.getElementById('i_post_code').value = data.zonecode;
+            document.getElementById("i_address_basic").value = addr;
+            // 커서를 상세주소 필드로 이동한다.
+            document.getElementById("i_address_detail").focus();
+
+            // iframe을 넣은 element를 안보이게 한다.
+            // (autoClose:false 기능을 이용한다면, 아래 코드를 제거해야 화면에서 사라지지 않는다.)
+            element_layer.style.display = 'none';
+        },
+        width : '100%',
+        height : '100%',
+        maxSuggestItems : 5
+    }).embed(element_layer);
+
+    // iframe을 넣은 element를 보이게 한다.
+    element_layer.style.display = 'block';
+
+    // iframe을 넣은 element의 위치를 화면의 가운데로 이동시킨다.
+    // initLayerPosition();
+}
+
+// 브라우저의 크기 변경에 따라 레이어를 가운데로 이동시키고자 하실때에는
+// resize이벤트나, orientationchange이벤트를 이용하여 값이 변경될때마다 아래 함수를 실행 시켜 주시거나,
+// 직접 element_layer의 top,left값을 수정해 주시면 됩니다.
+function initLayerPosition(){
+    var width = 300; //우편번호서비스가 들어갈 element의 width
+    var height = 400; //우편번호서비스가 들어갈 element의 height
+    var borderWidth = 1; //샘플에서 사용하는 border의 두께
+
+    // 위에서 선언한 값들을 실제 element에 넣는다.
+    element_layer.style.width = width + 'px';
+    element_layer.style.height = height + 'px';
+    element_layer.style.border = borderWidth + 'px solid';
+    // 실행되는 순간의 화면 너비와 높이 값을 가져와서 중앙에 뜰 수 있도록 위치를 계산한다.
+    element_layer.style.left = (((window.innerWidth || document.documentElement.clientWidth) - width)/2 - borderWidth) + 'px';
+    element_layer.style.top = (((window.innerHeight || document.documentElement.clientHeight) - height)/2 - borderWidth) + 'px';
+}
+</script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        //로그인실패
+        showModal('LoginFail');
+
+        //90일 계정잠김
+        showModal('memberLock');
+
+        //첫로그인 약관동의
+        showModal('firstLoginTerms');
+
+        //30일 비밀번호 변경
+        showModal('monthPasswordChange');
+    });
+</script>
+<script src="/resources/static/dist/js/tabler.min.js"></script>
+</body>
+</html>

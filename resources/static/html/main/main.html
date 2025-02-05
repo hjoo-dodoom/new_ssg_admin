@@ -1,0 +1,1730 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=1400"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>신세계 관리자</title>
+    <!-- CSS files -->
+    <link href="/resources/static/dist/css/tabler.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/tabler-vendors.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/>
+    <link rel="shortcut icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <script src="/resources/static/dist/js/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/resources/static/dist/libs/litepicker/dist/litepicker.js?1674944402"></script>
+    <script src="/resources/static/dist/js/jquery.validate.js"></script>
+    <!-- Tabler Core -->
+    
+    <script src="/resources/static/dist/js/common.js"></script>
+    <style>
+    :root {
+        --theme-admin-type: #cf3f42;
+        /* #cf3f42 통합관리자 컬러 코드*/
+        /* #4b9b52 협력회사 컬러 코드 */
+        /* #214c9c 고객사 컬러 코드 */
+    }
+    </style>
+</head>
+<body>
+
+<!-- 공통영역1 -->
+<aside id="header" class="navbar navbar-vertical navbar-expand-lg header_left"></aside>
+<script>
+    //html include
+    //헤더&푸터 개발 완료시 삭제해주세요
+    function includeFile(path, targetId) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', path, true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById(targetId).innerHTML = xhr.responseText;
+        }
+    };
+    xhr.send();
+    }
+    var includePath = "/resources/static/layout/header.html";
+    includeFile(includePath, 'header');
+</script>
+<!-- //공통영역1 -->
+
+<div class="page-wrapper">
+    <!-- 공통영역2 -->
+    <div class="member_info">
+        <div class="info">
+            <span>관리권한 : 최상위관리자</span>
+            <!-- 통합관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <!-- 협력관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <!-- 고객사관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <span class="login_session">로그인 유지시간 <strong>30:00</strong> <button type="button" class="btn btn-xs btn-primary">연장</button></span>
+            <button type="button" class="btn btn-xs btn-secondary">관리자 매뉴얼 보기</button><!-- 공통 -->
+            <button type="button" class="btn btn-xs btn-secondary">기본양식다운로드</button><!-- 통합,협력사만 -->
+            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/admin_modify_pop.html', '900', '640')">관리자정보수정</button><!-- 공통 -->
+            <button type="button" class="btn btn-xs btn-secondary">보안체크</button><!-- 협력사만 -->
+            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/terms_pop.html', '600', '540')">이용약관</button><!-- 협력사만 -->
+        </div>
+        <div>
+            <a href="javascript:;" class="logout">홍길동(admin_01)님 로그아웃</a>
+            <a href="javascript:;" class="home">홈으로</a>
+        </div>
+    </div>
+
+    <!-- 페이지 히스토리 탭 -->
+    <div class="page-history">
+        <div class="history_toggle">
+            <label class="form-check form-switch">
+                <span class="form-check-label">History</span>
+                <input id="historyUse" class="form-check-input" type="checkbox" >
+            </label>
+        </div>
+        <button class="close_all" type="button" title="히스토리 모두 삭제" onclick="historyRemoveAll();">히스토리 모두 삭제</button>
+    </div>
+    <!-- //공통영역2 -->
+
+    <div class="page-header d-print-none">
+        <div class="container-xl">
+            <div class="row g-2 align-items-center">
+                <div class="col">
+                    <!-- Page pre-title -->
+                    <div class="page-pretitle">
+                        홈 > 상품 > 상품목록 > 상품전체목록
+                    </div>
+                    <h2 class="page-title">
+                    상품전체목록
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+<!-- 정보보안 서약서 -->
+<div class="modal modal-blur fade " id="security_pledge" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop='static'><!-- data-bs-backdrop='static' 백그라운드 클릭시 모달 안닫힘 -->
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document" style="min-width: 700px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">정보보안 서약서</h5>
+            </div>
+            <form action="">
+            <div class="modal-body">
+                <div class="card-body">
+                    <div class="text-center text-black fs-3">
+                        <strong>본인은 (주)신세계(이하 <strong class="text-primary">신세계</strong>) 에서 개인정보 및 정보보안 업무를 <br/>수행함에 있어 다음 사항을 준수할 것을 엄숙히 서약합니다.</strong>
+                    </div>
+                    <div class="text-start fs-4 mt-3">
+                        <p>1. 본인은 <strong class="text-primary">신세계</strong>에서 <strong class="text-primary">신세계 B2E/B 시스템 활용 업무</strong>를 수행 중 취득한 제반 비밀사항을 업무 수행 중은 물론 종료 후에도 일체 누설하지 않을 것을 서약합니다.</p>
+                        <p>2. 본인은 <strong class="text-primary">신세계</strong>의 개인정보 및 내부정보를 제3자에게 유출하거나, 누설하였을 때는 그 결과에 대한 제반 법규에 의거하여 엄중한 처벌을 받을 것을 서약합니다.</p>
+                        <p>3. 본인은 업무상 고의 또는 중대한 과실로 인해 <strong class="text-primary">신세계</strong>의 브랜드 이미지 실추 및 재산 상 손해를 끼쳤을 경우에는  그에 대한 민 형사상의 책임을 집니다.</p>
+                    </div>
+                    <div class="text-center text-black fs-2 mt-4">
+                        <strong>(주) 신세계 대표이사 귀하</strong>
+                    </div>
+
+                    <label class="form-check mt-4">
+                        <input class="form-check-input check-all mt-1" type="checkbox">
+                        <strong class="form-check-label fs-4">위 정보보안 서약에 동의하며, 본인인증을 통해 서약을 확약합니다.</strong>
+                    </label>
+
+                    <div class="table-responsive mt-2">
+                        <table class="table table-vcenter table-line card-table text-center table-mb">
+                            <colgroup>
+                                <col style="width:25%;">
+                                <col style="width:25%;">
+                                <col style="width:25%;">
+                                <col style="width:25%;">
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th>협력회사</th>
+                                    <th>아이디</th>
+                                    <th>이름</th>
+                                    <th>인증수단</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>(주)돋움</td>
+                                    <td>dodoom</td>
+                                    <td>홍길동</td>
+                                    <td>
+                                        <div class="input-group">
+                                            <select name="" id="" class="form-select">
+                                                <option value="">휴대폰인증</option>
+                                                <option value="">범용공인인증서</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-3">
+                        <a href="javascript:;" class="btn btn-primary w-100" onclick="hideModal('security_pledge');showModal('check_list_popup');">
+                            본인인증
+                        </a>
+                    </div>
+                    <div class="card bg-primary-lt mt-3">
+                        <div class="card-body">
+                            <h3 class="card-title mb-1">본인인증 안내</h3>
+                            <p class="text-black mt-1 mb-0">ㆍ시스템에 등록된 담당자 정보와 동일한 이름으로만 본인인증이 가능합니다.</p>
+                            <p class="text-black mt-1 mb-0">ㆍ휴대폰인증 시 개인명의 휴대폰만 인증이 가능합니다. *법인명의 휴대폰 인증 불가</p>
+                            <p class="text-black mt-1 mb-0">ㆍ공인인증서로 인증 시 개인 범용공인인증서만 인증이 가능합니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- //정보보안 서약서 -->
+
+
+
+<!-- 협력회사 정보보안ㆍ개인정보보호 체크리스트 -->
+<div class="modal modal-blur fade " id="check_list_popup" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop='static'><!-- data-bs-backdrop='static' 백그라운드 클릭시 모달 안닫힘 -->
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document" style="min-width: 750px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">협력회사 정보보안ㆍ개인정보보호 체크리스트</h5>
+            </div>
+            <form action="">
+            <div class="modal-body">
+                <div class="card-body">
+                    <div class="table-responsive mt-2">
+                        <table class="table table-vcenter table-line card-table table-mb table-lg">
+                            <colgroup>
+                                <col>
+                                <col style="width:150px;">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <th colspan="2" class="fs-4">개인정보에 대한 접근통제 및 접근권한의 제한조치 (제6조 2항)</th>
+                                </tr>
+                                <tr>
+                                    <td class="fs-4">
+                                        본 시스템 관리자 계정을 지정되지 않은 PC접속 또는 담당자 이외 공유하고 있는가?<br/>
+                                        <small class="fs-5">
+                                        * 협력회사에 배송목적으로 위탁 제공된 개인정보는 개인정보 유출 및 오남용 사전예방 등 정보보호를 위해 최초 등록한 지정된 PC에서 담당자만 수행하여야 합니다.
+                                        </small>
+                                    </td>
+                                    <td class="text-center">
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="check_list_popup1_1" value="">
+                                            <span class="form-check-label">예</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="check_list_popup1_1" value="">
+                                            <span class="form-check-label">아니오</span>
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="fs-4">
+                                        사용자 계정 및 암호를 윈도우에 저장 후 사용하고 있지는 않는가?
+                                    </td>
+                                    <td class="text-center">
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="check_list_popup1_2" value="">
+                                            <span class="form-check-label">예</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="check_list_popup1_2" value="">
+                                            <span class="form-check-label">아니오</span>
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="fs-4">
+                                        사무실내 모든PC는 전원을 끄고 퇴근하는가?
+                                    </td>
+                                    <td class="text-center">
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="check_list_popup1_3" value="">
+                                            <span class="form-check-label">예</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="check_list_popup1_3" value="">
+                                            <span class="form-check-label">아니오</span>
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2" class="fs-4">개인정보를 안전하게 저장/전송할 수 있는 암호화 기술의 적용 또는 이에 상응하는 조치 (제6조3항)</th>
+                                </tr>
+                                <tr>
+                                    <td class="fs-4">
+                                        업무PC내 개인정보가 포함된 화일은 암호가 설정 되어있는가?
+                                    </td>
+                                    <td class="text-center">
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="check_list_popup2_1" value="">
+                                            <span class="form-check-label">예</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="check_list_popup2_1" value="">
+                                            <span class="form-check-label">아니오</span>
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="fs-4">
+                                        개인정보가 포함된 자료를 업무용PC이외의 저장장치(USB, 외장하드, CD, 웹하드등)에 저장하지는 하였는가?
+                                    </td>
+                                    <td class="text-center">
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="check_list_popup2_2" value="">
+                                            <span class="form-check-label">예</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="check_list_popup2_2" value="">
+                                            <span class="form-check-label">아니오</span>
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2" class="fs-4">개인정보에 대한 보안프로그램의 설치 및 갱신여부 (제6조 5항)</th>
+                                </tr>
+                                <tr>
+                                    <td class="fs-4">
+                                        해당업무PC의 백신이 설치되어 있으며 최신버전으로 관리하는가?
+                                    </td>
+                                    <td class="text-center">
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="check_list_popup3_1" value="">
+                                            <span class="form-check-label">예</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="check_list_popup3_1" value="">
+                                            <span class="form-check-label">아니오</span>
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="fs-4">
+                                        주1회 백신검사를 통해 바이러스 및 스파이웨어를 차단하고 있는가?
+                                    </td>
+                                    <td class="text-center">
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="check_list_popup3_2" value="">
+                                            <span class="form-check-label">예</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="check_list_popup3_2" value="">
+                                            <span class="form-check-label">아니오</span>
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2" class="fs-4">개인정보의 안전한 보관을 위한 보관시설의 마련 또는 잠금장치의 설치 (제6조 6항)</th>
+                                </tr>
+                                <tr>
+                                    <td class="fs-4">
+                                        사용컴퓨터는 부팅 시 CMOS암호를 설정하여 사용하고 있는가?
+                                    </td>
+                                    <td class="text-center">
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="check_list_popup4_1" value="">
+                                            <span class="form-check-label">예</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="check_list_popup4_1" value="">
+                                            <span class="form-check-label">아니오</span>
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="fs-4">
+                                        윈도우 화면보호기 실행 시 암호 설정을 하였는가? (8자리 이상, 영문/숫자 혼합형)
+                                    </td>
+                                    <td class="text-center">
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="check_list_popup4_2" value="">
+                                            <span class="form-check-label">예</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="check_list_popup4_2" value="">
+                                            <span class="form-check-label">아니오</span>
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="fs-4">
+                                        개인정보가 포함된 자료가 포함된 문서를 잠금장치가 있는 서랍에 보관하였는가?
+                                    </td>
+                                    <td class="text-center">
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="check_list_popup4_3" value="">
+                                            <span class="form-check-label">예</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="check_list_popup4_3" value="">
+                                            <span class="form-check-label">아니오</span>
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="fs-4">
+                                        사무실 출입 시 출입문 잠금장치는 작동하는가?
+                                    </td>
+                                    <td class="text-center">
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="check_list_popup4_4" value="">
+                                            <span class="form-check-label">예</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="check_list_popup4_4" value="">
+                                            <span class="form-check-label">아니오</span>
+                                        </label>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <th colspan="2" class="fs-4">목적 외 이용, 제공 및 재 위탁 금지 준수여부 (제8조 1항)</th>
+                                </tr>
+                                <tr>
+                                    <td class="fs-4">
+                                        <strong class="text-danger">상품 배송의 목적이외 제3자에게 고객정보를 전송하였는가?</strong>
+                                    </td>
+                                    <td class="text-center">
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="check_list_popup5_1" value="">
+                                            <span class="form-check-label">예</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="check_list_popup5_1" value="">
+                                            <span class="form-check-label">아니오</span>
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2" class="fs-4">개인정보가 포함된 자료(송장/리스트)의 파기</th>
+                                </tr>
+                                <tr>
+                                    <td class="fs-4">
+                                        개인정보가 포함된 자료는 배송목적이 종료된 후 삭제하였는가?
+                                        <small class="fs-5">
+                                            * 협력회사 시스템에서 PC로 다운받은 주문리스트, 송장업로드 엑셀파일의 파기 정기점검을 통해 개인정보가 포함된 파일이 발견되는 협력회사는 계약이 파기될 수 있습니다.
+                                        </small>
+
+                                        <div class="table-responsive mt-2">
+                                            <table class="table table-vcenter table-line card-table text-center table-mb">
+                                                <colgroup>
+                                                    <col style="width:33.333%;">
+                                                    <col>
+                                                </colgroup>
+                                                <thead>
+                                                    <tr>
+                                                        <th>파기확인서 다운로드</th>
+                                                        <th>파기확인서 업로드</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <a href="javascript:;" download="" class="badge bg-blue-lt fs-5">다운로드</a>
+                                                        </td>
+                                                        <td>
+                                                            <div class="input-group">
+                                                                <div class="file_single">
+                                                                    <div class="input">
+                                                                        <input type="text" class="file_name" readonly="" file-type="pdf, jpg, jpeg" max-size="5" placeholder="파일을 선택해주세요.">
+                                                                        <button type="button" class="remove_btn" style="display: none;">파일삭제</button>
+                                                                    </div>
+                                                                    <label>
+                                                                        <input type="file">
+                                                                        <span>파일선택</span>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <p class="mb-0 mt-2">* 파기확인서 작성안내</p>
+                                        <small class="fs-5 mt-1">
+                                            ㆍ다운로드한 파기확인서에 회사직인 서명 스캔본을 업로드해주세요.
+                                            ㆍ파일용량은 최대 5MB이며, PDF, JPG(JPEG)만 업로드 가능합니다.
+                                        </small>
+                                    </td>
+                                    <td class="text-center">
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="check_list_popup6_1" value="">
+                                            <span class="form-check-label">예</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="check_list_popup6_1" value="">
+                                            <span class="form-check-label">아니오</span>
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="fs-4">
+                                        개인정보자료 파기 시 사무실 내 파쇄기를 이용하여 파기하는가?
+                                    </td>
+                                    <td class="text-center">
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="check_list_popup6_2" value="">
+                                            <span class="form-check-label">예</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="check_list_popup6_2" value="">
+                                            <span class="form-check-label">아니오</span>
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2" class="fs-4">회사내에 개인정보관리책임자 지정 운영</th>
+                                </tr>
+                                <tr>
+                                    <td class="fs-4">
+                                        개인정보관리책임자는 위 사항을 성실히 이행하는가?
+                                    </td>
+                                    <td class="text-center">
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="check_list_popup7_1" value="">
+                                            <span class="form-check-label">예</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="check_list_popup7_1" value="">
+                                            <span class="form-check-label">아니오</span>
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="fs-4">
+                                        개인정보관리책임자는 회사내 다른 직원에게 위 사항에 대해 교육을 하고 있는가? 
+
+                                        <div class="table-responsive mt-2">
+                                            <table class="table table-vcenter table-line card-table text-center table-mb">
+                                                <colgroup>
+                                                    <col style="width:33.333%;">
+                                                    <col style="width:33.333%;">
+                                                    <col style="width:33.333%;">
+                                                </colgroup>
+                                                <thead>
+                                                    <tr>
+                                                        <th>개인정보보호책임자</th>
+                                                        <th>개인정보 시행일</th>
+                                                        <th>개인정보참석 인원</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control">
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control datepicker-icon">
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="input-group">
+                                                                <input type="tel" class="form-control text-end">
+                                                                <span class="input-group-text text">명</span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="check_list_popup7_2" value="">
+                                            <span class="form-check-label">예</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="check_list_popup7_2" value="">
+                                            <span class="form-check-label">아니오</span>
+                                        </label>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <label class="form-check mt-4">
+                        <input class="form-check-input check-all mt-1" type="checkbox">
+                        <strong class="form-check-label fs-4">위 점검사항은 사실에 근거하여 작성 및 확인 하였으며, 이에 동의합니다.</strong>
+                    </label>
+
+                    <div class="table-responsive mt-2">
+                        <table class="table table-vcenter table-line card-table text-center table-mb">
+                            <colgroup>
+                                <col style="width:25%;">
+                                <col style="width:25%;">
+                                <col style="width:25%;">
+                                <col style="width:25%;">
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th>협력회사</th>
+                                    <th>아이디</th>
+                                    <th>이름</th>
+                                    <th>인증수단</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>(주)돋움</td>
+                                    <td>dodoom</td>
+                                    <td>홍길동</td>
+                                    <td>
+                                        <div class="input-group">
+                                            <select name="" id="" class="form-select">
+                                                <option value="">휴대폰인증</option>
+                                                <option value="">범용공인인증서</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-3">
+                        <a href="javascript:;" class="btn btn-primary w-100" onclick="hideModal('check_list_popup');showModal('privacy_destruction')">
+                            본인인증
+                        </a>
+                    </div>
+                    <div class="card bg-primary-lt mt-3">
+                        <div class="card-body">
+                            <h3 class="card-title mb-1">체크리스트 작성 및 본인인증 안내</h3>
+                            <p class="text-black mt-1 mb-0">ㆍ매달 10일 보안체크리스트 작성 후 시스템을 이용하실 수 있습니다.</p>
+                            <p class="text-black mt-1 mb-0">ㆍ보안체크리스트는 담당자중 한 분만 작성하시면 되며, 미 점검 시 시스템을 이용하실 수 없습니다.</p>
+                            <p class="text-black mt-1 mb-0">ㆍ작성한 체크리스트는 “회원 > 협력회사계약관리“ 메뉴에서 확인하실 수 있습니다.</p>
+                            <p class="text-black mt-1 mb-0">ㆍ시스템에 등록된 담당자 정보와 동일한 이름으로만 본인인증이 가능합니다.</p>
+                            <p class="text-black mt-1 mb-0">ㆍ휴대폰인증 시 개인명의 휴대폰만 인증이 가능합니다. *법인명의 휴대폰 인증 불가</p>
+                            <p class="text-black mt-1 mb-0">ㆍ공인인증서로 인증 시 개인 범용공인인증서만 인증이 가능합니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- //협력회사 정보보안ㆍ개인정보보호 체크리스트 -->
+
+
+
+<!-- 파기확인서 -->
+<div class="modal modal-blur fade " id="privacy_destruction" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop='static'><!-- data-bs-backdrop='static' 백그라운드 클릭시 모달 안닫힘 -->
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document" style="min-width: 800px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">파기확인서</h5>
+            </div>
+            <form action="">
+            <div class="modal-body">
+                <div class="card-body">
+                    <div class="text-center text-black fs-2">
+                        <strong>개인정보 파기확인서</strong>
+                    </div>
+                    <div class="text-start fs-4 mt-3">
+                        <p>당사는 귀사와 체결한 개인(신용) 정보 관련 보안관리 약정서에 따라 상품 배송목적으로 제공받은 개인정보 일체를 복구 불가능한 방법으로 업무목적 달성 즉시 
+                        파기하였으며, 업무 목적 외에 별도로 고객정보를 저장, 출력하거나 복사, 가공하지 않았음을 확인합니다.<br/>
+                        추후 당사의 고의 또는 과실로 고객정보가 유출되거나 고객정보 관리를 소홀히 하여 ㈜신세계에 손해가 발생하거나 법적 책임이 부과될 경우 당사는 이에 대한 모든 책임을 질 것을 확인합니다.
+                        </p>
+                    </div>
+                    <div class="table-responsive mt-2">
+                        <table class="table table-vcenter table-line card-table table-mb table-lg">
+                            <colgroup>
+                                <col style="width:230px;">
+                                <col>
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <th class="fs-4">배송완료 처리기간</th>
+                                    <td><strong>2024-10-1~ 2024-10-31</strong></td>
+                                </tr>
+                                <tr>
+                                    <th class="fs-4">배송완료 건수</th>
+                                    <td>5,617건</td>
+                                </tr>
+                                <tr>
+                                    <th class="fs-4">개인정보 파기항목</th>
+                                    <td>주문자(이름, 휴대폰번호, 주소), 받는사람(이름, 휴대폰번호, 휴대폰번호 안심번호, 주소)<br/>
+                                        체결번호, 주문번호, 상품코드, 상품명, 배송비 등
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="fs-4">개인정보 파기일(필수)</th>
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control datepicker-icon">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="fs-4">파기확인자(필수)</th>
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="이름을 입력해주세요.">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="fs-4">다운로드</th>
+                                    <td><a href="javascript:;" download="" class="badge bg-blue-lt fs-5">파기확인서 다운로드</a></td>
+                                </tr>
+                                <tr>
+                                    <th>파일 업로드</th>
+                                    <td>
+                                        <div class="input-group">
+                                            <div class="file_single">
+                                                <div class="input">
+                                                    <input type="text" class="file_name" readonly="" max-size="5" placeholder="파일을 선택해주세요.">
+                                                    <button type="button" class="remove_btn" style="display: none;">파일삭제</button>
+                                                </div>
+                                                <label>
+                                                    <input type="file">
+                                                    <span>파일선택</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-3">
+                        <a href="javascript:;" class="btn btn-primary w-100">
+                            신청하기
+                        </a>
+                    </div>
+                    <div class="card bg-primary-lt mt-3">
+                        <div class="card-body">
+                            <h3 class="card-title mb-1">파기확인서 안내</h3>
+                            <p class="text-danger mt-1 mb-0">ㆍ업로드한 파기확인서는 수정 또는 삭제가 불가합니다.</p>
+                            <p class="text-black mt-1 mb-0">ㆍ다운로드한 파기확인서에 회사직인 날인 후 PDF파일로 재 업로드해주세요.</p>
+                            <p class="text-black mt-1 mb-0">ㆍ1개월 이상 파기확인서를 미 작성한 협력회사는 본 파기확인서 신청 후 시스템을 즉시 사용하실 수 없습니다. *MD관리자 검토 후 시스템 사용</p>
+                            <p class="text-black mt-1 mb-0">ㆍ파기확인서를 허위로 기재하여 제출 시 계약의 해지 사유에 해당됩니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- //파기확인서 -->
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        //정보보안 서약서
+        showModal('security_pledge');
+
+        //정보협력회사 정보보안ㆍ개인정보보호 체크리스트
+        //showModal('check_list_popup');
+
+        //파기확인서
+        //showModal('privacy_destruction');
+    });
+</script>
+
+<!-- Page body -->
+<div class="page-body">
+    <div class="container-xl">
+        <div class="row">
+            <div class="col-sm-6 col-lg-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="subheader">매출금액</div>
+                            <div class="ms-auto lh-1">
+                                <div class="dropdown">
+                                    <a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">최근 1달</a>
+                                    <div class="dropdown-menu dropdown-menu-end">
+                                        <a class="dropdown-item active" href="#">최근 1달</a>
+                                        <a class="dropdown-item" href="#">최근 2달</a>
+                                        <a class="dropdown-item" href="#">최근 3달</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="h1 mb-0 me-2">￦4,000,000</div>
+                            <div class="d-flex align-items-baseline">
+                                <div class="text-secondary small me-2">지난 1달 기준 대비</div>
+                                <span class="text-green d-inline-flex align-items-center lh-1">
+                                8% <!-- Download SVG icon from http://tabler-icons.io/i/trending-up -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 17l6 -6l4 4l8 -8" /><path d="M14 7l7 0l0 7" /></svg>
+                                </span>
+
+                                <span class="text-yellow d-inline-flex align-items-center lh-1">
+                                0% <!-- Download SVG icon from http://tabler-icons.io/i/minus -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /></svg>
+                                </span>
+
+                                <span class="text-red d-inline-flex align-items-center lh-1">
+                                -10% <!-- Download SVG icon from http://tabler-icons.io/i/minus -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trending-down" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7l6 6l4 -4l8 8" /><path d="M21 10l0 7l-7 0" /></svg>
+                                </span>
+                            </div>
+                        </div>
+                        <div id="chart-revenue-bg" class="chart-sm"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="subheader">신규회원</div>
+                            <div class="ms-auto lh-1">
+                                <div class="dropdown">
+                                    <a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">최근 1달</a>
+                                    <div class="dropdown-menu dropdown-menu-end">
+                                        <a class="dropdown-item active" href="#">최근 1달</a>
+                                        <a class="dropdown-item" href="#">최근 2달</a>
+                                        <a class="dropdown-item" href="#">최근 3달</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="h1 mb-0 me-2">6,782</div>
+                            <div class="d-flex align-items-baseline">
+                                <div class="text-secondary small me-2">지난 1달 기준 대비</div>
+                                <span class="text-green d-inline-flex align-items-center lh-1">
+                                8% <!-- Download SVG icon from http://tabler-icons.io/i/trending-up -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 17l6 -6l4 4l8 -8" /><path d="M14 7l7 0l0 7" /></svg>
+                                </span>
+
+                                <span class="text-yellow d-inline-flex align-items-center lh-1">
+                                0% <!-- Download SVG icon from http://tabler-icons.io/i/minus -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /></svg>
+                                </span>
+
+                                <span class="text-red d-inline-flex align-items-center lh-1">
+                                -10% <!-- Download SVG icon from http://tabler-icons.io/i/minus -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trending-down" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7l6 6l4 -4l8 8" /><path d="M21 10l0 7l-7 0" /></svg>
+                                </span>
+                            </div>
+                        </div>
+                        <div id="chart-new-clients" class="chart-sm"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="subheader">포스트 게시글</div>
+                            <div class="ms-auto lh-1">
+                                <div class="dropdown">
+                                    <a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">최근 1달</a>
+                                    <div class="dropdown-menu dropdown-menu-end">
+                                        <a class="dropdown-item active" href="#">최근 1달</a>
+                                        <a class="dropdown-item" href="#">최근 2달</a>
+                                        <a class="dropdown-item" href="#">최근 3달</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="h1 mb-0 me-2">687</div>
+                                <div class="d-flex align-items-baseline">
+                                <div class="text-secondary small me-2">지난 1달 기준 대비</div>
+                                <span class="text-green d-inline-flex align-items-center lh-1">
+                                8% <!-- Download SVG icon from http://tabler-icons.io/i/trending-up -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 17l6 -6l4 4l8 -8" /><path d="M14 7l7 0l0 7" /></svg>
+                                </span>
+
+                                <span class="text-yellow d-inline-flex align-items-center lh-1">
+                                0% <!-- Download SVG icon from http://tabler-icons.io/i/minus -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /></svg>
+                                </span>
+
+                                <span class="text-red d-inline-flex align-items-center lh-1">
+                                -10% <!-- Download SVG icon from http://tabler-icons.io/i/minus -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trending-down" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7l6 6l4 -4l8 8" /><path d="M21 10l0 7l-7 0" /></svg>
+                                </span>
+                            </div>
+                        </div>
+                        <div id="chart-active-users" class="chart-sm"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">최근 트래픽</h3>
+                        <div id="chart-mentions" class="chart-lg"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">가장 많이 방문한 페이지</h3>
+                        <div class="card-table table-responsive">
+                            <table class="table table-vcenter">
+                            <thead>
+                            <tr>
+                                <th>페이지명</th>
+                                <th>방문자수</th>
+                                <th>이탈율</th>
+                                <th>최근 1주</th>
+                            </tr>
+                            </thead>
+                            <tr>
+                                <td>
+                                    /
+                                    <a href="#" class="ms-1" aria-label="Open website"><!-- Download SVG icon from http://tabler-icons.io/i/link -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" /><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" /></svg>
+                                    </a>
+                                </td>
+                                <td class="text-muted">4,896</td>
+                                <td class="text-muted">82.54%</td>
+                                <td class="text-end w-1">
+                                    <div class="chart-sparkline chart-sparkline-sm" id="sparkline-bounce-rate-1"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    /form-elements.html
+                                    <a href="#" class="ms-1" aria-label="Open website"><!-- Download SVG icon from http://tabler-icons.io/i/link -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" /><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" /></svg>
+                                    </a>
+                                </td>
+                                <td class="text-muted">3,652</td>
+                                <td class="text-muted">76.29%</td>
+                                <td class="text-end w-1">
+                                    <div class="chart-sparkline chart-sparkline-sm" id="sparkline-bounce-rate-2"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    /index.html
+                                    <a href="#" class="ms-1" aria-label="Open website"><!-- Download SVG icon from http://tabler-icons.io/i/link -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" /><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" /></svg>
+                                    </a>
+                                </td>
+                                <td class="text-muted">3,256</td>
+                                <td class="text-muted">72.65%</td>
+                                <td class="text-end w-1">
+                                    <div class="chart-sparkline chart-sparkline-sm" id="sparkline-bounce-rate-3"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    /icons.html
+                                    <a href="#" class="ms-1" aria-label="Open website"><!-- Download SVG icon from http://tabler-icons.io/i/link -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" /><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" /></svg>
+                                    </a>
+                                </td>
+                                <td class="text-muted">986</td>
+                                <td class="text-muted">44.89%</td>
+                                <td class="text-end w-1">
+                                    <div class="chart-sparkline chart-sparkline-sm" id="sparkline-bounce-rate-4"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    /docs/
+                                    <a href="#" class="ms-1" aria-label="Open website"><!-- Download SVG icon from http://tabler-icons.io/i/link -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" /><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" /></svg>
+                                    </a>
+                                </td>
+                                <td class="text-muted">912</td>
+                                <td class="text-muted">41.12%</td>
+                                <td class="text-end w-1">
+                                    <div class="chart-sparkline chart-sparkline-sm" id="sparkline-bounce-rate-5"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    /accordion.html
+                                    <a href="#" class="ms-1" aria-label="Open website"><!-- Download SVG icon from http://tabler-icons.io/i/link -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" /><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" /></svg>
+                                    </a>
+                                </td>
+                                <td class="text-muted">855</td>
+                                <td class="text-muted">32.65%</td>
+                                <td class="text-end w-1">
+                                    <div class="chart-sparkline chart-sparkline-sm" id="sparkline-bounce-rate-6"></div>
+                                </td>
+                            </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">최근 상품</h3>
+                        <div class="divide-y">
+                            <div>
+                                <a href="javascript:;" class="row">
+                                <div class="col-auto">
+                                    <span class="avatar" style="background-image: url(https://i.pravatar.cc/60?9)"></span>
+                                </div>
+                                <div class="col">
+                                    <div class="text-truncate text-dark">
+                                        상품명 상품명 상품명 <span class="hashtag">#ㅇㅇ</span><span class="hashtag">#책방</span>
+                                    </div>
+                                    <div class="text-muted">02.02 12:11</div>
+                                </div>
+                                <div class="col-auto align-self-center">
+                                    <span class="avatar" style="background-image: url(https://picsum.photos/200)">
+                                    <div class="bg-dark text-dark-fg small px-2 badge">2</div>
+                                    </span>
+                                </div>
+                                </a>
+                            </div>
+                            <div>
+                                <a href="javascript:;" class="row">
+                                <div class="col-auto">
+                                    <span class="avatar" style="background-image: url(https://i.pravatar.cc/60?1)"></span>
+                                </div>
+                                <div class="col">
+                                    <div class="text-truncate text-dark">
+                                        상품명 상품명 상품명 <span class="hashtag">#ㅇㅇ</span><span class="hashtag">#책방</span>
+                                    </div>
+                                    <div class="text-muted">02.02 12:11</div>
+                                </div>
+                                <div class="col-auto align-self-center">
+                                    <span class="avatar" style="background-image: url(https://picsum.photos/200?2)"></span>
+                                </div>
+                                </a>
+                            </div>
+                            <div>
+                                <a href="javascript:;" class="row">
+                                <div class="col-auto">
+                                    <span class="avatar" style="background-image: url(https://i.pravatar.cc/60?2)"></span>
+                                </div>
+                                <div class="col">
+                                    <div class="text-truncate text-dark">
+                                        상품명 상품명 상품명 <span class="hashtag">#ㅇㅇ</span><span class="hashtag">#책방</span>
+                                    </div>
+                                    <div class="text-muted">02.02 12:11</div>
+                                </div>
+                                <div class="col-auto align-self-center">
+                                    <span class="avatar" style="background-image: url(https://picsum.photos/200?3)">
+                                    <div class="bg-dark text-dark-fg small px-2 badge">4</div>
+                                    </span>
+                                </div>
+                                </a>
+                            </div>
+                            <div>
+                                <a href="javascript:;" class="row">
+                                <div class="col-auto">
+                                    <span class="avatar" style="background-image: url(https://i.pravatar.cc/60?3)"></span>
+                                </div>
+                                <div class="col">
+                                    <div class="text-truncate text-dark">
+                                        상품명 상품명 상품명 <span class="hashtag">#ㅇㅇ</span><span class="hashtag">#책방</span>
+                                    </div>
+                                    <div class="text-muted">02.02 12:11</div>
+                                </div>
+                                <div class="col-auto align-self-center">
+                                    <span class="avatar" style="background-image: url(https://picsum.photos/200?4)"></span>
+                                </div>
+                                </a>
+                            </div>
+                            <div>
+                                <a href="javascript:;" class="row">
+                                <div class="col-auto">
+                                    <span class="avatar" style="background-image: url(https://i.pravatar.cc/60?4)"></span>
+                                </div>
+                                <div class="col">
+                                    <div class="text-truncate text-dark">
+                                        상품명 상품명 상품명 <span class="hashtag">#ㅇㅇ</span><span class="hashtag">#책방</span>
+                                    </div>
+                                    <div class="text-muted">02.02 12:11</div>
+                                </div>
+                                <div class="col-auto align-self-center">
+                                    <span class="avatar" style="background-image: url(https://picsum.photos/200?5)"></span>
+                                </div>
+                                </a>
+                            </div>
+                            <div>
+                                <a href="javascript:;" class="row">
+                                <div class="col-auto">
+                                    <span class="avatar" style="background-image: url(https://i.pravatar.cc/60?5)"></span>
+                                </div>
+                                <div class="col">
+                                    <div class="text-truncate text-dark">
+                                        상품명 상품명 상품명 <span class="hashtag">#ㅇㅇ</span><span class="hashtag">#책방</span>
+                                    </div>
+                                    <div class="text-muted">02.02 12:11</div>
+                                </div>
+                                <div class="col-auto align-self-center">
+                                    <span class="avatar" style="background-image: url(https://picsum.photos/200?6)"></span>
+                                </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <a href="#" class="card-title">신규회원</a>
+                        <div class="list-group list-group-flush lst-qna">
+                            <!-- 승인 text-success ,  대기 text-muted-->
+                            <a href="#" class="list-group-item list-group-item-action">
+                            <div class="row">
+                                <div class="col-9">
+                                    <span
+                                    class="btn btn-sm w-5 fs-5 text-light me-2 lst_state float-start btn-muted">
+                                    대기
+                                    </span>
+                                    <span class="subject mt float-start">user_id</span>
+                                </div>
+                                <div class="col-3 text-end">
+                                    <span class="text-secondary float-end">20.22.22</span>
+                                </div>
+                            </div>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action">
+                            <div class="row">
+                                <div class="col-9">
+                                    <span
+                                    class="btn btn-sm w-5 fs-5 text-light me-2 lst_state float-start btn-muted">
+                                    대기
+                                    </span>
+                                    <span class="subject mt float-start">user_id</span>
+                                </div>
+                                <div class="col-3 text-end">
+                                    <span class="text-secondary float-end">20.22.22</span>
+                                </div>
+                            </div>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action">
+                            <div class="row">
+                                <div class="col-9">
+                                    <span
+                                    class="btn btn-sm w-5 fs-5 text-light me-2 lst_state float-start btn-primary">
+                                    승인
+                                    </span>
+                                    <span class="subject mt float-start">user_id</span>
+                                </div>
+                                <div class="col-3 text-end">
+                                    <span class="text-secondary float-end">20.22.22</span>
+                                </div>
+                            </div>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action">
+                            <div class="row">
+                                <div class="col-9">
+                                    <span
+                                    class="btn btn-sm w-5 fs-5 text-light me-2 lst_state float-start btn-primary">
+                                    승인
+                                    </span>
+                                    <span class="subject mt float-start">user_id</span>
+                                </div>
+                                <div class="col-3 text-end">
+                                    <span class="text-secondary float-end">20.22.22</span>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <a href="#" class="card-title">탈퇴회원</a>
+                        <div class="list-group list-group-flush lst-notice">
+                            <a href="#" class="list-group-item list-group-item-action">
+                            <span class="subject">user_id</span>
+                            <span class="text-secondary float-end">20.22.22</span>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action">
+                            <span class="subject">user_id</span>
+                            <span class="text-secondary float-end">20.22.22</span>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action">
+                            <span class="subject">user_id</span>
+                            <span class="text-secondary float-end">20.22.22</span>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action">
+                            <span class="subject">user_id</span>
+                            <span class="text-secondary float-end">20.22.22</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <a href="#" class="card-title">최근 공지사항</a>
+                        <div class="list-group list-group-flush lst-notice">
+                            <a href="#" class="list-group-item list-group-item-action">
+                            <span class="subject">[공지]공지사항 제목이 표기됩니다공지]공지사항 제목이 표기됩니다</span>
+                            <span class="text-secondary float-end">20.22.22</span>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action">
+                            <span class="subject">[공지]공지사항 제목이 표기됩니다</span>
+                            <span class="text-secondary float-end">20.22.22</span>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action">
+                            <span class="subject">[공지]공지사항 제목이 표기됩니다</span>
+                            <span class="text-secondary float-end">20.22.22</span>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action">
+                            <span class="subject">[공지]공지사항 제목이 표기됩니다</span>
+                            <span class="text-secondary float-end">20.22.22</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <a href="#" class="card-title">최근 1:1문의</a>
+                        <div class="list-group list-group-flush lst-qna">
+                            <!-- 승인 text-success ,  대기 text-muted-->
+                            <a href="#" class="list-group-item list-group-item-action">
+                            <div class="row">
+                                <div class="col-9">
+                                    <span
+                                    class="btn btn-sm w-5 fs-5 text-light me-2 lst_state float-start btn-muted">
+                                    대기
+                                    </span>
+                                    <span class="subject mt float-start">1:1문의 제목이 표기됩니다1:1문의 제목이 표기됩니다</span>
+                                </div>
+                                <div class="col-3 text-end">
+                                    <span class="text-secondary float-end">20.22.22</span>
+                                </div>
+                            </div>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action">
+                            <div class="row">
+                                <div class="col-9">
+                                    <span
+                                    class="btn btn-sm w-5 fs-5 text-light me-2 lst_state float-start btn-muted">
+                                    대기
+                                    </span>
+                                    <span class="subject float-start">1:1문의 제목이 표기됩니다</span>
+                                </div>
+                                <div class="col-3 text-end">
+                                    <span class="text-secondary float-end">20.22.22</span>
+                                </div>
+                            </div>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action">
+                            <div class="row">
+                                <div class="col-9">
+                                    <span
+                                    class="btn btn-sm w-5 fs-5 text-light me-2 lst_state float-start btn-primary">
+                                    승인
+                                    </span>
+                                    <span class="subject float-start">1:1문의 제목이 표기됩니다</span>
+                                </div>
+                                <div class="col-3 text-end">
+                                    <span class="text-secondary float-end">20.22.22</span>
+                                </div>
+                            </div>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action">
+                            <div class="row">
+                                <div class="col-9">
+                                    <span
+                                    class="btn btn-sm w-5 fs-5 text-light me-2 lst_state float-start btn-primary">
+                                    승인
+                                    </span>
+                                    <span class="subject float-start">1:1문의 제목이 표기됩니다</span>
+                                </div>
+                                <div class="col-3 text-end">
+                                    <span class="text-secondary float-end">20.22.22</span>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <script>
+    // 매출금액
+    document.addEventListener("DOMContentLoaded", function () {
+        window.ApexCharts && (new ApexCharts(document.getElementById('chart-revenue-bg'), {
+            chart: {
+                type: "area",
+                fontFamily: 'inherit',
+                height: 40.0,
+                sparkline: {
+                    enabled: true
+                },
+                animations: {
+                    enabled: false
+                },
+            },
+            dataLabels: {
+                enabled: false,
+            },
+            fill: {
+                opacity: [.3, .1],
+                type: 'solid'
+            },
+            stroke: {
+                width: [2, 1],
+                dashArray: [0, 3],
+                lineCap: "round",
+                curve: "smooth",
+            },
+            series: [{
+                name: "매출금액",
+                data: [37, 35, 44, 28, 36, 24, 65, 31, 37, 39, 62, 51, 35, 41, 35, 27, 93, 53, 61, 27, 54, 43, 19, 46, 39, 62, 51, 35, 41, 67]
+            },{
+                name: "매출금액123",
+                data: [22, 44, 55, 22, 2, 24, 22, 56, 77, 88, 99, 22, 33, 44, 11, 22, 55, 44, 55, 27, 66, 55, 22, 55, 44, 33, 22, 66, 11, 22]
+            }],
+            tooltip: {
+                theme: 'dark'
+            },
+            grid: {
+                strokeDashArray: 4,
+            },
+            xaxis: {
+                labels: {
+                    padding: 0,
+                },
+                tooltip: {
+                    enabled: false
+                },
+                axisBorder: {
+                    show: false,
+                },
+                type: 'datetime',
+            },
+            yaxis: {
+                labels: {
+                    padding: 4
+                },
+            },
+            labels: [
+                '2020-06-20', '2020-06-21', '2020-06-22', '2020-06-23', '2020-06-24', '2020-06-25', '2020-06-26', '2020-06-27', '2020-06-28', '2020-06-29', '2020-06-30', '2020-07-01', '2020-07-02', '2020-07-03', '2020-07-04', '2020-07-05', '2020-07-06', '2020-07-07', '2020-07-08', '2020-07-09', '2020-07-10', '2020-07-11', '2020-07-12', '2020-07-13', '2020-07-14', '2020-07-15', '2020-07-16', '2020-07-17', '2020-07-18', '2020-07-19'
+            ],
+            colors: [tabler.getColor("primary"), tabler.getColor("gray-600")],
+            legend: {
+                show: false,
+            },
+        })).render();
+    });
+    // 매출금액
+    </script>
+    <script>
+    // 신규회원
+    document.addEventListener("DOMContentLoaded", function () {
+    window.ApexCharts && (new ApexCharts(document.getElementById('chart-new-clients'), {
+        chart: {
+            type: "line",
+            fontFamily: 'inherit',
+            height: 40.0,
+            sparkline: {
+                enabled: true
+            },
+            animations: {
+                enabled: false
+            },
+        },
+        fill: {
+            opacity: 1,
+        },
+        stroke: {
+            width: [2, 1],
+            dashArray: [0, 3],
+            lineCap: "round",
+            curve: "smooth",
+        },
+        series: [{
+            name: "24-02월",
+            data: [37, 35, 44, 28, 36, 24, 65, 31, 37, 39, 62, 51, 35, 41, 35, 27, 93, 53, 61, 27, 54, 43, 4, 46, 39, 62, 51, 35, 41, 67]
+        },{
+            name: "24-01월",
+            data: [93, 54, 51, 24, 35, 35, 31, 67, 19, 43, 28, 36, 62, 61, 27, 39, 35, 41, 27, 35, 51, 46, 62, 37, 44, 53, 41, 65, 39, 37]
+        }],
+        tooltip: {
+            theme: 'dark'
+        },
+        grid: {
+            strokeDashArray: 4,
+        },
+        xaxis: {
+            labels: {
+                padding: 0,
+            },
+            tooltip: {
+                enabled: false
+            },
+            type: 'datetime',
+        },
+        yaxis: {
+            labels: {
+                padding: 4
+            },
+        },
+        labels: [
+            '2020-06-20', '2020-06-21', '2020-06-22', '2020-06-23', '2020-06-24', '2020-06-25', '2020-06-26', '2020-06-27', '2020-06-28', '2020-06-29', '2020-06-30', '2020-07-01', '2020-07-02', '2020-07-03', '2020-07-04', '2020-07-05', '2020-07-06', '2020-07-07', '2020-07-08', '2020-07-09', '2020-07-10', '2020-07-11', '2020-07-12', '2020-07-13', '2020-07-14', '2020-07-15', '2020-07-16', '2020-07-17', '2020-07-18', '2020-07-19'
+        ],
+        colors: [tabler.getColor("primary"), tabler.getColor("gray-600")],
+        legend: {
+            show: false,
+        },
+    })).render();
+    });
+    // 신규회원
+    </script>
+    <script>
+    // 포스트 게시글
+    document.addEventListener("DOMContentLoaded", function () {
+    window.ApexCharts && (new ApexCharts(document.getElementById('chart-active-users'), {
+        chart: {
+            type: "bar",
+            fontFamily: 'inherit',
+            height: 40.0,
+            sparkline: {
+                enabled: true
+            },
+            animations: {
+                enabled: false
+            },
+        },
+        plotOptions: {
+            bar: {
+                columnWidth: '50%',
+            }
+        },
+        dataLabels: {
+            enabled: false,
+        },
+        fill: {
+            opacity: 1,
+        },
+        series: [{
+            name: "게시글",
+            data: [37, 35, 44, 28, 36, 24, 65, 31, 37, 39, 62, 51, 35, 41, 35, 27, 93, 53, 61, 27, 54, 43, 19, 46, 39, 62, 51, 35, 41, 67]
+        }],
+        tooltip: {
+            theme: 'dark'
+        },
+        grid: {
+            strokeDashArray: 4,
+        },
+        xaxis: {
+            labels: {
+                padding: 0,
+            },
+            tooltip: {
+                enabled: false
+            },
+            axisBorder: {
+                show: false,
+            },
+            type: 'datetime',
+        },
+        yaxis: {
+            labels: {
+                padding: 4
+            },
+        },
+        labels: [
+            '2020-06-20', '2020-06-21', '2020-06-22', '2020-06-23', '2020-06-24', '2020-06-25', '2020-06-26', '2020-06-27', '2020-06-28', '2020-06-29', '2020-06-30', '2020-07-01', '2020-07-02', '2020-07-03', '2020-07-04', '2020-07-05', '2020-07-06', '2020-07-07', '2020-07-08', '2020-07-09', '2020-07-10', '2020-07-11', '2020-07-12', '2020-07-13', '2020-07-14', '2020-07-15', '2020-07-16', '2020-07-17', '2020-07-18', '2020-07-19'
+        ],
+        colors: [tabler.getColor("primary")],
+        legend: {
+            show: false,
+        },
+    })).render();
+    });
+    // 포스트 게시글
+    </script>
+    <script>
+    // 최근 트래픽
+    document.addEventListener("DOMContentLoaded", function () {
+    window.ApexCharts && (new ApexCharts(document.getElementById('chart-mentions'), {
+        chart: {
+            type: "bar",
+            fontFamily: 'inherit',
+            height: 240,
+            parentHeightOffset: 0,
+            toolbar: {
+                show: false,
+            },
+            animations: {
+                enabled: false
+            },
+            stacked: true,
+        },
+        plotOptions: {
+            bar: {
+                columnWidth: '50%',
+            }
+        },
+        dataLabels: {
+            enabled: false,
+        },
+        fill: {
+            opacity: 1,
+        },
+        series: [{
+            name: "데스크탑",
+            data: [1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 2, 12, 5, 8, 22, 6, 8, 6, 4, 1, 8, 24, 29, 51, 40, 47, 23, 26, 50, 26, 41, 22, 46, 47, 81, 46, 6]
+        },{
+            name: "모바일",
+            data: [2, 5, 4, 3, 3, 1, 4, 7, 5, 1, 2, 5, 3, 2, 6, 7, 7, 1, 5, 5, 2, 12, 4, 6, 18, 3, 5, 2, 13, 15, 20, 47, 18, 15, 11, 10, 0]
+        },{
+            name: "기타",
+            data: [2, 9, 1, 7, 8, 3, 6, 5, 5, 4, 6, 4, 1, 9, 3, 6, 7, 5, 2, 8, 4, 9, 1, 2, 6, 7, 5, 1, 8, 3, 2, 3, 4, 9, 7, 1, 6]
+        }],
+        tooltip: {
+            theme: 'dark'
+        },
+        grid: {
+            padding: {
+                top: -20,
+                right: 0,
+                left: -4,
+                bottom: -4
+            },
+            strokeDashArray: 4,
+            xaxis: {
+                lines: {
+                    show: true
+                }
+            },
+        },
+        xaxis: {
+            labels: {
+                padding: 0,
+            },
+            tooltip: {
+                enabled: false
+            },
+            axisBorder: {
+                show: false,
+            },
+            type: 'datetime',
+        },
+        yaxis: {
+            labels: {
+                padding: 4
+            },
+        },
+        labels: [
+            '2020-06-20', '2020-06-21', '2020-06-22', '2020-06-23', '2020-06-24', '2020-06-25', '2020-06-26', '2020-06-27', '2020-06-28', '2020-06-29', '2020-06-30', '2020-07-01', '2020-07-02', '2020-07-03', '2020-07-04', '2020-07-05', '2020-07-06', '2020-07-07', '2020-07-08', '2020-07-09', '2020-07-10', '2020-07-11', '2020-07-12', '2020-07-13', '2020-07-14', '2020-07-15', '2020-07-16', '2020-07-17', '2020-07-18', '2020-07-19', '2020-07-20', '2020-07-21', '2020-07-22', '2020-07-23', '2020-07-24', '2020-07-25', '2020-07-26'
+        ],
+        colors: [tabler.getColor("primary"), tabler.getColor("primary", 0.8), tabler.getColor("green", 0.8)],
+        legend: {
+            show: false,
+        },
+    })).render();
+    });
+    // 최근 트래픽
+    </script>
+    <script>
+    // 가장 많이 방문한 페이지 1
+    document.addEventListener("DOMContentLoaded", function () {
+    window.ApexCharts && (new ApexCharts(document.getElementById('sparkline-bounce-rate-1'), {
+        chart: {
+            type: "line",
+            fontFamily: 'inherit',
+            height: 24,
+            animations: {
+                enabled: false
+            },
+            sparkline: {
+                enabled: true
+            },
+        },
+        tooltip: {
+            enabled: false,
+        },
+        stroke: {
+            width: 2,
+            lineCap: "round",
+        },
+        series: [{
+            color: tabler.getColor("primary"),
+            data: [1000, 2000, 300, 200, 5505, 1111, 2224, 500, 700]
+        }],
+    })).render();
+    });
+    // @가장 많이 방문한 페이지 1
+    </script>
+    <script>
+    // 가장 많이 방문한 페이지 2
+    document.addEventListener("DOMContentLoaded", function () {
+    window.ApexCharts && (new ApexCharts(document.getElementById('sparkline-bounce-rate-2'), {
+        chart: {
+            type: "line",
+            fontFamily: 'inherit',
+            height: 24,
+            animations: {
+                enabled: false
+            },
+            sparkline: {
+                enabled: true
+            },
+        },
+        tooltip: {
+            enabled: false,
+        },
+        stroke: {
+            width: 2,
+            lineCap: "round",
+        },
+        series: [{
+            color: tabler.getColor("primary"),
+            data: [13, 11, 19, 22, 12, 7, 14, 3, 21]
+        }],
+    })).render();
+    });
+    // 가장 많이 방문한 페이지 2
+    </script>
+    <script>
+    // 가장 많이 방문한 페이지 3
+    document.addEventListener("DOMContentLoaded", function () {
+    window.ApexCharts && (new ApexCharts(document.getElementById('sparkline-bounce-rate-3'), {
+        chart: {
+            type: "line",
+            fontFamily: 'inherit',
+            height: 24,
+            animations: {
+                enabled: false
+            },
+            sparkline: {
+                enabled: true
+            },
+        },
+        tooltip: {
+            enabled: false,
+        },
+        stroke: {
+            width: 2,
+            lineCap: "round",
+        },
+        series: [{
+            color: tabler.getColor("primary"),
+            data: [10, 13, 10, 4, 17, 3, 23, 22, 19]
+        }],
+    })).render();
+    });
+    // 가장 많이 방문한 페이지 3
+    </script>
+    <script>
+    // 가장 많이 방문한 페이지 4
+    document.addEventListener("DOMContentLoaded", function () {
+    window.ApexCharts && (new ApexCharts(document.getElementById('sparkline-bounce-rate-4'), {
+        chart: {
+            type: "line",
+            fontFamily: 'inherit',
+            height: 24,
+            animations: {
+                enabled: false
+            },
+            sparkline: {
+                enabled: true
+            },
+        },
+        tooltip: {
+            enabled: false,
+        },
+        stroke: {
+            width: 2,
+            lineCap: "round",
+        },
+        series: [{
+            color: tabler.getColor("primary"),
+            data: [6, 15, 13, 13, 5, 7, 17, 20, 19]
+        }],
+    })).render();
+    });
+    // 가장 많이 방문한 페이지 4
+    </script>
+    <script>
+    // 가장 많이 방문한 페이지 5
+    document.addEventListener("DOMContentLoaded", function () {
+    window.ApexCharts && (new ApexCharts(document.getElementById('sparkline-bounce-rate-5'), {
+        chart: {
+            type: "line",
+            fontFamily: 'inherit',
+            height: 24,
+            animations: {
+                enabled: false
+            },
+            sparkline: {
+                enabled: true
+            },
+        },
+        tooltip: {
+            enabled: false,
+        },
+        stroke: {
+            width: 2,
+            lineCap: "round",
+        },
+        series: [{
+            color: tabler.getColor("primary"),
+            data: [2, 11, 15, 14, 21, 20, 8, 23, 18, 14]
+        }],
+    })).render();
+    });
+    // 가장 많이 방문한 페이지 5
+    </script>
+    <script>
+    // 가장 많이 방문한 페이지 6
+    document.addEventListener("DOMContentLoaded", function () {
+    window.ApexCharts && (new ApexCharts(document.getElementById('sparkline-bounce-rate-6'), {
+        chart: {
+            type: "line",
+            fontFamily: 'inherit',
+            height: 24,
+            animations: {
+                enabled: false
+            },
+            sparkline: {
+                enabled: true
+            },
+        },
+        tooltip: {
+            enabled: false,
+        },
+        stroke: {
+            width: 2,
+            lineCap: "round",
+        },
+        series: [{
+            color: tabler.getColor("primary"),
+            data: [22, 12, 7, 14, 3, 21, 8, 23, 18, 14]
+        }],
+    })).render();
+    });
+    // 가장 많이 방문한 페이지 6
+    </script>
+
+    <!-- 공통영역 -->
+    <div id="footer"></div>
+    <script>
+        //헤더&푸터 개발 완료시 삭제해주세요
+        var includePath = "/resources/static/layout/footer.html";
+        includeFile(includePath, 'footer');
+    </script>
+    <!-- //공통영역 -->
+</div>
+<script src="/resources/static/dist/js/tabler.min.js"></script>
+</body>
+</html>

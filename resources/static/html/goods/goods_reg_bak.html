@@ -1,0 +1,591 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=1400"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>신세계 관리자</title>
+    <!-- CSS files -->
+    <link href="/resources/static/dist/css/tabler.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/tabler-vendors.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/>
+    <link rel="shortcut icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <script src="/resources/static/dist/js/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/resources/static/dist/libs/litepicker/dist/litepicker.js?1674944402"></script>
+    <script src="/resources/static/dist/js/jquery.validate.js"></script>
+    <!-- Tabler Core -->
+    
+    <script src="/resources/static/dist/js/common.js"></script>
+    <style>
+    :root {
+        --theme-admin-type: #cf3f42;
+        /* #cf3f42 통합관리자 컬러 코드*/
+        /* #4b9b52 협력회사 컬러 코드 */
+        /* #214c9c 고객사 컬러 코드 */
+    }
+    </style>
+</head>
+<body>
+
+<!-- 공통영역1 -->
+<aside id="header" class="navbar navbar-vertical navbar-expand-lg header_left"></aside>
+<script>
+    //html include
+    //헤더&푸터 개발 완료시 삭제해주세요
+    function includeFile(path, targetId) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', path, true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById(targetId).innerHTML = xhr.responseText;
+        }
+    };
+    xhr.send();
+    }
+    var includePath = "/resources/static/layout/header.html";
+    includeFile(includePath, 'header');
+</script>
+<!-- //공통영역1 -->
+
+<div class="page-wrapper">
+    <!-- 공통영역2 -->
+    <div class="member_info">
+        <div class="info">
+            <span class="login_session">로그인 유지시간 <strong>30:00</strong> <button type="button" class="btn btn-xs btn-primary">연장</button></span>
+            <span>관리권한 : 최상위관리자</span>
+            <span>방문횟수 : 1,000</span>
+            <span>최근방문IP : 12.1.123.12</span>
+            <button type="button" class="btn btn-xs btn-secondary">메뉴얼다운로드</button>
+            <button type="button" class="btn btn-xs btn-secondary">기본양식다운로드</button>
+            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/admin_modify_pop.html', '900', '640')">관리자정보수정</button>
+            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/terms_pop.html', '600', '540')">이용약관</button>
+        </div>
+        <div>
+            <a href="javascript:;" class="logout">홍길동(admin_01)님 로그아웃</a>
+            <a href="javascript:;" class="home">홈으로</a>
+        </div>
+    </div>
+
+    <!-- 페이지 히스토리 탭 -->
+    <div class="page-history">
+        <div class="history_toggle">
+            <label class="form-check form-switch">
+                <span class="form-check-label">History</span>
+                <input id="historyUse" class="form-check-input" type="checkbox" >
+            </label>
+        </div>
+        <button class="close_all" type="button" title="히스토리 모두 삭제" onclick="historyRemoveAll();">히스토리 모두 삭제</button>
+    </div>
+    <!-- //공통영역2 -->
+
+    <div class="page-header d-print-none">
+        <div class="container-xl">
+            <div class="row g-2 align-items-center">
+                <div class="col">
+                    <!-- Page pre-title -->
+                    <div class="page-pretitle">
+                        홈 > 상품 > 상품목록 > 상품 등록하기
+                    </div>
+                    <h2 class="page-title">
+                    상품 등록하기
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    </script>
+    <!-- Page body -->
+    <div class="page-body">
+        <div class="container-xl form-container grid_grid4">
+            <form action="">
+            <div class="list-btns justify-content-between align-items-center mb-3">
+                <div>
+                    <div class="display_type mb-0">
+                        <button type="button" class="grid4 active" title="폼 그리드 1x4">폼 그리드 1x4</button>
+                        <button type="button" class="grid3 " title="폼 그리드 1x3">폼 그리드 1x3</button>
+                        <button type="button" class="grid2" title="폼 그리드 1x2">폼 그리드 1x2</button>
+                    </div>
+                </div>
+                <div>
+                    <a href="/resources/static/html/goods/list_all.html" class="btn btn-secondary">목록</a>
+                    <button type="submit" class="btn btn-primary">저장</button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card form_area">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form_item">
+                                    <div class="subheader mb-1">협력회사명</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" value="">
+                                            <button class="btn bg-secondary text-light btn-sm" type="button">협력회사명 검색</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">상품코드</div>
+                                    <div class="subcontent">
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">담당자명</div>
+                                    <div class="subcontent">
+                                        <input type="text" class="form-control" value="박담당" readonly="">
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">대표전화</div>
+                                    <div class="subcontent">
+                                        <input type="text" class="form-control" value="02-1234-1234" readonly="">
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">담당자 전화번호</div>
+                                    <div class="subcontent">
+                                        <input type="text" class="form-control" value="02-1234-1234" readonly="">
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">담당자 휴대폰</div>
+                                    <div class="subcontent">
+                                        <input type="text" class="form-control" value="010-1234-1234" readonly="">
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1 required">주 카테고리</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <button class="btn bg-secondary text-light btn-sm" type="button">상품 카테고리 검색</button>
+                                            <input type="text" class="form-control" value="등록된 카테고리가 없습니다." readonly="">
+                                        </div>
+                                        <small class="form-hint">* 카테고리 등록 시 반드시 <span class="text-danger">"소분류 코드"</span> 까지 선택해 주시기 바랍니다.</small>
+                                        <div class="input-group mt-2">
+                                            <input type="text" class="form-control">
+                                        </div>
+                                        <small class="form-hint">* 카테고리 코드를 정확히 아시는 경우 직접 입력하실 수 있습니다.</small>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                        <div class="subheader mb-1 required">부 카테고리</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <button class="btn bg-secondary text-light btn-sm" type="button">상품 카테고리 검색</button>
+                                                <input type="text" class="form-control" value="등록된 카테고리가 없습니다." readonly="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row bg-red-lt">
+                                <div class="form_item">
+                                    <div class="subheader mb-1 required">상품정보고시 카테고리</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                            <button class="btn bg-secondary text-light btn-sm" type="button">상품정보고시 카테고리 검색</button>
+                                            <input type="text" class="form-control" value="등록된 카테고리가 없습니다." readonly="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">제품안전인증</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" value="">
+                                            <button class="btn bg-secondary text-light btn-sm" type="button">인증조회</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">적합성 평가인증</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                            <input type="text" class="form-control" value="">
+                                            <button class="btn bg-secondary text-light btn-sm" type="button">인증조회</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1 required">종류</div>
+                                    <div class="subcontent">
+                                        <input type="text" class="form-control" value="">
+                                        <small class="form-hint">ex) 모자</small>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1 required">소재</div>
+                                    <div class="subcontent">
+                                        <input type="text" class="form-control" value="">
+                                        <small class="form-hint">ex) 폴리에스테르 100%</small>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1 required">치수</div>
+                                    <div class="subcontent">
+                                        <input type="text" class="form-control" value="">
+                                        <small class="form-hint">ex) 머리둘레 57cm, 캡 포함길이 11cm</small>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1 required">제조사, 수입품의 경우 수입자를 함께 표기</div>
+                                    <div class="subcontent">
+                                        <input type="text" class="form-control" value="">
+                                        <small class="form-hint">ex) 병행수입</small>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1 required">제조국</div>
+                                    <div class="subcontent">
+                                        <input type="text" class="form-control" value="">
+                                        <small class="form-hint">ex) 일본</small>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1 required">세탁 방법 및 취급시 주의사항</div>
+                                    <div class="subcontent">
+                                        <input type="text" class="form-control" value="">
+                                        <small class="form-hint">ex) 물세탁 금지</small>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1 required">품질보증기준</div>
+                                    <div class="subcontent">
+                                        <input type="text" class="form-control" value="">
+                                        <small class="form-hint">ex) 병행수입 제품은 매장에서 a/s 가 불가합니다. 직접 유상 a/s를 맡기셔야 합니다. (단, 초기불량의 경우 미사용시 100% 교환처리)</small>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1 required">A/S책임자와 전화번호</div>
+                                    <div class="subcontent">
+                                        <input type="text" class="form-control" value="">
+                                        <small class="form-hint">ex) 홍길동 / 02-123-4567</small>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1 required">KCC 인증 필 유무</div>
+                                    <div class="subcontent">
+                                        <input type="text" class="form-control" value="">
+                                        <small class="form-hint">ex) 06 B362K175-7006A</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form_item">
+                                    <div class="subheader mb-1 required">안전인증 정보(어린이제품)</div>
+                                    <div class="subcontent">
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="safeinfoChild">
+                                            <span class="form-check-label">인증대상</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="safeinfoChild">
+                                            <span class="form-check-label">인증대상아님</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="safeinfoChild">
+                                            <span class="form-check-label">상세설명에 별도표기</span>
+                                        </label>
+                                        <div class="input-group mt-2">
+                                            <select class="form-select">
+                                                <option value="">안전인증</option>
+                                            </select>
+                                            <input type="text" class="form-control">
+                                            <button class="btn bg-secondary text-light btn-sm" type="button">조회</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1 required">안전인증 정보(생활용품)</div>
+                                    <div class="subcontent">
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="safeinfoDaily">
+                                            <span class="form-check-label">인증대상</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="safeinfoDaily">
+                                            <span class="form-check-label">인증대상아님</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="safeinfoDaily">
+                                            <span class="form-check-label">상세설명에 별도표기</span>
+                                        </label>
+                                        <div class="input-group mt-2">
+                                            <select class="form-select">
+                                                <option value="">안전인증</option>
+                                            </select>
+                                            <input type="text" class="form-control">
+                                            <button class="btn bg-secondary text-light btn-sm" type="button">조회</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1 required">안전인증 정보(전기용품)</div>
+                                    <div class="subcontent">
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="safeinfoElec">
+                                            <span class="form-check-label">인증대상</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="safeinfoElec">
+                                            <span class="form-check-label">인증대상아님</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="safeinfoElec">
+                                            <span class="form-check-label">상세설명에 별도표기</span>
+                                        </label>
+                                        <div class="input-group mt-2">
+                                            <select class="form-select">
+                                                <option value="">안전인증</option>
+                                            </select>
+                                            <input type="text" class="form-control">
+                                            <button class="btn bg-secondary text-light btn-sm" type="button">조회</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1 required">상품명</div>
+                                    <div class="subcontent">
+                                        <input type="text" class="form-control">
+                                        <small class="form-hint">* 다음과 같이 브랜드와 상품명을 등록해주세요. 예) [브랜드] 상품명</small>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">브랜드</div>
+                                    <div class="subcontent">
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1 required">제조사</div>
+                                    <div class="subcontent">
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1 required">원산지</div>
+                                    <div class="subcontent">
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-lg-8 col-xl-9 form_item">
+                                    <div class="subheader mb-1 required">검색키워드</div>
+                                    <div class="subcontent">
+                                        <input type="text" class="form-control">
+                                        <small class="form-hint">상품 검색 시 상품명이 아닌 검색 키워드에서 검색됩니다, 키워드는 <span class="text-danger">200Byte</span>까지 등록 가능합니다.</small>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1 required">공급가</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control text-end">
+                                            <span class="input-group-text text w-33">원 (부가세 포함)</span>
+                                        </div>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control text-end">
+                                            <span class="input-group-text text w-33">% (공급할인율)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">인터넷 최저가</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control text-end">
+                                            <span class="input-group-text text w-33">원</span>
+                                        </div>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control text-end">
+                                            <span class="input-group-text text w-33">% (판가율)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1 required">소비자가</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control text-end">
+                                            <span class="input-group-text text w-33">원 (판매할인율)</span>
+                                        </div>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control text-end">
+                                            <span class="input-group-text text w-33">% (공급할인율)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">판매가</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <button class="btn bg-secondary text-light btn-sm" type="button">기본마진율</button>
+                                            <input type="text" class="form-control text-end">
+                                            <span class="input-group-text text w-25">원</span>
+                                        </div>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control text-end">
+                                            <span class="input-group-text text w-25">% (마진율)</span>
+                                        </div>
+                                        <div class="input-group">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox">
+                                                <span class="form-check-label">상품 이용 고객사 적용</span>
+                                            </label>
+                                            <button class="btn bg-secondary text-light btn-sm" type="button">상세보기</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">쿠폰가</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <button class="btn bg-secondary text-light btn-sm" type="button">기본마진율</button>
+                                            <input type="text" class="form-control text-end">
+                                            <span class="input-group-text text w-25">원</span>
+                                        </div>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control text-end">
+                                            <span class="input-group-text text w-25">% (마진율)</span>
+                                        </div>
+                                        <div class="input-group">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox">
+                                                <span class="form-check-label">상품 이용 고객사 적용</span>
+                                            </label>
+                                            <button class="btn bg-secondary text-light btn-sm" type="button">상세보기</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">마일리지 적립</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <span class="input-group-text text">구매금액의</span>
+                                            <input type="text" class="form-control text-end">
+                                            <span class="input-group-text text">%를 마일리지로 추가 적립</span>
+                                        </div>
+                                        <small class="form-hint">※ 고객사에서 마일리지를 사용하는 경우만 입력한 마일리지를 사용할 수 있습니다. <a href="javascript:;" class="link">회원 > 마일리지 > 마일리지 설정</a></small>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1 required">과세구분</div>
+                                    <div class="subcontent">
+                                        <select name="" id="" class="form-select">
+                                            <option value="">과세</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form_item">
+                                    <div class="subheader mb-1 required">노출 아이콘</div>
+                                    <div class="subcontent">
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox">
+                                            <span class="form-check-label"><span class="badge bg-purple-lt">NEW</span></span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox">
+                                            <span class="form-check-label"><span class="badge bg-blue-lt">BEST</span></span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox">
+                                            <span class="form-check-label"><span class="badge bg-green-lt">HIT</span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1 required">노출구분</div>
+                                    <div class="subcontent">
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="displayType">
+                                            <span class="form-check-label">임원노출_1</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="displayType">
+                                            <span class="form-check-label">임원노출_2</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="displayType">
+                                            <span class="form-check-label">일반노출</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1 required">판매구분</div>
+                                    <div class="subcontent">
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="salesCate">
+                                            <span class="form-check-label">폐쇄몰</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="salesCate">
+                                            <span class="form-check-label">포인트몰</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1 required">판매쿠폰수</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control">
+                                            <span class="input-group-text text">개</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1 required">포인트</div>
+                                    <div class="subcontent">
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="pointUse">
+                                            <span class="form-check-label">모두사용</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="pointUse">
+                                            <span class="form-check-label">포인트 사용불가</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="pointUse">
+                                            <span class="form-check-label">포인트만 사용</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-btns justify-content-between mt-3">
+                <div>
+                    <div>
+                        <button type="button" class="btn btn-warning">삭제</button>
+                    </div>
+                </div>
+                <div>
+                    <a href="/resources/static/html/goods/list_all.html" class="btn btn-secondary">목록</a>
+                    <button type="submit" class="btn btn-primary">저장</button>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 공통영역 -->
+    <div id="footer"></div>
+    <script>
+        //헤더&푸터 개발 완료시 삭제해주세요
+        var includePath = "/resources/static/layout/footer.html";
+        includeFile(includePath, 'footer');
+    </script>
+    <!-- //공통영역 -->
+</div>
+<script src="/resources/static/dist/js/tabler.min.js"></script>
+</body>
+</html>

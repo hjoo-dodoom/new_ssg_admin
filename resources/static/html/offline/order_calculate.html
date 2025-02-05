@@ -1,0 +1,671 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=1400"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>신세계 관리자</title>
+    <!-- CSS files -->
+    <link href="/resources/static/dist/css/tabler.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/tabler-vendors.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/>
+    <link rel="shortcut icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <script src="/resources/static/dist/js/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/resources/static/dist/libs/litepicker/dist/litepicker.js?1674944402"></script>
+    <script src="/resources/static/dist/js/jquery.validate.js"></script>
+    <!-- Tabler Core -->
+    
+    <script src="/resources/static/dist/js/common.js"></script>
+    <style>
+    :root {
+        --theme-admin-type: #cf3f42;
+        /* #cf3f42 통합관리자 컬러 코드*/
+        /* #4b9b52 협력회사 컬러 코드 */
+        /* #214c9c 고객사 컬러 코드 */
+    }
+    </style>
+</head>
+<body>
+
+<!-- 공통영역1 -->
+<aside id="header" class="navbar navbar-vertical navbar-expand-lg header_left"></aside>
+<script>
+    //html include
+    //헤더&푸터 개발 완료시 삭제해주세요
+    function includeFile(path, targetId) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', path, true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById(targetId).innerHTML = xhr.responseText;
+        }
+    };
+    xhr.send();
+    }
+    var includePath = "/resources/static/layout/header.html";
+    includeFile(includePath, 'header');
+</script>
+<!-- //공통영역1 -->
+
+<div class="page-wrapper">
+    <!-- 공통영역2 -->
+    <div class="member_info">
+        <div class="info">
+            <span>관리권한 : 최상위관리자</span>
+            <!-- 통합관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <!-- 협력관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <!-- 고객사관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <span class="login_session">로그인 유지시간 <strong>30:00</strong> <button type="button" class="btn btn-xs btn-primary">연장</button></span>
+            <button type="button" class="btn btn-xs btn-secondary">관리자 매뉴얼 보기</button><!-- 공통 -->
+            <button type="button" class="btn btn-xs btn-secondary">기본양식다운로드</button><!-- 통합,협력사만 -->
+            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/admin_modify_pop.html', '900', '640')">관리자정보수정</button><!-- 공통 -->
+            <button type="button" class="btn btn-xs btn-secondary">보안체크</button><!-- 협력사만 -->
+            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/terms_pop.html', '600', '540')">이용약관</button><!-- 협력사만 -->
+        </div>
+        <div>
+            <a href="javascript:;" class="logout">홍길동(admin_01)님 로그아웃</a>
+            <a href="javascript:;" class="home">홈으로</a>
+        </div>
+    </div>
+
+    <!-- 페이지 히스토리 탭 -->
+    <div class="page-history">
+        <div class="history_toggle">
+            <label class="form-check form-switch">
+                <span class="form-check-label">History</span>
+                <input id="historyUse" class="form-check-input" type="checkbox" >
+            </label>
+        </div>
+        <button class="close_all" type="button" title="히스토리 모두 삭제" onclick="historyRemoveAll();">히스토리 모두 삭제</button>
+    </div>
+    <!-- //공통영역2 -->
+
+    <div class="page-header d-print-none">
+        <div class="container-xl">
+            <div class="row g-2 align-items-center">
+                <div class="col">
+                    <!-- Page pre-title -->
+                    <div class="page-pretitle">
+                        홈 > 오프라인주문 > 주문정산 > 주문정산
+                    </div>
+                    <h2 class="page-title">
+                    주문정산
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page body -->
+    <div class="page-body search_left">
+        <div class="container-xl">
+            <div class="row row-cards aside_wrap">
+
+                <!-- 검색시작 -->
+                <div class="aside-search" id="asideSearch">
+                    <form action="" class="card">
+                        <div class="card-body">
+                            <div class="display_type">
+                                <button type="button" class="left active" title="검색영역 좌측배치">검색영역 좌측배치</button>
+                                <button type="button" class="top " title="검색영역 상단배치">검색영역 상단배치</button>
+                                <button type="button" class="right" title="검색영역 우측배치">검색영역 우측배치</button>
+                            </div>
+                            <div class="search_options">
+                                <div class="option_item">
+                                    <div class="subheader">고객사</div>
+                                    <div class="row">
+                                        <div class="col-12 member_type_status1"><!-- member_type_status1 고객사 상태 -->
+                                            <select class="form-select select-display" onchange="clientStatusChange();">
+                                                <option value="" select-display="clientStatus1 clientStatus2 clientStatus3 clientStatus4">전체</option>
+                                                <option value="" select-display="clientStatus1" selected="">정상승인</option>
+                                                <option value="" select-display="clientStatus2">가승인</option>
+                                                <option value="" select-display="clientStatus3">정지</option>
+                                                <option value="" select-display="clientStatus4">만료</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12 member_type_select2" style=""><!-- member_type_select2 고객사 -->
+                                            <div class="search_select">
+                                                <input type="hidden" value="">
+                                                <button type="button" class="btn_select form-select text-start" onclick="searchSelectOpen(this);">고객사 전체</button>
+                                                <div class="search_select_options" style="display:none;">
+                                                    <input type="text" class="form-control" placeholder="검색어 입력" oninput="searchSelectSearch(this);">
+                                                    <div class="items">
+                                                        <div class="item"><a href="javascript:;" data-id="" class="active" onclick="searchSelectSelect(this);">고객사 전체</a></div>
+                                                        <div class="item clientStatus1" style=""><a href="javascript:;" data-id="code458i95i5" onclick="searchSelectSelect(this);">고객사1-1(정상승인)</a></div>
+                                                        <div class="item clientStatus2" style="display: none;"><a href="javascript:;" data-id="codeeye44576" onclick="searchSelectSelect(this);">고객사1-2(가승인)</a></div>
+                                                        <div class="item clientStatus3" style="display: none;"><a href="javascript:;" data-id="code45urt48u" onclick="searchSelectSelect(this);">고객사2-1(정지)</a></div>
+                                                        <div class="item clientStatus4" style="display: none;"><a href="javascript:;" data-id="code4567uer" onclick="searchSelectSelect(this);">고객사2-2(만료)</a></div>
+                                                        <div class="item clientStatus1" style="display: none;"><a href="javascript:;" data-id="code4575eyry" onclick="searchSelectSelect(this);">고객사3(정상승인)</a></div>
+                                                        <div class="item clientStatus1" style="display: none;"><a href="javascript:;" data-id="code12565" onclick="searchSelectSelect(this);">고객사4(정상승인)</a></div>
+                                                        <div class="item clientStatus1" style="display: none;"><a href="javascript:;" data-id="code6556677" onclick="searchSelectSelect(this);">고객사5(정상승인)</a></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" id="clientMultipleCheck" onchange="clientMultipleSelectCheck(this)" type="checkbox" name="">
+                                                <span class="form-check-label">고객사 다중선택(<span id="clientMultipleCheckCount">0</span>)</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="clientMultipleSelect" class="option_item w80 client_multiple_select" style="display:none;">
+                                    <div class="subheader">고객사 다중선택</div>
+                                    <div class="label-control">
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input check-all" type="checkbox">
+                                            <span class="form-check-label">전체</span>
+                                        </label>
+                                        <label class="form-check form-check-inline clientStatus1">
+                                            <input class="form-check-input" type="checkbox" name="">
+                                            <span class="form-check-label">신세계강남(정상승인)</span>
+                                        </label>
+                                        <label class="form-check form-check-inline clientStatus1">
+                                            <input class="form-check-input" type="checkbox" name="">
+                                            <span class="form-check-label">시크릿스토어(정상승인)</span>
+                                        </label>
+                                        <label class="form-check form-check-inline clientStatus2">
+                                            <input class="form-check-input" type="checkbox" name="">
+                                            <span class="form-check-label">(스마일)강남대학교(가승인)</span>
+                                        </label>
+                                        <label class="form-check form-check-inline clientStatus2">
+                                            <input class="form-check-input" type="checkbox" name="">
+                                            <span class="form-check-label">(스마일)거제시청(가승인)</span>
+                                        </label>
+                                        <label class="form-check form-check-inline clientStatus3">
+                                            <input class="form-check-input" type="checkbox" name="">
+                                            <span class="form-check-label">BMW코리아(정지)</span>
+                                        </label>
+                                        <label class="form-check form-check-inline clientStatus3">
+                                            <input class="form-check-input" type="checkbox" name="">
+                                            <span class="form-check-label">아우디코리아(정지)</span>
+                                        </label>
+                                        <label class="form-check form-check-inline clientStatus4">
+                                            <input class="form-check-input" type="checkbox" name="">
+                                            <span class="form-check-label">미래에셋그룹(만료)</span>
+                                        </label>
+                                        <label class="form-check form-check-inline clientStatus4">
+                                            <input class="form-check-input" type="checkbox" name="">
+                                            <span class="form-check-label">삼성화재 생생택배 삼천원몰(만료)</span>
+                                        </label>
+                                        <label class="form-check form-check-inline clientStatus4">
+                                            <input class="form-check-input" type="checkbox" name="">
+                                            <span class="form-check-label">카톨릭대학교부천성모병원(만료)</span>
+                                        </label>
+                                    </div>
+                                    
+
+                                    <script>
+                                        const clientMultipleSelect = document.getElementById('clientMultipleSelect');
+                                        const clientMultipleSelectCheckboxes = document.querySelectorAll('#clientMultipleSelect input[type="checkbox"]');
+                                        const clientMultipleSelectItem = document.querySelectorAll('#clientMultipleSelect input[type="checkbox"]:not(.check-all)');
+
+                                        //상태변경시 고객사 선택초기화(맨위 항목으로)
+                                        function resetSelection(selector) {
+                                            let container = document.querySelector(selector);
+                                            let items = container.querySelectorAll('.items .item a');
+                                            let firstItem = container.querySelector('.items .item:first-child a');
+                                            
+                                            container.querySelector('input[type="hidden"]').value = firstItem.getAttribute('data-id');
+                                            container.querySelector('.btn_select').textContent = firstItem.textContent;
+                                            
+                                            items.forEach(function(item){
+                                                item.classList.remove('active');
+                                            });
+                                            firstItem.classList.add('active');
+                                        }
+                                        
+
+                                        //셀렉트 변경시 하위 셀렉트 초기화
+                                        function clientStatusChange(){
+                                            //고객사 상태변경시 하위 셀렉트 초기화
+                                            resetSelection('.member_type_select2');//고객사
+
+                                            //고객사 상태변경시 고객사 다중선택 체크 초기화
+                                            document.querySelectorAll('#clientMultipleSelect input[type=checkbox]').forEach(function(checkbox){
+                                                checkbox.checked = false;
+                                            });
+                                            clientMultipleCheckCount.textContent = '0';
+                                        }
+
+                                        //고객사 다중선택, 제외 둘다 선택 방지
+                                        //둘다 해제시 다중선택 초기화
+                                        //선택시 고객사 셀렉트박스 비활성화
+                                        function clientMultipleSelectCheck(elm){
+                                            if(clientMultipleCheck.checked ){
+                                                clientMultipleSelect.style.display = 'flex';
+                                                document.querySelector('.member_type_select2').setAttribute('hidden' ,'');
+                                            }else if(!clientMultipleCheck.checked){
+                                                //고객사 다중선택, 고객사 제외 둘다 체크 해제시 
+                                                //고객사 다중선택 박스 hide && 체크해제 && 카운트 해제
+                                                document.querySelector('.member_type_select2').removeAttribute('hidden');
+                                                clientMultipleSelect.style.display = 'none';
+                                                clientMultipleSelectCheckboxes.forEach(function(checkbox){
+                                                    checkbox.checked = false;
+                                                });
+                                                clientMultipleCheckCount.textContent = '0';
+                                            }
+                                        }
+
+
+                                        //고객사 다중선택 && 제외 카운트 출력
+                                        document.addEventListener('DOMContentLoaded', function() {
+                                            clientMultipleSelectCheckboxes.forEach(function(check) {
+                                                check.addEventListener('change', function() {
+                                                    let count = 0;
+                                                    clientMultipleSelectItem.forEach(function(check) {
+                                                        if (check.checked) {
+                                                            count++;
+                                                        }
+                                                    });
+                                                    if(clientMultipleCheck.checked){
+                                                        clientMultipleCheckCount.textContent = count;
+                                                    }
+                                                });
+                                            });
+                                        });
+                                    </script>
+                                </div>
+                                <div class="option_item">
+                                    <div class="subheader">상품권</div>
+                                    <div>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="voucher_type" checked="">
+                                            <span class="form-check-label">전체</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="voucher_type" value="">
+                                            <span class="form-check-label">상품권</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="voucher_type" value="">
+                                            <span class="form-check-label">비상품권</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="option_item w30">
+                                    <div class="subheader">기간</div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <select name="" id="" class="form-select">
+                                                <option value="">주문일</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-6">
+                                            <input class="form-control datepicker-icon startDate" placeholder="시작일"
+                                                value="" />
+                                        </div>
+                                        <div class="col-6">
+                                            <input class="form-control datepicker-icon endDate" placeholder="종료일"
+                                                value="" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="search_btns">
+                                <button class="btn btn-primary">
+                                    검색
+                                </button>
+                                <a href="#" class="btn btn-secondary">
+                                    검색 초기화
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                    
+                </div>
+                <!-- //검색시작 -->
+
+                <!-- 콘텐츠 시작 -->
+                <div class="content-area">
+                    <div class="list-btns justify-content-between mb-1">
+                        <div></div>
+                        <div>
+                            <small class="ms-2 mt-1 float-start">
+                                ※ 반품접수 및 반품완료건은 주문취소가 이루어진 후 정산작업을 하시기 바랍니다. 
+                            </small>
+                            <button type="button" class="btn btn-secondary btn-sm ms-2 float-start"
+                            onclick="windowPopup('/resources/static/html/popup/download_reason_pop.html', '600', '380')"
+                            >
+                                통계 저장
+                            </button>
+                            <button type="button" class="btn btn-secondary btn-sm ms-2 float-start"
+                            onclick="windowPopup('/resources/static/html/popup/download_reason_pop.html', '600', '380')"
+                            >
+                                정산주문 저장
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <div class="card table-mb-card">
+                            <div class="table-responsive">
+                                <table class="table table-vcenter table-line card-table text-center table-mb">
+                                    <caption>매입매출 통계</caption>
+                                    <thead class="dark">
+                                        <tr>
+                                            <th></th>
+                                            <th>(+)매입</th>
+                                            <th>(-)매입</th>
+                                            <th>실매입</th>
+                                            <th>(+)에누리</th>
+                                            <th>(-)에누리</th>
+                                            <th>실에누리</th>
+                                            <th>(+)매출</th>
+                                            <th>(-)매출</th>
+                                            <th>실매출</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>총계</td>
+                                            <td class="text-end">93,300</td>
+                                            <td class="text-end">2,000</td>
+                                            <td class="text-end">91,300</td>
+                                            <td class="text-end">0</td>
+                                            <td class="text-end">0</td>
+                                            <td class="text-end">0</td>
+                                            <td class="text-end">105,800</td>
+                                            <td class="text-end">3,200</td>
+                                            <td class="text-end">102,600</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <div class="list-btns justify-content-between mb-1">
+                            <div></div>
+                            <div>
+                                <small class="ms-2 mt-1 float-start">
+                                    ※ 아래 해당업체에 세금계산서 요청 문자를 발송합니다. 
+                                </small>
+                                <button type="button" class="btn btn-secondary btn-sm ms-2 float-start">전체문자발송</button>
+                            </div>
+                        </div>
+
+                        <div class="card table-mb-card">
+                            <div class="table-responsive">
+                                <table class="table table-vcenter table-line card-table text-center table-mb">
+                                    <caption>매장 협력회사 별(10)</caption>
+                                    <thead class="dark">
+                                        <tr>
+                                            <th>협력회사명</th>
+                                            <th>점포</th>
+                                            <th>MD번호</th>
+                                            <th>총건수</th>
+                                            <th>매출건수</th>
+                                            <th>취소건수</th>
+                                            <th>실건수</th>
+                                            <th>(+)<br/>매출</th>
+                                            <th>(-)<br/>매출</th>
+                                            <th>배송비</th>
+                                            <th>실매출</th>
+                                            <th>에누리</th>
+                                            <th>매입</th>
+                                            <th>제안가<br/>(공급가)</th>
+                                            <th>세액</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>신세계강남_노스페이스</td>
+                                            <td>신세계강남</td>
+                                            <td class="text-end">004333</td>
+                                            <td class="text-end">12</td>
+                                            <td class="text-end">11</td>
+                                            <td class="text-end">1</td>
+                                            <td class="text-end">10</td>
+                                            <td class="text-end">888,250</td>
+                                            <td class="text-end">25,500</td>
+                                            <td class="text-end">0</td>
+                                            <td class="text-end">862,750</td>
+                                            <td class="text-end">152,250</td>
+                                            <td class="text-end">1,015,000</td>
+                                            <td class="text-end">922,727</td>
+                                            <td class="text-end">99,273</td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <td colspan="3">합계</td>
+                                        <td class="text-end">21</td>
+                                        <td class="text-end">20</td>
+                                        <td class="text-end">1</td>
+                                        <td class="text-end">19</td>
+                                        <td class="text-end">1,442,160</td>
+                                        <td class="text-end">25,500</td>
+                                        <td class="text-end">0</td>
+                                        <td class="text-end">1,416,660</td>
+                                        <td class="text-end">257,820</td>
+                                        <td class="text-end">1,674,480</td>
+                                        <td class="text-end">1,522,255</td>
+                                        <td class="text-end">159.225</td>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <div class="list-btns justify-content-between mb-1">
+                            <div></div>
+                            <div>
+                                <small class="ms-2 mt-1 float-start">
+                                    ※ 아래 해당업체에 세금계산서 요청 문자를 발송합니다. 
+                                </small>
+                                <button type="button" class="btn btn-secondary btn-sm ms-2 float-start">전체문자발송</button>
+                            </div>
+                        </div>
+                        <div class="card table-mb-card">
+                            <div class="table-responsive">
+                                <table class="table table-vcenter table-line card-table text-center table-mb">
+                                    <caption>기획 협력회사 별(10)</caption>
+                                    <thead class="dark">
+                                        <tr>
+                                            <th>협력회사명</th>
+                                            <th>사업자번호</th>
+                                            <th>총건수</th>
+                                            <th>매출건수</th>
+                                            <th>취소건수</th>
+                                            <th>실건수</th>
+                                            <th>(+)매출</th>
+                                            <th>(-)매출</th>
+                                            <th>배송비</th>
+                                            <th>실매출</th>
+                                            <th>매입</th>
+                                            <th>공급가</th>
+                                            <th>세액</th>
+                                            <th>이익</th>
+                                            <th>비율</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>(주)돋움</td>
+                                            <td>123-12-12345</td>
+                                            <td class="text-end">156</td>
+                                            <td class="text-end">147</td>
+                                            <td class="text-end">9</td>
+                                            <td class="text-end">138</td>
+                                            <td class="text-end">1,840,000</td>
+                                            <td class="text-end">120,000</td>
+                                            <td class="text-end">0</td>
+                                            <td class="text-end">1,720,000</td>
+                                            <td class="text-end">1,599,600</td>
+                                            <td class="text-end">1,454,182</td>
+                                            <td class="text-end">145,418</td>
+                                            <td class="text-end">120,400</td>
+                                            <td class="text-end">7%</td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <td colspan="2">합계</td>
+                                        <td class="text-end">0</td>
+                                        <td class="text-end">0</td>
+                                        <td class="text-end">0</td>
+                                        <td class="text-end">0</td>
+                                        <td class="text-end">0</td>
+                                        <td class="text-end">0</td>
+                                        <td class="text-end">0</td>
+                                        <td class="text-end">0</td>
+                                        <td class="text-end">0</td>
+                                        <td class="text-end">0</td>
+                                        <td class="text-end">0</td>
+                                        <td class="text-end">0</td>
+                                        <td class="text-end"></td>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="mt-4">
+                        <div class="card table-mb-card">
+                            <div class="table-responsive">
+                                <table class="table table-vcenter table-line card-table text-center table-mb">
+                                    <caption>(주)돋움</caption>
+                                    <thead class="dark">
+                                        <tr>
+                                            <th>상품명</th>
+                                            <th>과세구분</th>
+                                            <th>총 수량</th>
+                                            <th>매출수량</th>
+                                            <th>취소수량</th>
+                                            <th>실수량</th>
+                                            <th>(+)매출</th>
+                                            <th>(-)매출</th>
+                                            <th>배송비</th>
+                                            <th>실매출</th>
+                                            <th>에누리</th>
+                                            <th>매입</th>
+                                            <th>이익</th>
+                                            <th>비율</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>[햄튼]아트라믹 IH 웍 30cm / HQA-IH</td>
+                                            <td>과세</td>
+                                            <td class="text-end">10</td>
+                                            <td class="text-end">10</td>
+                                            <td class="text-end">0</td>
+                                            <td class="text-end">10</td>
+                                            <td class="text-end">100,000</td>
+                                            <td class="text-end">0</td>
+                                            <td class="text-end">3,000</td>
+                                            <td class="text-end">97,000</td>
+                                            <td class="text-end"></td>
+                                            <td class="text-end">10,000</td>
+                                            <td class="text-end">86,000</td>
+                                            <td class="text-end">86%</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <div class="card table-mb-card">
+                            <div class="table-responsive">
+                                <table class="table table-vcenter table-line card-table text-center table-mb">
+                                    <caption>(주)베네파트너</caption>
+                                    <thead class="dark">
+                                        <tr>
+                                            <th>상품명</th>
+                                            <th>과세구분</th>
+                                            <th>총 수량</th>
+                                            <th>매출수량</th>
+                                            <th>취소수량</th>
+                                            <th>실수량</th>
+                                            <th>(+)매출</th>
+                                            <th>(-)매출</th>
+                                            <th>배송비</th>
+                                            <th>실매출</th>
+                                            <th>에누리</th>
+                                            <th>매입</th>
+                                            <th>이익</th>
+                                            <th>비율</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>[햄튼]아트라믹 IH 웍 30cm / HQA-IH</td>
+                                            <td>과세</td>
+                                            <td class="text-end">10</td>
+                                            <td class="text-end">10</td>
+                                            <td class="text-end">0</td>
+                                            <td class="text-end">10</td>
+                                            <td class="text-end">100,000</td>
+                                            <td class="text-end">0</td>
+                                            <td class="text-end">3,000</td>
+                                            <td class="text-end">97,000</td>
+                                            <td class="text-end"></td>
+                                            <td class="text-end">10,000</td>
+                                            <td class="text-end">86,000</td>
+                                            <td class="text-end">86%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>[리앤쿡] 스텐레스304 더블사이드 컷팅</td>
+                                            <td>면세</td>
+                                            <td class="text-end">10</td>
+                                            <td class="text-end">10</td>
+                                            <td class="text-end">0</td>
+                                            <td class="text-end">10</td>
+                                            <td class="text-end">100,000</td>
+                                            <td class="text-end">0</td>
+                                            <td class="text-end">3,000</td>
+                                            <td class="text-end">97,000</td>
+                                            <td class="text-end"></td>
+                                            <td class="text-end">10,000</td>
+                                            <td class="text-end">86,000</td>
+                                            <td class="text-end">86%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>[Kassel] 카셀 국내생산 퓨어스텐 쌀함박</td>
+                                            <td>유가증권</td>
+                                            <td class="text-end">10</td>
+                                            <td class="text-end">10</td>
+                                            <td class="text-end">0</td>
+                                            <td class="text-end">10</td>
+                                            <td class="text-end">100,000</td>
+                                            <td class="text-end">0</td>
+                                            <td class="text-end">3,000</td>
+                                            <td class="text-end">97,000</td>
+                                            <td class="text-end"></td>
+                                            <td class="text-end">10,000</td>
+                                            <td class="text-end">86,000</td>
+                                            <td class="text-end">86%</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <!-- 콘텐츠 끝 -->
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 공통영역 -->
+    <div id="footer"></div>
+    <script>
+        //헤더&푸터 개발 완료시 삭제해주세요
+        var includePath = "/resources/static/layout/footer.html";
+        includeFile(includePath, 'footer');
+    </script>
+    <!-- //공통영역 -->
+</div>
+<script src="/resources/static/dist/js/tabler.min.js"></script>
+</body>
+</html>

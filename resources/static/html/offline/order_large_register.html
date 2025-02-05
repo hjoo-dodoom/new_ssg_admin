@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=1400"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>신세계 관리자</title>
+    <!-- CSS files -->
+    <link href="/resources/static/dist/css/tabler.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/tabler-vendors.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/>
+    <link rel="shortcut icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <script src="/resources/static/dist/js/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/resources/static/dist/libs/litepicker/dist/litepicker.js?1674944402"></script>
+    <script src="/resources/static/dist/js/jquery.validate.js"></script>
+    <!-- Tabler Core -->
+    
+    <script src="/resources/static/dist/js/common.js"></script>
+    <style>
+    :root {
+        --theme-admin-type: #cf3f42;
+        /* #cf3f42 통합관리자 컬러 코드*/
+        /* #4b9b52 협력회사 컬러 코드 */
+        /* #214c9c 고객사 컬러 코드 */
+    }
+    </style>
+</head>
+<body>
+<aside id="header" class="navbar navbar-vertical navbar-expand-lg header_left"></aside>
+<script>
+    //html include
+    function includeFile(path, targetId) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', path, true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById(targetId).innerHTML = xhr.responseText;
+        }
+    };
+    xhr.send();
+    }
+    var includePath = "/resources/static/layout/header.html";
+    includeFile(includePath, 'header');
+</script>
+
+<div class="page-wrapper">
+    <!-- 공통영역2 -->
+    <div class="member_info">
+        <div class="info">
+            <span>관리권한 : 최상위관리자</span>
+            <!-- 통합관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <!-- 협력관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <!-- 고객사관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <span class="login_session">로그인 유지시간 <strong>30:00</strong> <button type="button" class="btn btn-xs btn-primary">연장</button></span>
+            <button type="button" class="btn btn-xs btn-secondary">관리자 매뉴얼 보기</button><!-- 공통 -->
+            <button type="button" class="btn btn-xs btn-secondary">기본양식다운로드</button><!-- 통합,협력사만 -->
+            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/admin_modify_pop.html', '900', '640')">관리자정보수정</button><!-- 공통 -->
+            <button type="button" class="btn btn-xs btn-secondary">보안체크</button><!-- 협력사만 -->
+            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/terms_pop.html', '600', '540')">이용약관</button><!-- 협력사만 -->
+        </div>
+        <div>
+            <a href="javascript:;" class="logout">홍길동(admin_01)님 로그아웃</a>
+            <a href="javascript:;" class="home">홈으로</a>
+        </div>
+    </div>
+
+    <!-- 페이지 히스토리 탭 -->
+    <div class="page-history">
+        <div class="history_toggle">
+            <label class="form-check form-switch">
+                <span class="form-check-label">History</span>
+                <input id="historyUse" class="form-check-input" type="checkbox" >
+            </label>
+        </div>
+        <button class="close_all" type="button" title="히스토리 모두 삭제" onclick="historyRemoveAll();">히스토리 모두 삭제</button>
+    </div>
+    <!-- //공통영역2 -->
+
+    <div class="page-header d-print-none">
+        <div class="container-xl">
+            <div class="row g-2 align-items-center">
+                <div class="col">
+                    <!-- Page pre-title -->
+                    <div class="page-pretitle">
+                        홈 > 오프라인주문 > 주문목록 > 주문대량등록 > 등록
+                    </div>
+                    <h2 class="page-title">
+                        주문대량등록
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page body -->
+    <div class="page-body">
+        <div class="container-xl form-container grid_grid4">
+            <form action="">
+            <div class="list-btns justify-content-between align-items-center mb-3">
+                <div>
+                    <div class="display_type mb-0">
+                        <button type="button" class="grid4 active" title="폼 그리드 1x4">폼 그리드 1x4</button>
+                        <button type="button" class="grid3 " title="폼 그리드 1x3">폼 그리드 1x3</button>
+                        <button type="button" class="grid2" title="폼 그리드 1x2">폼 그리드 1x2</button>
+                    </div>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary">등록</button>
+                    <a href="/resources/static/html/offline/order_large_list.html" class="btn btn-secondary">목록</a>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <p class="text-muted fs-5 my-1">*표시는 필수 입력 항목입니다. 대량의 상품정보를 한번에 등록하실 수 있습니다.</p>
+                    <div class="card form_area">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form_item">
+                                    <div class="subheader mb-1">샘플 EXCEL</div>
+                                    <div class="subcontent">
+                                        <a href="https://naver.com" download="" class="badge bg-blue-lt fs-5">샘플파일 다운로드</a>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1 required">고객사 </div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <div class="col member_type_status1"><!-- member_type_status1 고객사 상태 -->
+                                                <select class="form-select select-display" onchange="clientStatusChange();">
+                                                    <option value="" select-display="clientStatus1 clientStatus2 clientStatus3 clientStatus4" >전체</option>
+                                                    <option value="" select-display="clientStatus1" select-display-hide="member_type_select3" selected>정상승인</option>
+                                                    <!-- <option value="" select-display="clientStatus2" select-display-hide="member_type_select3">가승인</option> -->
+                                                    <option value="" select-display="clientStatus3" select-display-hide="member_type_select3">정지</option>
+                                                    <!-- <option value="" select-display="clientStatus4" select-display-hide="member_type_select3">만료</option> -->
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="input-group">
+                                            <div class="col member_type_select2"><!-- member_type_select2 고객사 -->
+                                                <div class="search_select select-display">
+                                                    <input type="hidden">
+                                                    <button type="button" class="btn_select form-select text-start" onclick="searchSelectOpen(this);">고객사 전체</button>
+                                                    <div class="search_select_options" style="display:none;">
+                                                        <input type="text" class="form-control" placeholder="검색어 입력" oninput="searchSelectSearch(this);">
+                                                        <div class="items">
+                                                            <div class="item"><a href="javascript:;" data-id="" class="active" select-display="" onclick="searchSelectSelect(this);resetUnderSelect(this);">고객사 전체</a></div>
+                                                            <div class="item clientStatus1 code456uru"><a href="javascript:;" data-id="code458i95i5" select-display="member_type_select3" onclick="searchSelectSelect(this);resetUnderSelect(this);">고객사1-1(정상승인)</a></div>
+                                                            <!-- <div class="item clientStatus2 code456uru"><a href="javascript:;" data-id="codeeye44576" select-display="member_type_select3 codeeye44576" onclick="searchSelectSelect(this);resetUnderSelect(this);">고객사1-2(가승인)</a></div> -->
+                                                            <div class="item clientStatus3 code456754eyr"><a href="javascript:;" data-id="code45urt48u" select-display="member_type_select3" onclick="searchSelectSelect(this);resetUnderSelect(this);">고객사2-1(정지)</a></div>
+                                                            <!-- <div class="item clientStatus4 code456754eyr"><a href="javascript:;" data-id="code4567uer" select-display="" onclick="searchSelectSelect(this);resetUnderSelect(this);">고객사2-2(만료)</a></div> -->
+                                    
+                                                            <!-- 상위없으면 group_none출력 -->
+                                                            <div class="item clientStatus1 group_none"><a href="javascript:;" data-id="code4575eyry" select-display="member_type_select3" onclick="searchSelectSelect(this);resetUnderSelect(this);">고객사3(정상승인)</a></div>
+                                                            <div class="item clientStatus1 group_none"><a href="javascript:;" data-id="code12565" select-display="" onclick="searchSelectSelect(this);resetUnderSelect(this);">고객사4(정상승인)</a></div>
+                                                            <div class="item clientStatus1 group_none"><a href="javascript:;" data-id="code6556677" select-display="" onclick="searchSelectSelect(this);resetUnderSelect(this);">고객사5(정상승인)</a></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <script>
+                                            const memberTypeRadios = document.querySelectorAll('input[name="member_type"]');
+    
+                                            //구분 변경, 셀렉트 변경시  그룹사,고객사,계열사,상위몰 하위몰 선택초기화 (맨위에 항목으로)
+                                            function resetSelection(selector) {
+                                                let container = document.querySelector(selector);
+                                                let items = container.querySelectorAll('.items .item a');
+                                                let firstItem = container.querySelector('.items .item:first-child a');
+                                                
+                                                container.querySelector('input[type="hidden"]').value = firstItem.getAttribute('data-id');
+                                                container.querySelector('.btn_select').textContent = firstItem.textContent;
+                                                
+                                                items.forEach(function(item){
+                                                    item.classList.remove('active');
+                                                });
+                                                firstItem.classList.add('active');
+                                            }
+                                            
+                                            function clientStatusChange(){
+                                                //고객사 상태변경시 하위 셀렉트 초기화
+                                                resetSelection('.member_type_select2');//고객사
+                                            }
+                                    
+                                            function resetUnderSelect(elm){
+                                                
+                                            }
+                                        </script>
+                                    </div>
+                                </div>
+                                
+                                <div class="form_item size_xl">
+                                    <div class="subheader mb-1 required">파일 업로드</div>
+                                    <div class="subcontent">
+                                        <p class="text-muted">
+                                            <span class="text-danger">※업로드전 아래의 주의사항을 확인해주세요</span><br/>
+                                            1. [샘플파일 다운로드]버튼을 클릭하여 PC에 다운로드해 주세요.<br/>
+                                            2. 샘플파일의 확장자 또는 항목을 임의로 추가 또는 삭제 할 경우 파일이 정상적으로 업로드 되지 않습니다.<br/>
+                                            3. 샘플파일에 설정된 셀 서식을 임의로 변경하시면 파일이 정상적으로 업로드 되지 않습니다.<br/>
+                                            4. 엑셀파일 내 정보 입력 시 엑셀함수를 사용하지 마시고 텍스트만 입력해주세요.<br/>
+                                            5. 문서보안 해제 후 파일 용량을 꼭 확인해주세요.(파일용량이 0Kbyte인 경우 업로드 되지 않습니다.)<br/>
+                                            6. 업로드 파일은 몰 종료전까지 PC에 보관을 권장합니다.<br/>
+                                            7. 업로드 후 [등록]버튼을 클릭해주세요.
+                                        </p>
+                                        <div class="input-group mt-2" style="max-width:400px;">
+                                            <input type="file" class="form-control">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-btns justify-content-between align-items-center mt-2">
+                    <div>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary">등록</button>
+                        <a href="/resources/static/html/offline/order_large_list.html" class="btn btn-secondary">목록</a>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 공통영역 -->
+    <div id="footer"></div>
+    <script>
+        //헤더&푸터 개발 완료시 삭제해주세요
+        var includePath = "/resources/static/layout/footer.html";
+        includeFile(includePath, 'footer');
+    </script>
+    <!-- //공통영역 -->
+</div>
+
+<script src="/resources/static/dist/js/tabler.min.js"></script>
+</body>
+</html>

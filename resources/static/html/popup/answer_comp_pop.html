@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=1400"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>신세계 관리자</title>
+    <!-- CSS files -->
+    <link href="/resources/static/dist/css/tabler.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/tabler-vendors.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/>
+    <link rel="shortcut icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <script src="/resources/static/dist/js/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/resources/static/dist/libs/litepicker/dist/litepicker.js?1674944402"></script>
+    <script src="/resources/static/dist/js/jquery.validate.js"></script>
+    <!-- Tabler Core -->
+    
+    <script src="/resources/static/dist/js/common.js"></script>
+    <style>
+    :root {
+        --theme-admin-type: #cf3f42;
+        /* #cf3f42 통합관리자 컬러 코드*/
+        /* #4b9b52 협력회사 컬러 코드 */
+        /* #214c9c 고객사 컬러 코드 */
+    }
+    </style>
+</head>
+<body>
+
+<div class="popup-wrapper">
+    <h2 class="popup-title">탄산수는 없나요?</h2>
+    <div class="row">
+        <div class="col-12 form-container grid_grid2">
+            <div class="card form_area">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="form_item">
+                            <div class="subheader mb-1">답변자</div>
+                            <div class="subcontent">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" value="usder_id, 홍길동" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form_item">
+                            <div class="subheader mb-1">답변자 연락처</div>
+                            <div class="subcontent">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" value="010-1234-1234" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 form-container grid_grid2">
+            <div class="card form_area">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="form_item size_xl">
+                            <div class="subheader mb-1">제목</div>
+                            <div class="subcontent">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form_item size_xl">
+                            <div class="subheader mb-1">내용</div>
+                            <div class="subcontent">
+                                <div class="input-group">
+                                    <textarea name="" id="" class="form-control" readonly></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-area">
+            <div class="card table-mb-card">
+                <div class="table-responsive">
+                    <table class="table table-vcenter table-line card-table text-center table-mb tr_hover">
+                        <caption>답변 리스트(0)</caption>
+                        <thead>
+                            <tr>
+                                <th>제목</th>
+                                <th>아이디</th>
+                                <th>답변일</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="5" class="list-empty">
+                                    등록된 항목이 없습니다.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><a href="javascript:;" class="list_link" data-write-id="1">메모내용메모내용메모내용메모내용⋯</a></td>
+                                <td>abcd1234</td>
+                                <td>2024-05-21 11:11:11</td>
+                            </tr>
+                            <tr>
+                                <td><a href="javascript:;" class="list_link" data-write-id="2">메모예제입니다. 모예제입니다 예제입니다. ⋯</a></td>
+                                <td>abcd1234</td>
+                                <td>2024-05-21 11:11:11</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="ip_pagenation display-flex justify-content-center mt-4">
+                <div class="pg_btn disabled">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                        <!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevrons-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M11 7l-5 5l5 5"></path>
+                            <path d="M17 7l-5 5l5 5"></path>
+                            </svg>
+                    </a>
+                </div>
+                <div class="pg_btn disabled">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                        <!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M15 6l-6 6l6 6"></path>
+                        </svg>
+                    </a>
+                </div>
+                <div class="pg_ip">
+                    <input type="tel" value="1" class="form-control"> / 250
+                </div>
+                <div class="pg_btn">
+                    <a class="page-link" href="#">
+                        <!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M9 6l6 6l-6 6"></path>
+                        </svg>
+                    </a>
+                </div>
+                <div class="pg_btn">
+                    <a class="page-link" href="#">
+                        <!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevrons-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M7 7l5 5l-5 5"></path>
+                        <path d="M13 7l5 5l-5 5"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="list-btns justify-content-between mt-3">
+            <div>
+            </div>
+            <div>
+                <button type="button" class="btn btn-secondary" onclick="window.close();">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/resources/static/dist/js/tabler.min.js"></script>
+</body>
+</html>

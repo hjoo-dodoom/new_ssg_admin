@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=1400"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>거래내역서</title>
+    <!-- CSS files -->
+    <link href="/resources/static/dist/css/tabler.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/tabler-vendors.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/>
+    <link rel="shortcut icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <script src="/resources/static/dist/js/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/resources/static/dist/libs/litepicker/dist/litepicker.js?1674944402"></script>
+    <script src="/resources/static/dist/js/jquery.validate.js"></script>
+    <!-- Tabler Core -->
+    
+    <script src="/resources/static/dist/js/common.js"></script>
+    <style>
+    :root {
+        --theme-admin-type: #cf3f42;
+        /* #cf3f42 통합관리자 컬러 코드*/
+        /* #4b9b52 협력회사 컬러 코드 */
+        /* #214c9c 고객사 컬러 코드 */
+    }
+    </style>
+</head>
+<body>
+
+<div class="popup-wrapper">
+    <h2 class="popup-title">거래영수증</h2>
+    <form action="">
+    <div class="row">
+        <div class="content-area">
+
+            <div class="card table-mb-card">
+                <div class="table-responsive">
+                    <table class="table table-vcenter table-line card-table label-control text-center table-mb">
+                        <colgroup>
+                            <col>
+                            <col>
+                            <col>
+                            <col style="width:80px;" class="print_no">
+                        </colgroup>
+                        <thead class="dark">
+                            <tr>
+                                <th>체결번호</th>
+                                <th>결제일자</th>
+                                <th>결제구분</th>
+                                <th class="print_no">인쇄</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>K00002870587</td>
+                                <td>2024-09-0910:43:43</td>
+                                <td>신용거래</td>
+                                <td class="print_no">
+                                    <style>
+                                        @media print {
+                                            .popup-wrapper{padding:0;}
+                                            td,td{border:1px solid #666 !important;}
+                                            .table-responsive{border-bottom:1px solid #ddd;}
+                                            .print_no{display: none;}
+                                            * {
+                                                color-adjust: exact !important;
+                                                -webkit-print-color-adjust: exact !important;
+                                                print-color-adjust: exact !important;
+                                            }
+                                        }
+                                    </style>
+                                    <button type="button" class="btn btn-xs btn-secondary" onclick="window.print();">
+                                        인쇄하기
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card table-mb-card mt-3">
+                <div class="table-responsive">
+                    <table class="table table-vcenter table-line card-table text-center table-mb tr_hover">
+                        <caption>상품정보</caption>
+                        <thead class="dark">
+                            <tr>
+                                <th>주문번호</th>
+                                <th>상품명</th>
+                                <th>결제금액</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>O000000002805472</td>
+                                <td>[한삼인]홍삼본연 50mL*40포_1세트 ※ [200세트] 한정수량 특가</td>
+                                <td class="text-end">18,000</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card table-mb-card mt-3">
+                <div class="table-responsive">
+                    <table class="table table-vcenter table-line card-table table-mb tr_hover">
+                        <caption>판매자정보</caption>
+                        <tbody>
+                            <tr>
+                                <th>판매자상호</th>
+                                <td>주식회사 돋움</td>
+                            </tr>
+                            <tr>
+                                <th>사업자등록번호</th>
+                                <td>123-12-12345</td>
+                            </tr>
+                            <tr>
+                                <th>대표자명</th>
+                                <td>홍길동</td>
+                            </tr>
+                            <tr>
+                                <th>판매자전화번호</th>
+                                <td>02-1234-1234</td>
+                            </tr>
+                            <tr>
+                                <th>사업장주소</th>
+                                <td>서울시 서초구 신반포로 194 고속버스터미널 신관</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card table-mb-card mt-3">
+                <div class="table-responsive">
+                    <table class="table table-vcenter table-line card-table text-center table-mb tr_hover">
+                        <caption>상품정보</caption>
+                        <thead class="dark">
+                            <tr>
+                                <th>주문번호</th>
+                                <th>상품명</th>
+                                <th>결제금액</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>O000000002805472</td>
+                                <td>[한삼인]홍삼본연 50mL*40포_1세트 ※ [200세트] 한정수량 특가</td>
+                                <td class="text-end">18,000</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card table-mb-card mt-3">
+                <div class="table-responsive">
+                    <table class="table table-vcenter table-line card-table table-mb tr_hover">
+                        <caption>판매자정보</caption>
+                        <tbody>
+                            <tr>
+                                <th>판매자상호</th>
+                                <td>주식회사 돋움</td>
+                            </tr>
+                            <tr>
+                                <th>사업자등록번호</th>
+                                <td>123-12-12345</td>
+                            </tr>
+                            <tr>
+                                <th>대표자명</th>
+                                <td>홍길동</td>
+                            </tr>
+                            <tr>
+                                <th>판매자전화번호</th>
+                                <td>02-1234-1234</td>
+                            </tr>
+                            <tr>
+                                <th>사업장주소</th>
+                                <td>서울시 서초구 신반포로 194 고속버스터미널 신관</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card table-mb-card mt-3">
+                <div class="table-responsive">
+                    <table class="table table-vcenter table-line card-table table-mb tr_hover">
+                        <caption>가맹점정보</caption>
+                        <tbody>
+                            <tr>
+                                <th>가맹점명</th>
+                                <td>(주)신세계</td>
+                            </tr>
+                            <tr>
+                                <th>사업자등록번호</th>
+                                <td>123-12-12345</td>
+                            </tr>
+                            <tr>
+                                <th>대표자명</th>
+                                <td>박주형</td>
+                            </tr>
+                            <tr>
+                                <th>고객센터</th>
+                                <td>02-3406-0000</td>
+                            </tr>
+                            <tr>
+                                <th>사업장주소</th>
+                                <td>서울시 서초구 신반포로 194 고속버스터미널 신관</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="list-btns justify-content-between mt-3 print_no">
+            <div>
+            </div>
+            <div>
+                <button type="button" class="btn btn-secondary" onclick="window.close();">닫기</button>
+            </div>
+        </div>
+    </div>
+    </form>
+</div>
+<script src="/resources/static/dist/js/tabler.min.js"></script>
+</body>
+</html>

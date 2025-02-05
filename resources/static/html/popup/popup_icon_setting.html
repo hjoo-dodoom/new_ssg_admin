@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=1400"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>신세계 관리자</title>
+    <!-- CSS files -->
+    <link href="/resources/static/dist/css/tabler.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/tabler-vendors.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/>
+    <link rel="shortcut icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <script src="/resources/static/dist/js/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/resources/static/dist/libs/litepicker/dist/litepicker.js?1674944402"></script>
+    <script src="/resources/static/dist/js/jquery.validate.js"></script>
+    <!-- Tabler Core -->
+    
+    <script src="/resources/static/dist/js/common.js"></script>
+    <style>
+    :root {
+        --theme-admin-type: #cf3f42;
+        /* #cf3f42 통합관리자 컬러 코드*/
+        /* #4b9b52 협력회사 컬러 코드 */
+        /* #214c9c 고객사 컬러 코드 */
+    }
+    </style>
+</head>
+<body>
+
+<div class="popup-wrapper">
+    <h2 class="popup-title">카테고리 아이콘</h2>
+
+    <div class="row">
+        <div class="content-area">
+            <div class="card table-mb-card">
+                <div class="table-responsive">
+                    <table class="table table-vcenter table-line card-table text-center table-mb">
+                        <colgroup>
+                            <col style="width:18%">
+                            <col>
+                            <col style="width:18%">
+                            <col style="width:18%">
+                            <col style="width:12%">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>코드<span class="badge_required">필수</span></th>
+                                <th>카테고리 아이콘<span class="badge_required">필수</span></th>
+                                <th>카테고리명<span class="badge_required">필수</span></th>
+                                <th>노출순서</th>
+                                <th>추가</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="input-group">
+                                        <input type="tel" class="form-control">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-group">
+                                        <input type="file" class="form-control" data-file-size="" onchange="updateFileSize(this);">
+                                        <span class="input-group-text text">0 MB</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control text-center">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input check-all" type="radio" value="1" name="cate_use_add">
+                                            <span class="form-check-label">노출안함</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input check-all" type="radio" value="2" name="cate_use_add">
+                                            <span class="form-check-label">노출함</span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-primary">
+                                        추가
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="content-area">
+            <div class="card table-mb-card">
+                <div class="table-responsive">
+                    <table class="table table-vcenter table-line card-table text-center table-mb">
+                        <colgroup>
+                            <col style="width:18%">
+                            <col>
+                            <col style="width:18%">
+                            <col style="width:18%">
+                            <col style="width:12%">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>코드</th>
+                                <th>카테고리 아이콘</th>
+                                <th>카테고리명</th>
+                                <th>노출유무</th>
+                                <th>수정/삭제</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="7" class="list-empty">
+                                    등록된 카테고리가 없습니다.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="input-group">
+                                        <input type="tel" class="form-control" value="0101" readonly>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-group">
+                                        <input type="file" class="form-control" style="display:none;" onchange="updateFileSize(this);">
+                                        <input type="text" class="form-control" value="aaaa.zip" data-file-size="370.4" readonly>
+                                        <button class="btn btn-xs btn-danger" type="button" onclick="removeUploadedFile(this)">기존파일 삭제</button>
+                                        <span class="input-group-text text">370.4MB</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control text-center">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input check-all" type="radio" value="1" name="cate_use_add1">
+                                            <span class="form-check-label">노출안함</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input check-all" type="radio" value="2" name="cate_use_add1">
+                                            <span class="form-check-label">노출함</span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-primary">수정</button>
+                                    <button type="button" class="btn btn-sm btn-warning">삭제</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="list-btns justify-content-between mt-3">
+            <div>
+            </div>
+            <div>
+                <button type="button" class="btn btn-secondary" onclick="window.close();">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/resources/static/dist/js/tabler.min.js"></script>
+
+
+<script>
+    let fileSizeTotal = 0;
+
+    function updateFileSize(elm) {
+        const file = elm.files[0];
+        if (file) {
+            const fileSize = file.size / (1024 * 1024); // MB 단위로 변환
+            elm.setAttribute('data-file-size', fileSize.toFixed(2));
+            const fileSizeText = `${fileSize.toFixed(2)} MB`;
+            const inputGroup = elm.closest('.input-group');
+            const fileSizeSpan = inputGroup.querySelector('.input-group-text');
+            fileSizeSpan.textContent = fileSizeText;
+            updateTotalFileSize();
+        }
+    }
+
+    function updateTotalFileSize() {
+        fileSizeTotal = 0;
+        document.querySelectorAll('#uploadFiles .input-group').forEach(function(item) {
+            let fileItem;
+            const inputFile = item.querySelector('input[type="file"]');
+            const inputText = item.querySelector('input[type="text"]');
+            if (inputText) {
+                fileItem = inputText;
+            } else if (inputFile) {
+                fileItem = inputFile;
+            };
+            const fileSize = parseFloat(fileItem.getAttribute('data-file-size')) || 0;
+            fileSizeTotal += fileSize;
+        });
+    }
+    window.onload = function() {
+        updateTotalFileSize();
+    };
+
+    //업로드 있었던 파일 삭제
+    function removeUploadedFile(button) {
+        const inputGroup = button.closest('.input-group');
+        const inputFile = inputGroup.querySelector('input[type="file"]');
+        const inputUploadedFileName = inputGroup.querySelector('input[type="text"]');
+        const fileSize = parseFloat(inputUploadedFileName.getAttribute('data-file-size'));
+        const fileSizeSpan = inputGroup.querySelector('.input-group-text');
+        fileSizeSpan.textContent = '0MB';
+        fileSizeTotal -= fileSize;
+        inputFile.style.display = 'block';
+        inputUploadedFileName.remove();
+        button.remove();
+        updateTotalFileSize();
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,770 @@
+
+<!DOCTYPE html>
+<html lang="ko" xml:lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+<meta charset="UTF-8">
+<meta name="author" content="">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<title>통합관리자 파일 목록</title>
+<!--[if lt IE 9]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<link href="/resources/static/dist/css/tabler.css" rel="stylesheet"/>
+<link href="/resources/static/dist/css/tabler-vendors.css" rel="stylesheet"/>
+<link href="/resources/static/dist/css/style.css" rel="stylesheet"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/>
+<link rel="shortcut icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+<script src="/resources/static/dist/js/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- Libs JS -->
+<script src="/resources/static/dist/libs/litepicker/dist/litepicker.js?1674944402"></script>
+<script src="/resources/static/dist/js/jquery.validate.js"></script>
+    <!-- Tabler Core -->
+
+<script src="/resources/static/dist/js/common.js"></script>
+<!-- code highlight -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-okaidia.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-go.min.js"></script>
+<script src="/resources/static/dist/js/jquery.validate.js"></script>
+<script src="/resources/static/dist/js/ckeditor/ckeditor.js"></script>
+
+
+<style type="text/css">
+    *{margin:0;padding:0;font-size:12px;}
+	#guide_wrap {padding:10px}
+	table {border-collapse:collapse;border-spacing:0;}
+	table th, strong {font-weight:normal;}
+	h1{
+		margin:0 0 10px 0;
+		text-align:center;
+		font-size:2.4em;
+		color:#000
+	}
+	a {text-decoration:none;}
+	a:hover {text-decoration:underline;}
+	table {
+		width:100%;
+		margin-top:5px;
+		border-top:2px solid #1e61a8;
+	}
+	table th, table td{
+		padding:5px 7px;
+		border-left:1px solid #ccc; border-bottom:1px solid #ccc;
+	}
+	table th:rowspan + th, table td:rowspan + td{border-left:1px solid #ccc;}
+	td.lineli, th.lineli {border-left:1px solid #ccc !important;}
+	table th:first-child, table td:first-child{border-left:0 none}
+	table thead th {
+		font-family:'ngB';
+		font-size:13px;
+		color:#000;
+		border-bottom:1px solid #ccc;
+		background-color:#f2f2f2;
+	}
+	.no, .date, .work {
+		text-align:center;
+		padding:5px 0
+	}
+
+	tr.on {background-color: #f5fed0}
+
+	.lastmdate {color: #1155CC;}
+	.stand_by {color:#777;}
+	.ing, .per_2 {color:#4848D4 !important;}
+	.curr_n, .per, .end {color:#ff0000 !important;}
+
+	.division td{border-top:2px solid #7e8e9e}
+	table tr.division:first-child td{border-top:0 none;}
+	td a {text-decoration: none;}
+	pre[class*=language-]{padding:0 20px;margin:0;border-radius:0;height:100%;}
+	.guide_links{display:flex;text-align:center;margin-bottom:20px;}
+	.guide_links a{flex:1 1;background-color: #ddd;color:#000;font-size:15px;font-weight:bold;padding:10px;}
+    .guide_links a + a{border-left:1px solid #ccc;}
+	.guide_links a.active{background-color:#000;color:#fff;}
+    .common_function{}
+    .common_function .box{display:flex;box-shadow: 0 0 10px rgba(0,0,0,.2);margin-top:20px;}
+    .common_function .box .dec{width:30%;background-color:#41734b;padding:20px;font-size:15px;color:#fff;}
+    .common_function .box .dec a{color:#3aff62;text-decoration: underline;}
+    .common_function .box .code{flex:1 1 auto;}
+    .common_function .box .preview{width:30%;background-color:#f1f1f1;padding:20px;}
+</style>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        Prism.highlightAll();
+    });
+    </script>
+</head>
+<body>
+<div id="wrap" class="wrap">
+<!-- eniter wrap -->
+<div id="guide_wrap">
+	<div class="guide_links">
+		<a href="/resources/static/html/index.html">통합관리자 파일 목록</a>
+		<a href="/resources/static/html/notice.html">개발참고사항</a>
+		<a href="/resources/static/html/guide_js.html" class="active">가이드(JS)</a>
+		<a href="/resources/static/html/form.html">Form html</a>
+	</div>
+	<div class="header">
+		<h1>가이드(JS)</h1>
+	</div>
+
+	<div class="common_function">
+        <div class="box">
+			<div class="dec">폼 검사</div>
+			<div class="code">
+				<pre>
+					<code class="language-go">
+// /resources/static/dist/js/jquery.validate.js
+$("#ptnMngMemberDetailForm").validate({
+    rules: {
+        mbst : {
+            required: true
+        },
+        mbname : {
+            required: true
+        }
+    },
+    messages: {
+        mbst: {
+            required: "아이디를 입력해주세요."
+        },
+        mbname : {
+            required: "쇼핑몰코드를 입력해주세요."
+        }
+    }
+});
+					</code>
+				</pre>
+			</div>
+			<div class="preview">
+                <form id="ptnMngMemberDetailForm" >
+                    <div class="list-btns justify-content-between align-items-center mb-3">
+                        <div>
+                            <button type="submit" class="btn btn-primary">등록</button>
+                        </div>
+                    </div>
+
+                    <div class="card form_area">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form_item">
+                                    <div class="subheader mb-1 required">고객사</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <div class="search_select">
+                                                <input type="hidden" name="client">
+                                                <button type="button" class="btn_select form-select text-start" onclick="searchSelectOpen(this);">전체</button>
+                                                <div class="search_select_options" style="display:none;">
+                                                    <input type="text" class="form-control" placeholder="검색어 입력" oninput="searchSelectSearch(this);">
+                                                    <div class="items">
+                                                        <div class="item"><a href="javascript:;" data-id="" class="active" onclick="searchSelectSelect(this);">전체</a></div>
+                                                        <div class="item"><a href="javascript:;" data-id="123" onclick="searchSelectSelect(this);">고객사1</a></div>
+                                                        <div class="item"><a href="javascript:;" data-id="655" onclick="searchSelectSelect(this);">고객사2</a></div>
+                                                        <div class="item"><a href="javascript:;" data-id="499" onclick="searchSelectSelect(this);">고객사3</a></div>
+                                                        <div class="item"><a href="javascript:;" data-id="233" onclick="searchSelectSelect(this);">시크릿스토어</a></div>
+                                                        <div class="item"><a href="javascript:;" data-id="125" onclick="searchSelectSelect(this);">에스씨케이컴퍼니</a></div>
+                                                        <div class="item"><a href="javascript:;" data-id="2356" onclick="searchSelectSelect(this);">강원랜드</a></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1 required">아이디</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" value="" name="mbst">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1 required">쇼핑몰코드</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" value="" name="mbname">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1 required">쇼핑몰코드</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <select name="qwe" id="qwe" class="form-select">
+                                                <option value="">선택하세요</option>
+                                                <option value="234">234</option>
+                                                <option value="567">567</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form_item">
+                                    <div class="subheader mb-1 required">에디터</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <textarea class="ckeditor" name="editor1"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="list-btns justify-content-between align-items-center mb-3" style="margin-top:300px">
+                        <div>
+                            <button type="submit" class="btn btn-primary">등록</button>
+                        </div>
+                    </div>
+                </form>
+                <script>
+                    $("#ptnMngMemberDetailForm").validate({
+                        rules: {
+                            client : {
+                                required: true
+                            },
+                            mbst : {
+                                required: true
+                            },
+                            mbname : {
+                                required: true
+                            },
+                            qwe : {
+                                required: true
+                            },
+                            editor1 : {
+                                required: true
+                            },
+                        },
+                        messages: {
+                            client: {
+                                required: "고객사를 선택해주세요."
+                            },
+                            mbst: {
+                                required: "아이디를 입력해주세요."
+                            },
+                            mbname : {
+                                required: "쇼핑몰코드를 입력해주세요."
+                            },
+                            qwe : {
+                                required: "쇼핑몰코드를 입력해주세요."
+                            },
+                            editor1 : {
+                                required: "쇼핑몰코드를 입력해주세요."
+                            }
+                        },
+                        focusInvalid: false,
+                        invalidHandler: function(form, validator) {
+                        if (!validator.numberOfInvalids()) return;
+
+                        var firstErrorElement = $(validator.errorList[0].element);
+                        
+                        if (!firstErrorElement.is(':visible')) {
+                            firstErrorElement = firstErrorElement.closest(':visible');
+                        }
+                        $('html, body').scrollTop(firstErrorElement.offset().top - 100);
+                        },
+                    });
+                </script>
+            </div>
+		</div>
+        <div class="box">
+			<div class="dec">로딩화면</div>
+			<div class="code">
+				<pre>
+					<code class="language-go">
+//common.js
+loading('show'); //로딩화면 show
+loading('hide'); //로딩화면 hide
+
+//ex
+function showLoading(){
+    loading('show');
+    //ajax db loading...
+    setTimeout(() => {
+        //loaded
+        loading('hide');
+    }, "3000");
+}
+					</code>
+				</pre>
+			</div>
+			<div class="preview">
+                <script>
+                    //ex)
+                    function showLoading(){
+                        loading('show');
+                        //ajax db loading...
+                        setTimeout(() => {
+                            loading('hide');
+                        }, "3000");
+                    }
+                </script>
+				<button type="button" onclick="showLoading();">로딩화면</button>
+			</div>
+		</div>
+        <div class="box">
+			<div class="dec">input 숫자만입력(type이 tel이면 자동으로 숫자만 입력함) /<br/>input 숫자만 & 천단위 콤마처리<br/>저장시 콤마빼서 저장해야함</div>
+			<div class="code">
+				<pre>
+					<code class="language-go">
+//common.js
+//숫자만입력
+&lt;input type="tel" value="100000"&gt;
+
+//숫자만입력 & 천단위 콤마
+&lt;input type="tel" value="100000" data-amount-comma=""&gt;
+					</code>
+				</pre>
+			</div>
+			<div class="preview">
+                숫자만<br/>
+				<input type="tel" value="100000"><br/><br/>
+                숫자&천단위 콤마<br/>
+                <input type="tel" value="100000" data-amount-comma="">
+			</div>
+		</div>
+        <div class="box">
+			<div class="dec">input 특수문자입력불가 data-input-texts</div>
+			<div class="code">
+				<pre>
+					<code class="language-go">
+//common.js
+//특수문자입력불가
+&lt;input type="text" data-input-texts&gt;
+					</code>
+				</pre>
+			</div>
+			<div class="preview">
+                특수문자입력불가<br/>
+				<input type="text" data-input-texts value="">
+			</div>
+		</div>
+
+        <div class="box">
+			<div class="dec">
+                검색가능한 셀렉트박스<br/>
+                선택한 아이템의 data-id값이 input[type="hidden"]에 담기고 버튼에 출력됨
+            </div>
+			<div class="code">
+				<pre>
+					<code class="language-go">
+//common.js
+&lt;div class="search_select"&gt;
+	&lt;input type="hidden"&gt;
+	&lt;button type="button" class="btn_select form-select text-start" onclick="searchSelectOpen(this);"&gt;선택&lt;/button&gt;
+	&lt;div class="search_select_options" style="display:none;"&gt;
+		&lt;input type="text" class="form-control" placeholder="검색어 입력" oninput="searchSelectSearch(this);"&gt;
+		&lt;div class="items"&gt;
+			&lt;div class="item"&gt;&lt;a href="javascript:;" data-id="" class="active" onclick="searchSelectSelect(this);"&gt;선택&lt;/a&gt;&lt;/div&gt;
+			&lt;div class="item"&gt;&lt;a href="javascript:;" data-id="125555" onclick="searchSelectSelect(this);"&gt;항목1&lt;/a&gt;&lt;/div&gt;
+			&lt;div class="item"&gt;&lt;a href="javascript:;" data-id="123" onclick="searchSelectSelect(this);"&gt;항목2&lt;/a&gt;&lt;/div&gt;
+			&lt;div class="item"&gt;&lt;a href="javascript:;" data-id="234" onclick="searchSelectSelect(this);"&gt;항목3&lt;/a&gt;&lt;/div&gt;
+			&lt;div class="item"&gt;&lt;a href="javascript:;" data-id="445" onclick="searchSelectSelect(this);"&gt;항목4&lt;/a&gt;&lt;/div&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+					</code>
+				</pre>
+			</div>
+			<div class="preview">
+                <div class="search_select">
+                    <input type="hidden">
+                    <button type="button" class="btn_select form-select text-start" onclick="searchSelectOpen(this);">선택</button>
+                    <div class="search_select_options" style="display:none;">
+                        <input type="text" class="form-control" placeholder="검색어 입력" oninput="searchSelectSearch(this);">
+                        <div class="items">
+                            <div class="item"><a href="javascript:;" data-id="" class="active" onclick="searchSelectSelect(this);">선택</a></div>
+                            <div class="item"><a href="javascript:;" data-id="125555" onclick="searchSelectSelect(this);">항목1</a></div>
+                            <div class="item"><a href="javascript:;" data-id="123" onclick="searchSelectSelect(this);">항목2</a></div>
+                            <div class="item"><a href="javascript:;" data-id="234" onclick="searchSelectSelect(this);">항목3</a></div>
+                            <div class="item"><a href="javascript:;" data-id="445" onclick="searchSelectSelect(this);">항목4</a></div>
+                        </div>
+                    </div>
+                </div>
+			</div>
+		</div>
+
+        <div class="box">
+			<div class="dec">
+                라디오 선택에 따른 show/hide<br/><br/>
+                input radio에 지정된 'radio-display'에 보여줄 element의 클래스명을 넣어 제어합니다.<br/>
+                페이지 로드시 작동, 라디오 변경시 작동.<br/>
+                input name이 같은것 끼리만 작동함<br/>
+                보여줄게 없으면 빈값
+            </div>
+			<div class="code">
+				<pre>
+					<code class="language-go">
+//common.js
+&lt;div&gt;
+    &lt;label&gt;
+        &lt;input type="radio" name="radio1" radio-display="mall_typeA mall_typeB mall_typeC" checked=""&gt;
+        &lt;span&gt;폐쇄몰/포인트몰/사은품몰&lt;/span&gt;
+    &lt;/label&gt;
+    &lt;label&gt;
+        &lt;input type="radio" name="radio1" radio-display="mall_typeA" value="1"&gt;
+        &lt;span&gt;폐쇄몰&lt;/span&gt;
+    &lt;/label&gt;
+    &lt;label&gt;
+        &lt;input type="radio" name="radio1" radio-display="mall_typeB" value="2"&gt;
+        &lt;span&gt;포인트몰&lt;/span&gt;
+    &lt;/label&gt;
+    &lt;label&gt;
+        &lt;input type="radio" name="radio1" radio-display="mall_typeC" value="3"&gt;
+        &lt;span&gt;사은품몰&lt;/span&gt;
+    &lt;/label&gt;
+    &lt;label&gt;
+        &lt;input type="radio" name="radio1" radio-display="" value="4"&gt;
+        &lt;span&gt;없음&lt;/span&gt;
+    &lt;/label&gt;
+&lt;/div&gt;
+&lt;div class="mall_typeA" style="border:1px solid red;padding:10px;margin:5px 0;display:none;"&gt;
+    폐쇄몰
+&lt;/div&gt;
+&lt;div class="mall_typeB" style="border:1px solid green;padding:10px;margin:5px 0;display:none;"&gt;
+    포인트몰
+&lt;/div&gt;
+&lt;div class="mall_typeC" style="border:1px solid blue;padding:10px;margin:5px 0;display:none;"&gt;
+    사은품몰
+&lt;/div&gt;
+					</code>
+				</pre>
+			</div>
+			<div class="preview">
+				<div>
+                    <label class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="radio1" radio-display="mall_typeA mall_typeB mall_typeC" checked="">
+                        <span class="form-check-label">폐쇄몰/포인트몰/사은품몰</span>
+                    </label>
+                    <label class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="radio1" radio-display="mall_typeA" value="1">
+                        <span class="form-check-label">폐쇄몰</span>
+                    </label>
+                    <label class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="radio1" radio-display="mall_typeB" value="2">
+                        <span class="form-check-label">포인트몰</span>
+                    </label>
+                    <label class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="radio1" radio-display="mall_typeC" value="3">
+                        <span class="form-check-label">사은품몰</span>
+                    </label>
+                    <label class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="radio1" radio-display="" value="4">
+                        <span class="form-check-label">없음</span>
+                    </label>
+                </div>
+                <div class="mall_typeA" style="border:1px solid red;padding:10px;margin:5px 0;display:none;">
+                    폐쇄몰
+                </div>
+                <div class="mall_typeB" style="border:1px solid green;padding:10px;margin:5px 0;display:none;">
+                    포인트몰
+                </div>
+                <div class="mall_typeC" style="border:1px solid blue;padding:10px;margin:5px 0;display:none;">
+                    사은품몰
+                </div>
+
+                <div style="margin-top:30px;">
+                    <label class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="radio2" radio-display="home_typeA home_typeB home_typeC">
+                        <span class="form-check-label">집/회사/가게</span>
+                    </label>
+                    <label class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="radio2" radio-display="home_typeA" value="1">
+                        <span class="form-check-label">집</span>
+                    </label>
+                    <label class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="radio2" radio-display="home_typeB" value="2" checked="">
+                        <span class="form-check-label">회사</span>
+                    </label>
+                    <label class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="radio2" radio-display="home_typeC" value="3">
+                        <span class="form-check-label">가게</span>
+                    </label>
+                </div>
+                <div class="home_typeA" style="border:1px solid red;padding:10px;margin:5px 0;display:none;">
+                    집
+                </div>
+                <div class="home_typeB" style="border:1px solid green;padding:10px;margin:5px 0;display:none;">
+                    회사
+                </div>
+                <div class="home_typeC" style="border:1px solid blue;padding:10px;margin:5px 0;display:none;">
+                    가게
+                </div>
+			</div>
+		</div>
+
+        <div class="box">
+			<div class="dec">
+                셀렉트 선택에 따른 show/hide<br/><br/>
+                select option에 지정된 'select-display'에 보여줄 element의 클래스명을 넣어 제어합니다.<br/>
+                페이지 로드시 작동, 셀렉트박스 변경시 작동.<br/>
+                하나의 select안에 옵션 끼리만 작동함<br/>
+                보여줄게 없으면 빈값
+            </div>
+			<div class="code">
+				<pre>
+					<code class="language-go">
+//common.js
+&lt;select class="form-select select-display"&gt;
+    &lt;option value="" select-display=""&gt;선택&lt;/option&gt;
+    &lt;option value="1" select-display="site_type1 site_type2"&gt;폐쇄형&&오픈형&lt;/option&gt;
+    &lt;option value="1" select-display="site_type1"&gt;폐쇄형&lt;/option&gt;
+    &lt;option value="2" select-display="site_type2"&gt;오픈형&lt;/option&gt;
+    &lt;option value="3" select-display="site_type3"&gt;사은품몰&lt;/option&gt;
+    &lt;option value="4" select-display="site_type4"&gt;비회원구분&lt;/option&gt;
+&lt;/select&gt;
+&lt;div class="site_type1" style="display:none;border: 1px solid red; padding: 10px; margin: 5px 0px;"&gt;폐쇄형&lt;/div&gt;
+&lt;div class="site_type2" style="display:none;border: 1px solid blue; padding: 10px; margin: 5px 0px;"&gt;오픈형&lt;/div&gt;
+&lt;div class="site_type3" style="display:none;border: 1px solid green; padding: 10px; margin: 5px 0px;"&gt;사은품몰&lt;/div&gt;
+&lt;div class="site_type4" style="display:none;border: 1px solid black; padding: 10px; margin: 5px 0px;"&gt;비회원구분&lt;/div&gt;
+					</code>
+				</pre>
+			</div>
+			<div class="preview">
+				<select class="form-select select-display">
+                    <option value="" select-display="">선택</option>
+                    <option value="1" select-display="site_type1 site_type2">폐쇄형&&오픈형</option>
+                    <option value="1" select-display="site_type1">폐쇄형</option>
+                    <option value="2" select-display="site_type2">오픈형</option>
+                    <option value="3" select-display="site_type3">사은품몰</option>
+                    <option value="4" select-display="site_type4">비회원구분</option>
+                </select>
+                <div class="site_type1" style="display:none;border: 1px solid red; padding: 10px; margin: 5px 0px;">폐쇄형</div>
+                <div class="site_type2" style="display:none;border: 1px solid blue; padding: 10px; margin: 5px 0px;">오픈형</div>
+                <div class="site_type3" style="display:none;border: 1px solid green; padding: 10px; margin: 5px 0px;">사은품몰</div>
+                <div class="site_type4" style="display:none;border: 1px solid black; padding: 10px; margin: 5px 0px;">비회원구분</div>
+			</div>
+		</div>
+
+        <div class="box">
+			<div class="dec">
+                커스텀 셀렉트 선택에 따른 show/hide<br/><br/>
+                .items a 지정된 'select-display'에 보여줄 element의 클래스명을 넣어 제어합니다.<br/>
+                페이지 로드시 작동, 커스텀 셀렉트 변경시 작동.<br/>
+                하나의 .items안에 a 끼리만 작동함<br/>
+                보여줄게 없으면 빈값
+            </div>
+			<div class="code">
+				<pre>
+					<code class="language-go">
+//common.js
+&lt;div class="search_select select-display"&gt;
+	&lt;input type="hidden"&gt;
+	&lt;button type="button" class="btn_select form-select text-start" 
+    onclick="searchSelectOpen(this);"&gt;선택&lt;/button&gt;
+	&lt;div class="search_select_options" style="display:none;"&gt;
+		&lt;input type="text" class="form-control" placeholder="검색어 입력" 
+        oninput="searchSelectSearch(this);"&gt;
+		&lt;div class="items"&gt;
+			&lt;div class="item"&gt;&lt;a href="javascript:;" data-id="" 
+            select-display="" class="active" onclick="searchSelectSelect(this);"&gt;선택&lt;/a&gt;&lt;/div&gt;
+			&lt;div class="item"&gt;&lt;a href="javascript:;" data-id="125555" 
+            select-display="custom_select1 custom_select2" onclick="searchSelectSelect(this);"&gt;폐쇄형&&오픈형&lt;/a&gt;&lt;/div&gt;
+			&lt;div class="item"&gt;&lt;a href="javascript:;" data-id="123" 
+            select-display="custom_select1" onclick="searchSelectSelect(this);"&gt;폐쇄형&lt;/a&gt;&lt;/div&gt;
+			&lt;div class="item"&gt;&lt;a href="javascript:;" data-id="234" 
+            select-display="custom_select2" onclick="searchSelectSelect(this);"&gt;오픈형&lt;/a&gt;&lt;/div&gt;
+			&lt;div class="item"&gt;&lt;a href="javascript:;" data-id="445" 
+            select-display="custom_select3" onclick="searchSelectSelect(this);"&gt;사은품몰&lt;/a&gt;&lt;/div&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="custom_select1" style="display:none;border: 1px solid red; padding: 10px; margin: 5px 0px;"&gt;폐쇄형&lt;/div&gt;
+&lt;div class="custom_select2" style="display:none;border: 1px solid blue; padding: 10px; margin: 5px 0px;"&gt;오픈형&lt;/div&gt;
+&lt;div class="custom_select3" style="display:none;border: 1px solid green; padding: 10px; margin: 5px 0px;"&gt;사은품몰&lt;/div&gt;
+					</code>
+				</pre>
+			</div>
+			<div class="preview">
+                <div class="search_select select-display">
+                    <input type="hidden">
+                    <button type="button" class="btn_select form-select text-start" onclick="searchSelectOpen(this);">선택</button>
+                    <div class="search_select_options" style="display:none;">
+                        <input type="text" class="form-control" placeholder="검색어 입력" oninput="searchSelectSearch(this);">
+                        <div class="items">
+                            <div class="item"><a href="javascript:;" data-id="" select-display="" class="active" onclick="searchSelectSelect(this);">선택</a></div>
+                            <div class="item"><a href="javascript:;" data-id="125555" select-display="custom_select1 custom_select2" onclick="searchSelectSelect(this);">폐쇄형&&오픈형</a></div>
+                            <div class="item"><a href="javascript:;" data-id="123" select-display="custom_select1" onclick="searchSelectSelect(this);">폐쇄형</a></div>
+                            <div class="item"><a href="javascript:;" data-id="234" select-display="custom_select2" onclick="searchSelectSelect(this);">오픈형</a></div>
+                            <div class="item"><a href="javascript:;" data-id="445" select-display="custom_select3" onclick="searchSelectSelect(this);">사은품몰</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="custom_select1" style="display:none;border: 1px solid red; padding: 10px; margin: 5px 0px;">폐쇄형</div>
+                <div class="custom_select2" style="display:none;border: 1px solid blue; padding: 10px; margin: 5px 0px;">오픈형</div>
+                <div class="custom_select3" style="display:none;border: 1px solid green; padding: 10px; margin: 5px 0px;">사은품몰</div>
+			</div>
+		</div>
+
+
+        <div class="box">
+			<div class="dec">
+                체크 전체 선택<br/>
+                전체 선택 그룹을 .label-control로 묶고 
+                전체 선택할 input[type="checkbox"]에 check-all 클래스 붙여줍니다.
+            </div>
+			<div class="code">
+				<pre>
+					<code class="language-go">
+//common.js
+&lt;div class="label-control"&gt;
+    &lt;label class="form-check"&gt;
+        &lt;input class="form-check-input check-all" type="checkbox"&gt;
+        &lt;span class="form-check-label"&gt;전체&lt;/span&gt;
+    &lt;/label&gt;
+    &lt;label class="form-check"&gt;
+        &lt;input class="form-check-input" type="checkbox"&gt;
+        &lt;span class="form-check-label"&gt;체크1&lt;/span&gt;
+    &lt;/label&gt;
+    &lt;label class="form-check"&gt;
+        &lt;input class="form-check-input" type="checkbox"&gt;
+        &lt;span class="form-check-label"&gt;체크2&lt;/span&gt;
+    &lt;/label&gt;
+    &lt;label class="form-check"&gt;
+        &lt;input class="form-check-input" type="checkbox"&gt;
+        &lt;span class="form-check-label"&gt;체크3&lt;/span&gt;
+    &lt;/label&gt;
+&lt;/div&gt;
+					</code>
+				</pre>
+			</div>
+			<div class="preview">
+				<div class="label-control">
+                    <label class="form-check">
+                        <input class="form-check-input check-all" type="checkbox">
+                        <span class="form-check-label">전체</span>
+                    </label>
+                    <label class="form-check">
+                        <input class="form-check-input" type="checkbox">
+                        <span class="form-check-label">체크1</span>
+                    </label>
+                    <label class="form-check">
+                        <input class="form-check-input" type="checkbox">
+                        <span class="form-check-label">체크2</span>
+                    </label>
+                    <label class="form-check">
+                        <input class="form-check-input" type="checkbox">
+                        <span class="form-check-label">체크3</span>
+                    </label>
+                </div>
+			</div>
+		</div>
+
+        <div class="box">
+			<div class="dec">
+                체크 전체 선택 위에 또 전체가 있는경우<br/>
+                상위 그룹 element에 label-control-parent 클래스를 추가로 붙여주고
+                상위 그룹 전체 체크에 check-all-parent를 추가로 붙여줍니다.<br/><br/>
+
+                적용된 페이지: <br/>상품 카테고리 설정 <a href="javascript:;"
+                onclick="windowPopup('/resources/static/html/popup/category_set_pop.html', '900', '650')">category_set_pop.html</a>
+            </div>
+			<div class="code">
+				<pre>
+					<code class="language-go">
+//common.js
+&lt;div class="label-control label-control-parent" style="padding:10px;border:1px solid red;"&gt;
+    &lt;label class="form-check"&gt;
+        &lt;input class="form-check-input check-all check-all-parent" type="checkbox"&gt;
+        &lt;span class="form-check-label"&gt;전체&lt;/span&gt;
+    &lt;/label&gt;
+    &lt;div class="label-control" style="padding:10px;border:1px solid blue;margin-top:10px;"&gt;
+        &lt;label class="form-check"&gt;
+            &lt;input class="form-check-input check-all" type="checkbox"&gt;
+            &lt;span class="form-check-label"&gt;전체&lt;/span&gt;
+        &lt;/label&gt;
+        &lt;label class="form-check"&gt;
+            &lt;input class="form-check-input" type="checkbox"&gt;
+            &lt;span class="form-check-label"&gt;체크1&lt;/span&gt;
+        &lt;/label&gt;
+        &lt;label class="form-check"&gt;
+            &lt;input class="form-check-input" type="checkbox"&gt;
+            &lt;span class="form-check-label"&gt;체크2&lt;/span&gt;
+        &lt;/label&gt;
+        &lt;label class="form-check"&gt;
+            &lt;input class="form-check-input" type="checkbox"&gt;
+            &lt;span class="form-check-label"&gt;체크3&lt;/span&gt;
+        &lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div class="label-control" style="padding:10px;border:1px solid green;margin-top:10px;"&gt;
+        &lt;label class="form-check"&gt;
+            &lt;input class="form-check-input check-all" type="checkbox"&gt;
+            &lt;span class="form-check-label"&gt;전체&lt;/span&gt;
+        &lt;/label&gt;
+        &lt;label class="form-check"&gt;
+            &lt;input class="form-check-input" type="checkbox"&gt;
+            &lt;span class="form-check-label"&gt;체크1&lt;/span&gt;
+        &lt;/label&gt;
+        &lt;label class="form-check"&gt;
+            &lt;input class="form-check-input" type="checkbox"&gt;
+            &lt;span class="form-check-label"&gt;체크2&lt;/span&gt;
+        &lt;/label&gt;
+        &lt;label class="form-check"&gt;
+            &lt;input class="form-check-input" type="checkbox"&gt;
+            &lt;span class="form-check-label"&gt;체크3&lt;/span&gt;
+        &lt;/label&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+					</code>
+				</pre>
+			</div>
+			<div class="preview">
+				<div class="label-control label-control-parent" style="padding:10px;border:1px solid red;">
+                    <label class="form-check">
+                        <input class="form-check-input check-all check-all-parent" type="checkbox">
+                        <span class="form-check-label">전체</span>
+                    </label>
+                    <div class="label-control" style="padding:10px;border:1px solid blue;margin-top:10px;">
+                        <label class="form-check">
+                            <input class="form-check-input check-all" type="checkbox">
+                            <span class="form-check-label">전체</span>
+                        </label>
+                        <label class="form-check">
+                            <input class="form-check-input" type="checkbox">
+                            <span class="form-check-label">체크1</span>
+                        </label>
+                        <label class="form-check">
+                            <input class="form-check-input" type="checkbox">
+                            <span class="form-check-label">체크2</span>
+                        </label>
+                        <label class="form-check">
+                            <input class="form-check-input" type="checkbox">
+                            <span class="form-check-label">체크3</span>
+                        </label>
+                    </div>
+                    <div class="label-control" style="padding:10px;border:1px solid green;margin-top:10px;">
+                        <label class="form-check">
+                            <input class="form-check-input check-all" type="checkbox">
+                            <span class="form-check-label">전체</span>
+                        </label>
+                        <label class="form-check">
+                            <input class="form-check-input" type="checkbox">
+                            <span class="form-check-label">체크1</span>
+                        </label>
+                        <label class="form-check">
+                            <input class="form-check-input" type="checkbox">
+                            <span class="form-check-label">체크2</span>
+                        </label>
+                        <label class="form-check">
+                            <input class="form-check-input" type="checkbox">
+                            <span class="form-check-label">체크3</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+		</div>
+
+	</div>
+</div>
+<script>
+
+</script>
+
+</div><!-- //wrap -->
+</body>
+</html>

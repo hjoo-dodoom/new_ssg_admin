@@ -1,0 +1,1005 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=1400"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>신세계 관리자</title>
+    <!-- CSS files -->
+    <link href="/resources/static/dist/css/tabler.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/tabler-vendors.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/>
+    <link rel="shortcut icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <script src="/resources/static/dist/js/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/resources/static/dist/libs/litepicker/dist/litepicker.js?1674944402"></script>
+    <script src="/resources/static/dist/js/jquery.validate.js"></script>
+    <!-- Tabler Core -->
+    
+    <script src="/resources/static/dist/js/common.js"></script>
+    <style>
+    :root {
+        --theme-admin-type: #cf3f42;
+        /* #cf3f42 통합관리자 컬러 코드*/
+        /* #4b9b52 협력회사 컬러 코드 */
+        /* #214c9c 고객사 컬러 코드 */
+    }
+    </style>
+</head>
+<body>
+<aside id="header" class="navbar navbar-vertical navbar-expand-lg header_left"></aside>
+<script>
+    //html include
+    function includeFile(path, targetId) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', path, true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById(targetId).innerHTML = xhr.responseText;
+        }
+    };
+    xhr.send();
+    }
+    var includePath = "/resources/static/layout/header.html";
+    includeFile(includePath, 'header');
+</script>
+
+<div class="page-wrapper">
+    <!-- 공통영역2 -->
+    <div class="member_info">
+        <div class="info">
+            <span>관리권한 : 최상위관리자</span>
+            <!-- 통합관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <!-- 협력관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <!-- 고객사관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <span class="login_session">로그인 유지시간 <strong>30:00</strong> <button type="button" class="btn btn-xs btn-primary">연장</button></span>
+            <button type="button" class="btn btn-xs btn-secondary">관리자 매뉴얼 보기</button><!-- 공통 -->
+            <button type="button" class="btn btn-xs btn-secondary">기본양식다운로드</button><!-- 통합,협력사만 -->
+            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/admin_modify_pop.html', '900', '640')">관리자정보수정</button><!-- 공통 -->
+            <button type="button" class="btn btn-xs btn-secondary">보안체크</button><!-- 협력사만 -->
+            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/terms_pop.html', '600', '540')">이용약관</button><!-- 협력사만 -->
+        </div>
+        <div>
+            <a href="javascript:;" class="logout">홍길동(admin_01)님 로그아웃</a>
+            <a href="javascript:;" class="home">홈으로</a>
+        </div>
+    </div>
+
+    <!-- 페이지 히스토리 탭 -->
+    <div class="page-history">
+        <div class="history_toggle">
+            <label class="form-check form-switch">
+                <span class="form-check-label">History</span>
+                <input id="historyUse" class="form-check-input" type="checkbox" >
+            </label>
+        </div>
+        <button class="close_all" type="button" title="히스토리 모두 삭제" onclick="historyRemoveAll();">히스토리 모두 삭제</button>
+    </div>
+    <!-- //공통영역2 -->
+
+    <div class="page-header d-print-none">
+        <div class="container-xl">
+            <div class="row g-2 align-items-center">
+                <div class="col">
+                    <!-- Page pre-title -->
+                    <div class="page-pretitle">
+                        홈 > 오프라인주문 > 주문목록 > 오프라인주문조회 > 주문상세
+                    </div>
+                    <h2 class="page-title">
+                        주문상세(체결번호출력)
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    </script>
+    <!-- Page body -->
+    <div class="page-body">
+        <div class="container-xl form-container grid_grid4">
+            <div class="list-btns justify-content-between align-items-center mb-3">
+                <div>
+                    <div class="display_type mb-0">
+                        <button type="button" class="grid4 active" title="폼 그리드 1x4">폼 그리드 1x4</button>
+                        <button type="button" class="grid3 " title="폼 그리드 1x3">폼 그리드 1x3</button>
+                        <button type="button" class="grid2" title="폼 그리드 1x2">폼 그리드 1x2</button>
+                    </div>
+                </div>
+                <div>
+                    <a href="/resources/static/html/order/order_list_all.html" class="btn btn-secondary">목록</a>
+                </div>
+            </div>
+
+            <div class="fixed_taps row mb-3">
+                <div class="col">
+                    <a href="#section1" class="btn text-light w-100 bg-primary">
+                        배송정보
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="#section2" class="btn text-light w-100 bg-secondary">
+                        상품정보
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="#section4" class="btn text-light w-100 bg-secondary">
+                        결체/취소/반품/교환
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="#section5" class="btn text-light w-100 bg-secondary">
+                        상담메모
+                    </a>
+                </div>
+                <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    const sections = document.querySelectorAll('div[id^="section"]');
+                    const navLinks = document.querySelectorAll('.fixed_taps .col a');
+
+                    const observerOptions = {
+                        root: null,
+                        rootMargin: '0px',
+                        threshold: 0.5
+                    };
+
+                    const observerCallback = (entries, observer) => {
+                        entries.forEach(entry => {
+                            const id = entry.target.getAttribute('id');
+                            const navLink = document.querySelector(`.fixed_taps .col a[href="#${id}"]`);
+                            console.log(id)
+                            if (navLink) {
+                                if (entry.isIntersecting) {
+                                    navLink.classList.add('bg-primary');
+                                    navLink.classList.remove('bg-secondary');
+                                } else {
+                                    navLink.classList.remove('bg-primary');
+                                    navLink.classList.add('bg-secondary');
+                                }
+                            }
+                        });
+                    };
+
+                    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+                    sections.forEach(section => {
+                        observer.observe(section);
+                    });
+                });
+                </script>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="table-responsive">
+                        <table class="table table-vcenter table-line card-table text-center table-mb">
+                            <thead class="dark">
+                                <tr>
+                                    <th>고객사</th>
+                                    <th>Index Key</th>
+                                    <th>주문일</th>
+                                    <th>주문번호</th>
+                                    <th>배송번호</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>시크릿스토어</td>
+                                    <td>170</td>
+                                    <td>2024-06-14 11:11:11</td>
+                                    <td>K0123131230</td>
+                                    <td>O001023123123</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="section1" class="col-12">
+                    <form>
+                    <div class="card form_area">
+                        <div class="card-header"><h3 class="card-title">주문자 정보 / 아이디: user_id</h3></div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form_item">
+                                    <div class="subheader mb-1">이름</div>
+                                    <div class="subcontent">
+                                        <input type="text" class="form-control" value="홍길동">
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">휴대폰번호</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <input type="tel" class="form-control" value="01012341234" maxlength="11">
+                                        </div>
+                                        <small class="form-hint">-없이 숫자만 입력</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-header"><h3 class="card-title">받는사람정보</h3></div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form_item">
+                                    <div class="subheader mb-1">이름</div>
+                                    <div class="subcontent">
+                                        <input type="text" class="form-control" value="홍길동">
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">전화번호</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <input type="tel" class="form-control" value="">
+                                        </div>
+                                        <small class="form-hint">-없이 숫자만 입력</small>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">가상전화번호</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <input type="tel" class="form-control" value="">
+                                        </div>
+                                        <small class="form-hint">-없이 숫자만 입력</small>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">휴대폰번호</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <input type="tel" class="form-control" value="" maxlength="11">
+                                        </div>
+                                        <small class="form-hint">-없이 숫자만 입력</small>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">가상휴대폰번호</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <input type="tel" class="form-control" value="" maxlength="11">
+                                        </div>
+                                        <small class="form-hint">-없이 숫자만 입력</small>
+                                    </div>
+                                </div>
+                                <div class="form_item size_lg">
+                                    <div class="subheader mb-1">주소</div>
+                                    <div class="subcontent" id="adsInput1">
+                                        <div class="input-group w-50">
+                                            <input type="text" name="i_post_code1" class="form-control i_post_code" value="12345" placeholder="우편번호" readonly="" onclick="execDaumPostcode('adsInput1')">
+                                            <button class="btn bg-secondary text-light btn-sm" type="button" onclick="execDaumPostcode('adsInput1')">주소검색</button>
+                                        </div>
+                                        <div class="input-group">
+                                            <input type="text" name="i_address_basic1" class="form-control i_address_basic" value="서울시 서초구 신반포로194(반포동)" placeholder="입력주소" readonly="" onclick="execDaumPostcode('adsInput1')">
+                                        </div>
+                                        <div class="input-group">
+                                            <input type="text" name="i_address_detail1" class="form-control i_address_detail" value="신세계백화점b1층" placeholder="상세주소">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item size_lg">
+                                    <div class="subheader mb-1">배송메시지</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <textarea name="" id="" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">감사카드(명)</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <small class="form-hint mt-1"><span class="text-indigo">! 주의 : 정보수정 시 주문번호 내 정보가 일괄 수정됩니다.</span></small>
+                                </div>
+                                <div class="col-auto">
+                                    <button type="submit" class="btn btn-primary">정보수정</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+
+                <div class="col-12">
+                    <form>
+                    <div class="card form_area">
+                    <div class="card-header"><h3 class="card-title">기타정보</h3></div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form_item">
+                                    <div class="subheader mb-1">통관번호</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" value="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">1차구분</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" value="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">2차구분</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" value="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">정책번호</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" value="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">자사발주여부</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" value="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">과세구분</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <select name="" id="" class="form-select">
+                                                <option value="">선택</option>
+                                                <option value="">과세</option>
+                                                <option value="">면세</option>
+                                                <option value="">유가증권</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">배송비</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <input type="tel" class="form-control" value="" data-amount-comma>
+                                            <span class="input-group-text text">개</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <small class="form-hint mt-1"><span class="text-indigo">! 주의 : 정보수정 시 주문번호 내 정보가 일괄 수정됩니다.</span></small>
+                                </div>
+                                <div class="col-auto">
+                                    <button type="submit" class="btn btn-primary">정보수정</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+
+                <div id="section2" class="col-12">
+                    <form action="">
+                    <div class="card form_area">
+                        <div class="card-header"><h3 class="card-title">상품정보</h3></div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-vcenter table-line card-table label-control text-center table-mb">
+                                    <colgroup>
+                                        <col>
+                                        <col>
+                                        <col>
+                                        <col>
+                                        <col>
+                                        <col>
+                                        <col style="width:140px;">
+                                        <col style="width:140px;">
+                                        <col style="width:80px;">
+                                    </colgroup>
+                                    <thead class="dark">
+                                        <tr>
+                                            <th>상품코드</th>
+                                            <th>상품명</th>
+                                            <th>상품옵션</th>
+                                            <th>박스선택옵션</th>
+                                            <th>수량</th>
+                                            <th>매입금액</th>
+                                            <th>송장번호</th>
+                                            <th>주문상태</th>
+                                            <th>수정</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>WP2616497484</td>
+                                            <td class="text-start">
+                                                바삭바삭밥도둑명풍 완도김
+                                            </td>
+                                            <td>OAT / 160</td>
+                                            <td></td>
+                                            <td>1개</td>
+                                            <td class="text-start">103,500</td>
+                                            <td>
+                                                <select class="form-select w-100">
+                                                    <option value="">택배사선택</option>
+                                                </select>
+                                                <input type="text" class="form-control mt-1 w-100">
+                                            </td>
+                                            <td>
+                                                <select class="form-select w-100">
+                                                    <option value="" selected>주문접수</option>
+                                                    <option value="">발송완료</option>
+                                                    <option value="">배송준비중</option>
+                                                    <option value="">배송완료</option>
+                                                    <option value="">배송중</option>
+                                                    <option value="">주문취소</option>
+                                                    <option value="">반품신청</option>
+                                                    <option value="">반품철회</option>
+                                                    <option value="">반품거부</option>
+                                                    <option value="">반품거부승인</option>
+                                                    <option value="">반품거부불가</option>
+                                                    <option value="">반품진행</option>
+                                                    <option value="">반품완료</option>
+                                                    <option value="">교환신청</option>
+                                                    <option value="">교환철회</option>
+                                                    <option value="">교환거부</option>
+                                                    <option value="">교환거부승인</option>
+                                                    <option value="">교환거부불가</option>
+                                                    <option value="">교환진행</option>
+                                                    <option value="">교환완료</option>
+                                                </select>
+                                                <input type="text" class="form-control mt-1 w-100">
+                                                <button 
+                                                    type="button" 
+                                                    class="btn btn-sm btn-outline-dark mt-1 w-100"
+                                                >
+                                                    배송조회
+                                                </button>
+                                                <button 
+                                                    type="button" 
+                                                    class="btn btn-sm btn-outline-dark mt-1 w-100"
+                                                    onclick="windowPopup('/resources/static/html/popup/delivery_number_add_pop.html', '850', '550')"
+                                                >
+                                                    추가송장(2)
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-sm btn-secondary mt-1 w-100">수정</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+
+                <div class="col-12">
+                    <form>
+                    <div class="card form_area">
+                    <div class="card-header"><h3 class="card-title">취소/교환/반품</h3></div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form_item">
+                                    <div class="subheader mb-1">반품/교환</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <select name="" id="" class="form-select">
+                                                <option value="">선택</option>
+                                                <option value="">반품접수</option>
+                                                <option value="">교환접수</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">사유</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <textarea name="" id="" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <small class="form-hint mt-1"><span class="text-indigo">! 주의 : 정보수정 시 주문번호 내 정보가 일괄 수정됩니다.</span></small>
+                                </div>
+                                <div class="col-auto">
+                                    <button type="submit" class="btn btn-primary">처리완료</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+
+                <div id="section4" class="col-12">
+                    <div class="card form_area">
+                        <div class="card-header"><h3 class="card-title">취소 정보</h3></div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-vcenter table-line card-table text-center table-mb">
+                                    <thead class="dark">
+                                        <tr>
+                                            <th>상태</th>
+                                            <th>취소사유</th>
+                                            <th>취소일시</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>상태값</td>
+                                            <td>취소사유</td>
+                                            <td>2024-11-14</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="9999">취소처리된 상품이 없습니다.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="card form_area mt-3">
+                        <div class="card-header"><h3 class="card-title">반품/교환 정보</h3></div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-vcenter table-line card-table text-center table-mb">
+                                    <thead class="dark">
+                                        <tr>
+                                            <th>상태</th>
+                                            <th>반품/교환 사유</th>
+                                            <th>신청일시</th>
+                                            <th>취소일시</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>상태값</td>
+                                            <td>취소사유</td>
+                                            <td>2024-11-14</td>
+                                            <td>2024-11-14</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="9999">반품/교환 접수 및 완료된 상품이 없습니다.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <form>
+                    <div class="card form_area">
+                    <div class="card-header"><h3 class="card-title">결제 정보</h3></div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form_item">
+                                    <div class="subheader mb-1">총 결제금액</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <input type="tel" class="form-control" value="" data-amount-comma="">
+                                            <span class="input-group-text text">원</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <small class="form-hint mt-1"><span class="text-indigo">! 주의 : 정보수정 시 주문번호 내 정보가 일괄 수정됩니다.</span></small>
+                                </div>
+                                <div class="col-auto">
+                                    <button type="submit" class="btn btn-primary">정보수정</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+
+                <div id="section5" class="col-12">
+                    <div class="card form_area">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form_item size_lg">
+                                    <form action="">
+                                    <div class="list-btns justify-content-between mb-2">
+                                        <div>
+                                            <button type="button" class="btn btn-secondary">등록+</button>
+                                        </div>
+                                        <div><h3>신세계전용 상담메모</h3></div>
+                                        <div>
+                                            <button type="submit" class="btn btn-primary">저장</button>
+                                        </div>
+                                    </div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <!-- 메모 id -->
+                                            <input type="hidden" id="memoWriteId1">
+                                            <!-- 메모 내용 -->
+                                            <textarea name="" id="memoTextarea1" class="form-control">메모내용 예제입니다.메모내용 예제입니다.</textarea>
+                                        </div>
+                                    </div>
+                                    </form>
+                                    <div class="table-responsive">
+                                        <table class="table table-vcenter table-line card-table text-center table-mb tr_hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>메모</th>
+                                                    <th>작성자</th>
+                                                    <th>수정자</th>
+                                                    <th>작성일(최종수정일)</th>
+                                                    <th>삭제</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="5" class="list-empty">
+                                                        등록된 항목이 없습니다.
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><a href="javascript:;" class="list_link" data-write-id="1" onclick="insertMemoForm(this,1);">메모내용메모내용메모내용메모내용⋯</a></td>
+                                                    <td>abcd1234</td>
+                                                    <td>abcd1234</td>
+                                                    <td>2024-05-21 11:11:11</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-xs btn-warning">
+                                                            삭제
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><a href="javascript:;" class="list_link" data-write-id="2" onclick="insertMemoForm(this,1);">메모예제입니다. 모예제입니다 예제입니다. ⋯</a></td>
+                                                    <td>abcd1234</td>
+                                                    <td>abcd1234</td>
+                                                    <td>2024-05-21 11:11:11</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-xs btn-warning">
+                                                            삭제
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><a href="javascript:;" class="list_link" data-write-id="3" onclick="insertMemoForm(this,1);">메모내용 예제입니다. 메모내용 예제입니다. ⋯</a></td>
+                                                    <td>abcd1234</td>
+                                                    <td>abcd1234</td>
+                                                    <td>2024-05-21 11:11:11</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-xs btn-warning">
+                                                            삭제
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="form_item size_lg">
+                                    <form action="">
+                                    <div class="list-btns justify-content-between mb-2">
+                                        <div>
+                                            <button type="button" class="btn btn-secondary">등록+</button>
+                                        </div>
+                                        <div><h3>협력사공용 상담메모</h3></div>
+                                        <div>
+                                            <button type="submit" class="btn btn-primary">저장</button>
+                                        </div>
+                                    </div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <!-- 메모 id -->
+                                            <input type="hidden" id="memoWriteId2">
+                                            <!-- 메모 내용 -->
+                                            <textarea name="" id="memoTextarea2" class="form-control">메모내용 예제입니다.메모내용 예제입니다.</textarea>
+                                        </div>
+                                    </div>
+                                    </form>
+                                    <div class="table-responsive">
+                                        <table class="table table-vcenter table-line card-table text-center table-mb tr_hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>메모</th>
+                                                    <th>작성자</th>
+                                                    <th>수정자</th>
+                                                    <th>작성일(최종수정일)</th>
+                                                    <th>삭제</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="5" class="list-empty">
+                                                        등록된 항목이 없습니다.
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><a href="javascript:;" class="list_link" data-write-id="1" onclick="insertMemoForm(this,2);">메모내용메모내용메모내용메모내용⋯</a></td>
+                                                    <td>abcd1234</td>
+                                                    <td>abcd1234</td>
+                                                    <td>2024-05-21 11:11:11</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-xs btn-warning">
+                                                            삭제
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><a href="javascript:;" class="list_link" data-write-id="2" onclick="insertMemoForm(this,2);">메모예제입니다. 모예제입니다 예제입니다. ⋯</a></td>
+                                                    <td>abcd1234</td>
+                                                    <td>abcd1234</td>
+                                                    <td>2024-05-21 11:11:11</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-xs btn-warning">
+                                                            삭제
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><a href="javascript:;" class="list_link" data-write-id="3" onclick="insertMemoForm(this,2);">메모내용 예제입니다. 메모내용 예제입니다. ⋯</a></td>
+                                                    <td>abcd1234</td>
+                                                    <td>abcd1234</td>
+                                                    <td>2024-05-21 11:11:11</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-xs btn-warning">
+                                                            삭제
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <script>
+                                //임시 스크립트
+                                function insertMemoForm(elm , targetNum) {//this, 메모타겟번호
+                                    const target = targetNum
+                                    const memoWriteId = document.getElementById('memoWriteId' + target);
+                                    const memoTextarea = document.getElementById('memoTextarea' + target);
+                                    memoWriteId.value = elm.getAttribute('data-write-id');
+                                    memoTextarea.value = elm.innerText;
+                                }
+                            </script>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="card form_area">
+                        <div class="card-header"><h3 class="card-title">협력회사</h3></div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form_item">
+                                    <div class="subheader mb-1">협력회사명</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" readonly value="신세계강남_내셔널지오그래픽">
+                                            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/partner_detail_pop.html', '650', '650')">
+                                                협력회사 상세
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">담당자</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" value="홍*동" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">전화번호</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <input type="tel" class="form-control" value="03112341234" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">휴대폰번호</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <input type="tel" class="form-control" value="01012341234" readonly>
+                                            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/sms_pop.html', '450', '550')">
+                                                문자발송
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="card form_area">
+                        <div class="card-header"><h3 class="card-title">변동내역</h3></div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-vcenter table-line card-table text-center table-mb">
+                                    <thead class="dark">
+                                        <tr>
+                                            <th>상태</th>
+                                            <th>반품/교환 상태</th>
+                                            <th>내용</th>
+                                            <th>신세계 처리자</th>
+                                            <th>협력회사 처리자</th>
+                                            <th>처리일시</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="6">
+                                                변동내역이 없습니다.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td class="text-start">주문상세열람</td>
+                                            <td>admin1</td>
+                                            <td></td>
+                                            <td>2024-05-07 14:52:18</td>
+                                        </tr>
+                                        <tr>
+                                            <td>배송완료</td>
+                                            <td>반품완료</td>
+                                            <td class="text-start">반품완료</td>
+                                            <td></td>
+                                            <td>ptnadmin1</td>
+                                            <td>2024-05-07 14:52:18</td>
+                                        </tr>
+                                        <tr>
+                                            <td>배송완료</td>
+                                            <td></td>
+                                            <td class="text-start">[자동]배송상태 변경</td>
+                                            <td>SYSTEM</td>
+                                            <td></td>
+                                            <td>2024-05-07 14:52:18</td>
+                                        </tr>
+                                        <tr>
+                                            <td>배송시작</td>
+                                            <td></td>
+                                            <td class="text-start">[엑셀]송장업로드</td>
+                                            <td></td>
+                                            <td>ptnadmin1</td>
+                                            <td>2024-05-07 14:52:18</td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td class="text-start">주문상세열람</td>
+                                            <td></td>
+                                            <td>ptnadmin1</td>
+                                            <td>2024-05-07 14:52:18</td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td class="text-start">[엑셀]주문내역다운로드</td>
+                                            <td></td>
+                                            <td>ptnadmin1</td>
+                                            <td>2024-05-07 14:52:18</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-btns justify-content-between mt-3">
+                <div>
+                </div>
+                <div>
+                    <a href="/resources/static/html/order/order_list_all.html" class="btn btn-secondary">목록</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 공통영역 -->
+    <div id="footer"></div>
+    <script>
+        //헤더&푸터 개발 완료시 삭제해주세요
+        var includePath = "/resources/static/layout/footer.html";
+        includeFile(includePath, 'footer');
+    </script>
+    <!-- //공통영역 -->
+</div>
+
+
+<div id="daumAdressLayer" >
+<button type="button" id="btnCloseLayer" onclick="closeDaumPostcode()">닫기버튼</button>
+</div>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+//주소 api
+var element_layer = document.getElementById('daumAdressLayer');
+
+function closeDaumPostcode() {
+    element_layer.style.display = 'none';
+}
+
+function execDaumPostcode(elm) {
+    const target = document.getElementById(elm)
+    new daum.Postcode({
+        oncomplete: function(data) {
+            var addr = ''; // 주소 변수
+            var extraAddr = ''; // 참고항목 변수
+            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                addr = data.roadAddress;
+            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                addr = data.jibunAddress;
+            }
+            if(data.userSelectedType === 'R'){
+                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                    extraAddr += data.bname;
+                }
+                if(data.buildingName !== '' && data.apartment === 'Y'){
+                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                if(extraAddr !== ''){
+                    extraAddr = ' (' + extraAddr + ')';
+                }
+                target.querySelector(".i_address_basic").value = extraAddr;
+            } else {
+                target.querySelector(".i_address_basic").value = '';
+            }
+            target.querySelector(".i_post_code").value = data.zonecode;
+            target.querySelector(".i_address_basic").value = addr;
+            target.querySelector(".i_address_detail").focus();
+            element_layer.style.display = 'none';
+        },
+        width : '100%',
+        height : '100%',
+        maxSuggestItems : 5
+    }).embed(element_layer);
+    element_layer.style.display = 'block';
+}
+function initLayerPosition(){
+    var width = 300; //우편번호서비스가 들어갈 element의 width
+    var height = 400; //우편번호서비스가 들어갈 element의 height
+    var borderWidth = 1; //샘플에서 사용하는 border의 두께
+    element_layer.style.width = width + 'px';
+    element_layer.style.height = height + 'px';
+    element_layer.style.border = borderWidth + 'px solid';
+    element_layer.style.left = (((window.innerWidth || document.documentElement.clientWidth) - width)/2 - borderWidth) + 'px';
+    element_layer.style.top = (((window.innerHeight || document.documentElement.clientHeight) - height)/2 - borderWidth) + 'px';
+}
+</script>
+<script src="/resources/static/dist/js/tabler.min.js"></script>
+</body>
+</html>

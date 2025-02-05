@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=1400"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>신세계 관리자</title>
+    <!-- CSS files -->
+    <link href="/resources/static/dist/css/tabler.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/tabler-vendors.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/>
+    <link rel="shortcut icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <script src="/resources/static/dist/js/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/resources/static/dist/libs/litepicker/dist/litepicker.js?1674944402"></script>
+    <script src="/resources/static/dist/js/jquery.validate.js"></script>
+    <!-- Tabler Core -->
+    
+    <script src="/resources/static/dist/js/common.js"></script>
+    <style>
+    :root {
+        --theme-admin-type: #cf3f42;
+        /* #cf3f42 통합관리자 컬러 코드*/
+        /* #4b9b52 협력회사 컬러 코드 */
+        /* #214c9c 고객사 컬러 코드 */
+    }
+    </style>
+</head>
+<body>
+
+<div class="popup-wrapper">
+
+    <div class="row">
+        <div class="col-6">
+            <h2 class="popup-title">고객사 선택</h2>
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="seasrch_popup">
+                        <div class="search_options">
+                            <div class="option_item w100">
+                                <div class="subheader">상태</div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="input-group col-12 member_type_status1"><!-- member_type_status1 고객사 상태 -->
+                                            <select class="form-select select-display" onchange="clientStatusChange();">
+                                                <option value="" select-display="clientStatus1 clientStatus2 clientStatus3 clientStatus4" >전체</option>
+                                                <option value="" select-display="clientStatus1" select-display-hide="member_type_select3" selected>정상승인</option>
+                                                <option value="" select-display="clientStatus2" select-display-hide="member_type_select3">가승인</option>
+                                                <option value="" select-display="clientStatus3" select-display-hide="member_type_select3">정지</option>
+                                                <option value="" select-display="clientStatus4" select-display-hide="member_type_select3">만료</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="input-group col-12 member_type_select2"><!-- member_type_select2 고객사 -->
+                                            <div class="search_select select-display">
+                                                <input type="hidden">
+                                                <button type="button" class="btn_select form-select text-start" onclick="searchSelectOpen(this);">고객사 전체</button>
+                                                <div class="search_select_options" style="display:none;">
+                                                    <input type="text" class="form-control" placeholder="검색어 입력" oninput="searchSelectSearch(this);">
+                                                    <div class="items">
+                                                        <div class="item"><a href="javascript:;" data-id="" class="active" select-display="" onclick="searchSelectSelect(this);resetUnderSelect(this);">고객사 전체</a></div>
+                                                        <div class="item clientStatus1 code456uru"><a href="javascript:;" data-id="code458i95i5" select-display="member_type_select3" onclick="searchSelectSelect(this);resetUnderSelect(this);">고객사1-1(정상승인)</a></div>
+                                                        <div class="item clientStatus2 code456uru"><a href="javascript:;" data-id="codeeye44576" select-display="member_type_select3" onclick="searchSelectSelect(this);resetUnderSelect(this);">고객사1-2(가승인)</a></div>
+                                                        <div class="item clientStatus3 code456754eyr"><a href="javascript:;" data-id="code45urt48u" select-display="member_type_select3" onclick="searchSelectSelect(this);resetUnderSelect(this);">고객사2-1(정지)</a></div>
+                                                        <div class="item clientStatus4 code456754eyr"><a href="javascript:;" data-id="code4567uer" select-display="" onclick="searchSelectSelect(this);resetUnderSelect(this);">고객사2-2(만료)</a></div>
+                                
+                                                        <!-- 상위없으면 group_none출력 -->
+                                                        <div class="item clientStatus1 group_none"><a href="javascript:;" data-id="code4575eyry" select-display="member_type_select3" onclick="searchSelectSelect(this);resetUnderSelect(this);">고객사3(정상승인)</a></div>
+                                                        <div class="item clientStatus1 group_none"><a href="javascript:;" data-id="code12565" select-display="" onclick="searchSelectSelect(this);resetUnderSelect(this);">고객사4(정상승인)</a></div>
+                                                        <div class="item clientStatus1 group_none"><a href="javascript:;" data-id="code6556677" select-display="" onclick="searchSelectSelect(this);resetUnderSelect(this);">고객사5(정상승인)</a></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <script>
+                                        //구분 변경, 셀렉트 변경시  그룹사,고객사,계열사,상위몰 하위몰 선택초기화 (맨위에 항목으로)
+                                        function resetSelection(selector) {
+                                            let container = document.querySelector(selector);
+                                            let items = container.querySelectorAll('.items .item a');
+                                            let firstItem = container.querySelector('.items .item:first-child a');
+                                            
+                                            container.querySelector('input[type="hidden"]').value = firstItem.getAttribute('data-id');
+                                            container.querySelector('.btn_select').textContent = firstItem.textContent;
+                                            
+                                            items.forEach(function(item){
+                                                item.classList.remove('active');
+                                            });
+                                            firstItem.classList.add('active');
+                                        }
+                                        function clientStatusChange(){
+                                            //고객사 상태변경시 하위 셀렉트 초기화
+                                            resetSelection('.member_type_select2');//고객사
+                                        }
+                                
+                                        function resetUnderSelect(elm){
+                                            if(elm.closest('.col-12').classList.contains('member_type_select1')){
+                                                // 그룹사 변경시 고객사,계열사 초기화
+                                                resetSelection('.member_type_select2');//고객사
+                                            }
+                                        }
+                                    </script>
+                                </div>
+                            </div>
+                            <div class="option_item w100">
+                                <div class="subheader">검색</div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <select class="form-select">
+                                            <option value="" selected="">고객사명</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-6">
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="search_btns">
+                            <button type="button" class="btn btn-primary">
+                                검색
+                            </button>
+                            <button type="button" class="btn btn-secondary">
+                                검색 초기화
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card-body">
+                    <div class="card table-mb-card">
+                        <div class="list-btns justify-content-between table_actions">
+                            <div>
+                                <button type="button" id="addAllBtn" class="btn btn-sm ms-1 btn-outline-secondary" onclick="addAllRows();">전체추가</button>
+                                <button type="button" id="addSelectedBtn" class="btn btn-sm ms-1 btn-outline-secondary" onclick="addSelectedRows();">선택추가</button>
+                            </div>
+                        </div>
+                        <div class="table-responsive" style="overflow-y:auto;max-height:311px;">
+                            <table class="table table-vcenter table-line card-table text-center table-mb label-control tr_hover">
+                                <colgroup>
+                                    <col style="width:60px;">
+                                    <col>
+                                    <col style="width:80px;">
+                                    <col style="width:60px;">
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                        <th class="check-all-box">
+                                            <label class="form-check form-check-inline m-0">
+                                                <input class="form-check-input check-all" type="checkbox">
+                                            </label>
+                                        </th>
+                                        <th>고객사명</th>
+                                        <th>상태</th>
+                                        <th>추가</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="leftTableBody">
+                                    <!-- <tr>
+                                        <td colspan="3" class="list-empty">
+                                            내역이 존재하지 않습니다.
+                                        </td>
+                                    </tr> -->
+                                    <!-- <tr class="bg_pink" data-id="111">
+                                        <td>
+                                            <label class="form-check form-check-inline m-0">
+                                                <input class="form-check-input" type="checkbox" disabled>
+                                            </label>
+                                        </td>
+                                        <td class="text-start">시크릿스토어</td>
+                                        <td>
+                                            <button type="button" class="btn btn-xs btn-secondary add-btn" disabled>
+                                                추가
+                                            </button>
+                                        </td>
+                                    </tr> -->
+                                    <tr data-id="111">
+                                        <td>
+                                            <label class="form-check form-check-inline m-0">
+                                                <input class="form-check-input" type="checkbox">
+                                            </label>
+                                        </td>
+                                        <td class="text-start">시크릿스토어</td>
+                                        <td>정상승인</td>
+                                        <td>
+                                            <button type="button" class="btn btn-xs btn-secondary add-btn">
+                                                추가
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr data-id="222">
+                                        <td>
+                                            <label class="form-check form-check-inline m-0">
+                                                <input class="form-check-input" type="checkbox">
+                                            </label>
+                                        </td>
+                                        <td class="text-start">시크릿스토어2</td>
+                                        <td>가승인</td>
+                                        <td>
+                                            <button type="button" class="btn btn-xs btn-secondary add-btn">
+                                                추가
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr data-id="234">
+                                        <td>
+                                            <label class="form-check form-check-inline m-0">
+                                                <input class="form-check-input" type="checkbox">
+                                            </label>
+                                        </td>
+                                        <td class="text-start">스마일</td>
+                                        <td>정지</td>
+                                        <td>
+                                            <button type="button" class="btn btn-xs btn-secondary add-btn">
+                                                추가
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr data-id="432">
+                                        <td>
+                                            <label class="form-check form-check-inline m-0">
+                                                <input class="form-check-input" type="checkbox">
+                                            </label>
+                                        </td>
+                                        <td class="text-start">에스씨케이컴퍼니</td>
+                                        <td>대기</td>
+                                        <td>
+                                            <button type="button" class="btn btn-xs btn-secondary add-btn">
+                                                추가
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <h2 class="popup-title">고객사 추가 (<strong id="selectedCount" class="text-primary">0</strong>건)</h2>
+            <div class="card">
+                <div class="card-body">
+                    <div class="seasrch_popup">
+                        <form action="" onsubmit="filterRows(event)">
+                            <div class="search_options">
+                                <div class="option_item w100">
+                                    <div class="subheader">고객사명</div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <input type="text" class="form-control" id="searchInput" placeholder="고객사명을 입력하면 자동검색 됩니다." oninput="filterRows(event);">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="search_btns">
+                                <button type="button" class="btn btn-secondary" id="resetBtn" onclick="resetFilter();">
+                                    검색 초기화
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card table-mb-card">
+                        <div class="list-btns justify-content-between table_actions">
+                            <div>
+                                <button type="button" id="removeAllBtn" class="btn btn-sm ms-1 btn-outline-secondary" onclick="removeAllRows();">전체삭제</button>
+                                <button type="button" id="removeSelectedBtn" class="btn btn-sm ms-1 btn-outline-secondary" onclick="removeSelectedRows();">선택삭제</button>
+                            </div>
+                        </div>
+                        <div class="table-responsive" style="overflow-y:auto;max-height:300px;">
+                            <table class="table table-vcenter table-line card-table text-center table-mb label-control tr_hover">
+                                <colgroup>
+                                    <col style="width:60px;">
+                                    <col>
+                                    <col style="width:60px;">
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                        <th class="check-all-box">
+                                            <label class="form-check form-check-inline m-0">
+                                                <input class="form-check-input check-all" type="checkbox">
+                                            </label>
+                                        </th>
+                                        <th>고객사명</th>
+                                        <th>삭제</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="rightTableBody">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <form action="">
+                        <div class="list-btns justify-content-between mt-2">
+                            <div>
+                            </div>
+                            <div>
+                                <button type="submit" class="btn btn-primary">확정</button>
+                                <button type="button" class="btn btn-secondary" onclick="window.close();">닫기</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+<script>
+    const selectedArray = [];//추가된 내역 아이템 data-id
+
+    const leftTableBody = document.getElementById('leftTableBody');
+    const rightTableBody = document.getElementById('rightTableBody');
+    const selectedCount = document.getElementById('selectedCount');
+    const searchInput = document.getElementById('searchInput');
+    const searchBtn = document.getElementById('searchBtn');
+    const resetBtn = document.getElementById('resetBtn');
+
+    // 추가버튼
+    leftTableBody.addEventListener('click', function(event) {
+        if (event.target.classList.contains('add-btn')) {
+            const row = event.target.closest('tr');
+            addRow(row);
+        }
+    });
+
+    // 삭제버튼
+    rightTableBody.addEventListener('click', function(event) {
+        if (event.target.classList.contains('remove-btn')) {
+            const row = event.target.closest('tr');
+            removeRow(row);
+        }
+    });
+
+    // 전체추가
+    function addAllRows() {
+        leftTableBody.querySelectorAll('tr').forEach(row => {
+            addRow(row);
+        });
+    }
+
+    // 선택추가
+    function addSelectedRows() {
+        leftTableBody.querySelectorAll('tr').forEach(row => {
+            if (row.querySelector('input[type="checkbox"]').checked) {
+                addRow(row);
+            }
+        });
+    }
+
+    // 전체삭제
+    function removeAllRows() {
+        rightTableBody.querySelectorAll('tr').forEach(row => {
+            removeRow(row);
+        });
+    }
+
+    // 선택삭제
+    function removeSelectedRows() {
+        rightTableBody.querySelectorAll('tr').forEach(row => {
+            if (row.querySelector('input[type="checkbox"]').checked) {
+                removeRow(row);
+            }
+        });
+    }
+
+    // 추가함수
+    function addRow(row) {
+        const dataId = row.getAttribute('data-id');
+
+        if (!selectedArray.includes(dataId)) {
+            selectedArray.push(dataId);
+            row.querySelector('input[type="checkbox"]').checked = false;
+
+            const clonedRow = row.cloneNode(true);
+            clonedRow.querySelector('td:nth-child(3)').remove();
+            clonedRow.querySelector('.add-btn').classList.replace('add-btn', 'remove-btn');
+            clonedRow.querySelector('.remove-btn').classList.replace('btn-secondary', 'btn-warning');
+            clonedRow.querySelector('.remove-btn').textContent = '삭제';
+
+            row.classList.add('bg_pink');
+            row.querySelector('input[type="checkbox"]').disabled = true;
+            row.querySelector('.add-btn').disabled = true;
+
+            rightTableBody.appendChild(clonedRow);
+            updateSelectedCount();
+        }
+    }
+
+    // 삭제함수
+    function removeRow(row) {
+        const dataId = row.getAttribute('data-id');
+
+        const index = selectedArray.indexOf(dataId);
+        if (index > -1) {
+            selectedArray.splice(index, 1);
+
+            const originalRow = leftTableBody.querySelector(`tr[data-id="${dataId}"]`);
+            if (originalRow) {
+                originalRow.classList.remove('bg_pink');
+                originalRow.querySelector('input[type="checkbox"]').disabled = false;
+                originalRow.querySelector('.add-btn').disabled = false;
+            }
+
+            row.remove();
+            updateSelectedCount();
+        }
+    }
+
+    // 카운트 업데이트
+    function updateSelectedCount() {
+        selectedCount.textContent = selectedArray.length;
+
+        console.log(selectedArray);
+    }
+
+
+    // 선택고객사 검색
+    function filterRows(event) {
+        event.preventDefault();
+        const searchTerm = searchInput.value.toLowerCase();
+        rightTableBody.querySelectorAll('tr').forEach(row => {
+            const customerName = row.cells[1].textContent.toLowerCase();
+            if (customerName.includes(searchTerm)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    }
+
+    // 선택고객사 검색 초기화
+    function resetFilter() {
+        searchInput.value = '';
+        rightTableBody.querySelectorAll('tr').forEach(row => {
+            row.style.display = '';
+        });
+    }
+</script>
+</script>
+<script src="/resources/static/dist/js/tabler.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,580 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=1400"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>신세계 관리자</title>
+    <!-- CSS files -->
+    <link href="/resources/static/dist/css/tabler.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/tabler-vendors.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/>
+    <link rel="shortcut icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <script src="/resources/static/dist/js/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/resources/static/dist/libs/litepicker/dist/litepicker.js?1674944402"></script>
+    <script src="/resources/static/dist/js/jquery.validate.js"></script>
+    <!-- Tabler Core -->
+    
+    <script src="/resources/static/dist/js/common.js"></script>
+    <style>
+    :root {
+        --theme-admin-type: #cf3f42;
+        /* #cf3f42 통합관리자 컬러 코드*/
+        /* #4b9b52 협력회사 컬러 코드 */
+        /* #214c9c 고객사 컬러 코드 */
+    }
+    </style>
+</head>
+<body>
+
+<!-- 공통영역1 -->
+<aside id="header" class="navbar navbar-vertical navbar-expand-lg header_left"></aside>
+<script>
+    //html include
+    //헤더&푸터 개발 완료시 삭제해주세요
+    function includeFile(path, targetId) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', path, true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById(targetId).innerHTML = xhr.responseText;
+        }
+    };
+    xhr.send();
+    }
+    var includePath = "/resources/static/layout/header.html";
+    includeFile(includePath, 'header');
+</script>
+<!-- //공통영역1 -->
+
+<div class="page-wrapper">
+    <!-- 공통영역2 -->
+    <div class="member_info">
+        <div class="info">
+            <span class="login_session">로그인 유지시간 <strong>30:00</strong> <button type="button" class="btn btn-xs btn-primary">연장</button></span>
+            <span>관리권한 : 최상위관리자</span>
+            <span>방문횟수 : 1,000</span>
+            <span>최근방문IP : 12.1.123.12</span>
+            <button type="button" class="btn btn-xs btn-secondary">메뉴얼다운로드</button>
+            <button type="button" class="btn btn-xs btn-secondary">기본양식다운로드</button>
+            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/admin_modify_pop.html', '900', '640')">관리자정보수정</button>
+            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/terms_pop.html', '600', '540')">이용약관</button>
+        </div>
+        <div>
+            <a href="javascript:;" class="logout">홍길동(admin_01)님 로그아웃</a>
+            <a href="javascript:;" class="home">홈으로</a>
+        </div>
+    </div>
+
+    <!-- 페이지 히스토리 탭 -->
+    <div class="page-history">
+        <div class="history_toggle">
+            <label class="form-check form-switch">
+                <span class="form-check-label">History</span>
+                <input id="historyUse" class="form-check-input" type="checkbox" >
+            </label>
+        </div>
+        <button class="close_all" type="button" title="히스토리 모두 삭제" onclick="historyRemoveAll();">히스토리 모두 삭제</button>
+    </div>
+    <!-- //공통영역2 -->
+
+    <div class="page-header d-print-none">
+        <div class="container-xl">
+            <div class="row g-2 align-items-center">
+                <div class="col">
+                    <!-- Page pre-title -->
+                    <div class="page-pretitle">
+                        홈 > 쇼핑몰 > 배너관리 > 퀵배너
+                    </div>
+                    <h2 class="page-title">
+                        퀵배너
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page body -->
+    <div class="page-body search_left">
+        <div class="container-xl">
+            <div class="row row-cards aside_wrap">
+
+                <!-- 검색시작 -->
+                <div class="aside-search" id="asideSearch">
+                    <form action="" class="card">
+                        <div class="card-body">
+                            <div class="display_type">
+                                <button type="button" class="left active" title="검색영역 좌측배치">검색영역 좌측배치</button>
+                                <button type="button" class="top " title="검색영역 상단배치">검색영역 상단배치</button>
+                                <button type="button" class="right" title="검색영역 우측배치">검색영역 우측배치</button>
+                            </div>
+                            <div class="search_options">
+                                <div class="option_item">
+                                    <div class="subheader">고객사</div>
+                                    <div class="row">
+                                        <div class="col-12 member_type_status1"><!-- member_type_status1 고객사 상태 -->
+                                            <select class="form-select select-display" onchange="clientStatusChange();">
+                                                <option value="" select-display="clientStatus1 clientStatus2 clientStatus3 clientStatus4" >전체</option>
+                                                <option value="" select-display="clientStatus1" select-display-hide="member_type_select3" selected>정상승인</option>
+                                                <!-- <option value="" select-display="clientStatus2" select-display-hide="member_type_select3">가승인</option> -->
+                                                <option value="" select-display="clientStatus3" select-display-hide="member_type_select3">정지</option>
+                                                <!-- <option value="" select-display="clientStatus4" select-display-hide="member_type_select3">만료</option> -->
+                                            </select>
+                                        </div>
+
+                                        <div class="col-12 member_type_select2"><!-- member_type_select2 고객사 -->
+                                            <div class="search_select select-display">
+                                                <input type="hidden">
+                                                <button type="button" class="btn_select form-select text-start" onclick="searchSelectOpen(this);">고객사 전체</button>
+                                                <div class="search_select_options" style="display:none;">
+                                                    <input type="text" class="form-control" placeholder="검색어 입력" oninput="searchSelectSearch(this);">
+                                                    <div class="items">
+                                                        <div class="item"><a href="javascript:;" data-id="" class="active" select-display="" onclick="searchSelectSelect(this);resetUnderSelect(this);">고객사 전체</a></div>
+                                                        <div class="item clientStatus1 code456uru"><a href="javascript:;" data-id="code458i95i5" select-display="member_type_select3" onclick="searchSelectSelect(this);resetUnderSelect(this);">고객사1-1(정상승인)</a></div>
+                                                        <!-- <div class="item clientStatus2 code456uru"><a href="javascript:;" data-id="codeeye44576" select-display="member_type_select3 codeeye44576" onclick="searchSelectSelect(this);resetUnderSelect(this);">고객사1-2(가승인)</a></div> -->
+                                                        <div class="item clientStatus3 code456754eyr"><a href="javascript:;" data-id="code45urt48u" select-display="member_type_select3" onclick="searchSelectSelect(this);resetUnderSelect(this);">고객사2-1(정지)</a></div>
+                                                        <!-- <div class="item clientStatus4 code456754eyr"><a href="javascript:;" data-id="code4567uer" select-display="" onclick="searchSelectSelect(this);resetUnderSelect(this);">고객사2-2(만료)</a></div> -->
+                                
+                                                        <!-- 상위없으면 group_none출력 -->
+                                                        <div class="item clientStatus1 group_none"><a href="javascript:;" data-id="code4575eyry" select-display="member_type_select3" onclick="searchSelectSelect(this);resetUnderSelect(this);">고객사3(정상승인)</a></div>
+                                                        <div class="item clientStatus1 group_none"><a href="javascript:;" data-id="code12565" select-display="" onclick="searchSelectSelect(this);resetUnderSelect(this);">고객사4(정상승인)</a></div>
+                                                        <div class="item clientStatus1 group_none"><a href="javascript:;" data-id="code6556677" select-display="" onclick="searchSelectSelect(this);resetUnderSelect(this);">고객사5(정상승인)</a></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <script>
+                                        const memberTypeRadios = document.querySelectorAll('input[name="member_type"]');
+
+                                        //구분 변경, 셀렉트 변경시  그룹사,고객사,계열사,상위몰 하위몰 선택초기화 (맨위에 항목으로)
+                                        function resetSelection(selector) {
+                                            let container = document.querySelector(selector);
+                                            let items = container.querySelectorAll('.items .item a');
+                                            let firstItem = container.querySelector('.items .item:first-child a');
+                                            
+                                            container.querySelector('input[type="hidden"]').value = firstItem.getAttribute('data-id');
+                                            container.querySelector('.btn_select').textContent = firstItem.textContent;
+                                            
+                                            items.forEach(function(item){
+                                                item.classList.remove('active');
+                                            });
+                                            firstItem.classList.add('active');
+                                        }
+                                        
+                                        function clientStatusChange(){
+                                            //고객사 상태변경시 하위 셀렉트 초기화
+                                            resetSelection('.member_type_select2');//고객사
+                                        }
+                                
+                                        function resetUnderSelect(elm){
+                                            
+                                        }
+                                    </script>
+                                </div>
+                                <div class="option_item">
+                                    <div class="subheader">상태</div>
+                                    <div>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="display_status" checked="">
+                                            <span class="form-check-label">전체</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="display_status" value="1">
+                                            <span class="form-check-label">노출함</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="display_status" value="2">
+                                            <span class="form-check-label">노출안함</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="option_item w30">
+                                    <div class="subheader">제목</div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <input type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="search_btns">
+                                <button class="btn btn-primary">
+                                    검색
+                                </button>
+                                <a href="#" class="btn btn-secondary">
+                                    검색 초기화
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                    
+                </div>
+                <!-- //검색시작 -->
+
+                <!-- 콘텐츠 시작 -->
+                <div class="content-area">
+                    <div class="list-btns justify-content-between mb-1">
+                        <div>
+                            <a href="/resources/static/html/shop/quick_register.html" class="btn btn-primary">등록</a>
+                        </div>
+                    </div>
+                    <div class="list-btns justify-content-between mb-1">
+                        <div>
+                            <div class="list_count">* 전체 : <strong class="text-primary">111,592</strong>건 / 검색 : <strong class="text-primary">50</strong>건</div>
+                        </div>
+                    </div>
+
+                    <div class="card table-mb-card">
+                        <div class="list-btns justify-content-between table_actions">
+                            <div>
+                                <div class="list_count">
+                                    <span class="check_pred_action">선택한 항목을</span>
+                                    <button type="button" class="btn btn-sm ms-1 btn-outline-secondary">
+                                        노출함
+                                    </button>
+                                    <button type="button" class="btn btn-sm ms-1 btn-outline-secondary">
+                                        노출안함
+                                    </button>
+                                    <span class="ms-1">|</span>
+                                    <button type="button" class="btn btn-sm ms-1 btn-outline-warning">
+                                        삭제
+                                    </button>
+                                    <span class="ms-1">|</span>
+                                    <div class="input-group d-inline-flex w-33 ms-1">
+                                        <span class="input-group-text text">진열순서</span>
+                                        <input type="tel" class="form-control w">
+                                        <span class="input-group-text text">로</span>
+                                        <button type="button" class="btn btn-sm btn-secondary" onclick="indexMoveInput(this);">
+                                            변경
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <button type="button" class="btn btn-sm ms-1 btn-outline-primary"
+                                    onclick="windowPopup('/resources/static/html/popup/client_select.html', '600', '680')">
+                                    고객사 선택 (선택된 고객사: 10)
+                                </button>
+                                
+                                <button type="button" class="btn btn-sm ms-1 btn-outline-secondary">배너 복사</button>
+                            </div>
+                        </div>
+                        <div class="table-responsive overflow-visible">
+                            <table class="table table-vcenter table-line card-table text-center table-mb label-control tr_hover">
+                                <thead>
+                                    <tr>
+                                        <th class="check-all-box" rowspan="2">
+                                            <label class="form-check form-check-inline m-0">
+                                                <input class="form-check-input check-all" type="checkbox">
+                                            </label>
+                                        </th>
+                                        <th>순서</th>
+                                        <th>순서정렬</th>
+                                        <th>배너이미지</th>
+                                        <th>배너명</th>
+                                        <th>상태</th>
+                                        <th>게시기간</th>
+                                        <th>삭제</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- <tr>
+                                        <td colspan="8" class="list-empty">
+                                            검색 내역이 존재하지 않습니다.
+                                        </td>
+                                    </tr> -->
+                                    <tr>
+                                        <td>
+                                            <label class="form-check form-check-inline m-0">
+                                                <input class="form-check-input" type="checkbox">
+                                            </label>
+                                        </td>
+                                        <td class="index_num">4</td>
+                                        <td>
+                                            <input type="hidden" value="4"><!-- index -->
+                                            <button onclick="indexMove(this , 'top')" type="button" class="btn btn-xs btn-secondary"><span class="icon_chevron top">최상단</span></button>
+                                            <button onclick="indexMove(this , 'up')" type="button" class="btn btn-xs btn-secondary"><span class="icon_chevron up">위로</span></button>
+                                            <button onclick="indexMove(this,'down')" type="button" class="btn btn-xs btn-secondary"><span class="icon_chevron down">아래로</span></button>
+                                            <button onclick="indexMove(this,'bottom')" type="button" class="btn btn-xs btn-secondary"><span class="icon_chevron bottom">최하단</span></button>
+                                        </td>
+                                        <td class="hover_cnt">
+                                            <span class="tm_cnt"><img src="/resources/static/dist/img/img.jpg" alt=""></span>
+                                            <div class="hover_layer"><img src="/resources/static/dist/img/img.jpg" alt=""></div>
+                                        </td>
+                                        <td class="text-start">
+                                            <a href="/resources/static/html/shop/quick_modify.html" class="short_cut list_link" style="max-width:450px;">
+                                                2024 추석 배너
+                                            </a>
+                                        </td>
+                                        <td>노출함</td>
+                                        <td>2024-08-21 11:11:11 ~<br/>2024-08-21 11:11:11</td>
+                                        <td>
+                                            <button 
+                                            type="button" 
+                                            class="btn btn-xs btn-danger"
+                                            >
+                                                삭제
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label class="form-check form-check-inline m-0">
+                                                <input class="form-check-input" type="checkbox">
+                                            </label>
+                                        </td>
+                                        <td class="index_num">3</td>
+                                        <td>
+                                            <input type="hidden" value="3"><!-- index -->
+                                            <button onclick="indexMove(this , 'top')" type="button" class="btn btn-xs btn-secondary"><span class="icon_chevron top">최상단</span></button>
+                                            <button onclick="indexMove(this , 'up')" type="button" class="btn btn-xs btn-secondary"><span class="icon_chevron up">위로</span></button>
+                                            <button onclick="indexMove(this,'down')" type="button" class="btn btn-xs btn-secondary"><span class="icon_chevron down">아래로</span></button>
+                                            <button onclick="indexMove(this,'bottom')" type="button" class="btn btn-xs btn-secondary"><span class="icon_chevron bottom">최하단</span></button>
+                                        </td>
+                                        <td class="hover_cnt">
+                                            <span class="tm_cnt"><img src="/resources/static/dist/img/login_banner2.jpg" alt=""></span>
+                                            <div class="hover_layer"><img src="/resources/static/dist/img/login_banner2.jpg" alt=""></div>
+                                        </td>
+                                        <td class="text-start">
+                                            <a href="/resources/static/html/shop/quick_modify.html" class="short_cut list_link" style="max-width:450px;">
+                                                2024 추석 배너
+                                            </a>
+                                        </td>
+                                        <td>노출함</td>
+                                        <td>2024-08-21 11:11:11 ~<br/>2024-08-21 11:11:11</td>
+                                        <td>
+                                            <button 
+                                            type="button" 
+                                            class="btn btn-xs btn-danger"
+                                            >
+                                                삭제
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label class="form-check form-check-inline m-0">
+                                                <input class="form-check-input" type="checkbox">
+                                            </label>
+                                        </td>
+                                        <td class="index_num">2</td>
+                                        <td>
+                                            <input type="hidden" value="2"><!-- index -->
+                                            <button onclick="indexMove(this , 'top')" type="button" class="btn btn-xs btn-secondary"><span class="icon_chevron top">최상단</span></button>
+                                            <button onclick="indexMove(this , 'up')" type="button" class="btn btn-xs btn-secondary"><span class="icon_chevron up">위로</span></button>
+                                            <button onclick="indexMove(this,'down')" type="button" class="btn btn-xs btn-secondary"><span class="icon_chevron down">아래로</span></button>
+                                            <button onclick="indexMove(this,'bottom')" type="button" class="btn btn-xs btn-secondary"><span class="icon_chevron bottom">최하단</span></button>
+                                        </td>
+                                        <td class="hover_cnt">
+                                            <span class="tm_cnt"><img src="/resources/static/dist/img/login_banner1.jpg" alt=""></span>
+                                            <div class="hover_layer"><img src="/resources/static/dist/img/login_banner1.jpg" alt=""></div>
+                                        </td>
+                                        <td class="text-start">
+                                            <a href="/resources/static/html/shop/quick_modify.html" class="short_cut list_link" style="max-width:450px;">
+                                                2024 추석 배너
+                                            </a>
+                                        </td>
+                                        <td>노출함</td>
+                                        <td>2024-08-21 11:11:11 ~<br/>2024-08-21 11:11:11</td>
+                                        <td>
+                                            <button 
+                                            type="button" 
+                                            class="btn btn-xs btn-danger"
+                                            >
+                                                삭제
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label class="form-check form-check-inline m-0">
+                                                <input class="form-check-input" type="checkbox">
+                                            </label>
+                                        </td>
+                                        <td class="index_num">1</td>
+                                        <td>
+                                            <input type="hidden" value="1"><!-- index -->
+                                            <button onclick="indexMove(this , 'top')" type="button" class="btn btn-xs btn-secondary"><span class="icon_chevron top">최상단</span></button>
+                                            <button onclick="indexMove(this , 'up')" type="button" class="btn btn-xs btn-secondary"><span class="icon_chevron up">위로</span></button>
+                                            <button onclick="indexMove(this,'down')" type="button" class="btn btn-xs btn-secondary"><span class="icon_chevron down">아래로</span></button>
+                                            <button onclick="indexMove(this,'bottom')" type="button" class="btn btn-xs btn-secondary"><span class="icon_chevron bottom">최하단</span></button>
+                                        </td>
+                                        <td class="hover_cnt">
+                                            <span class="tm_cnt"><img src="/resources/static/dist/img/login_banner3.jpg" alt=""></span>
+                                            <div class="hover_layer"><img src="/resources/static/dist/img/login_banner3.jpg" alt=""></div>
+                                        </td>
+                                        <td class="text-start">
+                                            <a href="/resources/static/html/shop/quick_modify.html" class="short_cut list_link" style="max-width:450px;">
+                                                2024 추석 배너
+                                            </a>
+                                        </td>
+                                        <td>노출함</td>
+                                        <td>2024-08-21 11:11:11 ~<br/>2024-08-21 11:11:11</td>
+                                        <td>
+                                            <button 
+                                            type="button" 
+                                            class="btn btn-xs btn-danger"
+                                            >
+                                                삭제
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="list-btns justify-content-between table_actions">
+                            <div>
+                                <div class="list_count">
+                                    <span class="check_pred_action">선택한 항목을</span>
+                                    <button type="button" class="btn btn-sm ms-1 btn-outline-secondary">
+                                        노출함
+                                    </button>
+                                    <button type="button" class="btn btn-sm ms-1 btn-outline-secondary">
+                                        노출안함
+                                    </button>
+                                    <span class="ms-1">|</span>
+                                    <button type="button" class="btn btn-sm ms-1 btn-outline-warning">
+                                        삭제
+                                    </button>
+                                    <span class="ms-1">|</span>
+                                    <div class="input-group d-inline-flex w-33 ms-1">
+                                        <span class="input-group-text text">진열순서</span>
+                                        <input type="tel" class="form-control w">
+                                        <span class="input-group-text text">로</span>
+                                        <button type="button" class="btn btn-sm btn-secondary" onclick="indexMoveInput(this);">
+                                            변경
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 콘텐츠 끝 -->
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 공통영역 -->
+    <div id="footer"></div>
+    <script>
+        //헤더&푸터 개발 완료시 삭제해주세요
+        var includePath = "/resources/static/layout/footer.html";
+        includeFile(includePath, 'footer');
+    </script>
+    <!-- //공통영역 -->
+</div>
+<script src="/resources/static/dist/js/tabler.min.js"></script>
+
+<script>
+function indexMove(button, move) {
+    const row = button.closest('tr');
+    const table = row.closest('tbody');
+    const rows = Array.from(table.querySelectorAll('tr'));
+    const index = rows.indexOf(row);
+
+    switch (move) {
+        case 'top':
+            if (index > 0) {
+                table.insertBefore(row, rows[0]);
+            }
+            break;
+        case 'up':
+            if (index > 0) {
+                table.insertBefore(row, rows[index - 1]);
+            }
+            break;
+        case 'down':
+            if (index < rows.length - 1) {
+                table.insertBefore(row, rows[index + 2]);
+            }
+            break;
+        case 'bottom':
+            if (index < rows.length - 1) {
+                table.appendChild(row);
+            }
+            break;
+    }
+
+    const indexNums = table.querySelectorAll('.index_num');
+    const hiddenInputs = table.querySelectorAll('input[type="hidden"]');
+    let i = indexNums.length;
+    indexNums.forEach(function(num){
+        num.textContent = i;
+        i--;
+    });
+    i = hiddenInputs.length;
+    hiddenInputs.forEach(function(input){
+        input.value = i;
+        i--;
+    });
+}
+
+function indexMoveInput(button) {
+    const inputGroup = button.closest('.input-group');
+    const input = inputGroup.querySelector('input[type="tel"]');
+    const originalValue = parseInt(input.value);
+    const value = reverseValue(originalValue);
+    function reverseValue(val) {
+        const maxValue = document.querySelectorAll('.index_num').length; // 최대값 설정
+        return maxValue - val + 1;
+    }
+    if (isNaN(originalValue) || originalValue < 1) {
+        alert('유효한 순서 번호를 입력해주세요.');
+        return;
+    }
+
+    const table = document.querySelector('.table-responsive table tbody');
+    const rows = Array.from(table.querySelectorAll('tr'));
+    if (originalValue > rows.length) {
+        alert('입력한 순서가 총 행의 수를 초과합니다.');
+        return;
+    }
+
+    const checkedRows = rows.filter(row => row.querySelector('input[type="checkbox"]:checked'));
+    if (checkedRows.length === 0) {
+        alert('이동할 항목을 선택해주세요.');
+        return;
+    }
+    if (checkedRows.length > 1) {
+        alert('이동할 항목을 하나만 선택해주세요.');
+        return;
+    }
+    if(value == rows.length){
+        checkedRows.forEach(row => {
+            table.insertBefore(row, rows[rows.length]);
+        });
+    }else{
+        checkedRows.forEach(row => {
+            if(row.rowIndex < value){
+                table.insertBefore(row, rows[value]);
+            }else{
+                table.insertBefore(row, rows[value - 1]);
+            }
+        });
+    }
+    
+    // 인덱스 번호 재정렬
+    const indexNums = table.querySelectorAll('.index_num');
+    const hiddenInputs = table.querySelectorAll('input[type="hidden"]');
+    let i = indexNums.length;
+    indexNums.forEach(function(num){
+        num.textContent = i;
+        i--;
+    });
+    i = hiddenInputs.length;
+    hiddenInputs.forEach(function(input){
+        input.value = i;
+        i--;
+    });
+
+    input.value = '';
+}
+</script>
+</body>
+</html>

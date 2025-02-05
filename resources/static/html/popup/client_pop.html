@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=1400"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>신세계 관리자</title>
+    <!-- CSS files -->
+    <link href="/resources/static/dist/css/tabler.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/tabler-vendors.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/>
+    <link rel="shortcut icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <script src="/resources/static/dist/js/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/resources/static/dist/libs/litepicker/dist/litepicker.js?1674944402"></script>
+    <script src="/resources/static/dist/js/jquery.validate.js"></script>
+    <!-- Tabler Core -->
+    
+    <script src="/resources/static/dist/js/common.js"></script>
+    <style>
+    :root {
+        --theme-admin-type: #cf3f42;
+        /* #cf3f42 통합관리자 컬러 코드*/
+        /* #4b9b52 협력회사 컬러 코드 */
+        /* #214c9c 고객사 컬러 코드 */
+    }
+    </style>
+</head>
+<body>
+
+<div class="popup-wrapper">
+    <h2 class="popup-title">고객사 (<strong id="selectedCount" class="text-primary">6</strong>건)</h2>
+    <div class="row">
+        <div class="card">
+            <div class="card-body">
+                <div class="seasrch_popup">
+                    <form action="" onsubmit="filterRows(event)">
+                        <div class="search_options">
+                            <div class="option_item w100">
+                                <div class="subheader">고객사명</div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <input type="text" class="form-control" id="searchInput" placeholder="고객사명을 입력하면 자동검색 됩니다." oninput="filterRows(event);">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="search_btns">
+                            <button type="button" class="btn btn-secondary" id="resetBtn" onclick="resetFilter();">
+                                검색 초기화
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="card table-mb-card">
+                    <div class="table-responsive">
+                        <table class="table table-vcenter table-line card-table text-center table-mb label-control tr_hover">
+                            <colgroup>
+                                <col style="width:80px;">
+                                <col>
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th>번호</th>
+                                    <th>고객사</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rightTableBody">
+                                <tr data-id="222">
+                                    <td>20</td>
+                                    <td class="text-start">시크릿스토어2</td>
+                                </tr>
+                                <tr data-id="234">
+                                    <td>19</td>
+                                    <td class="text-start">스마일</td>
+                                </tr>
+                                <tr data-id="432">
+                                    <td>18</td>
+                                    <td class="text-start">에스씨케이컴퍼니</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="list-btns justify-content-between mt-2">
+            <div>
+            </div>
+            <div>
+                <button type="button" class="btn btn-secondary" onclick="window.close();">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    const rightTableBody = document.getElementById('rightTableBody');
+    const searchInput = document.getElementById('searchInput');
+
+    // 선택고객사 검색
+    function filterRows(event) {
+        event.preventDefault();
+        const searchTerm = searchInput.value.toLowerCase();
+        rightTableBody.querySelectorAll('tr').forEach(row => {
+            const customerName = row.cells[1].textContent.toLowerCase();
+            if (customerName.includes(searchTerm)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    }
+
+    // 선택고객사 검색 초기화
+    function resetFilter() {
+        searchInput.value = '';
+        rightTableBody.querySelectorAll('tr').forEach(row => {
+            row.style.display = '';
+        });
+    }
+</script>
+</script>
+<script src="/resources/static/dist/js/tabler.min.js"></script>
+</body>
+</html>

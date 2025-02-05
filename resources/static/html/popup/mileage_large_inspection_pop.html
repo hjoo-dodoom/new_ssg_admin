@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=1400"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>신세계 관리자</title>
+    <!-- CSS files -->
+    <link href="/resources/static/dist/css/tabler.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/tabler-vendors.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/>
+    <link rel="shortcut icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <script src="/resources/static/dist/js/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/resources/static/dist/libs/litepicker/dist/litepicker.js?1674944402"></script>
+    <script src="/resources/static/dist/js/jquery.validate.js"></script>
+    <!-- Tabler Core -->
+    
+    <script src="/resources/static/dist/js/common.js"></script>
+    <style>
+    :root {
+        --theme-admin-type: #cf3f42;
+        /* #cf3f42 통합관리자 컬러 코드*/
+        /* #4b9b52 협력회사 컬러 코드 */
+        /* #214c9c 고객사 컬러 코드 */
+    }
+    </style>
+</head>
+<body>
+
+<div class="popup-wrapper">
+    <!-- 지급 선택 시 -->
+    <h2 class="popup-title">마일리지 대량등록 검수(지급)</h2>
+
+    <!-- 회수 선택 시 -->
+    <h2 class="popup-title">마일리지 대량등록 검수(회수)</h2>
+    <form action="">
+    <div class="row">
+        <div class="text_box">
+            <p class="text-muted fs-5 my-1">※오류체크를 통해 업로드한 파일의 오류내용을 확인해주세요. 오류내용을 모두 수정해야 등록을 할 수 있습니다.</p>
+            <p class="text-muted fs-5 my-1">※마일리지는 숫자만 입력해주세요.</p>
+        </div>
+        <div class="list-btns justify-content-between">
+            <div>
+                <div class="list_count me-2">* 전체 : <strong class="text-primary">111,592</strong>건 / 성공 : <strong class="text-primary">50</strong>건 / 오류 : <strong class="text-danger">50</strong>건</div>
+                <div class="d-flex align-items-center">
+                    <div class="me-2">
+                        <label class="form-check form-check-inline mt-1">
+                            <input class="form-check-input" type="checkbox">
+                            <span class="form-check-label fs-4">오류항목만 보기</span>
+                        </label>
+                    </div>
+                    <p class="text-dark fs-4 text_underline mb-0 me-2">등록된 정보를 수정하는 “□ 중복무시”를 체크하였습니다</p>
+                </div>
+            </div>
+            <div>
+                <div class="d-flex">
+                    <button type="button" class="btn btn-secondary ms-2">오류체크</button>
+                    <button type="button" class="btn btn-warning ms-2">삭제</button>
+                    <button type="button" class="btn btn-primary ms-2">등록</button>
+                    <button type="button" class="btn btn-secondary ms-2" onclick="window.close();">닫기</button>
+                </div>
+                <p class="text-danger fs-4 mb-0 mt-1 text-end"><span class="text-danger">*</span>표기는 필수 입력 항목입니다.</p>
+            </div>
+        </div>
+        <div class="content-area mt-1">
+            <div class="card table-mb-card">
+                <div class="table-responsive">
+                    <table class="table table-vcenter table-line card-table text-center table-mb label-control tr_hover">
+                        <colgroup>
+                            <col style="width:100px;;">
+                            <col style="width:150px;;">
+                            <col style="width:150px;;">
+                            <col>
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>[1]번호</th>
+                                <th class="bg_pink">*[2]아이디</th>
+                                <th class="bg_pink">*[3]마일리지</th>
+                                <th>[4]마일리지 지급사유</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>20</td><!-- 1 -->
+                                <td><input type="text" class="form-control" value="0" style="width:100%;"></td><!-- 2 -->
+                                <td><input type="text" class="form-control bg_pink" value="0" style="width:100%;"></td><!-- 3 -->
+                                <td><input type="text" class="form-control" value="0" style="width:100%;"></td><!-- 4 -->
+                            </tr>
+                            <tr>
+                                <td colspan="100" class="text-start text-danger fw-bold">[3]중복된 아이디입니다. [4]마일리지 금액을 입력해주세요.</td>
+                            </tr>
+                            <tr>
+                                <td>20</td><!-- 1 -->
+                                <td><input type="text" class="form-control bg_pink" value="0" style="width:100%;"></td><!-- 2 -->
+                                <td><input type="text" class="form-control" value="0" style="width:100%;"></td><!-- 3 -->
+                                <td><input type="text" class="form-control" value="0" style="width:100%;"></td><!-- 4 -->
+                            </tr>
+                            <tr>
+                                <td colspan="100" class="text-start text-danger fw-bold">[4]마일리지 금액을 입력해주세요.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="list-btns justify-content-between">
+            <div>
+            </div>
+            <div>
+                <button type="button" class="btn btn-secondary" onclick="window.close();">닫기</button>
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
+<script src="/resources/static/dist/js/tabler.min.js"></script>
+</body>
+</html>

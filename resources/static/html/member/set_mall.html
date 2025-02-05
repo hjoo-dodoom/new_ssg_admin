@@ -1,0 +1,1937 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=1400"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>신세계 관리자</title>
+    <!-- CSS files -->
+    <link href="/resources/static/dist/css/tabler.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/tabler-vendors.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/>
+    <link rel="shortcut icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <script src="/resources/static/dist/js/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/resources/static/dist/libs/litepicker/dist/litepicker.js?1674944402"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="../../dist/libs/apexcharts/dist/apexcharts.js?1674944402" defer></script>
+    <script src="../../dist/libs/jsvectormap/dist/js/jsvectormap.min.js?1674944402" defer></script>
+    <script src="../../dist/libs/jsvectormap/dist/maps/world.js?1674944402" defer></script>
+    <script src="../../dist/libs/jsvectormap/dist/maps/world-merc.js?1674944402" defer></script>
+    <script src="/resources/static/dist/js/jquery.validate.js"></script>
+    <!-- Tabler Core -->
+    <script src="/resources/static/dist/js/ckeditor/ckeditor.js"></script>
+    <script src="/resources/static/dist/js/common.js"></script>
+    <style>
+    :root {
+        --theme-admin-type: #cf3f42;
+        /* #cf3f42 통합관리자 컬러 코드*/
+        /* #4b9b52 협력회사 컬러 코드 */
+        /* #214c9c 고객사 컬러 코드 */
+    }
+    </style>
+</head>
+<body>
+<aside id="header" class="navbar navbar-vertical navbar-expand-lg header_left"></aside>
+<script>
+    //html include
+    function includeFile(path, targetId) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', path, true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById(targetId).innerHTML = xhr.responseText;
+        }
+    };
+    xhr.send();
+    }
+    var includePath = "/resources/static/layout/header.html";
+    includeFile(includePath, 'header');
+</script>
+
+<div class="page-wrapper">
+    <!-- 공통영역2 -->
+    <div class="member_info">
+        <div class="info">
+            <span>관리권한 : 최상위관리자</span>
+            <!-- 통합관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <!-- 협력관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <!-- 고객사관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <span class="login_session">로그인 유지시간 <strong>30:00</strong> <button type="button" class="btn btn-xs btn-primary">연장</button></span>
+            <button type="button" class="btn btn-xs btn-secondary">관리자 매뉴얼 보기</button><!-- 공통 -->
+            <button type="button" class="btn btn-xs btn-secondary">기본양식다운로드</button><!-- 통합,협력사만 -->
+            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/admin_modify_pop.html', '900', '640')">관리자정보수정</button><!-- 공통 -->
+            <button type="button" class="btn btn-xs btn-secondary">보안체크</button><!-- 협력사만 -->
+            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/terms_pop.html', '600', '540')">이용약관</button><!-- 협력사만 -->
+        </div>
+        <div>
+            <a href="javascript:;" class="logout">홍길동(admin_01)님 로그아웃</a>
+            <a href="javascript:;" class="home">홈으로</a>
+        </div>
+    </div>
+
+    <!-- 페이지 히스토리 탭 -->
+    <div class="page-history">
+        <div class="history_toggle">
+            <label class="form-check form-switch">
+                <span class="form-check-label">History</span>
+                <input id="historyUse" class="form-check-input" type="checkbox" >
+            </label>
+        </div>
+        <button class="close_all" type="button" title="히스토리 모두 삭제" onclick="historyRemoveAll();">히스토리 모두 삭제</button>
+    </div>
+    <!-- //공통영역2 -->
+
+    <div class="page-header d-print-none">
+        <div class="container-xl">
+            <div class="row g-2 align-items-center">
+                <div class="col">
+                    <!-- Page pre-title -->
+                    <div class="page-pretitle">
+                        홈 > 회원 > 고객사관리 > 고객사 > 디자인설정 > 기본설정
+                    </div>
+                    <h2 class="page-title">
+                        디자인설정(고객사명출력)
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page body -->
+    <div class="page-body">
+        <div class="container-xl form-container grid_grid4">
+            <form action="">
+            <div class="list-btns justify-content-between align-items-center mb-3">
+                <div>
+                    <div class="display_type mb-0">
+                        <button type="button" class="grid4 active" title="폼 그리드 1x4">폼 그리드 1x4</button>
+                        <button type="button" class="grid3 " title="폼 그리드 1x3">폼 그리드 1x3</button>
+                        <button type="button" class="grid2" title="폼 그리드 1x2">폼 그리드 1x2</button>
+                    </div>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary">확인</button>
+                    <a href="/resources/static/html/member/ptn_member_list.html" class="btn btn-secondary">목록</a>
+                </div>
+            </div>
+
+            <div class="fixed_taps row">
+                <div class="col">
+                    <a href="#section1"
+                        class="btn bg-primary text-light w-100">
+                        기본설정
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="#section4"
+                        class="btn bg-secondary text-light w-100">
+                        포인트설정
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="#section2"
+                        class="btn bg-secondary text-light w-100">
+                        디자인설정
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="#section3"
+                        class="btn bg-secondary text-light w-100">
+                        회원설정
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="#section5"
+                        class="btn bg-secondary text-light w-100">
+                        자동진열
+                    </a>
+                </div>
+            </div>
+
+            <div class="row">
+                <div id="section1"  class="col-12">
+                    <p class="text-muted fs-5 my-1">
+                        <span class="square_color me-1" style="border-color:#5d95ff;"></span>
+                        공통몰 사용 시 하위몰은 
+                        <span class="square_color ms-1" style="border-color:#5d95ff;"></span>
+                        색상 항목은 필수 입력항목 입니다.</p>
+                    <div class="card form_area">
+                        <div class="card-header"><h3 class="card-title">기본설정</h3></div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form_item">
+                                    <div class="subheader mb-1">고객사</div>
+                                    <div class="subcontent">
+                                        <input type="text" class="form-control" value="신세계임직원몰" readonly="">
+                                    </div>
+                                </div>
+                                <div class="form_item lblue">
+                                    <div class="subheader mb-1">사이트구분</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <select class="form-select select-display">
+                                                <option value="" select-display="">선택</option>
+                                                <option value="" select-display="site_type_join">폐쇄형</option>
+                                                <option value="" select-display="site_type_login">오픈형</option>
+                                                <option value="" select-display="">비회원</option>
+                                            </select>
+                                        </div>
+                                        <div class="input-group site_type_join" style="display:none;">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox">
+                                                <span class="form-check-label">회원가입</span>
+                                            </label>
+                                        </div>
+                                        <div class="input-group site_type_login" style="display:none;">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox">
+                                                <span class="form-check-label">로그인 후 가격노출</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">사이트형식</div>
+                                    <div class="subcontent">
+                                        <div>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="site_type" radio-display="">
+                                                <span class="form-check-label">상시몰</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="site_type" radio-display="site_event">
+                                                <span class="form-check-label">한시몰</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item site_event" style="display: none;">
+                                    <div class="subheader mb-1">쇼핑몰 운영기간 (시작)</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <input class="form-control datepicker-icon" placeholder="시작일">
+                                            <input type="text" name="input-mask" class="form-control input-time" data-mask="00:00" data-mask-visible="true" placeholder="00:00" autocomplete="off">
+                                            <span class="input-group-text text">24h</span>
+                                        </div>
+                                    </div>
+                                    <div class="subheader mb-1 mt-2">쇼핑몰 운영기간 (종료)</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <input class="form-control datepicker-icon" placeholder="종료일">
+                                            <input type="text" name="input-mask" class="form-control input-time" data-mask="00:00" data-mask-visible="true" placeholder="00:00" autocomplete="off">
+                                            <span class="input-group-text text">24h</span>
+                                        </div>
+                                    </div>
+                                    <div class="subheader mb-1 mt-2">주문정보 열람일</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <input class="form-control datepicker-icon" placeholder="">
+                                            <input type="text" name="input-mask" class="form-control input-time" data-mask="00:00" data-mask-visible="true" placeholder="00:00" autocomplete="off">
+                                            <span class="input-group-text text">24h</span>
+                                        </div>
+                                    </div>
+                                    <small class="form-hint mt-1">※ 주문정보 열람일부터 협력회사는 회원 주문정보확인이 가능합니다.</small>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">임직원몰</div>
+                                    <div class="subcontent">
+                                        <div>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="employees_use">
+                                                <span class="form-check-label">사용안함</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="employees_use">
+                                                <span class="form-check-label">사용함</span>
+                                            </label>
+                                        </div>
+                                        <small class="form-hint">※ 임직원몰 사용함 : 회원가입 및 6개월 주기 이메일 인증을 진행합니다.</small>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">대량구매몰</div>
+                                    <div class="subcontent">
+                                        <div>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="largemall_use" radio-display="">
+                                                <span class="form-check-label">사용안함</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="largemall_use" radio-display="largemall_use">
+                                                <span class="form-check-label">사용함</span>
+                                            </label>
+                                        </div>
+
+                                        <!-- 대량구매몰 사용함 선택 시 -->
+                                        <div class="largemall_use mt-2" style="display:none;">
+                                            <div class="subcontent" id="uploadFiles">
+                                                <!-- 업로드된 파일이 있는 경우 -->
+                                                <div class="input-group">
+                                                    <input type="file" class="form-control" style="display:none;" onchange="updateFileSize(this);">
+                                                    <input type="text" class="form-control" value="aaaa.zip" data-file-size="370.4" readonly>
+                                                    <button class="btn btn-xs btn-danger" type="button" onclick="removeUploadedFile(this)">기존파일 삭제</button>
+                                                    <span class="input-group-text text">370.4MB</span>
+                                                </div>
+                                                <!-- 업로드된 파일이 없는 경우 -->
+                                                <!-- <div class="input-group">
+                                                    <input type="file" class="form-control" data-file-size="" onchange="updateFileSize(this);">
+                                                    <span class="input-group-text text">0 MB</span>
+                                                </div> -->
+                                            </div>
+                                        </div>
+                                        <!-- //대량구매몰 사용함 선택 시 -->
+                                        <script>
+                                            let fileSizeTotal = 0;
+                                        
+                                            function updateFileSize(elm) {
+                                                const file = elm.files[0];
+                                                if (file) {
+                                                    const fileSize = file.size / (1024 * 1024); // MB 단위로 변환
+                                                    elm.setAttribute('data-file-size', fileSize.toFixed(2));
+                                                    const fileSizeText = `${fileSize.toFixed(2)} MB`;
+                                                    const inputGroup = elm.closest('.input-group');
+                                                    const fileSizeSpan = inputGroup.querySelector('.input-group-text');
+                                                    fileSizeSpan.textContent = fileSizeText;
+                                                    updateTotalFileSize();
+                                                }
+                                            }
+                                        
+                                            function updateTotalFileSize() {
+                                                fileSizeTotal = 0;
+                                                document.querySelectorAll('#uploadFiles .input-group').forEach(function(item) {
+                                                    let fileItem;
+                                                    const inputFile = item.querySelector('input[type="file"]');
+                                                    const inputText = item.querySelector('input[type="text"]');
+                                                    if (inputText) {
+                                                        fileItem = inputText;
+                                                    } else if (inputFile) {
+                                                        fileItem = inputFile;
+                                                    };
+                                                    const fileSize = parseFloat(fileItem.getAttribute('data-file-size')) || 0;
+                                                    fileSizeTotal += fileSize;
+                                                });
+                                                console.log(fileSizeTotal)
+                                                if (fileSizeTotal > 400) {
+                                                    alert('총 파일 용량이 400MB를 초과합니다. 파일을 제거하거나 용량을 줄여주세요.');
+                                                }
+                                            }
+                                        
+                                            window.onload = function() {
+                                                updateTotalFileSize();
+                                            };
+                                        
+                                            function addFile() {
+                                                const uploadFiles = document.getElementById('uploadFiles');
+                                                const fileHtml = `
+                                                    <div class="input-group">
+                                                        <input type="file" class="form-control" data-file-size="" onchange="updateFileSize(this);">
+                                                        <span class="input-group-text text">0 MB</span>
+                                                        <button class="btn btn-xs btn-warning" type="button" onclick="removeFile(this)">삭제</button>
+                                                    </div>
+                                                `;
+                                                uploadFiles.insertAdjacentHTML('beforeend', fileHtml);
+                                            }
+                                        
+                                            //업로드 있었던 파일 삭제
+                                            function removeUploadedFile(button) {
+                                                const inputGroup = button.closest('.input-group');
+                                                const inputFile = inputGroup.querySelector('input[type="file"]');
+                                                const inputUploadedFileName = inputGroup.querySelector('input[type="text"]');
+                                                const fileSize = parseFloat(inputUploadedFileName.getAttribute('data-file-size'));
+                                                const fileSizeSpan = inputGroup.querySelector('.input-group-text');
+                                                fileSizeSpan.textContent = '0MB';
+                                                fileSizeTotal -= fileSize;
+                                                inputFile.style.display = 'block';
+                                                inputUploadedFileName.remove();
+                                                button.remove();
+                                                updateTotalFileSize();
+                                            }
+                                        
+                                            function removeFile(button) {
+                                                const uploadFiles = document.getElementById('uploadFiles');
+                                                const inputGroup = button.closest('.input-group');
+                                                const inputFile = inputGroup.querySelector('input[type="file"]');
+                                                const fileSize = parseFloat(inputFile.getAttribute('data-file-size')) || 0;
+                                                const fileSizeSpan = inputGroup.querySelector('.input-group-text');
+                                                const inputGroups = Array.from(uploadFiles.children);
+                                                const index = inputGroups.indexOf(inputGroup);
+                                                if (index === 0) {//첫번째 input이면 삭제 안하고 값만 초기화함.
+                                                    if(inputGroup.querySelector('input[type="text"]')){
+                                                        //첫번째 첨부파일이면서 기존파일 업로드가 있는경우 return false
+                                                        alert(`첫번째 첨부파일의 경우 기존파일 삭제만 가능합니다.`)
+                                                        return false;
+                                                    }
+                                                    inputGroup.querySelector('input').value = '';
+                                                    fileSizeSpan.textContent = '0MB';
+                                                } else {
+                                                    inputGroup.remove();
+                                                }
+                                                fileSizeTotal -= fileSize;
+                                                updateTotalFileSize();
+                                            }
+                                        </script>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">공통몰</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <div class="search_select">
+                                                <input type="hidden">
+                                                <button type="button" class="btn_select form-select text-start" onclick="searchSelectOpen(this);">선택</button>
+                                                <div class="search_select_options" style="display:none;">
+                                                    <input type="text" class="form-control" placeholder="검색어 입력" oninput="searchSelectSearch(this);">
+                                                    <div class="items">
+                                                        <div class="item"><a href="javascript:;" data-id="" class="active" onclick="searchSelectSelect(this);resetUnderSelect(this);">선택</a></div>
+                                                        <div class="item"><a href="javascript:;" data-id="code326778265y" onclick="searchSelectSelect(this);resetUnderSelect(this);">공통몰1</a></div>
+                                                        <div class="item"><a href="javascript:;" data-id="code47332ey" onclick="searchSelectSelect(this);resetUnderSelect(this);">공통몰2</a></div>
+                                                        <div class="item"><a href="javascript:;" data-id="code3567212y" onclick="searchSelectSelect(this);resetUnderSelect(this);">공통몰3</a></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <small class="form-hint">※ 상위몰을 선택해주세요</small>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">제휴몰</div>
+                                    <div class="subcontent">
+                                        <button class="btn bg-secondary text-light btn-sm" type="button" onclick="windowPopup('/resources/static/html/popup/client_search_pop.html', '920', '605')">
+                                        고객사 선택(10)
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="form_item ">
+                                    <div class="subheader mb-1">주문방식</div>
+                                    <div class="subcontent">
+                                        <div>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="order_type" radio-display="">
+                                                <span class="form-check-label">일반</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="order_type" radio-display="order_type">
+                                                <span class="form-check-label">취합</span>
+                                            </label>
+                                        </div>
+                                        <!-- 취합 선택 시 -->
+                                        <div class="order_type mt-2" style="display: none;">
+                                            <table class="table table-vcenter table-line card-table table-mb">
+                                                <colgroup>
+                                                    <col style="width:100px;">
+                                                    <col>
+                                                </colgroup>
+                                                <tbody>
+                                                    <tr>
+                                                        <th>취합 후 결제일<br/>(시작일)</th>
+                                                        <td>
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control datepicker-icon" value="2024-08-21">
+                                                                <input type="text" class="form-control input-time" data-mask="00:00" data-mask-visible="true" placeholder="00:00" autocomplete="off">
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>취합 후 결제일<br/>(종료일)</th>
+                                                        <td>
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control datepicker-icon" value="2024-08-21">
+                                                                <input type="text" class="form-control input-time" data-mask="00:00" data-mask-visible="true" placeholder="00:00" autocomplete="off">
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>결제수단</th>
+                                                        <td>
+                                                            <div>
+                                                                <label class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="checkbox" id="paymentCard2">
+                                                                    <span class="form-check-label">신용카드</span>
+                                                                </label>
+                                                                <label class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="checkbox" id="paymentTransfer2">
+                                                                    <span class="form-check-label">가상계좌</span>
+                                                                </label>
+                                                                <label class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="checkbox" id="paymentTransfer2">
+                                                                    <span class="form-check-label">실시간계좌이체</span>
+                                                                </label>
+                                                                <label class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="checkbox"id="paymentSsg2">
+                                                                    <span class="form-check-label">SSG PAY</span>
+                                                                </label>
+                                                                <label class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="checkbox"id="paymentEasy2">
+                                                                    <span class="form-check-label">간편결제</span>
+                                                                </label>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- //취합 선택 시 -->
+                                    </div>
+                                </div>
+                                <div class="form_item lblue">
+                                    <div class="subheader mb-1">결제수단</div>
+                                    <div class="subcontent">
+                                        <div>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" id="paymentCard">
+                                                <span class="form-check-label">신용카드</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" id="paymentTransfer">
+                                                <span class="form-check-label">실시간계좌이체</span>
+                                            </label>
+                                            <label class="form-check form-check-inline d-flex align-items-center">
+                                                <input class="form-check-input" type="checkbox" id="paymentDeduct">
+                                                <span class="form-check-label">급여공제</span>
+                                                <input type="text" class="form-control w-auto ms-1" id="paymentDeductName" placeholder="급여공제 명칭" readonly>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox"id="paymentSsg">
+                                                <span class="form-check-label">SSG PAY</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox"id="paymentEasy">
+                                                <span class="form-check-label">간편결제</span>
+                                            </label>
+                                        </div>
+                                        <script>
+                                            //결제수단 급여공제 체크 시
+                                            const paymentDeduct = document.getElementById('paymentDeduct');
+                                            const paymentDeductName = document.getElementById('paymentDeductName');
+                                            paymentDeduct.addEventListener('change', function() {
+                                                if (paymentDeduct.checked) {
+                                                    paymentDeductName.removeAttribute('readonly');
+                                                }else{
+                                                    paymentDeductName.setAttribute('readonly', true);
+                                                    paymentDeductName.value = '';
+                                                }
+                                            });
+                                        </script>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">주문횟수</div>
+                                    <div class="subcontent">
+                                        <div>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="order_limit">
+                                                <span class="form-check-label">제한없음</span>
+                                            </label>
+                                            <label class="form-check form-check-inline d-flex align-items-center">
+                                                <input class="form-check-input" type="radio" id="orderLimitRadio" name="order_limit">
+                                                <input type="tel" class="form-control w-5 ms-1 text-end" id="orderLimitInput" readonly="">
+                                                <span class="form-check-label">회 이하로 제한함</span>
+                                            </label>
+                                        </div>
+                                        <script>
+                                            //주문횟수 제한 체크 시
+                                            const orderLimit = document.querySelectorAll('input[name="order_limit"]');
+                                            const orderLimitRadio = document.getElementById('orderLimitRadio');
+                                            const orderLimitInput = document.getElementById('orderLimitInput');
+                                                orderLimit.forEach(function(elm){
+                                                    elm.addEventListener('change', function() {
+                                                    if (orderLimitRadio.checked) {
+                                                        orderLimitInput.removeAttribute('readonly');
+                                                    }else{
+                                                        orderLimitInput.setAttribute('readonly', true);
+                                                        orderLimitInput.value = '';
+                                                    }
+                                                });
+                                            });
+                                        </script>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">주문상품 수량제한</div>
+                                    <div class="subcontent">
+                                        <table class="table table-vcenter table-line card-table table-mb">
+                                            <colgroup>
+                                                <col style="width:80px;">
+                                                <col>
+                                            </colgroup>
+                                            <tbody>
+                                                <tr>
+                                                    <th>최소 주문수량</th>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="tel" name="" class="form-control text-end" value="">
+                                                            <span class="input-group-text text">개</span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>최대 주문수량</th>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <label class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio" id="limitLotNo" name="limit_lot" checked="">
+                                                                <span class="form-check-label">제한없음</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="input-group">
+                                                            <label class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio" id="limitLotYes" name="limit_lot">
+                                                                <span class="form-check-label">제한있음</span>
+                                                            </label>
+                                                            <input type="tel" class="form-control" id="limitLotInput" readonly="true">
+                                                            <span class="input-group-text text">개 이하로 제한함</span>
+                                                        </div>
+                                                        <script>
+                                                            //최대 주문수량 각 항목 체크 시
+                                                            const limitLot = document.querySelectorAll('input[name="limit_lot"]');
+                                                            const limitLotNo = document.getElementById('limitLotNo');
+                                                            const limitLotYes = document.getElementById('limitLotYes');
+                                                            const limitLotInput = document.getElementById('limitLotInput');
+                                                            function lotLimitCheck(){
+                                                                if (limitLotYes.checked) {
+                                                                    limitLotInput.removeAttribute('readonly');
+                                                                    limitLotInput.value = '';
+                                                                }else if(!limitLotYes.checked) {
+                                                                    limitLotInput.setAttribute('readonly', true);
+                                                                    limitLotInput.value = '';
+                                                                }
+                                                            }
+                                                            limitLot.forEach(function (item) {
+                                                                item.addEventListener('change', function() {
+                                                                    lotLimitCheck()
+                                                                });
+                                                            });
+                                                            lotLimitCheck()
+                                                        </script>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="form_item">
+                                    <div class="subheader mb-1">주문금액 제한</div>
+                                    <div class="subcontent">
+                                        <div>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="limit_price" id="limit_price1">
+                                                <span class="form-check-label">제한없음</span>
+                                            </label>
+                                            <label class="form-check form-check-inline d-flex align-items-center">
+                                                <input class="form-check-input" type="radio" name="limit_price" id="limit_price2">
+                                                <span class="form-check-label">최대주문금액</span>
+                                                <input type="text" class="form-control w-auto ms-1" id="limit_price2_input" readonly>
+                                                원
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="limit_price" id="limit_price3">
+                                                <span class="form-check-label d-inline-flex">상품별 최대주문금액</span>
+                                                <button 
+                                                    class="btn bg-secondary text-light btn-sm" type="button"
+                                                    onclick="windowPopup('/resources/static/html/popup/goods_limit_price_pop.html', '700', '550')"
+                                                >
+                                                상품검색(0)
+                                                </button>
+                                            </label>
+                                        </div>
+                                        <script>
+                                            //주문횟수 제한 체크 시
+                                            const limit_price = document.querySelectorAll('input[name="limit_price"]');
+                                            const limit_price2 = document.getElementById('limit_price2');
+                                            const limit_price2_input = document.getElementById('limit_price2_input');
+                                                limit_price.forEach(function(elm){
+                                                    elm.addEventListener('change', function() {
+                                                    if (limit_price2.checked) {
+                                                        limit_price2_input.removeAttribute('readonly');
+                                                    }else{
+                                                        limit_price2_input.setAttribute('readonly', true);
+                                                        limit_price2_input.value = '';
+                                                    }
+                                                });
+                                            });
+                                        </script>
+                                    </div>
+                                </div>
+
+                                <div class="form_item size_lg">
+                                    <div class="subheader mb-1">도메인</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <input class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="subheader mb-1 mt-2">사이트홈</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <input type="text" readonly class="form-control">
+                                            <button class="btn btn-xs btn-warning" type="button">삭제</button>
+                                            <button type="button" class="btn btn-xs btn-secondary" 
+                                            onclick="windowPopup('/resources/static/html/popup/exhibitions_brand_pop.html', '600', '650')">
+                                                기획전/브랜드관
+                                            </button>
+                                            <button type="button" class="btn btn-xs btn-secondary" 
+                                            onclick="windowPopup('/resources/static/html/popup/roulette_attendance_pop.html', '600', '650')">
+                                            룰렛/출석체크
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="section4" class="col-12">
+                    <div class="card form_area">
+                        <div class="card-header"><h3 class="card-title">포인트 설정</h3></div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form_item lblue">
+                                    <div class="subheader mb-1">포인트사용</div>
+                                    <div class="subcontent">
+                                        <div>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="point_use">
+                                                <span class="form-check-label">사용안함</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="point_use">
+                                                <span class="form-check-label">사용함</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item lblue">
+                                    <div class="subheader mb-1">명칭</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="포인트">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item lblue">
+                                    <div class="subheader mb-1">표기방식</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="원">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item lblue">
+                                    <div class="subheader mb-1">소멸예정표기 사용</div>
+                                    <div class="subcontent">
+                                        <div>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="extinct_point_display">
+                                                <span class="form-check-label">사용안함</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="extinct_point_display">
+                                                <span class="form-check-label">사용함</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item lblue">
+                                    <div class="subheader mb-1">포인트 사용방식
+                                        <div class="info_hover">
+                                            <button type="button" class="info_btn">도움말 보기</button>
+                                            <div class="info_cnt" style="width: 400px;">
+                                                <p>자동차감: 사용 가능 포인트 = 주문금액 - 포인트 사용 제한 금액</p>
+                                                <p>필수차감: 사용 가능 포인트 = 포인트 사용 제한 금액</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="subcontent">
+                                        <div>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="use_point_type">
+                                                <span class="form-check-label">회원 직접입력</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="use_point_type">
+                                                <span class="form-check-label">자동차감(결제수단보다 포인트를 자동 선 차감합니다)</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="use_point_type">
+                                                <span class="form-check-label">필수차감(상품구매 합계 만큼 자동 차감합니다)</span>
+                                            </label>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                <div class="form_item lblue">
+                                    <div class="subheader mb-1">상품구매 합계</div>
+                                    <div class="subcontent">
+                                        <div>
+                                            <div class="input-group">
+                                                <label class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" id="" name="radio_buy_total">
+                                                </label>
+                                                <span class="input-group-text text">주문구매금액 합계가</span>
+                                                <input class="form-control text-end" type="tel" data-amount-comma>
+                                                <span class="input-group-text text">원 이상인 경우 포인트 사용</span>
+                                            </div>
+                                            <div class="input-group">
+                                                <label class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" id="" name="radio_buy_total">
+                                                </label>
+                                                <span class="input-group-text text">주문금액 대비</span>
+                                                <input class="form-control text-end" type="tel" data-amount-comma>
+                                                <span class="input-group-text text">%인 경우 포인트 사용</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item lblue">
+                                    <div class="subheader mb-1">보유 포인트</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <input class="form-control text-end" type="tel" data-amount-comma>
+                                            <span class="input-group-text text">원 이상 포인트를 보유한 경우 사용</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item lblue">
+                                    <div class="subheader mb-1">포인트 사용한도</div>
+                                    <div class="subcontent">
+                                        <div>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" id="pointLimitNoLimit" name="point_limit">
+                                                <span class="form-check-label">한도 제한 없음</span>
+                                            </label>
+
+                                            <label class="form-check form-check-inline d-flex align-items-center">
+                                                <input class="form-check-input" type="radio" id="pointLimitLimit" name="point_limit">
+                                                <span class="form-check-label">구매금액 합계의 </span>
+                                                <input type="tel" class="form-control w-5 ms-1 text-end" id="pointLimitInput">
+                                                <span class="form-check-label">% 까지만 사용가능</span>
+                                            </label>
+                                        </div>
+                                        <script>
+                                            //포인트 사용한도 체크 시
+                                            const pointLimitNoLimit = document.getElementById('pointLimitNoLimit');
+                                            const pointLimitLimit = document.getElementById('pointLimitLimit');
+                                            const pointLimitInput = document.getElementById('pointLimitInput');
+                                            function pointLimitCheck(){
+                                                if (pointLimitLimit.checked) {
+                                                        pointLimitInput.removeAttribute('readonly');
+                                                }else{
+                                                    pointLimitInput.setAttribute('readonly', true);
+                                                    pointLimitInput.value = '';
+                                                }
+                                            }
+                                            pointLimitNoLimit.addEventListener('change', pointLimitCheck);
+                                            pointLimitLimit.addEventListener('change', pointLimitCheck);
+
+                                            // 초기 상태 설정
+                                            pointLimitCheck();
+                                        </script>
+                                    </div>
+                                </div>
+                                <div class="form_item lblue">
+                                    <div class="subheader mb-1">사용불가 카테고리</div>
+                                    <div class="subcontent">
+                                        <button 
+                                        class="btn bg-secondary text-light btn-sm" 
+                                        type="button" 
+                                        onclick="windowPopup('/resources/static/html/popup/category_set_pop.html', '920', '650')"
+                                        >
+                                        카테고리(10)
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="section2" class="col-12">
+                    <div class="card form_area">
+                        <div class="card-header"><h3 class="card-title">디자인설정</h3></div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form_item">
+                                    <div class="subheader mb-1">아이콘 노출</div>
+                                    <div class="subcontent">
+                                        <div>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" disabled checked>
+                                                <span class="form-check-label">검색</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" disabled checked>
+                                                <span class="form-check-label">로그아웃</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" disabled checked>
+                                                <span class="form-check-label">주문배송조회</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" disabled checked>
+                                                <span class="form-check-label">고객센터</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" disabled checked>
+                                                <span class="form-check-label">마이페이지</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox">
+                                                <span class="form-check-label">장바구니</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox">
+                                                <span class="form-check-label">위시리스트</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox">
+                                                <span class="form-check-label">공지사항 알림</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">퀵메뉴 노출</div>
+                                    <div class="subcontent">
+                                        <div>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" disabled checked>
+                                                <span class="form-check-label">최근본상품</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox">
+                                                <span class="form-check-label">재판매금지</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item size_lg">
+                                    <div class="subheader mb-1">가격노출</div>
+                                    <div class="subcontent">
+                                        <p class="text-mustad">※ “가격노출안함" 선택 시 쇼핑몰 모든 페이지에 포인트/마일리지/쿠폰 포함 상품 가격이 노출되지 않습니다.</p>
+                                        <div>
+                                            <label class="form-check">
+                                                <input class="form-check-input" type="radio" id="displayPriceUnuse" name="display_price" value="1">
+                                                <span class="form-check-label">가격노출안함</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" id="displayPriceUse" name="display_price" value="2">
+                                                <span class="form-check-label">가격노출함</span>
+                                            </label>
+                                            (
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input display_price_use_checkbox" type="checkbox" id="">
+                                                <span class="form-check-label">공급가</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input display_price_use_checkbox" type="checkbox" id="">
+                                                <span class="form-check-label">인터넷최저가</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input display_price_use_checkbox" type="checkbox" id="">
+                                                <span class="form-check-label">소비자가</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input display_price_use_checkbox" type="checkbox" id="">
+                                                <span class="form-check-label">판매가</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input display_price_use_checkbox" type="checkbox" id="">
+                                                <span class="form-check-label">부가세</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input display_price_use_checkbox" type="checkbox" id="">
+                                                <span class="form-check-label">포인트</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input display_price_use_checkbox" type="checkbox" id="">
+                                                <span class="form-check-label">마일리지</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input display_price_use_checkbox" type="checkbox" id="">
+                                                <span class="form-check-label">쿠폰</span>
+                                            </label>
+                                            )
+                                        </div>
+                                        <script>
+                                            // 가격노출 체크 시
+                                            const displayPriceUnuse = document.getElementById('displayPriceUnuse');
+                                            const displayPriceUse = document.getElementById('displayPriceUse');
+                                            const displayPriceUseCheckboxes = document.querySelectorAll('.display_price_use_checkbox');
+                                            function displayPriceUseCheck() {
+                                                let useStatus = true;
+                                                if(displayPriceUse.checked){
+                                                    useStatus = false;
+                                                }
+                                                displayPriceUseCheckboxes.forEach(function(checkbox){
+                                                    checkbox.disabled = useStatus
+                                                    if(useStatus){
+                                                        checkbox.checked = false;
+                                                    }
+                                                    console.log(useStatus)
+                                                });
+                                            }
+                                            displayPriceUnuse.addEventListener('change', displayPriceUseCheck);
+                                            displayPriceUse.addEventListener('change', displayPriceUseCheck);
+
+                                            // 초기 상태 설정
+                                            displayPriceUseCheck();
+                                        </script>
+                                    </div>
+                                </div>
+                                <div class="form_item lblue">
+                                    <div class="subheader mb-1">주 색상</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <input type="color" class="form-control form-control-color w-100" value="#f22c2d">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item lblue">
+                                    <div class="subheader mb-1">로고</div>
+                                    <div class="subcontent">
+                                        <!-- 
+                                        등록된 이미지가 있을 경우 
+                                        preview_image -> display:block;
+                                        preview_image img -> 이미지 경로
+                                        file_name -> 파일명 출력
+                                        -->
+                                        <div class="photo_input_box">
+                                            <div class="preview_image" style="display:none;">
+                                                <img src="" alt="">
+                                            </div>
+                                            <div class="photo_input">
+                                                <label class="input-group file_name_input">
+                                                    <span class="file_name form-control">파일을 선택해주세요.</span>
+                                                    <span class="file_btn btn btn-xs btn-secondary">파일선택</span>
+                                                    <input type="file">
+                                                    <button class="btn bg-warning text-light btn-sm" type="button" onclick="removePhotoFile(this)">
+                                                    삭제
+                                                    </button>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form_item size_xl lblue">
+                                    <div class="subheader mb-1">로그인배너</div>
+                                    <div class="subcontent">
+                                        <div class="table-responsive mt-2">
+                                            <table class="table table-vcenter table-line card-table text-center table-mb">
+                                                <colgroup>
+                                                    <col style="width:90px;">
+                                                    <col>
+                                                    <col>
+                                                    <col style="width:120px;">
+                                                </colgroup>
+                                                <thead class="dark">
+                                                    <tr>
+                                                        <th>순서</th>
+                                                        <th>배너(규칙 : 1028px * 85px)</th>
+                                                        <th>노출</th>
+                                                        <th>삭제/추가</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="loginBannerTbody">
+                                                    <tr>
+                                                        <td>
+                                                            <input type="hidden" value="1">
+                                                            <button onclick="indexUp(this , 'loginBannerTbody')" type="button" class="btn btn-xs btn-secondary">▲</button>
+                                                            <button onclick="indexDown(this,'loginBannerTbody')" type="button" class="btn btn-xs btn-secondary">▼</button>
+                                                        </td>
+                                                        <td>
+                                                            <!-- 
+                                                            등록된 이미지가 있을 경우 
+                                                            preview_image -> display:block;
+                                                            preview_image img -> 이미지 경로
+                                                            file_name -> 파일명 출력
+                                                            -->
+                                                            <div class="photo_input_box">
+                                                                <div class="preview_image" style="display:none;">
+                                                                    <img src="" alt="" style="max-height:140px;">
+                                                                </div>
+                                                                <div class="photo_input">
+                                                                    <label class="input-group file_name_input">
+                                                                        <span class="file_name form-control">파일을 선택해주세요.</span>
+                                                                        <span class="file_btn btn btn-xs btn-secondary">파일선택</span>
+                                                                        <input type="file">
+                                                                        <button class="btn bg-warning text-light btn-sm" type="button" onclick="removePhotoFile(this)">
+                                                                        삭제
+                                                                        </button>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <label class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox">
+                                                                <span class="form-check-label">노출함</span>
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <button onclick="addOption('next', this , 'loginBannerTbody')" type="button" class="btn btn-xs btn-primary">추가</button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <script>
+                                            function createOptionRow(target) {
+                                                const row = document.createElement('tr');
+                                                row.innerHTML = `
+                                                    <td>
+                                                        <input type="hidden" value="0">
+                                                        <button onclick="indexUp(this , '${target}')" type="button" class="btn btn-xs btn-secondary">▲</button>
+                                                        <button onclick="indexDown(this,'${target}')" type="button" class="btn btn-xs btn-secondary">▼</button>
+                                                    </td>
+                                                    <td>
+                                                        <!-- 
+                                                        등록된 이미지가 있을 경우 
+                                                        preview_image -> display:block;
+                                                        preview_image img -> 이미지 경로
+                                                        file_name -> 파일명 출력
+                                                        -->
+                                                        <div class="photo_input_box">
+                                                            <div class="preview_image" style="display:none;">
+                                                                <img src="" alt="" style="max-height:140px;">
+                                                            </div>
+                                                            <div class="photo_input">
+                                                                <label class="input-group file_name_input">
+                                                                    <span class="file_name form-control">파일을 선택해주세요.</span>
+                                                                    <span class="file_btn btn btn-xs btn-secondary">파일선택</span>
+                                                                    <input type="file">
+                                                                    <button class="btn bg-warning text-light btn-sm" type="button" onclick="removePhotoFile(this)">
+                                                                    삭제
+                                                                    </button>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <label class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox">
+                                                            <span class="form-check-label">노출함</span>
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <button onclick="removeOption(this ,'${target}')" type="button" class="btn btn-xs btn-warning">삭제</button>
+                                                        <button onclick="addOption('next', this , '${target}')" type="button" class="btn btn-xs btn-primary">추가</button>
+                                                    </td>
+                                                `;
+                                                return row;
+                                            }
+
+                                            function addOption(position, element, target) {
+                                                const tableBody = document.getElementById(target);
+                                                const newRow = createOptionRow(target);
+
+                                                if (position === 'next' && element) {
+                                                    const currentRow = element.closest('tr');
+                                                    currentRow.parentNode.insertBefore(newRow, currentRow.nextSibling);
+                                                } else {
+                                                    tableBody.appendChild(newRow);
+                                                }
+                                                updateIndex(target);
+                                                photoFileInput();//동적 추가된 배너  사진이벤트 추가
+                                            }
+
+                                            function removeOption(element, target) {
+                                                const row = element.closest('tr');
+                                                row.parentNode.removeChild(row);
+                                                const tableBody = document.getElementById(target);
+                                                updateIndex(target);
+                                            }
+
+                                            function indexUp(element, target) {
+                                                const row = element.closest('tr');
+                                                const previousRow = row.previousElementSibling;
+                                                row.parentNode.insertBefore(row, previousRow);
+                                                updateIndex(target);
+                                            }
+
+                                            function indexDown(element, target) {
+                                                const row = element.closest('tr');
+                                                const nextRow = row.nextElementSibling;
+                                                if (nextRow) {
+                                                    row.parentNode.insertBefore(nextRow, row);
+                                                }
+                                                updateIndex(target);
+                                            }
+                                            function updateIndex(target) {
+                                                const rows = document.querySelectorAll('#' + target + ' tr');
+                                                rows.forEach((row, index) => {
+                                                    const hiddenInput = row.querySelector('input[type="hidden"]');
+                                                    if (hiddenInput) {
+                                                        hiddenInput.value = index + 1;
+                                                    }
+                                                });
+                                            }
+                                        </script>
+                                    </div>
+                                </div>
+
+                                <div class="form_item size_xl">
+                                    <div class="subheader mb-1">로그인설명</div>
+                                    <div class="subcontent">
+                                        <p class="text-mustad my-2 fs-4">※ 입력한 설명문구는 로그인화면 하단에 노출됩니다</p>
+                                        <textarea class="ckeditor" name="editor1"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form_item size_xl">
+                                    <div class="subheader mb-1">배송정보</div>
+                                    <div class="subcontent">
+                                        <p class="text-mustad my-2 fs-4">※ 입력한 배송정보는 쇼핑몰 상품상세페이지 최상단에 일괄 노출됩니다</p>
+                                        <textarea class="ckeditor" name="editor2"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form_item size_xl">
+                                    <div class="subheader mb-1">교환 및 반품정보</div>
+                                    <div class="subcontent">
+                                        <p class="text-mustad my-2 fs-4">※ 입력한 교환 및 반품정보는 쇼핑몰 상품상세페이지 최상단에 일괄 노출됩니다</p>
+                                        <textarea class="ckeditor" name="editor3"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form_item size_xl">
+                                    <div class="subheader mb-1">푸터색상</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <span class="input-group-text text">폰트색상</span>
+                                            <input type="color" id="footerColor" class="form-control form-control-color" value="#ffffff">
+                                            <span class="input-group-text text">배경색상</span>
+                                            <input type="color" id="footerBacgrkound" class="form-control form-control-color" value="#1E2023">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item size_xl">
+                                    <div class="subheader mb-1">푸터내용</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <textarea name="" id="footerText" class="form-control">서울시 서초구 신반포로 194 고속버스터미널 신관  |  대표이사 : OOO  |  개인정보관리 책임자 : OOO  | 사업자등록번호 : 123-123-123
+고객만족센터 TEL : 00-0000-0000  |  FAX : 00-0000-0000  |  운영시간 : 평일 10:00 ~ 17:00 (점심시간  12:00~13:00)</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item size_xl">
+                                    <div class="subheader mb-1">푸터 미리보기 <span class="text-danger">(실제 사용자 화면과 다를 수 있습니다.)</span></div>
+                                    <div class="subcontent">
+                                        <!-- 저장된 값이 있을시  footerSample style에 저장된값 출력 없으면 지금 들어있는 색상이 디폴트 -->
+                                        <div id="footerSample" class="footer_sample p-3 mt-3" style="color:#fff;background-color: #1E2023;">
+                                            서울시 서초구 신반포로 194 고속버스터미널 신관  |  대표이사 : OOO  |  개인정보관리 책임자 : OOO  | 사업자등록번호 : 123-123-123<br/>
+고객만족센터 TEL : 00-0000-0000  |  FAX : 00-0000-0000  |  운영시간 : 평일 10:00 ~ 17:00 (점심시간  12:00~13:00)
+                                        </div>
+                                        <script>
+                                            // 색상 변경
+                                            const footerColor = document.getElementById('footerColor');
+                                            const footerBacgrkound = document.getElementById('footerBacgrkound');
+                                            const footerSample = document.getElementById('footerSample');
+                                            const footerText = document.getElementById('footerText');
+
+                                            footerColor.addEventListener('change', footerColorChange);
+                                            footerBacgrkound.addEventListener('change', footerColorChange);
+                                            function footerColorChange(){
+                                                footerSample.style.color = footerColor.value;
+                                                footerSample.style.backgroundColor  = footerBacgrkound.value;
+                                            }
+
+                                            footerText.addEventListener('input', function () {
+                                                footerSample.innerHTML = footerText.value.replace(/\n/g, '<br/>');
+                                            });
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="section3"  class="col-12">
+                    <div class="card form_area">
+                        <div class="card-header"><h3 class="card-title">회원 설정</h3></div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form_item lblue">
+                                    <div class="subheader mb-1">휴대폰인증</div>
+                                    <div class="subcontent">
+                                        <div>
+                                            <label class="form-check">
+                                                <input class="form-check-input" type="radio" name="certify_phone">
+                                                <span class="form-check-label">사용안함</span>
+                                            </label>
+                                            <label class="form-check">
+                                                <input class="form-check-input" type="radio" name="certify_phone">
+                                                <span class="form-check-label">최초 로그인만 인증</span>
+                                            </label>
+                                            <label class="form-check">
+                                                <input class="form-check-input" type="radio" name="certify_phone">
+                                                <span class="form-check-label">로그인할 때마다 인증</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item size_lg lblue">
+                                    <div class="subheader mb-1">최초 로그인 설정</div>
+                                    <div class="subcontent">
+                                        <div>
+                                            <small class="form-hint">※ 관리자가 등록한 고객사 회원만 해당됩니다.(회원가입 회원 제외)</small>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="first_login">
+                                                <span class="form-check-label">사용안함</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="first_login">
+                                                <span class="form-check-label">사용함</span>
+                                            </label>
+                                        </div>
+                                        <table class="table table-vcenter table-line card-table table-mb mt-2">
+                                            <colgroup>
+                                                <col style="width:100px;">
+                                                <col>
+                                            </colgroup>
+                                            <tbody>
+                                                <tr>
+                                                    <th>첫 로그인 설정</th>
+                                                    <td>
+                                                        <div>
+                                                            <label class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox">
+                                                                <span class="form-check-label">비밀번호 필수변경</span>
+                                                            </label>
+                                                            <label class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox">
+                                                                <span class="form-check-label">휴대폰번호 필수입력</span>
+                                                            </label>
+                                                            <label class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox">
+                                                                <span class="form-check-label">배송지 필수입력</span>
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>마케팅 수신동의</th>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <label class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio" name="firstlogin_marketing">
+                                                                <span class="form-check-label">노출안함</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="input-group">
+                                                            <label class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio" name="firstlogin_marketing">
+                                                                <span class="form-check-label">노출함</span>
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">해피톡 사용</div>
+                                    <div class="subcontent">
+                                        <div>
+                                            <label class="form-check">
+                                                <input class="form-check-input" type="radio" name="happlytalk_use">
+                                                <span class="form-check-label">사용안함</span>
+                                            </label>
+                                            <label class="form-check">
+                                                <input class="form-check-input" type="radio" name="happlytalk_use">
+                                                <span class="form-check-label">사용함</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">안심번호 사용</div>
+                                    <div class="subcontent">
+                                        <div>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="safenumber_use">
+                                                <span class="form-check-label">사용안함</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="safenumber_use">
+                                                <span class="form-check-label">사용함</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">선물하기 사용</div>
+                                    <div class="subcontent">
+                                        <div>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="gift_use">
+                                                <span class="form-check-label">사용안함</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="gift_use">
+                                                <span class="form-check-label">사용함</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item lblue">
+                                    <div class="subheader mb-1">포인트전달 사용</div>
+                                    <div class="subcontent">
+                                        <div>
+                                            <label class="form-check">
+                                                <input class="form-check-input" type="radio" id="sendPointUnuse" name="send_point_use">
+                                                <span class="form-check-label">사용안함</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" id="sendPointUse" name="send_point_use">
+                                                <span class="form-check-label">사용함</span>
+                                            </label>
+                                            ( <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" id="sendPointUseCheckbox" disabled="">
+                                                <span class="form-check-label">관리자승인 후 포인트 전달</span>
+                                            </label> )
+                                        </div>
+                                        <script>
+                                            //포인트전달 체크 시
+                                            const sendPointUseRadios = document.querySelectorAll('input[name="send_point_use"]');
+                                            const sendPointUnuse = document.getElementById('sendPointUnuse');
+                                            const sendPointUse = document.getElementById('sendPointUse');
+                                            const sendPointUseCheckbox = document.getElementById('sendPointUseCheckbox');
+                                            sendPointUseRadios.forEach(function(elm){
+                                                    elm.addEventListener('change', function() {
+                                                    if (sendPointUse.checked) {
+                                                        sendPointUseCheckbox.removeAttribute('disabled');
+                                                    }else{
+                                                        sendPointUseCheckbox.setAttribute('disabled', true);
+                                                        sendPointUseCheckbox.checked = false;
+                                                    }
+                                                });
+                                            });
+                                        </script>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">감사카드 사용</div>
+                                    <div class="subcontent">
+                                        <div>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="thanskcard_use">
+                                                <span class="form-check-label">사용안함</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="thanskcard_use">
+                                                <span class="form-check-label">사용함</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">상품요청 게시판</div>
+                                    <div class="subcontent">
+                                        <div>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="product_request_board_use">
+                                                <span class="form-check-label">사용안함</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="product_request_board_use">
+                                                <span class="form-check-label">사용함</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">배송요청일 사용</div>
+                                    <div class="subcontent">
+                                        <div>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" id="deliveryReservationUnuse" name="delivery_reservation_use">
+                                                <span class="form-check-label">사용안함</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" id="deliveryReservationUse" name="delivery_reservation_use">
+                                                <span class="form-check-label">사용함</span>
+                                            </label>
+                                        </div>
+                                        <div class="input-group">
+                                            <input class="form-control datepicker-icon delivery_reservation_use_input" placeholder="">
+                                            <span class="input-group-text text">~</span>
+                                            <input class="form-control datepicker-icon delivery_reservation_use_input" placeholder="">
+                                        </div>
+                                        <small class="form-hint">※ 고객이 주문 시 배송요청일을 선택할 수 있습니다.</small>
+                                        <script>
+                                            //배송요청일 체크 시
+                                            const deliveryReservationUnuse = document.getElementById('deliveryReservationUnuse');
+                                            const deliveryReservationUse = document.getElementById('deliveryReservationUse');
+                                            const deliveryReservationUseInput = document.querySelectorAll('.delivery_reservation_use_input');
+                                            function deliveryReservationUseCheck(){
+                                                if (deliveryReservationUse.checked) {
+                                                    deliveryReservationUseInput.forEach(function(input){
+                                                        input.removeAttribute('disabled');
+                                                    });
+                                                }else{
+                                                    deliveryReservationUseInput.forEach(function(input){
+                                                        input.setAttribute('disabled', true);
+                                                        input.value = ''
+                                                    });
+                                                }
+                                            }
+                                            deliveryReservationUnuse.addEventListener('change', deliveryReservationUseCheck);
+                                            deliveryReservationUse.addEventListener('change', deliveryReservationUseCheck);
+
+                                            // 초기 상태 설정
+                                            deliveryReservationUseCheck();
+                                        </script>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">개인정보 제3자 제공동의</div>
+                                    <div class="subcontent">
+                                        <div>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="info_agree" id="info_agree_unuse">
+                                                <span class="form-check-label">사용안함</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="info_agree" id="info_agree_use">
+                                                <span class="form-check-label">사용함</span>
+                                            </label>
+                                        </div>
+                                        <div class="input-group" style="display: none;" id="info_agree_use_input_row">
+                                            <input class="form-control" id="info_agree_use_input" placeholder="제공받는 법인명">
+                                        </div>
+                                        <small class="form-hint">※고객 결제페이지에 “제3자 제공동의(필수)” 노출여부를 설정할 수 있습니다</small>
+                                        <script>
+                                            const info_agree_unuse = document.getElementById('info_agree_unuse');
+                                            const info_agree_use = document.getElementById('info_agree_use');
+                                            const info_agree_use_input = document.getElementById('info_agree_use_input');
+                                            const info_agree_use_input_row = document.getElementById('info_agree_use_input_row');
+                                            function info_agree_check(){
+                                                if (info_agree_use.checked) {
+                                                    info_agree_use_input.removeAttribute('disabled');
+                                                    info_agree_use_input_row.style.display = 'flex'
+                                                }else{
+                                                    info_agree_use_input.setAttribute('disabled', true);
+                                                    info_agree_use_input.value = ''
+                                                    info_agree_use_input_row.style.display = 'none'
+                                                }
+                                            }
+                                            info_agree_unuse.addEventListener('change', info_agree_check);
+                                            info_agree_use.addEventListener('change', info_agree_check);
+
+                                            // 초기 상태 설정
+                                            info_agree_check();
+                                        </script>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">여러곳으로 배송</div>
+                                    <div class="subcontent">
+                                        <div>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="multi_address">
+                                                <span class="form-check-label">사용안함</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="multi_address">
+                                                <span class="form-check-label">사용함</span>
+                                            </label>
+                                        </div>
+                                        <small class="form-hint">※고객이 하나의 상품을 여러 개의 주소로 배송할 수 있습니다</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form_item size_lg">
+                                    <div class="subheader mb-1">주문자 정보</div>
+                                    <div class="subcontent">
+                                        <div>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="display_seller_info">
+                                                <span class="form-check-label">노출안함</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="display_seller_info">
+                                                <span class="form-check-label">노출함</span>
+                                            </label>
+                                        </div>
+                                        <hr class="my-1">
+                                        <div>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="modify_address">
+                                                <span class="form-check-label">주소 수정불가</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="modify_address">
+                                                <span class="form-check-label">주소 수정가능</span>
+                                            </label>
+                                        </div>
+                                        <hr class="my-1">
+                                        <small class="form-hint">※ 주문자 정보 “노출안함” 선택 회원 배송지가 주문다운로드 엑셀파일 내 주문자 정보에 우선 기입됩니다.<br/>
+                                        ※ 회원 배송지가 등록되지 않은 경우 아래 입력한 주소가 주문다운로드 엑셀파일 내 주문자 정보에 기입됩니다.
+                                        </small>
+                                        <div id="adsInput1">
+                                            <div class="input-group w-50">
+                                                <input type="text" name="i_post_code1" class="form-control i_post_code" value="" placeholder="우편번호" readonly="" onclick="execDaumPostcode('adsInput1')">
+                                                <button class="btn bg-secondary text-light btn-sm" type="button" onclick="execDaumPostcode('adsInput1')">주소검색</button>
+                                            </div>
+                                            <div class="input-group">
+                                                <input type="text" name="i_address_basic1" class="form-control i_address_basic" value="" placeholder="입력주소" readonly="" onclick="execDaumPostcode('adsInput1')">
+                                            </div>
+                                            <div class="input-group">
+                                                <input type="text" name="i_address_detail1" class="form-control i_address_detail" value="" placeholder="상세주소">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item size_lg">
+                                    <div class="subheader mb-1">받는사람 정보</div>
+                                    <div class="subcontent">
+                                        <div>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" id="reciverAddress1" name="reciver_address">
+                                                <span class="form-check-label">주소 직접입력</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" id="reciverAddress2" name="reciver_address">
+                                                <span class="form-check-label">주소 수정불가</span>
+                                            </label>
+                                            ( <label class="form-check form-check-inline">
+                                                <input class="form-check-input" id="giftcardAddress" type="checkbox">
+                                                <span class="form-check-label">상품권만 주소수정 불가</span>
+                                            </label> )
+                                        </div>
+                                        <script>
+                                            //배송요청일 체크 시
+                                            const reciverAddress1 = document.getElementById('reciverAddress1');
+                                            const reciverAddress2 = document.getElementById('reciverAddress2');
+                                            const giftcardAddress = document.getElementById('giftcardAddress');
+                                            function reciverAddressCheck(){
+                                                if (reciverAddress2.checked) {
+                                                    giftcardAddress.removeAttribute('disabled');
+                                                }else{
+                                                    giftcardAddress.setAttribute('disabled', true);
+                                                    giftcardAddress.value = ''
+                                                }
+                                            }
+                                            reciverAddress1.addEventListener('change', reciverAddressCheck);
+                                            reciverAddress2.addEventListener('change', reciverAddressCheck);
+
+                                            // 초기 상태 설정
+                                            reciverAddressCheck();
+                                        </script>
+                                        <hr class="my-1">
+                                        <div id="adsInput2">
+                                            <div class="input-group w-50">
+                                                <input type="text" name="i_post_code2" class="form-control i_post_code" value="" placeholder="우편번호" readonly="" onclick="execDaumPostcode('adsInput2')">
+                                                <button class="btn bg-secondary text-light btn-sm" type="button" onclick="execDaumPostcode('adsInput2')">주소검색</button>
+                                            </div>
+                                            <div class="input-group">
+                                                <input type="text" name="i_address_basic2" class="form-control i_address_basic" value="" placeholder="입력주소" readonly="" onclick="execDaumPostcode('adsInput2')">
+                                            </div>
+                                            <div class="input-group">
+                                                <input type="text" name="i_address_detail2" class="form-control i_address_detail" value="" placeholder="상세주소">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item size_lg">
+                                    <div class="subheader mb-1">알림톡(문자)발송</div>
+                                    <div class="subcontent">
+                                        <table class="table table-vcenter table-line card-table table-mb mt-2">
+                                            <colgroup>
+                                                <col style="width:100px;">
+                                                <col>
+                                            </colgroup>
+                                            <tbody>
+                                                <tr>
+                                                    <th>주문완료</th>
+                                                    <td>
+                                                        <div>
+                                                            <label class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio" name="order_complete">
+                                                                <span class="form-check-label">발송안함</span>
+                                                            </label>
+                                                            <label class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio" name="order_complete">
+                                                                <span class="form-check-label">발송함</span>
+                                                            </label>
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>송장업로드</th>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <label class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio" id="deliverynumberUpload1" name="deliverynumber_upload">
+                                                                <span class="form-check-label">발송안함</span>
+                                                            </label>
+                                                        </div>
+                                                            <label class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio" id="deliverynumberUpload2" name="deliverynumber_upload">
+                                                                <span class="form-check-label">발송함</span>
+                                                            </label>
+                                                            (
+                                                                <label class="form-check form-check-inline">
+                                                                    <input class="form-check-input deliverynumber_upload_checkbox" type="checkbox">
+                                                                    <span class="form-check-label">주문자</span>
+                                                                </label>
+                                                                <label class="form-check form-check-inline">
+                                                                    <input class="form-check-input deliverynumber_upload_checkbox" type="checkbox">
+                                                                    <span class="form-check-label">받는사람</span>
+                                                                </label>
+                                                            )
+                                                        </div>
+                                                        <script>
+                                                            //송장업로드 체크 시
+                                                            const deliverynumberUpload1 = document.getElementById('deliverynumberUpload1');
+                                                            const deliverynumberUpload2 = document.getElementById('deliverynumberUpload2');
+                                                            const deliverynumberUploadInput = document.querySelectorAll('.deliverynumber_upload_checkbox');
+                                                            function deliverynumberUploadCheck(){
+                                                                if (deliverynumberUpload2.checked) {
+                                                                    deliverynumberUploadInput.forEach(function(input){
+                                                                        input.removeAttribute('disabled');
+                                                                    });
+                                                                }else{
+                                                                    deliverynumberUploadInput.forEach(function(input){
+                                                                        input.setAttribute('disabled', true);
+                                                                        input.checked = false;
+                                                                    });
+                                                                }
+                                                            }
+                                                            deliverynumberUpload1.addEventListener('change', deliverynumberUploadCheck);
+                                                            deliverynumberUpload2.addEventListener('change', deliverynumberUploadCheck);
+                
+                                                            // 초기 상태 설정
+                                                            deliverynumberUploadCheck();
+                                                        </script>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="section5" class="col-12">
+                    <div class="card form_area">
+                        <div class="card-header"><h3 class="card-title">자동진열</h3></div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form_item size_xl">
+                                    <div class="subheader mb-1">설정</div>
+                                    <div class="subcontent">
+                                        <div>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="auto_display" radio-display="">
+                                                <span class="form-check-label">사용안함</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="auto_display" radio-display="auto_display_use">
+                                                <span class="form-check-label">사용함</span>
+                                            </label>
+                                        </div>
+                                        <div class="auto_display_use">
+                                            <hr class="my-2">
+                                            <small class="form-hint">※ 쇼핑몰 판매 상품 중 “승인” 상품이 쇼핑몰 메인화면에 자동 진열됩니다.</small>
+                                            <table class="table table-vcenter table-line card-table table-mb mt-2">
+                                                <colgroup>
+                                                    <col style="width:130px;">
+                                                    <col>
+                                                </colgroup>
+                                                <tbody>
+                                                    <tr>
+                                                        <th>타이틀</th>
+                                                        <td>
+                                                            <div>
+                                                                <div class="input-group">
+                                                                    <label class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="radio" id="autoDisplayTitleUnuse" name="auto_display_title">
+                                                                        <span class="form-check-label">사용안함</span>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="input-group">
+                                                                    <label class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="radio" id="autoDisplayTitleUse" name="auto_display_title">
+                                                                        <span class="form-check-label">사용함</span>
+                                                                    </label>
+                                                                    <input type="text" class="form-control ms-1 col-auto w-33" id="autoDisplayTitleInput">
+                                                                </div>
+                                                            </div>
+                                                            <script>
+                                                                //자동진열 타이틀 체크 시
+                                                                const autoDisplayTitleUnuse = document.getElementById('autoDisplayTitleUnuse');
+                                                                const autoDisplayTitleUse = document.getElementById('autoDisplayTitleUse');
+                                                                const autoDisplayTitleInput = document.getElementById('autoDisplayTitleInput');
+                                                                function autoDisplayTitleCheck(){
+                                                                    if (autoDisplayTitleUse.checked) {
+                                                                        autoDisplayTitleInput.removeAttribute('readonly');
+                                                                    }else{
+                                                                        autoDisplayTitleInput.setAttribute('readonly', true);
+                                                                        autoDisplayTitleInput.value=""
+                                                                    }
+                                                                }
+                                                                autoDisplayTitleUnuse.addEventListener('change', autoDisplayTitleCheck);
+                                                                autoDisplayTitleUse.addEventListener('change', autoDisplayTitleCheck);
+                    
+                                                                // 초기 상태 설정
+                                                                autoDisplayTitleCheck();
+                                                            </script>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>상품 진열방식</th>
+                                                        <td>
+                                                            <label class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio" name="auto_display_sort">
+                                                                <span class="form-check-label">신규상품순</span>
+                                                            </label>
+                                                            <label class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio" name="auto_display_sort">
+                                                                <span class="form-check-label">최근수정일순</span>
+                                                            </label>
+                                                            <label class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio" name="auto_display_sort">
+                                                                <span class="form-check-label">높은가격순</span>
+                                                            </label>
+                                                            <label class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio" name="auto_display_sort">
+                                                                <span class="form-check-label">낮은가격순</span>
+                                                            </label>
+                                                            <label class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio" name="auto_display_sort">
+                                                                <span class="form-check-label">가나다순</span>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>PC 상품 노출개수</th>
+                                                        <td>
+                                                                <select name="" id="" class="form-select w-25">
+                                                                    <option value="5">5개</option>
+                                                                    <option value="4">4개</option>
+                                                                    <option value="3">3개</option>
+                                                                    <option value="2">2개</option>
+                                                                    <option value="1">1개</option>
+                                                                </select>
+                                                            <small class="form-hint">※ 한 행에 노출되는 상품 개수를 선택해주세요.</small>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>모바일 상품 노출개수</th>
+                                                        <td>
+                                                            <select name="" id="" class="form-select w-25" disabled>
+                                                                <option value="2" selected>2개</option>
+                                                            </select>
+                                                            <small class="form-hint">※ 모바일 상품 노출개수는 변경이 불가합니다.</small>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                                
+
+                                        
+                <div class="list-btns justify-content-between align-items-center mt-2">
+                    <div>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary">확인</button>
+                        <a href="/resources/static/html/member/ptn_member_list.html" class="btn btn-secondary">목록</a>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 공통영역 -->
+    <div id="footer"></div>
+    <script>
+        //헤더&푸터 개발 완료시 삭제해주세요
+        var includePath = "/resources/static/layout/footer.html";
+        includeFile(includePath, 'footer');
+    </script>
+    <!-- //공통영역 -->
+</div>
+
+
+
+<div id="daumAdressLayer" >
+<button type="button" id="btnCloseLayer" onclick="closeDaumPostcode()">닫기버튼</button>
+</div>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+//주소 api
+var element_layer = document.getElementById('daumAdressLayer');
+
+function closeDaumPostcode() {
+    element_layer.style.display = 'none';
+}
+
+function execDaumPostcode(elm) {
+    const target = document.getElementById(elm)
+    new daum.Postcode({
+        oncomplete: function(data) {
+            var addr = ''; // 주소 변수
+            var extraAddr = ''; // 참고항목 변수
+            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                addr = data.roadAddress;
+            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                addr = data.jibunAddress;
+            }
+            if(data.userSelectedType === 'R'){
+                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                    extraAddr += data.bname;
+                }
+                if(data.buildingName !== '' && data.apartment === 'Y'){
+                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                if(extraAddr !== ''){
+                    extraAddr = ' (' + extraAddr + ')';
+                }
+                target.querySelector(".i_address_basic").value = extraAddr;
+            } else {
+                target.querySelector(".i_address_basic").value = '';
+            }
+            target.querySelector(".i_post_code").value = data.zonecode;
+            target.querySelector(".i_address_basic").value = addr;
+            target.querySelector(".i_address_detail").focus();
+            element_layer.style.display = 'none';
+        },
+        width : '100%',
+        height : '100%',
+        maxSuggestItems : 5
+    }).embed(element_layer);
+    element_layer.style.display = 'block';
+}
+function initLayerPosition(){
+    var width = 300; //우편번호서비스가 들어갈 element의 width
+    var height = 400; //우편번호서비스가 들어갈 element의 height
+    var borderWidth = 1; //샘플에서 사용하는 border의 두께
+    element_layer.style.width = width + 'px';
+    element_layer.style.height = height + 'px';
+    element_layer.style.border = borderWidth + 'px solid';
+    element_layer.style.left = (((window.innerWidth || document.documentElement.clientWidth) - width)/2 - borderWidth) + 'px';
+    element_layer.style.top = (((window.innerHeight || document.documentElement.clientHeight) - height)/2 - borderWidth) + 'px';
+}
+</script>
+<script src="/resources/static/dist/js/tabler.min.js"></script>
+</body>
+</html>

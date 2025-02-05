@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=1400"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>신세계 관리자</title>
+    <!-- CSS files -->
+    <link href="/resources/static/dist/css/tabler.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/tabler-vendors.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/>
+    <link rel="shortcut icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <script src="/resources/static/dist/js/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/resources/static/dist/libs/litepicker/dist/litepicker.js?1674944402"></script>
+    <script src="/resources/static/dist/js/jquery.validate.js"></script>
+    <!-- Tabler Core -->
+    
+    <script src="/resources/static/dist/js/common.js"></script>
+    <style>
+    :root {
+        --theme-admin-type: #cf3f42;
+        /* #cf3f42 통합관리자 컬러 코드*/
+        /* #4b9b52 협력회사 컬러 코드 */
+        /* #214c9c 고객사 컬러 코드 */
+    }
+    </style>
+</head>
+<body>
+<aside id="header" class="navbar navbar-vertical navbar-expand-lg header_left"></aside>
+<script>
+    //html include
+    function includeFile(path, targetId) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', path, true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById(targetId).innerHTML = xhr.responseText;
+        }
+    };
+    xhr.send();
+    }
+    var includePath = "/resources/static/layout/header.html";
+    includeFile(includePath, 'header');
+</script>
+
+<div class="page-wrapper">
+    <!-- 공통영역2 -->
+    <div class="member_info">
+        <div class="info">
+            <span>관리권한 : 최상위관리자</span>
+            <!-- 통합관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <!-- 협력관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <!-- 고객사관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <span class="login_session">로그인 유지시간 <strong>30:00</strong> <button type="button" class="btn btn-xs btn-primary">연장</button></span>
+            <button type="button" class="btn btn-xs btn-secondary">관리자 매뉴얼 보기</button><!-- 공통 -->
+            <button type="button" class="btn btn-xs btn-secondary">기본양식다운로드</button><!-- 통합,협력사만 -->
+            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/admin_modify_pop.html', '900', '640')">관리자정보수정</button><!-- 공통 -->
+            <button type="button" class="btn btn-xs btn-secondary">보안체크</button><!-- 협력사만 -->
+            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/terms_pop.html', '600', '540')">이용약관</button><!-- 협력사만 -->
+        </div>
+        <div>
+            <a href="javascript:;" class="logout">홍길동(admin_01)님 로그아웃</a>
+            <a href="javascript:;" class="home">홈으로</a>
+        </div>
+    </div>
+
+    <!-- 페이지 히스토리 탭 -->
+    <div class="page-history">
+        <div class="history_toggle">
+            <label class="form-check form-switch">
+                <span class="form-check-label">History</span>
+                <input id="historyUse" class="form-check-input" type="checkbox" >
+            </label>
+        </div>
+        <button class="close_all" type="button" title="히스토리 모두 삭제" onclick="historyRemoveAll();">히스토리 모두 삭제</button>
+    </div>
+    <!-- //공통영역2 -->
+
+    <div class="page-header d-print-none">
+        <div class="container-xl">
+            <div class="row g-2 align-items-center">
+                <div class="col">
+                    <!-- Page pre-title -->
+                    <div class="page-pretitle">
+                        홈 > 메시지 > 알림톡발송
+                    </div>
+                    <h2 class="page-title">
+                        알림톡발송
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page body -->
+    <div class="page-body">
+        <div class="container-xl form-container grid_grid4">
+            <div class="row">
+                <form action="">
+                <div class="list-btns justify-content-between align-items-center mb-3">
+                    <div>
+                        <div class="display_type mb-0">
+                            <button type="button" class="grid4 active" title="폼 그리드 1x4">폼 그리드 1x4</button>
+                            <button type="button" class="grid3 " title="폼 그리드 1x3">폼 그리드 1x3</button>
+                            <button type="button" class="grid2" title="폼 그리드 1x2">폼 그리드 1x2</button>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary">발송하기</button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card form_area">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="form_item size_xl">
+                                        <div class="subheader mb-1 required">템플릿</div>
+                                        <div class="subcontent">
+                                            <div class="templates_sms">
+                                                <div class="item">
+                                                    <label>
+                                                        <input type="radio" name="templates_sms" data-sms-code="TM0001">
+                                                        <div>
+                                                            <div class="tit">인증번호<br/>(TM0001)</div>
+                                                            <div class="cnt">
+                                                                [****] 인증번호 : ****
+                                                            </div>
+                                                            <div class="btn btn-sm btn-secondary w-100">선택</div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                                <div class="item">
+                                                    <label>
+                                                        <input type="radio" name="templates_sms" data-sms-code="TM0002">
+                                                        <div>
+                                                            <div class="tit">주문신청완료<br/>(TM0002)</div>
+                                                            <div class="cnt">
+                                                                [****] 몰의 ***이 주문(신청)이 완료 되었습니다.
+                                                            </div>
+                                                            <div class="btn btn-sm btn-secondary w-100">선택</div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                                <div class="item">
+                                                    <label>
+                                                        <input type="radio" name="templates_sms" data-sms-code="TM0003">
+                                                        <div>
+                                                            <div class="tit">작업요청게시판 글등록<br/>(TM0003)</div>
+                                                            <div class="cnt">
+                                                                ***님께서 작업요청게시판에 글을 등록 하였습니다.
+                                                            </div>
+                                                            <div class="btn btn-sm btn-secondary w-100">선택</div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                                <div class="item">
+                                                    <label>
+                                                        <input type="radio" name="templates_sms" data-sms-code="TM0004">
+                                                        <div>
+                                                            <div class="tit">배송시작<br/>(TM0004)</div>
+                                                            <div class="cnt">
+                                                                [****] 몰에서 주문하신 ***배송이 시작되었습니다.
+                                                            </div>
+                                                            <div class="btn btn-sm btn-secondary w-100">선택</div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                                <div class="item">
+                                                    <label>
+                                                        <input type="radio" name="templates_sms" data-sms-code="TM0005">
+                                                        <div>
+                                                            <div class="tit">인증번호<br/>(TM0005)</div>
+                                                            <div class="cnt">
+                                                                [****] 인증번호 : ****
+                                                            </div>
+                                                            <div class="btn btn-sm btn-secondary w-100">선택</div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                                <div class="item">
+                                                    <label>
+                                                        <input type="radio" name="templates_sms" data-sms-code="TM0006">
+                                                        <div>
+                                                            <div class="tit">주문신청완료<br/>(TM0006)</div>
+                                                            <div class="cnt">
+                                                                [****] 몰의 ***이 주문(신청)이 완료 되었습니다.
+                                                            </div>
+                                                            <div class="btn btn-sm btn-secondary w-100">선택</div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                                <div class="item">
+                                                    <label>
+                                                        <input type="radio" name="templates_sms" data-sms-code="TM0007">
+                                                        <div>
+                                                            <div class="tit">작업요청게시판 글등록<br/>(TM0007)</div>
+                                                            <div class="cnt">
+                                                                ***님께서 작업요청게시판에 글을 등록 하였습니다.
+                                                            </div>
+                                                            <div class="btn btn-sm btn-secondary w-100">선택</div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                                <div class="item">
+                                                    <label>
+                                                        <input type="radio" name="templates_sms" data-sms-code="TM0008">
+                                                        <div>
+                                                            <div class="tit">배송시작<br/>(TM0008)</div>
+                                                            <div class="cnt">
+                                                                [****] 몰에서 주문하신 ***배송이 시작되었습니다.
+                                                            </div>
+                                                            <div class="btn btn-sm btn-secondary w-100">선택</div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="card form_area">
+                            <div class="card-header"><h3 class="card-title">메시지 등록</h3></div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="form_item">
+                                        <div class="subheader mb-1 required">템플릿</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="text" id="templatesInput" class="form-control" value="" readonly>
+                                            </div>
+                                        </div>
+                                        <script>
+                                            //템플릿 선택,변경시 템플릿 인풋에 코드번호입력
+                                            const templatesSms = document.querySelectorAll('input[name="templates_sms"]');
+                                            const templatesInput = document.getElementById('templatesInput');
+                                            function templatesSmsCheck(){
+                                                let checkedValue = '';
+                                                templatesSms.forEach(function(item) {
+                                                    if (item.checked) {
+                                                        checkedValue = item.getAttribute('data-sms-code');
+                                                    }
+                                                });
+                                                templatesInput.value = checkedValue;
+                                            }
+                                            templatesSms.forEach(function (item) {
+                                                item.addEventListener('change', function() {
+                                                    templatesSmsCheck()
+                                                });
+                                            });
+                                            templatesSmsCheck()
+                                        </script>
+                                    </div>
+
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">가변데이터</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <span class="input-group-text text">고객사명</span>
+                                                <input type="text" class="form-control" value="">
+                                            </div>
+                                            <div class="input-group">
+                                                <span class="input-group-text text">인증번호</span>
+                                                <input type="text" class="form-control" value="">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">수신인</div>
+                                        <div class="subcontent">
+                                            <div>
+                                                <label class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="recive_type" radio-display="recive_type1" checked="">
+                                                    <span class="form-check-label">고객사</span>
+                                                </label>
+                                                <label class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="recive_type" radio-display="recive_type2">
+                                                    <span class="form-check-label">협력회사</span>
+                                                </label>
+                                                <label class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="recive_type" radio-display="recive_type3">
+                                                    <span class="form-check-label">대량등록</span>
+                                                </label>
+                                                <label class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="recive_type" radio-display="recive_type4">
+                                                    <span class="form-check-label">건별등록</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form_item">
+                                        <div class="subheader mb-1 required">발송대상</div>
+                                        <div class="subcontent recive_type1"><!-- 고객사 -->
+                                            <div class="input-group">
+                                                <span class="input-group-text text">수신인</span>
+                                                <input type="text" class="form-control text-end" readonly value="10">
+                                                <button 
+                                                class="btn bg-secondary text-light btn-sm" 
+                                                type="button"
+                                                onclick="windowPopup('/resources/static/html/popup/client_member_search_pop.html', '1020', '605')"
+                                                >
+                                                수신인 검색
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <div class="subcontent recive_type2"><!-- 협력회사 -->
+                                            <div class="input-group">
+                                                <span class="input-group-text text">수신인</span>
+                                                <input type="text" class="form-control text-end" readonly value="10">
+                                                <button 
+                                                class="btn bg-secondary text-light btn-sm" 
+                                                type="button"
+                                                onclick="windowPopup('/resources/static/html/popup/joint_search_pop.html', '1020', '605')"
+                                                >
+                                                수신인 검색
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <div class="subcontent recive_type3"><!-- 대량등록 -->
+                                            <div class="input-group">
+                                                <span class="input-group-text text">수신인</span>
+                                                <input type="text" class="form-control text-end" readonly value="10">
+                                            </div>
+                                            <div class="input-group">
+                                                <input type="file" class="form-control" id="fileLargeInput">
+                                                <button class="btn btn-xs btn-warning" type="button" onclick="removeFile()">삭제</button>
+                                                <a href="https://naver.com" download="" class="btn btn-xs bg-blue-lt">샘플파일</a>
+                                            </div>
+                                            <script>
+                                                function removeFile(){
+                                                    document.getElementById('fileLargeInput').value = ''
+                                                }
+                                            </script>
+                                        </div>
+
+                                        <div class="subcontent recive_type4"><!-- 건별등록 -->
+                                            <div class="input-group">
+                                                <span class="input-group-text text">수신인</span>
+                                                <input type="text" class="form-control text-end" readonly value="10">
+                                            </div>
+                                            <div class="input-group">
+                                                <input type="hidden" id="hiddenPhoneNumbers"><!-- 수신번호 항목들 , 로 구분하여 저장됨 -->
+                                                <input type="tel" class="form-control" id="phoneInput" placeholder="숫자만 입력">
+                                                <button class="btn btn-xs btn-secondary" type="button" onclick="addRiciver()">추가</button>
+                                                <button class="btn btn-xs btn-warning" type="button" onclick="removeAllRiciver()">전체삭제</button>
+                                            </div>
+                                            <script>
+                                                //전화번호 추가, 전체삭제, 개별삭제
+                                                function addRiciver() {
+                                                const phoneInput = document.getElementById('phoneInput');
+                                                const phoneValue = phoneInput.value.trim();
+                                                const hiddenPhoneNumbers = document.getElementById('hiddenPhoneNumbers');
+                                                const addRiciverWrap = document.getElementById('addRiciverWrap');
+                                                const existingNumbers = hiddenPhoneNumbers.value ? hiddenPhoneNumbers.value.split(',') : [];
+
+                                                // 중복 검사
+                                                if (!existingNumbers.includes(phoneValue)) {
+                                                    const newItem = document.createElement('div');
+                                                    newItem.className = 'item';
+                                                    newItem.innerHTML = `
+                                                        ${phoneValue}
+                                                        <button type="button" class="btn btn-xs btn-secondary" onclick="removeRiciver(this, '${phoneValue}')">삭제</button>
+                                                    `;
+
+                                                    // 항목 추가
+                                                    addRiciverWrap.appendChild(newItem);
+
+                                                    // input hidden에 전화번호 추가
+                                                    existingNumbers.push(phoneValue);
+                                                    hiddenPhoneNumbers.value = existingNumbers.join(',');
+
+                                                    if (addRiciverWrap.querySelector('.mt-2')) {
+                                                        addRiciverWrap.querySelector('.mt-2').remove();
+                                                    }
+                                                    phoneInput.value = '';
+                                                } else if (existingNumbers.includes(phoneValue)) {
+                                                    alert('이미 등록된 번호입니다.');
+                                                } 
+                                            }
+
+                                            function removeRiciver(button, phoneValue) {
+                                                const item = button.parentNode;
+                                                const hiddenPhoneNumbers = document.getElementById('hiddenPhoneNumbers');
+                                                let existingNumbers = hiddenPhoneNumbers.value ? hiddenPhoneNumbers.value.split(',') : [];
+
+                                                existingNumbers = existingNumbers.filter(number => number !== phoneValue);
+                                                hiddenPhoneNumbers.value = existingNumbers.join(',');
+
+                                                item.parentNode.removeChild(item);
+
+                                                if (existingNumbers.length === 0) {
+                                                    const addRiciverWrap = document.getElementById('addRiciverWrap');
+                                                    const noNumberMessage = document.createElement('div');
+                                                    noNumberMessage.className = 'mt-2';
+                                                    noNumberMessage.textContent = '등록된 번호가 없습니다.';
+                                                    addRiciverWrap.appendChild(noNumberMessage);
+                                                }
+                                            }
+
+                                            function removeAllRiciver() {
+                                                const addRiciverWrap = document.getElementById('addRiciverWrap');
+                                                const hiddenPhoneNumbers = document.getElementById('hiddenPhoneNumbers');
+
+                                                addRiciverWrap.innerHTML = '<div class="mt-2">등록된 번호가 없습니다.</div>';
+                                                hiddenPhoneNumbers.value = '';
+                                            }
+                                            </script>
+                                        </div>
+                                    </div>
+
+                                    <div class="form_item size_lg recive_type4">
+                                        <div class="subheader mb-1">수신번호</div>
+                                        <div class="subcontent">
+                                            <div id="addRiciverWrap" class="selected_cates2" style="max-height: 300px;overflow-y:auto;">
+                                                <div class="mt-2">등록된 번호가 없습니다.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                </div>
+                                <div class="row">
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">예약발송</div>
+                                        <div class="subcontent">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" name="" checked="">
+                                                <span class="form-check-label">예약발송</span>
+                                            </label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control datepicker-icon" value="">
+                                                <input type="text" name="input-mask" class="form-control input-time" data-mask="00:00" data-mask-visible="true" placeholder="00:00" autocomplete="off">
+                                            </div>
+                                            <small class="form-hint">! 주의 : 예약취소는 발송 10분전가지만 가능합니다.</small>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">발신번호</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" value="02-1234-1234" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">등록일</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" value="admin1" readonly>
+                                                <input type="text" class="form-control" value="02-1234-1234" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">최종수정일</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" value="admin1" readonly>
+                                                <input type="text" class="form-control" value="02-1234-1234" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-muted fs-5 mt-2">
+                        ※ 수신번호는 <strong class="text-danger">1,000</strong>건까지 등록 가능하며, 중복된 수신번호는 <strong class="text-danger">한 번만 발송</strong>됩니다. 단, 직접입력은 100건까지 가능합니다<br/>
+                        ※ 정보통신망법에 따라 <strong class="text-danger">수신거부한 회원</strong>에게 광고성 정보를 발송하거나 광고성 정보 수신동의 외에 <strong class="text-danger">별도의 동의를 받지 않고</strong> 야간발송(저녁 8시 ~ 다음날 8시)시, 3천만원 이하의 과태료가 부과되니 주의하여 주시기 바랍니다.
+                        </p>
+                    </div>
+                    
+                    <div class="list-btns justify-content-between align-items-center mt-2">
+                        <div>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-primary">발송하기</button>
+                        </div>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 공통영역 -->
+    <div id="footer"></div>
+    <script>
+        //헤더&푸터 개발 완료시 삭제해주세요
+        var includePath = "/resources/static/layout/footer.html";
+        includeFile(includePath, 'footer');
+    </script>
+    <!-- //공통영역 -->
+</div>
+
+<script src="/resources/static/dist/js/tabler.min.js"></script>
+</body>
+</html>

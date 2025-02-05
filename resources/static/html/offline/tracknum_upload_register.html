@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=1400"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>신세계 관리자</title>
+    <!-- CSS files -->
+    <link href="/resources/static/dist/css/tabler.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/tabler-vendors.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/>
+    <link rel="shortcut icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <script src="/resources/static/dist/js/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/resources/static/dist/libs/litepicker/dist/litepicker.js?1674944402"></script>
+    <script src="/resources/static/dist/js/jquery.validate.js"></script>
+    <!-- Tabler Core -->
+    
+    <script src="/resources/static/dist/js/common.js"></script>
+    <style>
+    :root {
+        --theme-admin-type: #cf3f42;
+        /* #cf3f42 통합관리자 컬러 코드*/
+        /* #4b9b52 협력회사 컬러 코드 */
+        /* #214c9c 고객사 컬러 코드 */
+    }
+    </style>
+</head>
+<body>
+<aside id="header" class="navbar navbar-vertical navbar-expand-lg header_left"></aside>
+<script>
+    //html include
+    function includeFile(path, targetId) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', path, true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById(targetId).innerHTML = xhr.responseText;
+        }
+    };
+    xhr.send();
+    }
+    var includePath = "/resources/static/layout/header.html";
+    includeFile(includePath, 'header');
+</script>
+
+<div class="page-wrapper">
+    <!-- 공통영역2 -->
+    <div class="member_info">
+        <div class="info">
+            <span>관리권한 : 최상위관리자</span>
+            <!-- 통합관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <!-- 협력관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <!-- 고객사관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <span class="login_session">로그인 유지시간 <strong>30:00</strong> <button type="button" class="btn btn-xs btn-primary">연장</button></span>
+            <button type="button" class="btn btn-xs btn-secondary">관리자 매뉴얼 보기</button><!-- 공통 -->
+            <button type="button" class="btn btn-xs btn-secondary">기본양식다운로드</button><!-- 통합,협력사만 -->
+            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/admin_modify_pop.html', '900', '640')">관리자정보수정</button><!-- 공통 -->
+            <button type="button" class="btn btn-xs btn-secondary">보안체크</button><!-- 협력사만 -->
+            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/terms_pop.html', '600', '540')">이용약관</button><!-- 협력사만 -->
+        </div>
+        <div>
+            <a href="javascript:;" class="logout">홍길동(admin_01)님 로그아웃</a>
+            <a href="javascript:;" class="home">홈으로</a>
+        </div>
+    </div>
+
+    <!-- 페이지 히스토리 탭 -->
+    <div class="page-history">
+        <div class="history_toggle">
+            <label class="form-check form-switch">
+                <span class="form-check-label">History</span>
+                <input id="historyUse" class="form-check-input" type="checkbox" >
+            </label>
+        </div>
+        <button class="close_all" type="button" title="히스토리 모두 삭제" onclick="historyRemoveAll();">히스토리 모두 삭제</button>
+    </div>
+    <!-- //공통영역2 -->
+
+    <div class="page-header d-print-none">
+        <div class="container-xl">
+            <div class="row g-2 align-items-center">
+                <div class="col">
+                    <!-- Page pre-title -->
+                    <div class="page-pretitle">
+                        홈 > 오프라인주문 > 주문목록 > 송장업로드 > 등록
+                    </div>
+                    <h2 class="page-title">
+                        송장업로드 등록
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page body -->
+    <div class="page-body">
+        <div class="container-xl form-container grid_grid4">
+            <form action="">
+            <div class="list-btns justify-content-between align-items-center mb-3">
+                <div>
+                    <div class="display_type mb-0">
+                        <button type="button" class="grid4 active" title="폼 그리드 1x4">폼 그리드 1x4</button>
+                        <button type="button" class="grid3 " title="폼 그리드 1x3">폼 그리드 1x3</button>
+                        <button type="button" class="grid2" title="폼 그리드 1x2">폼 그리드 1x2</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card form_area">
+                        <div class="card-header"><h3 class="card-title">송장번호 대량등록</h3></div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form_item">
+                                    <div class="subheader mb-1">샘플 EXCEL</div>
+                                    <div class="subcontent">
+                                        <a href="https://naver.com" download="" class="badge bg-blue-lt fs-5 me-2">샘플파일 다운로드</a>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">택배사코드 확인</div>
+                                    <div class="subcontent">
+                                        <button class="btn bg-secondary text-light btn-sm" type="button" onclick="windowPopup('/resources/static/html/popup/parcel_code_pop.html', '500', '640')">
+                                        택배사 코드 확인
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1 required">협력회사</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <div class="col member_type_status3"><!-- member_type_status3 협력회사 상태 -->
+                                                <select class="form-select" disabled>
+                                                    <option value="" selected="">정상승인</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="input-group">
+                                            <div class="col">
+                                                <div class="search_select">
+                                                    <input type="hidden" value="">
+                                                    <button type="button" class="btn_select form-select text-start" onclick="searchSelectOpen(this);">협력회사 선택</button>
+                                                    <div class="search_select_options" style="display:none;">
+                                                        <input type="text" class="form-control" placeholder="검색어 입력" oninput="searchSelectSearch(this);">
+                                                        <div class="items">
+                                                            <div class="item"><a href="javascript:;" data-id="" class="active" onclick="searchSelectSelect(this);">협력회사 선택</a></div>
+                                                            <div class="item partnerStatus1"><a href="javascript:;" data-id="code458i95i5" onclick="searchSelectSelect(this);">협력회사1(정상승인)</a></div>
+                                                            <div class="item partnerStatus1"><a href="javascript:;" data-id="code4575eyry" onclick="searchSelectSelect(this);">협력회사3(정상승인)</a></div>
+                                                            <div class="item partnerStatus1"><a href="javascript:;" data-id="code12565" onclick="searchSelectSelect(this);">협력회사4(정상승인)</a></div>
+                                                            <div class="item partnerStatus1"><a href="javascript:;" data-id="code6556677" onclick="searchSelectSelect(this);">협력회사5(정상승인)</a></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form_item">
+                                    <div class="subheader mb-1 required">고객사</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <div class="col">
+                                                <div class="search_select">
+                                                    <input type="hidden" value="">
+                                                    <button type="button" class="btn_select form-select text-start" onclick="searchSelectOpen(this);">고객사 선택</button>
+                                                    <div class="search_select_options" style="display:none;">
+                                                        <input type="text" class="form-control" placeholder="검색어 입력" oninput="searchSelectSearch(this);">
+                                                        <div class="items">
+                                                            <div class="item"><a href="javascript:;" data-id="" class="active" onclick="searchSelectSelect(this);">고객사 선택</a></div>
+                                                            <div class="item partnerStatus1"><a href="javascript:;" data-id="code458i95i5" onclick="searchSelectSelect(this);">고객사1</a></div>
+                                                            <div class="item partnerStatus1"><a href="javascript:;" data-id="code4575eyry" onclick="searchSelectSelect(this);">고객사2</a></div>
+                                                            <div class="item partnerStatus1"><a href="javascript:;" data-id="code12565" onclick="searchSelectSelect(this);">고객사3</a></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form_item size_xl">
+                                    <div class="subheader mb-1 required">파일 업로드</div>
+                                    <div class="subcontent">
+                                        <p class="text-muted">
+                                            <span class="text-danger">※업로드전 아래의 주의사항을 확인해주세요</span><br/>
+                                            1. [샘플파일 다운로드]버튼을 클릭하여 PC에 다운로드해 주세요.<br/>
+                                            2. 샘플파일의 확장자 또는 항목을 임의로 추가 또는 삭제 할 경우 파일이 정상적으로 업로드 되지 않습니다.<br/>
+                                            3. 샘플파일에 설정된 셀 서식을 임의로 변경하시면 파일이 정상적으로 업로드 되지 않습니다.<br/>
+                                            4. 엑셀파일 내 정보 입력 시 엑셀함수를 사용하지 마시고 텍스트만 입력해주세요.<br/>
+                                            5. 문서보안 해제 후 파일 용량을 꼭 확인해주세요.(파일용량이 0Kbyte인 경우 업로드 되지 않습니다.)<br/>
+                                            6. 업로드 후 [배송정보 다운로드] 또는 [등록]버튼을 클릭해주세요.
+                                        </p>
+                                        <div class="input-group mt-2" style="max-width:400px;">
+                                            <input type="file" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="list-btns justify-content-between align-items-center mt-2">
+                    <div>
+                        <a href="/resources/static/html/offline/tracknum_upload.html" class="btn btn-secondary">등록내역 보기</a>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary" onclick="windowPopup('/resources/static/html/popup/upload_result.html', '700', '640')">
+                            송장업로드
+                        </button>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 공통영역 -->
+    <div id="footer"></div>
+    <script>
+        //헤더&푸터 개발 완료시 삭제해주세요
+        var includePath = "/resources/static/layout/footer.html";
+        includeFile(includePath, 'footer');
+    </script>
+    <!-- //공통영역 -->
+</div>
+
+<script src="/resources/static/dist/js/tabler.min.js"></script>
+</body>
+</html>

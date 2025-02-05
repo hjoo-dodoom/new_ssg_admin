@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=1400"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>신세계 관리자</title>
+    <!-- CSS files -->
+    <link href="/resources/static/dist/css/tabler.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/tabler-vendors.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/>
+    <link rel="shortcut icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <script src="/resources/static/dist/js/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/resources/static/dist/libs/litepicker/dist/litepicker.js?1674944402"></script>
+    <script src="/resources/static/dist/js/jquery.validate.js"></script>
+    <!-- Tabler Core -->
+    
+    <script src="/resources/static/dist/js/common.js"></script>
+    <style>
+    :root {
+        --theme-admin-type: #cf3f42;
+        /* #cf3f42 통합관리자 컬러 코드*/
+        /* #4b9b52 협력회사 컬러 코드 */
+        /* #214c9c 고객사 컬러 코드 */
+    }
+    </style>
+</head>
+<body>
+
+<div class="popup-wrapper">
+    <h2 class="popup-title">메모</h2>
+
+    <div class="row">
+        <form action="">
+        <div class="text_box">
+            <p class="text-danger fs-5 my-1">※메모 수정은 <span class="text-underline">메모 또는 아이디</span>를 선택해주세요</p>
+        </div>
+        <div class="form-container">
+            <!--form-container.grid_grid2 
+                form-container.grid_grid3
+                form-container.grid_grid4 -->
+            <div class="col-12">
+                <div class="card form_area">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="form_item">
+                                <div class="subcontent">
+                                    <div class="input-group">
+                                        <input type="hidden" id="memoWriteId">
+                                        <textarea name="" id="memoTextarea" class="form-control">메모내용 예제입니다.메모내용 예제입니다.</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="list-btns justify-content-between mb-2">
+            <div>
+                <button type="button" class="btn btn-secondary">등록</button>
+            </div>
+            <div>
+                <button type="button" class="btn btn-primary">수정</button>
+            </div>
+        </div>
+        </form>
+        
+        <div class="content-area">
+            <div class="card table-mb-card">
+                <div class="table-responsive">
+                    <table class="table table-vcenter table-line card-table text-center table-mb tr_hover">
+                        <caption>메모 리스트(0)</caption>
+                        <thead>
+                            <tr>
+                                <th>메모</th>
+                                <th>아이디</th>
+                                <th>등록일</th>
+                                <th>최종수정일</th>
+                                <th>삭제</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="5" class="list-empty">
+                                    등록된 항목이 없습니다.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><a href="javascript:;" class="list_link" data-write-id="1" onclick="insertMemoForm(this);">메모내용메모내용메모내용메모내용⋯</a></td>
+                                <td>abcd1234</td>
+                                <td>2024-05-21 11:11:11</td>
+                                <td>2024-05-21 11:11:11</td>
+                                <td>
+                                    <button type="button" class="btn btn-xs btn-warning">
+                                        삭제
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><a href="javascript:;" class="list_link" data-write-id="2" onclick="insertMemoForm(this);">메모예제입니다. 모예제입니다 예제입니다. ⋯</a></td>
+                                <td>abcd1234</td>
+                                <td>2024-05-21 11:11:11</td>
+                                <td>2024-05-21 11:11:11</td>
+                                <td>
+                                    <button type="button" class="btn btn-xs btn-warning">
+                                        삭제
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><a href="javascript:;" class="list_link" data-write-id="3" onclick="insertMemoForm(this);">메모내용 예제입니다. 메모내용 예제입니다. ⋯</a></td>
+                                <td>abcd1234</td>
+                                <td>2024-05-21 11:11:11</td>
+                                <td>2024-05-21 11:11:11</td>
+                                <td>
+                                    <button type="button" class="btn btn-xs btn-warning">
+                                        삭제
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <script>
+                        //임시 스크립트
+                        function insertMemoForm(elm) {
+                            const memoWriteId = document.getElementById('memoWriteId');
+                            const memoTextarea = document.getElementById('memoTextarea');
+                            memoWriteId.value = elm.getAttribute('data-write-id');
+                            memoTextarea.value = elm.innerText;
+                        }
+                    </script>
+                </div>
+            </div>
+
+            <div class="ip_pagenation display-flex justify-content-center mt-4">
+                <div class="pg_btn disabled">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                        <!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevrons-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M11 7l-5 5l5 5"></path>
+                            <path d="M17 7l-5 5l5 5"></path>
+                            </svg>
+                    </a>
+                </div>
+                <div class="pg_btn disabled">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                        <!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M15 6l-6 6l6 6"></path>
+                        </svg>
+                    </a>
+                </div>
+                <div class="pg_ip">
+                    <input type="tel" value="1" class="form-control"> / 250
+                </div>
+                <div class="pg_btn">
+                    <a class="page-link" href="#">
+                        <!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M9 6l6 6l-6 6"></path>
+                        </svg>
+                    </a>
+                </div>
+                <div class="pg_btn">
+                    <a class="page-link" href="#">
+                        <!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevrons-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M7 7l5 5l-5 5"></path>
+                        <path d="M13 7l5 5l-5 5"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="list-btns justify-content-between mt-3">
+        <div>
+        </div>
+        <div>
+            <button type="button" class="btn btn-secondary" onclick="window.close();">닫기</button>
+        </div>
+    </div>
+</div>
+<script src="/resources/static/dist/js/tabler.min.js"></script>
+</body>
+</html>

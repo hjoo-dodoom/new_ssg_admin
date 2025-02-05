@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=1400"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>신세계 관리자</title>
+    <!-- CSS files -->
+    <link href="/resources/static/dist/css/tabler.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/tabler-vendors.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/>
+    <link rel="shortcut icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <script src="/resources/static/dist/js/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/resources/static/dist/libs/litepicker/dist/litepicker.js?1674944402"></script>
+    <script src="/resources/static/dist/js/jquery.validate.js"></script>
+    <!-- Tabler Core -->
+    
+    <script src="/resources/static/dist/js/common.js"></script>
+    <style>
+    :root {
+        --theme-admin-type: #cf3f42;
+        /* #cf3f42 통합관리자 컬러 코드*/
+        /* #4b9b52 협력회사 컬러 코드 */
+        /* #214c9c 고객사 컬러 코드 */
+    }
+    </style>
+</head>
+<body>
+
+<div class="popup-wrapper">
+    <h2 class="popup-title">메시지발송 내역</h2>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="seasrch_popup">
+                        <form action="">
+                            <div class="search_options">
+                                <div class="option_item w100">
+                                    <div class="subheader">수신번호</div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <input type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="option_item w100">
+                                    <div class="subheader">상태</div>
+                                    <div class="row">
+                                        <div>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="recive_status" checked="">
+                                                <span class="form-check-label">전체</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="recive_status">
+                                                <span class="form-check-label">성공</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="recive_status">
+                                                <span class="form-check-label">실패</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="search_btns">
+                                <button class="btn btn-primary">
+                                    검색
+                                </button>
+                                <button type="button" class="btn btn-secondary">
+                                    검색 초기화
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="list-btns justify-content-between mb-1">
+                <div>
+                    <div class="list_count">발송 100건 (성공<strong class="text-primary">100</strong>건,
+                        실패<strong class="text-danger">10</strong>건)
+                    </div>
+                </div>
+                <div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="card table-mb-card">
+                        <div class="table-responsive">
+                            <table class="table table-vcenter table-line card-table text-center table-mb label-control tr_hover">
+                                <thead>
+                                    <tr>
+                                        <th>번호</th>
+                                        <th>수신번호</th>
+                                        <th>상태</th>
+                                        <th>발송시간</th>
+                                        <th>상태코드</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>20</td>
+                                        <td>010-****-1234</td>
+                                        <td>성공</td>
+                                        <td>2024-07-15 11:11:11</td>
+                                        <td class="text-start">[06] 전송성공</td>
+                                    </tr>
+                                    <tr>
+                                        <td>20</td>
+                                        <td>010-****-1234</td>
+                                        <td>성공</td>
+                                        <td>2024-07-15 11:11:11</td>
+                                        <td class="text-start">[06] 전송성공</td>
+                                    </tr>
+                                    <tr>
+                                        <td>20</td>
+                                        <td>010-****-1234</td>
+                                        <td>성공</td>
+                                        <td>2024-07-15 11:11:11</td>
+                                        <td class="text-start">[06] 전송성공</td>
+                                    </tr>
+                                    <tr>
+                                        <td>20</td>
+                                        <td>010-****-1234</td>
+                                        <td>성공</td>
+                                        <td>2024-07-15 11:11:11</td>
+                                        <td class="text-start">[06] 전송성공</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="list-btns justify-content-between mt-2">
+                <div>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-secondary" onclick="window.close();">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</script>
+<script src="/resources/static/dist/js/tabler.min.js"></script>
+</body>
+</html>

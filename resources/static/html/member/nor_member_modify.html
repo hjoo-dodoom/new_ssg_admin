@@ -1,0 +1,541 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=1400"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>신세계 관리자</title>
+    <!-- CSS files -->
+    <link href="/resources/static/dist/css/tabler.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/tabler-vendors.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/>
+    <link rel="shortcut icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <script src="/resources/static/dist/js/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/resources/static/dist/libs/litepicker/dist/litepicker.js?1674944402"></script>
+    <script src="/resources/static/dist/js/jquery.validate.js"></script>
+    <!-- Tabler Core -->
+    
+    <script src="/resources/static/dist/js/common.js"></script>
+    <style>
+    :root {
+        --theme-admin-type: #cf3f42;
+        /* #cf3f42 통합관리자 컬러 코드*/
+        /* #4b9b52 협력회사 컬러 코드 */
+        /* #214c9c 고객사 컬러 코드 */
+    }
+    </style>
+</head>
+<body>
+<aside id="header" class="navbar navbar-vertical navbar-expand-lg header_left"></aside>
+<script>
+    //html include
+    function includeFile(path, targetId) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', path, true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById(targetId).innerHTML = xhr.responseText;
+        }
+    };
+    xhr.send();
+    }
+    var includePath = "/resources/static/layout/header.html";
+    includeFile(includePath, 'header');
+</script>
+
+<div class="page-wrapper">
+    <!-- 공통영역2 -->
+    <div class="member_info">
+        <div class="info">
+            <span>관리권한 : 최상위관리자</span>
+            <!-- 통합관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <!-- 협력관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <!-- 고객사관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <span class="login_session">로그인 유지시간 <strong>30:00</strong> <button type="button" class="btn btn-xs btn-primary">연장</button></span>
+            <button type="button" class="btn btn-xs btn-secondary">관리자 매뉴얼 보기</button><!-- 공통 -->
+            <button type="button" class="btn btn-xs btn-secondary">기본양식다운로드</button><!-- 통합,협력사만 -->
+            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/admin_modify_pop.html', '900', '640')">관리자정보수정</button><!-- 공통 -->
+            <button type="button" class="btn btn-xs btn-secondary">보안체크</button><!-- 협력사만 -->
+            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/terms_pop.html', '600', '540')">이용약관</button><!-- 협력사만 -->
+        </div>
+        <div>
+            <a href="javascript:;" class="logout">홍길동(admin_01)님 로그아웃</a>
+            <a href="javascript:;" class="home">홈으로</a>
+        </div>
+    </div>
+
+    <!-- 페이지 히스토리 탭 -->
+    <div class="page-history">
+        <div class="history_toggle">
+            <label class="form-check form-switch">
+                <span class="form-check-label">History</span>
+                <input id="historyUse" class="form-check-input" type="checkbox" >
+            </label>
+        </div>
+        <button class="close_all" type="button" title="히스토리 모두 삭제" onclick="historyRemoveAll();">히스토리 모두 삭제</button>
+    </div>
+    <!-- //공통영역2 -->
+
+    <div class="page-header d-print-none">
+        <div class="container-xl">
+            <div class="row g-2 align-items-center">
+                <div class="col">
+                    <!-- Page pre-title -->
+                    <div class="page-pretitle">
+                        홈 > 회원 > 고객사회원관리 > 고객사회원 > 수정
+                    </div>
+                    <h2 class="page-title">
+                        고객사회원 수정(회원아이디출력)
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page body -->
+    <div class="page-body">
+        <div class="container-xl form-container grid_grid4">
+            <div class="row">
+                <form action="">
+                <div class="list-btns justify-content-between align-items-center mb-3">
+                    <div>
+                        <div class="display_type mb-0">
+                            <button type="button" class="grid4 active" title="폼 그리드 1x4">폼 그리드 1x4</button>
+                            <button type="button" class="grid3 " title="폼 그리드 1x3">폼 그리드 1x3</button>
+                            <button type="button" class="grid2" title="폼 그리드 1x2">폼 그리드 1x2</button>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-warning">삭제</button>
+                        <button type="submit" class="btn btn-primary">수정</button>
+                        <a href="/resources/static/html/member/nor_member_list.html" class="btn btn-secondary">목록</a>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <p class="text-muted fs-5 my-1">* 표시는 필수 입력항목입니다.</p>
+                        <div class="card form_area">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">고객사</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" value="시크릿스토어" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">계열사</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" value="이마트" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">아이디</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" value="abc1234" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1 required">이름</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" value="홍길순">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">비밀번호</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="password" class="form-control" value="">
+                                                <button type="button" class="btn btn-xs btn-secondary">
+                                                    비밀번호 초기화
+                                                </button>
+                                                <span class="input-group-text text bg-red-lt">실패횟수: 0회</span>
+                                            </div>
+                                            <small class="form-hint">*비밀번호는 8~20자 영문, 숫자, 특수문자 조합(영문 대, 소문자 구분)해서 입력하세요.</small>
+                                            <small class="form-hint">*비밀번호변경을 원하시는 경우에만 비밀번호를 입력해주세요</small>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">사업장</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" value="고속버스터미널점">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">사원번호</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="tel" class="form-control" value="12313">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">소속</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" value="경리팀">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">부서(직급)</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" value="1파트">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">업체명</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" value="신세계디에프">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">사업자번호</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="tel" class="form-control" value="12341234">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">전화번호</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="tel" class="form-control" value="0212341234">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">휴대폰번호</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="tel" class="form-control" value="01012341234">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">이메일</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="email" class="form-control" value="qwe@aqwe.com">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">세금계산서 발행 이메일</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="email" class="form-control" value="qwe@aqwe.com">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">업체코드</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="tel" class="form-control" value="12341234">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">종사업자번호</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="tel" class="form-control" value="12341234">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">감사카드명의</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" value="신세계백화점 강남점 대표이사 박주형 배상">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">감사카드수량</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <label class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="thanks_limit" checked="">
+                                                    <span class="form-check-label">수량제한 없음</span>
+                                                </label>
+                                            </div>
+                                            <div class="input-group">
+                                                <label class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" id="thanksLimitYes" name="thanks_limit">
+                                                    <span class="form-check-label">수량제한</span>
+                                                </label>
+                                                <input type="tel" class="form-control" id="thanksLimitYesInput" data-amount-comma="" readonly="true">
+                                            </div>
+                                            <small class="form-hint">※회원이 주문대량등록 시 사용할 수 있는 감사카드 수량을 설정합니다.</small>
+                                            <script>
+                                                //감사카드수량 수량제한 항목 체크 시
+                                                const thanksLimit = document.querySelectorAll('input[name="thanks_limit"]');
+                                                const thanksLimitYes = document.getElementById('thanksLimitYes');
+                                                const thanksLimitYesInput = document.getElementById('thanksLimitYesInput');
+                                                function thanksLimitCheck(){
+                                                    if (thanksLimitYes.checked) {
+                                                        thanksLimitYesInput.removeAttribute('readonly');
+                                                    }else{
+                                                        thanksLimitYesInput.setAttribute('readonly', true);
+                                                        thanksLimitYesInput.value = '';
+                                                    }
+                                                }
+                                                thanksLimit.forEach(function (item) {
+                                                    item.addEventListener('change', function() {
+                                                        thanksLimitCheck()
+                                                    });
+                                                });
+                                                thanksLimitCheck()
+                                            </script>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">이메일수신</div>
+                                        <div class="subcontent">
+                                            <div>
+                                                <label class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="email_recive_status">
+                                                    <span class="form-check-label">수신동의</span>
+                                                </label>
+                                                <label class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="email_recive_status" checked="">
+                                                    <span class="form-check-label">수신거부</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">SMS수신</div>
+                                        <div class="subcontent">
+                                            <div>
+                                                <label class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="sms_recive_status">
+                                                    <span class="form-check-label">수신동의</span>
+                                                </label>
+                                                <label class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="sms_recive_status" checked="">
+                                                    <span class="form-check-label">수신거부</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">상태</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <select name="" id="" class="form-select">
+                                                    <option value="" selected>정상승인</option>
+                                                    <option value="">대기</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item size_lg">
+                                        <div class="subheader mb-1">감사장</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <textarea name="" id="" class="form-control"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">약관동의일시</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" value="2024-06-12 11:11:11" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">약관동의IP</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" value="118.129.252.226" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item size_lg">
+                                        <div class="subheader mb-1">기타정보</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" value="방문횟수 : 2회 / 마지막방문일 : 2024-05-20 23:59:59 / 마지막방문IP : 12.111.00.000" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="list-btns justify-content-between align-items-center mt-2">
+                        <div>
+                            <button 
+                                type="button" 
+                                class="btn btn-secondary" 
+                                onclick="windowPopup('/resources/static/html/popup/memo_pop.html', '800', '640')"
+                            >
+                                메모(10)
+                            </button>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-warning">삭제</button>
+                            <button type="submit" class="btn btn-primary">수정</button>
+                            <a href="/resources/static/html/member/nor_member_list.html" class="btn btn-secondary">목록</a>
+                        </div>
+                    </div>
+                </div>
+                </form>
+
+                <div class="col-12">
+                    <form action="">
+                    <div class="card form_area">
+                        <div class="card-header"><h3 class="card-title">배송지 설정</h3></div>
+                        <div class="card-body">
+                            <div class="list-btns justify-content-between table_actions mt-2">
+                                <div>
+                                    <div class="list_count">
+                                        <span class="check_pred_action">선택한 항목을</span>
+                                        <button type="button" class="btn btn-sm ms-1 btn-outline-primary">기본배송지 설정</button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <button type="button" class="btn btn-sm ms-1 btn-outline-secondary">신규배송지 추가</button>
+                                </div>
+                            </div>
+                            <div class="table-responsive mt-0">
+                                <table class="table table-vcenter table-line card-table text-center table-mb">
+                                    <colgroup>
+                                        <col style="width:45px;">
+                                        <col style="width:115px;">
+                                        <col style="width:115px;">
+                                        <col>
+                                        <col style="width:120px;">
+                                    </colgroup>
+                                    <thead class="dark">
+                                        <tr>
+                                            <th>선택</th>
+                                            <th>받는사람</th>
+                                            <th>휴대폰번호</th>
+                                            <th>주소</th>
+                                            <th>관리</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <label class="form-check form-check-inline m-0">
+                                                    <input class="form-check-input" type="radio" name="address_setting">
+                                                </label>
+                                            </td>
+                                            <td>홍길동</td>
+                                            <td>010-1234-1234</td>
+                                            <td class="text-start">
+                                                <span class="badge badge-outline text-danger fs-5">기본배송지</span>
+                                                12345, 서울시 서초구 신반포로 고속버스터미널 신관
+                                            </td>
+                                            <td>
+                                                <button 
+                                                    type="button" 
+                                                    class="btn btn-sm btn-primary"
+                                                    onclick="windowPopup('/resources/static/html/popup/delivery_address_pop.html', '600', '540')"
+                                                >
+                                                수정
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label class="form-check form-check-inline m-0">
+                                                    <input class="form-check-input" type="radio" name="address_setting">
+                                                </label>
+                                            </td>
+                                            <td>김기기</td>
+                                            <td>010-1234-1234</td>
+                                            <td class="text-start">
+                                                54321, 경기도 고양시 호국로111 102동102호
+                                            </td>
+                                            <td>
+                                                <button 
+                                                    type="button" 
+                                                    class="btn btn-sm btn-primary"
+                                                    onclick="windowPopup('/resources/static/html/popup/delivery_address_pop.html', '600', '540')"
+                                                >
+                                                수정
+                                                </button>
+                                                <button type="button" class="btn btn-sm btn-secondary">삭제</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+
+                <div class="col-12">
+                    <div class="card form_area">
+                        <div class="card-header"><h3 class="card-title">승인상태 변동내역</h3></div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-vcenter table-line card-table text-center table-mb">
+                                    <thead class="dark">
+                                        <tr>
+                                            <th>변동내역</th>
+                                            <th>처리자</th>
+                                            <th>처리일시</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="3">변동 내역이 없습니다.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>정상승인</td>
+                                            <td>abvc1234</td>
+                                            <td>2024-06-12 11:11:11</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 공통영역 -->
+    <div id="footer"></div>
+    <script>
+        //헤더&푸터 개발 완료시 삭제해주세요
+        var includePath = "/resources/static/layout/footer.html";
+        includeFile(includePath, 'footer');
+    </script>
+    <!-- //공통영역 -->
+</div>
+
+<script src="/resources/static/dist/js/tabler.min.js"></script>
+</body>
+</html>

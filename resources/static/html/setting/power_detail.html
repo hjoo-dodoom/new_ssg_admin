@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=1400"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>신세계 관리자</title>
+    <!-- CSS files -->
+    <link href="/resources/static/dist/css/tabler.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/tabler-vendors.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/>
+    <link rel="shortcut icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <script src="/resources/static/dist/js/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/resources/static/dist/libs/litepicker/dist/litepicker.js?1674944402"></script>
+    <script src="/resources/static/dist/js/jquery.validate.js"></script>
+    <!-- Tabler Core -->
+    
+    <script src="/resources/static/dist/js/common.js"></script>
+    <style>
+    :root {
+        --theme-admin-type: #cf3f42;
+        /* #cf3f42 통합관리자 컬러 코드*/
+        /* #4b9b52 협력회사 컬러 코드 */
+        /* #214c9c 고객사 컬러 코드 */
+    }
+    </style>
+</head>
+<body>
+<aside id="header" class="navbar navbar-vertical navbar-expand-lg header_left"></aside>
+<script>
+    //html include
+    function includeFile(path, targetId) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', path, true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById(targetId).innerHTML = xhr.responseText;
+        }
+    };
+    xhr.send();
+    }
+    var includePath = "/resources/static/layout/header.html";
+    includeFile(includePath, 'header');
+</script>
+
+<div class="page-wrapper">
+    <!-- 공통영역2 -->
+    <div class="member_info">
+        <div class="info">
+            <span>관리권한 : 최상위관리자</span>
+            <!-- 통합관리자 - 관리권한 : 최상위관리, MD관리자, 고객사담당자, 아르바이트, 시스템관리 -->
+            <!-- 협력관리자 - 관리권한 : 최상위관리, MD관리자, 고객사담당자, 아르바이트, 시스템관리 -->
+            <!-- 고객사관리자 - 관리권한 : 최상위관리, MD관리자, 고객사담당자, 아르바이트, 시스템관리 -->
+            <span class="login_session">로그인 유지시간 <strong>30:00</strong> <button type="button" class="btn btn-xs btn-primary">연장</button></span>
+            <button type="button" class="btn btn-xs btn-secondary">관리자 매뉴얼 보기</button><!-- 공통 -->
+            <button type="button" class="btn btn-xs btn-secondary">기본양식다운로드</button><!-- 통합,협력사만 -->
+            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/admin_modify_pop.html', '900', '640')">관리자정보수정</button><!-- 공통 -->
+            <button type="button" class="btn btn-xs btn-secondary">보안체크</button><!-- 협력사만 -->
+            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/terms_pop.html', '600', '540')">이용약관</button><!-- 협력사만 -->
+        </div>
+        <div>
+            <a href="javascript:;" class="logout">홍길동(admin_01)님 로그아웃</a>
+            <a href="javascript:;" class="home">홈으로</a>
+        </div>
+    </div>
+
+    <!-- 페이지 히스토리 탭 -->
+    <div class="page-history">
+        <div class="history_toggle">
+            <label class="form-check form-switch">
+                <span class="form-check-label">History</span>
+                <input id="historyUse" class="form-check-input" type="checkbox" >
+            </label>
+        </div>
+        <button class="close_all" type="button" title="히스토리 모두 삭제" onclick="historyRemoveAll();">히스토리 모두 삭제</button>
+    </div>
+    <!-- //공통영역2 -->
+
+    <div class="page-header d-print-none">
+        <div class="container-xl">
+            <div class="row g-2 align-items-center">
+                <div class="col">
+                    <!-- Page pre-title -->
+                    <div class="page-pretitle">
+                        홈 > 설정 > 관리자관리 > 계정권한 > 계정권한상세
+                    </div>
+                    <h2 class="page-title">
+                        계정권한상세(아이디출력)
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page body -->
+    <div class="page-body">
+        <div class="container-xl form-container grid_grid4">
+            <div class="row">
+                <form action="">
+                <div class="list-btns justify-content-between align-items-center mb-3">
+                    <div>
+                        <div class="display_type mb-0">
+                            <button type="button" class="grid4 active" title="폼 그리드 1x4">폼 그리드 1x4</button>
+                            <button type="button" class="grid3 " title="폼 그리드 1x3">폼 그리드 1x3</button>
+                            <button type="button" class="grid2" title="폼 그리드 1x2">폼 그리드 1x2</button>
+                        </div>
+                    </div>
+                    <div>
+                        <a href="/resources/static/html/setting/power_list.html" class="btn btn-secondary">목록</a>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card form_area">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">아이디</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="text" value="abc123" class="form-control" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">관리자명</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="text" value="홍길동" class="form-control" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 최상위 관리자만 승인버튼 활성화  -> 기획서 디스크립션 참고하세요 -->
+
+                                
+                                <div class="row">
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">계정승인</div>
+                                        <div class="subcontent">
+                                            <span class="icon_ok">O</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">등급 변경 승인(사용자 변경)</div>
+                                        <div class="subcontent">
+                                            <span class="icon_ok">O</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">팀/파트 변경 승인</div>
+                                        <div class="subcontent">
+                                            <span class="icon_ok">O</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">파트장 변경 승인</div>
+                                        <div class="subcontent">
+                                            <span class="icon_ok">O</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">팀장 변경 승인</div>
+                                        <div class="subcontent">
+                                            <span class="icon_ok">O</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 계정등록 후 대기
+                                팀/파트 변경 후 대기
+                                파트장/팀장 변경 후 대기
+                                -->
+                                <div class="row">
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">계정승인</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <select name="" id="" class="form-select">
+                                                    <option value="">최상위관리</option>
+                                                    <option value="">MD담당자</option>
+                                                    <option value="" selected>고객사담당자</option>
+                                                    <option value="">CS담당자</option>
+                                                    <option value="">시스템관리</option>
+                                                </select>
+                                                <button class="btn bg-secondary text-light btn-sm" type="button">
+                                                승인
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">등급 변경 승인(사용자 변경)</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="text" value="MD관리자 → 고객사담당자" class="form-control" readonly>
+                                                <button class="btn bg-secondary text-light btn-sm" type="button">
+                                                승인
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">팀/파트 변경 승인</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="text" value="법인영업팀/1파트 → 법인영업팀/2파트" class="form-control" readonly>
+                                                <button class="btn bg-secondary text-light btn-sm" type="button">
+                                                승인
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">파트장 변경 승인</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="text" value="일반 → 파트장" class="form-control" readonly>
+                                                <button class="btn bg-secondary text-light btn-sm" type="button">
+                                                승인
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">팀장 변경 승인</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="text" value="일반 → 팀장" class="form-control" readonly>
+                                                <button class="btn bg-secondary text-light btn-sm" type="button">
+                                                승인
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="list-btns justify-content-between align-items-center mt-2">
+                        <div>
+                        </div>
+                        <div>
+                            <a href="/resources/static/html/setting/power_list.html" class="btn btn-secondary">목록</a>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="card form_area">
+                            <div class="card-header"><h3 class="card-title">변동내역</h3></div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-vcenter table-line card-table text-center table-mb">
+                                        <thead class="dark">
+                                            <tr>
+                                                <th>변동내역</th>
+                                                <th>변경전</th>
+                                                <th>변경후</th>
+                                                <th>처리자</th>
+                                                <th>일시</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="5">변동 내역이 없습니다.</td>
+                                            </tr>
+                                            <tr>
+                                                <td>승인상태</td>
+                                                <td>변경전 내용</td>
+                                                <td>변경후 내용</td>
+                                                <td>abvc1234</td>
+                                                <td>2024-06-12 11:11:11</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 공통영역 -->
+    <div id="footer"></div>
+    <script>
+        //헤더&푸터 개발 완료시 삭제해주세요
+        var includePath = "/resources/static/layout/footer.html";
+        includeFile(includePath, 'footer');
+    </script>
+    <!-- //공통영역 -->
+</div>
+
+<script src="/resources/static/dist/js/tabler.min.js"></script>
+</body>
+</html>

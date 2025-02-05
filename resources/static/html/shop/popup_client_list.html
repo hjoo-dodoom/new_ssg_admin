@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=1400"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>신세계 관리자</title>
+    <!-- CSS files -->
+    <link href="/resources/static/dist/css/tabler.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/tabler-vendors.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/>
+    <link rel="shortcut icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <script src="/resources/static/dist/js/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/resources/static/dist/libs/litepicker/dist/litepicker.js?1674944402"></script>
+    <script src="/resources/static/dist/js/jquery.validate.js"></script>
+    <!-- Tabler Core -->
+    
+    <script src="/resources/static/dist/js/common.js"></script>
+    <style>
+    :root {
+        --theme-admin-type: #cf3f42;
+        /* #cf3f42 통합관리자 컬러 코드*/
+        /* #4b9b52 협력회사 컬러 코드 */
+        /* #214c9c 고객사 컬러 코드 */
+    }
+    </style>
+</head>
+<body>
+
+<!-- 공통영역1 -->
+<aside id="header" class="navbar navbar-vertical navbar-expand-lg header_left"></aside>
+<script>
+    //html include
+    //헤더&푸터 개발 완료시 삭제해주세요
+    function includeFile(path, targetId) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', path, true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById(targetId).innerHTML = xhr.responseText;
+        }
+    };
+    xhr.send();
+    }
+    var includePath = "/resources/static/layout/header.html";
+    includeFile(includePath, 'header');
+</script>
+<!-- //공통영역1 -->
+
+<div class="page-wrapper">
+    <!-- 공통영역2 -->
+    <div class="member_info">
+        <div class="info">
+            <span class="login_session">로그인 유지시간 <strong>30:00</strong> <button type="button" class="btn btn-xs btn-primary">연장</button></span>
+            <span>관리권한 : 최상위관리자</span>
+            <span>방문횟수 : 1,000</span>
+            <span>최근방문IP : 12.1.123.12</span>
+            <button type="button" class="btn btn-xs btn-secondary">메뉴얼다운로드</button>
+            <button type="button" class="btn btn-xs btn-secondary">기본양식다운로드</button>
+            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/admin_modify_pop.html', '900', '640')">관리자정보수정</button>
+            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/terms_pop.html', '600', '540')">이용약관</button>
+        </div>
+        <div>
+            <a href="javascript:;" class="logout">홍길동(admin_01)님 로그아웃</a>
+            <a href="javascript:;" class="home">홈으로</a>
+        </div>
+    </div>
+
+    <!-- 페이지 히스토리 탭 -->
+    <div class="page-history">
+        <div class="history_toggle">
+            <label class="form-check form-switch">
+                <span class="form-check-label">History</span>
+                <input id="historyUse" class="form-check-input" type="checkbox" >
+            </label>
+        </div>
+        <button class="close_all" type="button" title="히스토리 모두 삭제" onclick="historyRemoveAll();">히스토리 모두 삭제</button>
+    </div>
+    <!-- //공통영역2 -->
+
+    <div class="page-header d-print-none">
+        <div class="container-xl">
+            <div class="row g-2 align-items-center">
+                <div class="col">
+                    <!-- Page pre-title -->
+                    <div class="page-pretitle">
+                        홈 > 쇼핑몰 > 팝업관리 > 고객사팝업
+                    </div>
+                    <h2 class="page-title">
+                        고객사팝업
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page body -->
+    <div class="page-body search_left">
+        <div class="container-xl">
+            <div class="row row-cards aside_wrap">
+
+                <!-- 검색시작 -->
+                <div class="aside-search" id="asideSearch">
+                    <form action="" class="card">
+                        <div class="card-body">
+                            <div class="display_type">
+                                <button type="button" class="left active" title="검색영역 좌측배치">검색영역 좌측배치</button>
+                                <button type="button" class="top " title="검색영역 상단배치">검색영역 상단배치</button>
+                                <button type="button" class="right" title="검색영역 우측배치">검색영역 우측배치</button>
+                            </div>
+                            <div class="search_options">
+                                <div class="option_item w30">
+                                    <div class="subheader">상태</div>
+                                    <div>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="display_status" >
+                                            <span class="form-check-label">전체</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="display_status" value="1" checked="">
+                                            <span class="form-check-label">노출함</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="display_status" value="2">
+                                            <span class="form-check-label">노출안함</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="option_item w30">
+                                    <div class="subheader">제목</div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <input type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="search_btns">
+                                <button class="btn btn-primary">
+                                    검색
+                                </button>
+                                <a href="#" class="btn btn-secondary">
+                                    검색 초기화
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                    
+                </div>
+                <!-- //검색시작 -->
+
+                <!-- 콘텐츠 시작 -->
+                <div class="content-area">
+                    <div class="list-btns justify-content-between mb-1">
+                        <div>
+                            <a href="/resources/static/html/shop/popup_client_register.html" class="btn btn-primary">등록</a>
+                        </div>
+                    </div>
+                    <div class="list-btns justify-content-between mb-1">
+                        <div>
+                            <div class="list_count">* 전체 : <strong class="text-primary">111,592</strong>건 / 검색 : <strong class="text-primary">50</strong>건</div>
+                        </div>
+                        <div>
+                            <select class="form-select ms-2 float-start w-auto">
+                                <option selected>등록일 역순 ⬆</option>
+                                <option>등록일 순 ⬇</option>
+                                <option>수정일 역순⬆</option>
+                                <option>수정일 순 ⬇</option>
+                                <option>접속일 역순⬆</option>
+                                <option>접속일 순 ⬇</option>
+                            </select>
+                            <select class="form-select ms-2 float-start w-auto">
+                                <option selected>20개씩 보기</option>
+                                <option>30개씩 보기</option>
+                                <option>50개씩 보기</option>
+                                <option>100개씩 보기</option>
+                                <option>200개씩 보기</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="card table-mb-card">
+                        <div class="list-btns justify-content-between table_actions">
+                            <div>
+                                <div class="list_count">
+                                    <span class="check_pred_action">선택한 상품을</span>
+                                    <button type="button" class="btn btn-sm ms-1 btn-outline-secondary">노출함</button>
+                                    <button type="button" class="btn btn-sm ms-1 btn-outline-secondary">노출안함</button>
+                                    <span class="ms-1">|</span>
+                                    <button type="button" class="btn btn-sm ms-1 btn-outline-warning">삭제</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-vcenter table-line card-table text-center table-mb label-control tr_hover">
+                                <thead>
+                                    <tr>
+                                        <th class="check-all-box">
+                                            <label class="form-check form-check-inline m-0">
+                                                <input class="form-check-input check-all" type="checkbox">
+                                            </label>
+                                        </th>
+                                        <th>번호</th>
+                                        <th>제목</th>
+                                        <th>상태</th>
+                                        <th>게시기간</th>
+                                        <th>등록일</th>
+                                        <th style="min-width:80px;max-width:80px;width:80px;">미리보기</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="7" class="list-empty">
+                                            검색 내역이 존재하지 않습니다.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label class="form-check form-check-inline m-0">
+                                                <input class="form-check-input" type="checkbox">
+                                            </label>
+                                        </td>
+                                        <td>20</td>
+                                        <td class="text-start">
+                                            <a href="/resources/static/html/shop/popup_client_modify.html" class="list_link short_cut" style="max-width:450px;">
+                                                내부 공지사항
+                                            </a>
+                                        </td>
+                                        <td>노출함</td>
+                                        <td>2024-08-28 11:11:11 ~ 2024-08-28 11:11:11</td>
+                                        <td>2024-08-29 11:11:11</td>
+                                        <td>
+                                            <button type="button" class="btn btn-xs btn-secondary" onclick="document.querySelector('.popup_notice').style.display = 'block';">
+                                                미리보기
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label class="form-check form-check-inline m-0">
+                                                <input class="form-check-input" type="checkbox">
+                                            </label>
+                                        </td>
+                                        <td>20</td>
+                                        <td class="text-start">
+                                            <a href="/resources/static/html/shop/popup_client_modify.html" class="list_link short_cut" style="max-width:450px;">
+                                                내부 공지사항
+                                            </a>
+                                        </td>
+                                        <td>노출함</td>
+                                        <td>2024-08-28 11:11:11 ~ 2024-08-28 11:11:11</td>
+                                        <td>2024-08-29 11:11:11</td>
+                                        <td>
+                                            <button type="button" class="btn btn-xs btn-secondary" onclick="document.querySelector('.popup_notice').style.display = 'block';">
+                                                미리보기
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="list-btns justify-content-between table_actions">
+                            <div>
+                                <div class="list_count">
+                                    <span class="check_pred_action">선택한 상품을</span>
+                                    <button type="button" class="btn btn-sm ms-1 btn-outline-secondary">노출함</button>
+                                    <button type="button" class="btn btn-sm ms-1 btn-outline-secondary">노출안함</button>
+                                    <span class="ms-1">|</span>
+                                    <button type="button" class="btn btn-sm ms-1 btn-outline-warning">삭제</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ip_pagenation display-flex justify-content-center mt-4">
+                        <div class="pg_btn disabled">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                                <!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevrons-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M11 7l-5 5l5 5"></path>
+                                    <path d="M17 7l-5 5l5 5"></path>
+                                    </svg>
+                            </a>
+                        </div>
+                        <div class="pg_btn disabled">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                                <!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M15 6l-6 6l6 6"></path>
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="pg_ip">
+                            <input type="tel" value="1" class="form-control"> / 250
+                        </div>
+                        <div class="pg_btn">
+                            <a class="page-link" href="#">
+                                <!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M9 6l6 6l-6 6"></path>
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="pg_btn">
+                            <a class="page-link" href="#">
+                                <!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevrons-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M7 7l5 5l-5 5"></path>
+                                <path d="M13 7l5 5l-5 5"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="display-flex justify-content-center">
+                        <ul class="pagination mt-4">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                                    <!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevrons-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <path d="M11 7l-5 5l5 5"></path>
+                                        <path d="M17 7l-5 5l5 5"></path>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                                    <!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <path d="M15 6l-6 6l6 6"></path>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">4</a></li>
+                            <li class="page-item"><a class="page-link" href="#">5</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">
+                                    <!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <path d="M9 6l6 6l-6 6"></path>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">
+                                    <!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevrons-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <path d="M7 7l5 5l-5 5"></path>
+                                        <path d="M13 7l5 5l-5 5"></path>
+                                    </svg>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- 콘텐츠 끝 -->
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 공통영역 -->
+    <div id="footer"></div>
+    <script>
+        //헤더&푸터 개발 완료시 삭제해주세요
+        var includePath = "/resources/static/layout/footer.html";
+        includeFile(includePath, 'footer');
+    </script>
+    <!-- //공통영역 -->
+</div>
+
+
+
+<!-- 팝업 -->
+<div class="popup_notice type3" style="top:70px;left:20px;width:500px;z-index:999999;display:none;">
+	<div id="" class="popup_nbox" style="max-height:550px;">
+		<div class="tit">신한은행 협력사 공지</div>	
+		<div class="cnt">
+			신한은행 기프트몰을 찾아주셔서<br>
+			감사드립니다.<br>
+			해당 사이트에서 각 지점에서 필요로 하신 상품을 선택, <br>
+			결제까지 가능합니다.<br>
+			결제방법은 법인카드로 가능하며 30만원이<br>
+			결제방법은 법인카드로 가능하며 30만원이<br>
+			결제방법은 법인카드로 가능하며 30만원이<br>
+			결제방법은 법인카드로 가능하며 30만원이<br>
+			결제방법은 법인카드로 가능하며 30만원이<br>
+			결제방법은 법인카드로 가능하며 30만원이<br>
+			결제방법은 법인카드로 가능하며 30만원이<br>
+			결제방법은 법인카드로 가능하며 30만원이<br>
+			결제방법은 법인카드로 가능하며 30만원이<br>
+			결제방법은 법인카드로 가능하며 30만원이<br>
+			결제방법은 법인카드로 가능하며 30만원이<br>
+			초과시 공인인증서를 요구할 수 있으니 수량을 <br>
+			조절하시어 분할 결제 하시면 됩니다.<br>
+			기타 문의사항은 아래 연락처로 연락주세요.<br>
+			문의 : 02-3406-6998 (평일 : 9:30 ~ 5:30)
+		</div>
+	</div>
+	<div class="popup_nbtn">
+        <div class="check_today">
+            <label class="checkbox"><input type="checkbox"><span class="ck_icon"></span> 24시간동안 팝업 안열기</label>
+        </div>
+		<button type="button" class="ppn_close" onclick="document.querySelector('.popup_notice.type3').style.display = 'none'">닫기</button>
+	</div>
+</div>
+
+<script src="/resources/static/dist/js/tabler.min.js"></script>
+</body>
+</html>

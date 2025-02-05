@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=1400"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>신세계 관리자</title>
+    <!-- CSS files -->
+    <link href="/resources/static/dist/css/tabler.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/tabler-vendors.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/>
+    <link rel="shortcut icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <script src="/resources/static/dist/js/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/resources/static/dist/libs/litepicker/dist/litepicker.js?1674944402"></script>
+    <script src="/resources/static/dist/js/jquery.validate.js"></script>
+    <!-- Tabler Core -->
+    
+    <script src="/resources/static/dist/js/common.js"></script>
+    <style>
+    :root {
+        --theme-admin-type: #cf3f42;
+        /* #cf3f42 통합관리자 컬러 코드*/
+        /* #4b9b52 협력회사 컬러 코드 */
+        /* #214c9c 고객사 컬러 코드 */
+    }
+    </style>
+</head>
+<body>
+<aside id="header" class="navbar navbar-vertical navbar-expand-lg header_left"></aside>
+<script>
+    //html include
+    function includeFile(path, targetId) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', path, true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById(targetId).innerHTML = xhr.responseText;
+        }
+    };
+    xhr.send();
+    }
+    var includePath = "/resources/static/layout/header.html";
+    includeFile(includePath, 'header');
+</script>
+
+<div class="page-wrapper">
+    <!-- 공통영역2 -->
+    <div class="member_info">
+        <div class="info">
+            <span>관리권한 : 최상위관리자</span>
+            <!-- 통합관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <!-- 협력관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <!-- 고객사관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <span class="login_session">로그인 유지시간 <strong>30:00</strong> <button type="button" class="btn btn-xs btn-primary">연장</button></span>
+            <button type="button" class="btn btn-xs btn-secondary">관리자 매뉴얼 보기</button><!-- 공통 -->
+            <button type="button" class="btn btn-xs btn-secondary">기본양식다운로드</button><!-- 통합,협력사만 -->
+            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/admin_modify_pop.html', '900', '640')">관리자정보수정</button><!-- 공통 -->
+            <button type="button" class="btn btn-xs btn-secondary">보안체크</button><!-- 협력사만 -->
+            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/terms_pop.html', '600', '540')">이용약관</button><!-- 협력사만 -->
+        </div>
+        <div>
+            <a href="javascript:;" class="logout">홍길동(admin_01)님 로그아웃</a>
+            <a href="javascript:;" class="home">홈으로</a>
+        </div>
+    </div>
+
+    <!-- 페이지 히스토리 탭 -->
+    <div class="page-history">
+        <div class="history_toggle">
+            <label class="form-check form-switch">
+                <span class="form-check-label">History</span>
+                <input id="historyUse" class="form-check-input" type="checkbox" >
+            </label>
+        </div>
+        <button class="close_all" type="button" title="히스토리 모두 삭제" onclick="historyRemoveAll();">히스토리 모두 삭제</button>
+    </div>
+    <!-- //공통영역2 -->
+
+    <div class="page-header d-print-none">
+        <div class="container-xl">
+            <div class="row g-2 align-items-center">
+                <div class="col">
+                    <!-- Page pre-title -->
+                    <div class="page-pretitle">
+                        홈 > 회원 > 고객사관리 > 고객사 > 쇼핑몰 설정 > 디자인 설정
+                    </div>
+                    <h2 class="page-title">
+                        쇼핑몰 설정(고객사명출력)
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page body -->
+    <div class="page-body">
+        <div class="container-xl form-container grid_grid4">
+            <div class="row mb-3">
+                <div class="col"><a href="/resources/static/html/member/set_mall.html" class="btn btn-secondary w-100">기본설정</a></div>
+                <div class="col"><a href="/resources/static/html/member/set_mall_member.html" class="btn btn-secondary w-100">회원설정</a></div>
+                <div class="col"><a href="/resources/static/html/member/set_mall_point.html" class="btn btn-secondary w-100">포인트설정</a></div>
+                <div class="col"><a href="/resources/static/html/member/set_mall_design.html" class="btn btn-primary w-100">디자인설정</a></div>
+                <div class="col"><a href="/resources/static/html/member/set_mall_message.html" class="btn btn-secondary w-100">메시지설정</a></div>
+            </div>
+
+            <form action="">
+            <div class="list-btns justify-content-between align-items-center mb-3">
+                <div>
+                    <div class="display_type mb-0">
+                        <button type="button" class="grid4 active" title="폼 그리드 1x4">폼 그리드 1x4</button>
+                        <button type="button" class="grid3 " title="폼 그리드 1x3">폼 그리드 1x3</button>
+                        <button type="button" class="grid2" title="폼 그리드 1x2">폼 그리드 1x2</button>
+                    </div>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary">확인</button>
+                    <a href="/resources/static/html/member/ptn_member_list.html" class="btn btn-secondary">목록</a>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <p class="text-muted fs-5 my-1">* 표시는 필수 입력항목입니다.</p>
+                    <div class="card form_area">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form_item">
+                                    <div class="subheader mb-1">아이콘 노출</div>
+                                    <div class="subcontent">
+                                        <div>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox">
+                                                <span class="form-check-label">위시리스트</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox">
+                                                <span class="form-check-label">장바구니</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox">
+                                                <span class="form-check-label">마이페이지</span>
+                                            </label>
+                                        </div>
+                                        <small class="form-hint">
+                                            ※데스크탑과 모바일웹/앱이 같이 적용됩니다.
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">메뉴 노출</div>
+                                    <div class="subcontent">
+                                        <div>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox">
+                                                <span class="form-check-label">포인트 조회</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox">
+                                                <span class="form-check-label">주문내역조회</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox">
+                                                <span class="form-check-label">고객센터</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox">
+                                                <span class="form-check-label">상품카테고리</span>
+                                            </label>
+                                        </div>
+                                        <small class="form-hint">
+                                            ※데스크탑과 모바일웹/앱이 같이 적용됩니다.
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">상품 자동노출</div>
+                                    <div class="subcontent">
+                                        <div>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="auto_product_visible">
+                                                <span class="form-check-label">사용</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="auto_product_visible">
+                                                <span class="form-check-label">미사용</span>
+                                            </label>
+                                        </div>
+                                        <small class="form-hint">
+                                            ※진열하지 않아도 PC화면에서 승인된 상품이 노출 됩니다.
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">퀵메뉴 노출(데스크톱 한정)</div>
+                                    <div class="subcontent">
+                                        <div>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox">
+                                                <span class="form-check-label">좌측 퀵 메뉴</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox">
+                                                <span class="form-check-label">최근 본 상품</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox">
+                                                <span class="form-check-label">퀵메뉴 상단 배너</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item size_xl">
+                                    <div class="subheader mb-1">로그인타입</div>
+                                    <div class="subcontent">
+                                        <div class="row">
+                                            <div class="col-6">
+                                            <label class="form-imagecheck mb-2">
+                                                <input name="login_type_design" type="radio" value="1" class="form-imagecheck-input">
+                                                <h3>Type A</h3>
+                                                <span class="form-imagecheck-figure">
+                                                    <img src="http://citi.web.re.kr/images/dummy/login_atype.png" class="form-imagecheck-image">
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="col-6">
+                                            <label class="form-imagecheck mb-2">
+                                                <input name="login_type_design" type="radio" value="2" class="form-imagecheck-input">
+                                                <h3>Type B</h3>
+                                                <span class="form-imagecheck-figure">
+                                                    <img src="http://citi.web.re.kr/images/dummy/login_btype.png" class="form-imagecheck-image">
+                                                </span>
+                                            </label>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item size_xl">
+                                    <div class="subheader mb-1">고객사명</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item size_lg">
+                                    <div class="subheader mb-1">사이트 타이틀</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item size_lg">
+                                    <div class="subheader mb-1">사이트 설명</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item size_xl">
+                                    <div class="subheader mb-1">로그인 설명</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <textarea name="" id=""class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item size_lg">
+                                    <div class="subheader mb-1">사이트 도메인</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control">
+                                        </div>
+                                        <small class="form-hint">
+                                        ※2차 도메인은 담당자에게 요청해주시기 바랍니다.
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="form_item size_lg">
+                                    <div class="subheader mb-1">사이트 홈 데스크톱</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">사이트 테마 컬러</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <input type="color" name="site_theme_color" class="form-control form-control-color w-100" value="#cf3f42">
+                                        </div>
+                                        <div class="my-3">
+                                            <button type="button" class="btn btn-primary w-100 bg_sample_btn" style="background-color: #cf3f42;">컬러 적용 버튼 샘플</button>
+                                        </div>
+                                        <small class="form-hint">
+                                        ※너무 밝은 색은 문자가 안보일 수 있습니다. 
+                                        </small>
+                                        <script>
+                                            document.querySelector('input[name="site_theme_color"]').addEventListener('change', function() {
+                                                document.querySelector('.bg_sample_btn').style.backgroundColor = this.value;
+                                            });
+                                        </script>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">사이트 로고 정렬위치</div>
+                                    <div class="subcontent">
+                                        <div>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="logo_align">
+                                                <span class="form-check-label">왼쪽</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="logo_align">
+                                                <span class="form-check-label">가운데</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="logo_align">
+                                                <span class="form-check-label">오른쪽</span>
+                                            </label>
+                                        </div>
+                                        <small class="form-hint">
+                                            ※진열하지 않아도 PC화면에서 승인된 상품이 노출 됩니다.
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">사이트 로고(상시사용)</div>
+                                    <div class="subcontent">
+                                        <!-- 
+                                            등록된 이미지가 있을 경우 
+                                            preview_image -> display:block;
+                                            preview_image img -> 이미지 경로
+                                            file_name -> 파일명 출력
+                                        -->
+                                        <div class="photo_input_box">
+                                            <div class="preview_image" style="display:none;">
+                                                <img src="" alt="">
+                                                <label class="form-check form-check-inline mt-1">
+                                                    <input class="form-check-input" type="checkbox">
+                                                    <span class="form-check-label">등록된 이미지 삭제</span>
+                                                </label>
+                                            </div>
+                                            <div class="photo_input">
+                                                <label class="input-group file_name_input">
+                                                    <span class="file_name form-control">파일을 선택해주세요.</span>
+                                                    <span class="file_btn btn btn-xs btn-secondary">파일선택</span>
+                                                    <input type="file">
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <small class="form-hint mt-1">
+                                            ※진열하지 않아도 PC화면에서 승인된 상품이 노출 됩니다.
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">사이트 로고(한시사용)</div>
+                                    <div class="subcontent">
+                                        <div>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="site_logo_event" radio-display="site_logo_event1">
+                                                <span class="form-check-label">사용</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="site_logo_event" radio-display="">
+                                                <span class="form-check-label">미사용</span>
+                                            </label>
+                                        </div>
+                                        <div class="site_logo_event1 mt-1" style="display:none;">
+                                            <div class="input-group mb-1">
+                                                <input class="form-control datepicker-icon" placeholder="시작일" value="">
+                                                <span class="input-group-text text">~</span>
+                                                <input class="form-control datepicker-icon" placeholder="종료일" value="">
+                                            </div>
+                                            <div class="photo_input_box">
+                                                <div class="preview_image" style="display:none;">
+                                                    <img src="" alt="">
+                                                    <label class="form-check form-check-inline mt-1">
+                                                        <input class="form-check-input" type="checkbox">
+                                                        <span class="form-check-label">등록된 이미지 삭제</span>
+                                                    </label>
+                                                </div>
+                                                <div class="photo_input">
+                                                    <label class="input-group file_name_input">
+                                                        <span class="file_name form-control">파일을 선택해주세요.</span>
+                                                        <span class="file_btn btn btn-xs btn-secondary">파일선택</span>
+                                                        <input type="file">
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">로그인 배너 PC(상시사용)</div>
+                                    <div class="subcontent">
+                                        <div class="photo_input_box">
+                                            <div class="preview_image" style="display:none;">
+                                                <img src="" alt="">
+                                                <label class="form-check form-check-inline mt-1">
+                                                    <input class="form-check-input" type="checkbox">
+                                                    <span class="form-check-label">등록된 이미지 삭제</span>
+                                                </label>
+                                            </div>
+                                            <div class="photo_input">
+                                                <label class="input-group file_name_input">
+                                                    <span class="file_name form-control">파일을 선택해주세요.</span>
+                                                    <span class="file_btn btn btn-xs btn-secondary">파일선택</span>
+                                                    <input type="file">
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <small class="form-hint mt-1">
+                                            ※진열하지 않아도 PC화면에서 승인된 상품이 노출 됩니다.
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">로그인 배너 PC(한시사용)</div>
+                                    <div class="subcontent">
+                                        <div>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="login_pc_banner_event" radio-display="login_pc_banner_event1">
+                                                <span class="form-check-label">사용</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="login_pc_banner_event" radio-display="">
+                                                <span class="form-check-label">미사용</span>
+                                            </label>
+                                        </div>
+                                        <div class="login_pc_banner_event1 mt-1" style="display:none;">
+                                            <div class="input-group mb-1">
+                                                <input class="form-control datepicker-icon" placeholder="시작일" value="">
+                                                <span class="input-group-text text">~</span>
+                                                <input class="form-control datepicker-icon" placeholder="종료일" value="">
+                                            </div>
+                                            <div class="photo_input_box">
+                                                <div class="preview_image" style="display:none;">
+                                                    <img src="" alt="">
+                                                    <label class="form-check form-check-inline mt-1">
+                                                        <input class="form-check-input" type="checkbox">
+                                                        <span class="form-check-label">등록된 이미지 삭제</span>
+                                                    </label>
+                                                </div>
+                                                <div class="photo_input">
+                                                    <label class="input-group file_name_input">
+                                                        <span class="file_name form-control">파일을 선택해주세요.</span>
+                                                        <span class="file_btn btn btn-xs btn-secondary">파일선택</span>
+                                                        <input type="file">
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">로그인 배너 MOBILE(상시사용)</div>
+                                    <div class="subcontent">
+                                        <div class="photo_input_box">
+                                            <div class="preview_image" style="display:none;">
+                                                <img src="" alt="">
+                                                <label class="form-check form-check-inline mt-1">
+                                                    <input class="form-check-input" type="checkbox">
+                                                    <span class="form-check-label">등록된 이미지 삭제</span>
+                                                </label>
+                                            </div>
+                                            <div class="photo_input">
+                                                <label class="input-group file_name_input">
+                                                    <span class="file_name form-control">파일을 선택해주세요.</span>
+                                                    <span class="file_btn btn btn-xs btn-secondary">파일선택</span>
+                                                    <input type="file">
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <small class="form-hint mt-1">
+                                            ※진열하지 않아도 PC화면에서 승인된 상품이 노출 됩니다.
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="form_item">
+                                    <div class="subheader mb-1">로그인 배너 MOBILE(한시사용)</div>
+                                    <div class="subcontent">
+                                        <div>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="login_mobile_banner_event" radio-display="login_mobile_banner_event1">
+                                                <span class="form-check-label">사용</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="login_mobile_banner_event" radio-display="">
+                                                <span class="form-check-label">미사용</span>
+                                            </label>
+                                        </div>
+                                        <div class="login_mobile_banner_event1 mt-1" style="display:none;">
+                                            <div class="input-group mb-1">
+                                                <input class="form-control datepicker-icon" placeholder="시작일" value="">
+                                                <span class="input-group-text text">~</span>
+                                                <input class="form-control datepicker-icon" placeholder="종료일" value="">
+                                            </div>
+                                            <div class="photo_input_box">
+                                                <div class="preview_image" style="display:none;">
+                                                    <img src="" alt="">
+                                                    <label class="form-check form-check-inline mt-1">
+                                                        <input class="form-check-input" type="checkbox">
+                                                        <span class="form-check-label">등록된 이미지 삭제</span>
+                                                    </label>
+                                                </div>
+                                                <div class="photo_input">
+                                                    <label class="input-group file_name_input">
+                                                        <span class="file_name form-control">파일을 선택해주세요.</span>
+                                                        <span class="file_btn btn btn-xs btn-secondary">파일선택</span>
+                                                        <input type="file">
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-btns justify-content-between align-items-center mt-2">
+                    <div>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary">확인</button>
+                        <a href="/resources/static/html/member/ptn_member_list.html" class="btn btn-secondary">목록</a>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 공통영역 -->
+    <div id="footer"></div>
+    <script>
+        //헤더&푸터 개발 완료시 삭제해주세요
+        var includePath = "/resources/static/layout/footer.html";
+        includeFile(includePath, 'footer');
+    </script>
+    <!-- //공통영역 -->
+</div>
+<script src="/resources/static/dist/js/tabler.min.js"></script>
+</body>
+</html>

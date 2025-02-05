@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=1400"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>신세계 관리자</title>
+    <!-- CSS files -->
+    <link href="/resources/static/dist/css/tabler.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/tabler-vendors.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/>
+    <link rel="shortcut icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <script src="/resources/static/dist/js/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/resources/static/dist/libs/litepicker/dist/litepicker.js?1674944402"></script>
+    <script src="/resources/static/dist/js/jquery.validate.js"></script>
+    <!-- Tabler Core -->
+    
+    <script src="/resources/static/dist/js/common.js"></script>
+    <style>
+    :root {
+        --theme-admin-type: #cf3f42;
+        /* #cf3f42 통합관리자 컬러 코드*/
+        /* #4b9b52 협력회사 컬러 코드 */
+        /* #214c9c 고객사 컬러 코드 */
+    }
+    </style>
+</head>
+<body>
+
+<div class="popup-wrapper">
+    <h2 class="popup-title">추가 송장번호 입력</h2>
+    <form>
+    <div class="row">
+        <div class="content-area">
+            <div class="card table-mb-card">
+                <div class="table-responsive">
+                    <table class="table table-vcenter table-line card-table text-center table-mb tr_hover">
+                        <thead class="dark">
+                            <tr>
+                                <th>상품별주문번호</th>
+                                <th>상품코드</th>
+                                <th>상품명</th>
+                                <th>수량</th>
+                                <th>옵션</th>
+                                <th>기본 택배사/송장번호</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="javascript:;" class="link">123453</a></td>
+                                <td><a href="javascript:;" class="link">P0000123123123</a></td>
+                                <td class="text-start"><a href="javascript:;" class="link">여성 셔링 빅리본20</a></td>
+                                <td>1개</td>
+                                <td>블루</td>
+                                <td>한진택배<br/>123123123123</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-area">
+            <div class="card table-mb-card">
+                <div class="table-responsive">
+                    <table class="table table-vcenter table-line card-table text-center table-mb tr_hover">
+                        <caption>추가송장 등록</caption>
+                        <colgroup>
+                            <col style="width:250px;">
+                            <col>
+                            <col style="width:90px;">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>택배사</th>
+                                <th>송장번호</th>
+                                <th style="min-width:80px;max-width:80px;width:80px;">추가</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="input-group">
+                                        <select name="" id="" class="form-select">
+                                            <option value="">선택</option>
+                                        </select>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-xs btn-primary">
+                                        추가
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-area">
+            <div class="card table-mb-card">
+                <div class="table-responsive">
+                    <table class="table table-vcenter table-line card-table text-center table-mb tr_hover">
+                        <caption>추가송장 리스트</caption>
+                        <colgroup>
+                            <col style="width:60px;">
+                            <col style="width:80px;">
+                            <col style="width:90px;">
+                            <col style="width:110px;">
+                            <col style="width:110px;">
+                            <col>
+                            <col>
+                            <col style="width:80px;">
+                            <col style="width:80px;">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>번호</th>
+                                <th>일련번호</th>
+                                <th>구분</th>
+                                <th>택배사</th>
+                                <th>송장번호</th>
+                                <th>처리자</th>
+                                <th>수정자</th>
+                                <th>처리일<br/>(최종 수정일)</th>
+                                <th style="min-width:80px;max-width:80px;width:80px;">수정/삭제</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>181</td>
+                                <td>배송</td>
+                                <td>
+                                    <div class="input-group">
+                                        <select name="" id="" class="form-select">
+                                            <option value="" selected>cj대한통운</option>
+                                        </select>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </td>
+                                <td>abc1234</td>
+                                <td></td>
+                                <td>2024-06-13<br/>11:11:11</td>
+                                <td>
+                                    <button type="button" class="btn btn-xs btn-secondary">
+                                        수정
+                                    </button>
+                                    <button type="button" class="btn btn-xs btn-warning">
+                                        삭제
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>181</td>
+                                <td>배송</td>
+                                <td>
+                                    <div class="input-group">
+                                        <select name="" id="" class="form-select">
+                                            <option value="" selected>cj대한통운</option>
+                                        </select>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </td>
+                                <td>abc1234</td>
+                                <td></td>
+                                <td>2024-06-13<br/>11:11:11</td>
+                                <td>
+                                    <button type="button" class="btn btn-xs btn-secondary">
+                                        수정
+                                    </button>
+                                    <button type="button" class="btn btn-xs btn-warning">
+                                        삭제
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="list-btns justify-content-between mt-3">
+            <div>
+            </div>
+            <div>
+                <button type="button" class="btn btn-secondary" onclick="window.close();">닫기</button>
+            </div>
+        </div>
+    </div>
+    </form>
+</div>
+<script src="/resources/static/dist/js/tabler.min.js"></script>
+</body>
+</html>

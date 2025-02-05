@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=1400"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>신세계 관리자</title>
+    <!-- CSS files -->
+    <link href="/resources/static/dist/css/tabler.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/tabler-vendors.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/>
+    <link rel="shortcut icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <script src="/resources/static/dist/js/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/resources/static/dist/libs/litepicker/dist/litepicker.js?1674944402"></script>
+    <script src="/resources/static/dist/js/jquery.validate.js"></script>
+    <!-- Tabler Core -->
+    
+    <script src="/resources/static/dist/js/common.js"></script>
+    <style>
+    :root {
+        --theme-admin-type: #cf3f42;
+        /* #cf3f42 통합관리자 컬러 코드*/
+        /* #4b9b52 협력회사 컬러 코드 */
+        /* #214c9c 고객사 컬러 코드 */
+    }
+    </style>
+</head>
+<body>
+<aside id="header" class="navbar navbar-vertical navbar-expand-lg header_left"></aside>
+<script>
+    //html include
+    function includeFile(path, targetId) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', path, true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById(targetId).innerHTML = xhr.responseText;
+        }
+    };
+    xhr.send();
+    }
+    var includePath = "/resources/static/layout/header.html";
+    includeFile(includePath, 'header');
+</script>
+
+<div class="page-wrapper">
+    <!-- 공통영역2 -->
+    <div class="member_info">
+        <div class="info">
+            <span>관리권한 : 최상위관리자</span>
+            <!-- 통합관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <!-- 협력관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <!-- 고객사관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <span class="login_session">로그인 유지시간 <strong>30:00</strong> <button type="button" class="btn btn-xs btn-primary">연장</button></span>
+            <button type="button" class="btn btn-xs btn-secondary">관리자 매뉴얼 보기</button><!-- 공통 -->
+            <button type="button" class="btn btn-xs btn-secondary">기본양식다운로드</button><!-- 통합,협력사만 -->
+            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/admin_modify_pop.html', '900', '640')">관리자정보수정</button><!-- 공통 -->
+            <button type="button" class="btn btn-xs btn-secondary">보안체크</button><!-- 협력사만 -->
+            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/terms_pop.html', '600', '540')">이용약관</button><!-- 협력사만 -->
+        </div>
+        <div>
+            <a href="javascript:;" class="logout">홍길동(admin_01)님 로그아웃</a>
+            <a href="javascript:;" class="home">홈으로</a>
+        </div>
+    </div>
+
+    <!-- 페이지 히스토리 탭 -->
+    <div class="page-history">
+        <div class="history_toggle">
+            <label class="form-check form-switch">
+                <span class="form-check-label">History</span>
+                <input id="historyUse" class="form-check-input" type="checkbox" >
+            </label>
+        </div>
+        <button class="close_all" type="button" title="히스토리 모두 삭제" onclick="historyRemoveAll();">히스토리 모두 삭제</button>
+    </div>
+    <!-- //공통영역2 -->
+
+    <div class="page-header d-print-none">
+        <div class="container-xl">
+            <div class="row g-2 align-items-center">
+                <div class="col">
+                    <!-- Page pre-title -->
+                    <div class="page-pretitle">
+                        홈 > 프로모션 > 쿠폰관리 > 쿠폰 리스트 > 쿠폰 상세
+                    </div>
+                    <h2 class="page-title">
+                        쿠폰상세(쿠폰명출력)
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page body -->
+    <div class="page-body">
+        <div class="container-xl form-container grid_grid4">
+            <div class="row">
+                <form action="">
+                <div class="list-btns justify-content-between align-items-center mb-3">
+                    <div>
+                        <div class="display_type mb-0">
+                            <button type="button" class="grid4 active" title="폼 그리드 1x4">폼 그리드 1x4</button>
+                            <button type="button" class="grid3 " title="폼 그리드 1x3">폼 그리드 1x3</button>
+                            <button type="button" class="grid2" title="폼 그리드 1x2">폼 그리드 1x2</button>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-warning">삭제</button>
+                        <button type="submit" class="btn btn-primary">수정</button>
+                        <a href="/resources/static/html/promotion/coupon_list.html" class="btn btn-secondary">목록</a>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card form_area">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">고객사</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" value="시크릿스토어" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form_item size_xl">
+                                        <div class="subheader mb-1 required">쿠폰명</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input class="form-control max-text" maxlength="20" name="">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text text max-len"><b>0</b> / 20</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">사용기간</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <span class="input-group-text text">쿠폰 발급일로 부터 ~ </span>
+                                                <input class="form-control datepicker-icon">
+                                            </div>
+                                            <small class="form-hint">! 주의 : 입력하지 않을 경우 기간 제한이 없습니다.</small>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1 required">혜택구분</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <select name="" id="" class="form-select select-display">
+                                                    <option value="" select-display="benefit_type1" select-display-hide="benefit_type2" selected>할인금액</option>
+                                                    <option value="" select-display="benefit_type2" select-display-hide="benefit_type1">할인율</option>
+                                                </select>
+                                            </div>
+                                            <div class="input-group benefit_type1">
+                                                <input type="tel" class="form-control text-end" data-amount-comma value="">
+                                                <span class="input-group-text text">원</span>
+                                            </div>
+                                            <div class="input-group benefit_type2" style="display: none;">
+                                                <input type="tel" class="form-control text-end" value="">
+                                                <span class="input-group-text text">%</span>
+                                            </div>
+                                            <div class="input-group benefit_type2" style="display: none;">
+                                                <span class="input-group-text text">절사단위</span>
+                                                <select name="" id="" class="form-select">
+                                                    <option value="">0.1</option>
+                                                </select>
+                                            </div>
+                                            <div class="input-group benefit_type2" style="display: none;">
+                                                <span class="input-group-text text">최대할인금액</span>
+                                                <input type="tel" class="form-control text-end" data-amount-comma value="">
+                                                <span class="input-group-text text">원</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">발급구분</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <label class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="issue_type">
+                                                    <span class="form-check-label">전체회원</span>
+                                                </label>
+                                            </div>
+                                            <div class="input-group">
+                                                <label class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" id="issueType2" name="issue_type">
+                                                    <span class="form-check-label">일정기간 미 구매 회원 대상</span>
+                                                </label>
+                                                <select name="" id="issueType2Select" class="form-select" disabled>
+                                                    <option value="">선택해주세요</option>
+                                                    <option value="1">1개월</option>
+                                                    <option value="2">2개월</option>
+                                                    <option value="3">3개월</option>
+                                                    <option value="4">4개월</option>
+                                                    <option value="5">5개월</option>
+                                                    <option value="6">6개월</option>
+                                                    <option value="7">7개월</option>
+                                                    <option value="8">8개월</option>
+                                                    <option value="9">9개월</option>
+                                                    <option value="10">10개월</option>
+                                                    <option value="11">11개월</option>
+                                                    <option value="12">12개월</option>
+                                                </select>
+                                            </div>
+                                            <script>
+                                                //일정기간 미 구매 회원 대상
+                                                const issueType = document.querySelectorAll('input[name="issue_type"]');
+                                                const issueType2 = document.getElementById('issueType2');
+                                                const issueType2Select = document.getElementById('issueType2Select');
+                                                function issueTypeCheck(){
+                                                    if (issueType2.checked) {
+                                                        issueType2Select.disabled = false;
+                                                    }else{
+                                                        issueType2Select.disabled = true;
+                                                        issueType2Select.value = issueType2Select.options[0].value;
+                                                    }
+                                                }
+                                                issueType.forEach(function (item) {
+                                                    item.addEventListener('change', function() {
+                                                        issueTypeCheck()
+                                                    });
+                                                });
+                                                issueTypeCheck()
+                                            </script>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">발급 수 제한</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <label class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="issue_limit">
+                                                    <span class="form-check-label">제한없음</span>
+                                                </label>
+                                            </div>
+                                            <div class="input-group">
+                                                <label class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" id="issueLimit2" name="issue_limit">
+                                                    <span class="form-check-label">선착순</span>
+                                                </label>
+                                                <input type="tel" id="issueLimit2Input" class="form-control text-end" readonly data-amount-comma="">
+                                                <span class="input-group-text text">매</span>
+                                            </div>
+                                            <script>
+                                                //선착순
+                                                const issueLimit = document.querySelectorAll('input[name="issue_limit"]');
+                                                const issueLimit2 = document.getElementById('issueLimit2');
+                                                const issueLimit2Input = document.getElementById('issueLimit2Input');
+                                                function issueLimitCheck(){
+                                                    if (issueLimit2.checked) {
+                                                        issueLimit2Input.removeAttribute('readonly');
+                                                    }else{
+                                                        issueLimit2Input.setAttribute('readonly', true);
+                                                        issueLimit2Input.value = '';
+                                                    }
+                                                }
+                                                issueLimit.forEach(function (item) {
+                                                    item.addEventListener('change', function() {
+                                                        issueLimitCheck()
+                                                    });
+                                                });
+                                                issueLimitCheck()
+                                            </script>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">쿠폰적용 상품목록</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <label class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="applied_products">
+                                                    <span class="form-check-label">전체상품</span>
+                                                </label>
+                                            </div>
+                                            <div class="input-group">
+                                                <label class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="applied_products">
+                                                    <span class="form-check-label">특정상품</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1 required">상품</div>
+                                        <div class="subcontent">
+                                            <button 
+                                            class="btn bg-secondary text-light btn-sm" 
+                                            type="button"
+                                            onclick="windowPopup('/resources/static/html/popup/product_select_pop.html', '1420', '650')"
+                                            >
+                                            상품(0)
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">쿠폰중복사용</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <label class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="overlap_use">
+                                                    <span class="form-check-label">중복사용 불가</span>
+                                                </label>
+                                            </div>
+                                            <div class="input-group">
+                                                <label class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="overlap_use">
+                                                    <span class="form-check-label">중복사용 가능</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">메시지 발송</div>
+                                        <div class="subcontent">
+                                            <div>
+                                                <label class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" name="">
+                                                    <span class="form-check-label">쿠폰만료 1주일 전 안내 메시지 발송</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">상태</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <select name="" id="" class="form-select">
+                                                    <option value="">대기</option>
+                                                    <option value="">진행</option>
+                                                    <option value="">종료</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">등록일 아이디</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" value="abc123" readonly="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">등록일</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" value="2024-06-12 11:11:11" readonly="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">최종 수정 아이디</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" value="abc123" readonly="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">최종 수정일</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" value="2024-06-12 11:11:11" readonly="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-12">
+                        <div class="card form_area">
+                            <div class="card-header"><h3 class="card-title">안내 메시지  |  미 입력 시 기본문구가 발송됩니다.</h3></div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="form_item size_xl">
+                                        <div class="subheader mb-1">쿠폰만료</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" placeholder="{OOO}고객님 {고객사명}에서 보유하신 {쿠폰명}이 만료될 예정입니다.">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="list-btns justify-content-between align-items-center mt-2">
+                        <div>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-warning">삭제</button>
+                            <button type="submit" class="btn btn-primary">수정</button>
+                            <a href="/resources/static/html/promotion/coupon_list.html" class="btn btn-secondary">목록</a>
+                        </div>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 공통영역 -->
+    <div id="footer"></div>
+    <script>
+        //헤더&푸터 개발 완료시 삭제해주세요
+        var includePath = "/resources/static/layout/footer.html";
+        includeFile(includePath, 'footer');
+    </script>
+    <!-- //공통영역 -->
+</div>
+
+<script src="/resources/static/dist/js/tabler.min.js"></script>
+</body>
+</html>

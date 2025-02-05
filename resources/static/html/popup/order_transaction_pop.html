@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=1400"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>거래내역서</title>
+    <!-- CSS files -->
+    <link href="/resources/static/dist/css/tabler.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/tabler-vendors.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/>
+    <link rel="shortcut icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <script src="/resources/static/dist/js/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/resources/static/dist/libs/litepicker/dist/litepicker.js?1674944402"></script>
+    <script src="/resources/static/dist/js/jquery.validate.js"></script>
+    <!-- Tabler Core -->
+    
+    <script src="/resources/static/dist/js/common.js"></script>
+    <style>
+    :root {
+        --theme-admin-type: #cf3f42;
+        /* #cf3f42 통합관리자 컬러 코드*/
+        /* #4b9b52 협력회사 컬러 코드 */
+        /* #214c9c 고객사 컬러 코드 */
+    }
+    </style>
+</head>
+<body>
+
+<div class="popup-wrapper">
+    <h2 class="popup-title">거래내역서</h2>
+    <form action="">
+    <div class="row">
+        <div class="content-area">
+            <p>ㆍ본 거래내역서는 부가세법 제 32조의 2 제 3항에 의거 신용카드 매입 세액공제를 받을 수가 없으며, 대금결제용으로만 사용 가능합니다. </p>
+
+            <div class="card table-mb-card">
+                <div class="table-responsive">
+                    <table class="table table-vcenter table-line card-table label-control text-center table-mb">
+                        <colgroup>
+                            <col>
+                            <col>
+                            <col>
+                            <col style="width:80px;" class="print_no">
+                        </colgroup>
+                        <thead class="dark">
+                            <tr>
+                                <th>체결번호</th>
+                                <th>주문일시</th>
+                                <th>고객명</th>
+                                <th class="print_no">인쇄</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>K00002870587</td>
+                                <td>2024-09-0910:43:43</td>
+                                <td>홍길동</td>
+                                <td class="print_no">
+                                    <style>
+                                        @media print {
+                                            .popup-wrapper{padding:0;}
+                                            td,td{border:1px solid #666 !important;}
+                                            .table-responsive{border-bottom:1px solid #ddd;}
+                                            .print_no{display: none;}
+                                            * {
+                                                color-adjust: exact !important;
+                                                -webkit-print-color-adjust: exact !important;
+                                                print-color-adjust: exact !important;
+                                            }
+                                        }
+                                    </style>
+                                    <button type="button" class="btn btn-xs btn-secondary" onclick="window.print();">
+                                        인쇄하기
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card table-mb-card mt-3">
+                <div class="table-responsive">
+                    <table class="table table-vcenter table-line card-table text-center table-mb tr_hover">
+                        <caption>거래상세내역</caption>
+                        <thead class="dark">
+                            <tr>
+                                <th>주문번호</th>
+                                <th>상품명</th>
+                                <th>수량</th>
+                                <th>배송비</th>
+                                <th>금액</th>
+                                <th>합계</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>O000000002805472</td>
+                                <td class="text-start">[한삼인]홍삼본연 50mL*40포_1세트 ※ [200세트] 한정수량 특가</td>
+                                <td>1</td>
+                                <td>0</td>
+                                <td class="text-end">18,000</td>
+                                <td class="text-end">18,000</td>
+                            </tr>
+                            <tr>
+                                <td>O000000002805472</td>
+                                <td class="text-start">고래밥</td>
+                                <td>1</td>
+                                <td>0</td>
+                                <td class="text-end">2,000</td>
+                                <td class="text-end">2,000</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="5">총 주문금액</td>
+                                <td class="text-end">20,000</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card table-mb-card mt-3">
+                <div class="table-responsive">
+                    <table class="table table-vcenter table-line card-table text-center table-mb tr_hover">
+                        <caption>결제상세내역</caption>
+                        <thead class="dark">
+                            <tr>
+                                <th>결제수단</th>
+                                <th>결제금액</th>
+                                <th>포인트</th>
+                                <th>마일리지</th>
+                                <th>쿠폰</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>신용카드</td>
+                                <td class="text-end">30,000</td>
+                                <td class="text-end">10,000</td>
+                                <td class="text-end">1,400</td>
+                                <td class="text-end">0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="admin_footer">
+                <div class="ft_company">㈜ 신세계</div>
+                <div class="ft_info">
+                    <div class="item">서울시 서초구 신반포로 194 고속버스터미널 신관</div>
+                    <div class="item">대표이사 : 박주형</div>
+                    <div class="item">개인정보보호책임자 : 김선진</div>
+                    <div class="item">사업자등록번호 :  201-81-32195</div>
+                    <div class="item">고객만족센터 : 02-3406-0000</div>
+                    <div class="item">운영시간 : 평일 10:00 ~ 17:00(점심시간 12:00 ~ 13:00)</div>
+                </div>
+                <div class="ft_copy">©copyright SHINSEGAE. All right Reserved.</div>
+            </div>
+        </div>
+
+        <div class="list-btns justify-content-between mt-3 print_no">
+            <div>
+            </div>
+            <div>
+                <button type="button" class="btn btn-secondary" onclick="window.close();">닫기</button>
+            </div>
+        </div>
+    </div>
+    </form>
+</div>
+<script src="/resources/static/dist/js/tabler.min.js"></script>
+</body>
+</html>

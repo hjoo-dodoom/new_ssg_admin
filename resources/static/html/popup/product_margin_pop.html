@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=1400"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>신세계 관리자</title>
+    <!-- CSS files -->
+    <link href="/resources/static/dist/css/tabler.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/tabler-vendors.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/>
+    <link rel="shortcut icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <script src="/resources/static/dist/js/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/resources/static/dist/libs/litepicker/dist/litepicker.js?1674944402"></script>
+    <script src="/resources/static/dist/js/jquery.validate.js"></script>
+    <!-- Tabler Core -->
+    
+    <script src="/resources/static/dist/js/common.js"></script>
+    <style>
+    :root {
+        --theme-admin-type: #cf3f42;
+        /* #cf3f42 통합관리자 컬러 코드*/
+        /* #4b9b52 협력회사 컬러 코드 */
+        /* #214c9c 고객사 컬러 코드 */
+    }
+    </style>
+</head>
+<body>
+
+<div class="popup-wrapper">
+    <h2 class="popup-title">마진율 일괄 변경</h2>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="seasrch_popup">
+                        <form action="">
+                            <div class="search_options">
+                                <div class="option_item">
+                                    <div class="subheader">고객사</div>
+                                    <div class="row">
+                                        <div class="col-12 member_type_status1"><!-- member_type_status1 고객사 상태 -->
+                                            <select class="form-select select-display" onchange="clientStatusChange();">
+                                                <option value="" select-display="clientStatus1 clientStatus2 clientStatus3 clientStatus4">전체</option>
+                                                <option value="" select-display="clientStatus1" selected="">정상승인</option>
+                                                <option value="" select-display="clientStatus2">가승인</option>
+                                                <option value="" select-display="clientStatus3">정지</option>
+                                                <option value="" select-display="clientStatus4">만료</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12 member_type_select2" style=""><!-- member_type_select2 고객사 -->
+                                            <div class="search_select">
+                                                <input type="hidden" value="">
+                                                <button type="button" class="btn_select form-select text-start" onclick="searchSelectOpen(this);">고객사 전체</button>
+                                                <div class="search_select_options" style="display:none;">
+                                                    <input type="text" class="form-control" placeholder="검색어 입력" oninput="searchSelectSearch(this);">
+                                                    <div class="items">
+                                                        <div class="item"><a href="javascript:;" data-id="" class="active" onclick="searchSelectSelect(this);">고객사 전체</a></div>
+                                                        <div class="item clientStatus1" style=""><a href="javascript:;" data-id="code458i95i5" onclick="searchSelectSelect(this);">고객사1-1(정상승인)</a></div>
+                                                        <div class="item clientStatus2" style="display: none;"><a href="javascript:;" data-id="codeeye44576" onclick="searchSelectSelect(this);">고객사1-2(가승인)</a></div>
+                                                        <div class="item clientStatus3" style="display: none;"><a href="javascript:;" data-id="code45urt48u" onclick="searchSelectSelect(this);">고객사2-1(정지)</a></div>
+                                                        <div class="item clientStatus4" style="display: none;"><a href="javascript:;" data-id="code4567uer" onclick="searchSelectSelect(this);">고객사2-2(만료)</a></div>
+                                                        <div class="item clientStatus1" style="display: none;"><a href="javascript:;" data-id="code4575eyry" onclick="searchSelectSelect(this);">고객사3(정상승인)</a></div>
+                                                        <div class="item clientStatus1" style="display: none;"><a href="javascript:;" data-id="code12565" onclick="searchSelectSelect(this);">고객사4(정상승인)</a></div>
+                                                        <div class="item clientStatus1" style="display: none;"><a href="javascript:;" data-id="code6556677" onclick="searchSelectSelect(this);">고객사5(정상승인)</a></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" id="clientMultipleCheck" onchange="clientMultipleSelectCheck(this)" type="checkbox" name="">
+                                                <span class="form-check-label">고객사 다중선택(<span id="clientMultipleCheckCount">0</span>)</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="clientMultipleSelect" class="option_item w80 client_multiple_select" style="display:none;">
+                                    <div class="subheader">고객사 다중선택</div>
+                                    <div class="label-control">
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input check-all" type="checkbox">
+                                            <span class="form-check-label">전체</span>
+                                        </label>
+                                        <label class="form-check form-check-inline clientStatus1">
+                                            <input class="form-check-input" type="checkbox" name="">
+                                            <span class="form-check-label">신세계강남(정상승인)</span>
+                                        </label>
+                                        <label class="form-check form-check-inline clientStatus1">
+                                            <input class="form-check-input" type="checkbox" name="">
+                                            <span class="form-check-label">시크릿스토어(정상승인)</span>
+                                        </label>
+                                        <label class="form-check form-check-inline clientStatus2">
+                                            <input class="form-check-input" type="checkbox" name="">
+                                            <span class="form-check-label">(스마일)강남대학교(가승인)</span>
+                                        </label>
+                                        <label class="form-check form-check-inline clientStatus2">
+                                            <input class="form-check-input" type="checkbox" name="">
+                                            <span class="form-check-label">(스마일)거제시청(가승인)</span>
+                                        </label>
+                                        <label class="form-check form-check-inline clientStatus3">
+                                            <input class="form-check-input" type="checkbox" name="">
+                                            <span class="form-check-label">BMW코리아(정지)</span>
+                                        </label>
+                                        <label class="form-check form-check-inline clientStatus3">
+                                            <input class="form-check-input" type="checkbox" name="">
+                                            <span class="form-check-label">아우디코리아(정지)</span>
+                                        </label>
+                                        <label class="form-check form-check-inline clientStatus4">
+                                            <input class="form-check-input" type="checkbox" name="">
+                                            <span class="form-check-label">미래에셋그룹(만료)</span>
+                                        </label>
+                                        <label class="form-check form-check-inline clientStatus4">
+                                            <input class="form-check-input" type="checkbox" name="">
+                                            <span class="form-check-label">삼성화재 생생택배 삼천원몰(만료)</span>
+                                        </label>
+                                        <label class="form-check form-check-inline clientStatus4">
+                                            <input class="form-check-input" type="checkbox" name="">
+                                            <span class="form-check-label">카톨릭대학교부천성모병원(만료)</span>
+                                        </label>
+                                    </div>
+                                    
+
+                                    <script>
+                                        const clientMultipleSelect = document.getElementById('clientMultipleSelect');
+                                        const clientMultipleSelectCheckboxes = document.querySelectorAll('#clientMultipleSelect input[type="checkbox"]');
+                                        const clientMultipleSelectItem = document.querySelectorAll('#clientMultipleSelect input[type="checkbox"]:not(.check-all)');
+
+                                        //상태변경시 고객사 선택초기화(맨위 항목으로)
+                                        function resetSelection(selector) {
+                                            let container = document.querySelector(selector);
+                                            let items = container.querySelectorAll('.items .item a');
+                                            let firstItem = container.querySelector('.items .item:first-child a');
+                                            
+                                            container.querySelector('input[type="hidden"]').value = firstItem.getAttribute('data-id');
+                                            container.querySelector('.btn_select').textContent = firstItem.textContent;
+                                            
+                                            items.forEach(function(item){
+                                                item.classList.remove('active');
+                                            });
+                                            firstItem.classList.add('active');
+                                        }
+                                        
+
+                                        //셀렉트 변경시 하위 셀렉트 초기화
+                                        function clientStatusChange(){
+                                            //고객사 상태변경시 하위 셀렉트 초기화
+                                            resetSelection('.member_type_select2');//고객사
+
+                                            //고객사 상태변경시 고객사 다중선택 체크 초기화
+                                            document.querySelectorAll('#clientMultipleSelect input[type=checkbox]').forEach(function(checkbox){
+                                                checkbox.checked = false;
+                                            });
+                                            clientMultipleCheckCount.textContent = '0';
+                                        }
+
+                                        //고객사 다중선택, 제외 둘다 선택 방지
+                                        //둘다 해제시 다중선택 초기화
+                                        //선택시 고객사 셀렉트박스 비활성화
+                                        function clientMultipleSelectCheck(elm){
+                                            if(clientMultipleCheck.checked ){
+                                                clientMultipleSelect.style.display = 'flex';
+                                                document.querySelector('.member_type_select2').setAttribute('hidden' ,'');
+                                            }else if(!clientMultipleCheck.checked){
+                                                //고객사 다중선택, 고객사 제외 둘다 체크 해제시 
+                                                //고객사 다중선택 박스 hide && 체크해제 && 카운트 해제
+                                                document.querySelector('.member_type_select2').removeAttribute('hidden');
+                                                clientMultipleSelect.style.display = 'none';
+                                                clientMultipleSelectCheckboxes.forEach(function(checkbox){
+                                                    checkbox.checked = false;
+                                                });
+                                                clientMultipleCheckCount.textContent = '0';
+                                            }
+                                        }
+
+
+                                        //고객사 다중선택 && 제외 카운트 출력
+                                        document.addEventListener('DOMContentLoaded', function() {
+                                            clientMultipleSelectCheckboxes.forEach(function(check) {
+                                                check.addEventListener('change', function() {
+                                                    let count = 0;
+                                                    clientMultipleSelectItem.forEach(function(check) {
+                                                        if (check.checked) {
+                                                            count++;
+                                                        }
+                                                    });
+                                                    if(clientMultipleCheck.checked){
+                                                        clientMultipleCheckCount.textContent = count;
+                                                    }
+                                                });
+                                            });
+                                        });
+                                    </script>
+                                </div>
+                                <div class="option_item">
+                                    <div class="subheader">협력회사</div>
+                                    <div class="row">
+                                        <div class="col-12 member_type_status3"><!-- member_type_status3 협력회사 상태 -->
+                                            <select class="form-select select-display" onchange="partnerStatusChange();">
+                                                <option value="" select-display="partnerStatus1 partnerStatus2 partnerStatus3 partnerStatus4">전체</option>
+                                                <option value="" select-display="partnerStatus1" selected="">정상승인</option>
+                                                <option value="" select-display="partnerStatus2">가승인</option>
+                                                <option value="" select-display="partnerStatus3">정지</option>
+                                                <option value="" select-display="partnerStatus4">만료</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-12 member_type_select8"><!-- member_type_select8 협력회사 -->
+                                            <div class="search_select">
+                                                <input type="hidden" value="">
+                                                <button type="button" class="btn_select form-select text-start" onclick="searchSelectOpen(this);">협력회사 선택</button>
+                                                <div class="search_select_options" style="display:none;">
+                                                    <input type="text" class="form-control" placeholder="검색어 입력" oninput="searchSelectSearch(this);">
+                                                    <div class="items">
+                                                        <div class="item"><a href="javascript:;" data-id="" class="active" onclick="searchSelectSelect(this);">협력회사 선택</a></div>
+                                                        <div class="item partnerStatus1"><a href="javascript:;" data-id="code458i95i5" onclick="searchSelectSelect(this);">협력회사1(정상승인)</a></div>
+                                                        <div class="item partnerStatus2"><a href="javascript:;" data-id="codeeye44576" onclick="searchSelectSelect(this);">협력회사2(가승인)</a></div>
+                                                        <div class="item partnerStatus3"><a href="javascript:;" data-id="code45urt48u" onclick="searchSelectSelect(this);">협력회사2(정지)</a></div>
+                                                        <div class="item partnerStatus4"><a href="javascript:;" data-id="code4567uer" onclick="searchSelectSelect(this);">협력회사2(만료)</a></div>
+                                                        <div class="item partnerStatus1"><a href="javascript:;" data-id="code4575eyry" onclick="searchSelectSelect(this);">협력회사3(정상승인)</a></div>
+                                                        <div class="item partnerStatus1"><a href="javascript:;" data-id="code12565" onclick="searchSelectSelect(this);">협력회사4(정상승인)</a></div>
+                                                        <div class="item partnerStatus1"><a href="javascript:;" data-id="code6556677" onclick="searchSelectSelect(this);">협력회사5(정상승인)</a></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <script>
+                                        //셀렉트 변경시  그룹사,고객사,계열사,상위몰 하위몰 선택초기화 (맨위에 항목으로)
+                                        function resetSelection(selector) {
+                                            let container = document.querySelector(selector);
+                                            let items = container.querySelectorAll('.items .item a');
+                                            let firstItem = container.querySelector('.items .item:first-child a');
+                                            
+                                            container.querySelector('input[type="hidden"]').value = firstItem.getAttribute('data-id');
+                                            container.querySelector('.btn_select').textContent = firstItem.textContent;
+                                            
+                                            items.forEach(function(item){
+                                                item.classList.remove('active');
+                                            });
+                                            firstItem.classList.add('active');
+                                        }
+                                        
+                                        function partnerStatusChange(){
+                                            //협력회사 상태변경시 하위 셀렉트 초기화
+                                            resetSelection('.member_type_select8');//고객사
+                                        }
+                                    </script>
+                                </div>
+                                <div class="option_item">
+                                    <div class="subheader">검색</div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <select class="form-select col-6">
+                                                <option value="" selected="">상품명</option>
+                                                <option value="">상품코드</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-6">
+                                            <input type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="option_item">
+                                    <div class="subheader">상품구분</div>
+                                    <div class="row">
+                                        <div>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" name="">
+                                                <span class="form-check-label">복사상품</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="search_btns">
+                                <button class="btn btn-primary">
+                                    검색
+                                </button>
+                                <button type="button" class="btn btn-secondary">
+                                    검색 초기화
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="list-btns justify-content-between mb-1">
+                <div>
+                    <small class="form-hint text-primary">! 주의 : 다중 고객사 판매상품의 경우 변경된 마진율이 타 고객사에도 적용됩니다.</small>
+                </div>
+                <div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="card table-mb-card">
+                        <div class="list-btns justify-content-between table_actions">
+                            <div>
+                                <span class="check_pred_action">선택한 상품의 마진율을</span>
+                                <div class="input-group">
+                                    <input type="tel" class="form-control text-end w-5">
+                                    <span class="input-group-text text w-4">%</span>
+                                    <button type="button" class="btn btn-sm btn-secondary">일괄변경</button>
+                                </div>
+                            </div>
+                            <div>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-vcenter table-line card-table text-center table-mb label-control tr_hover">
+                                <thead>
+                                    <tr>
+                                        <th class="check-all-box">
+                                            <label class="form-check form-check-inline m-0">
+                                                <input class="form-check-input check-all" type="checkbox">
+                                            </label>
+                                        </th>
+                                        <th>번호</th>
+                                        <th>협력회사</th>
+                                        <th>상품코드</th>
+                                        <th>상품명</th>
+                                        <th>상태</th>
+                                        <th>마진율</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <td colspan="7" class="list-empty">
+                                        검색된 내역이 존재하지 않습니다.
+                                    </td>
+                                    <tr>
+                                        <td>
+                                            <label class="form-check form-check-inline m-0">
+                                                <input class="form-check-input" type="checkbox">
+                                            </label>
+                                        </td>
+                                        <td>20</td>
+                                        <td class="text-start">베네파트너</td>
+                                        <td>P0000000193874</td>
+                                        <td class="text-start"><a href="javascript:;" class="link">[글라스락] 클래식 12조 세트(핑크)</a></td>
+                                        <td>승인</td>
+                                        <td>5%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label class="form-check form-check-inline m-0">
+                                                <input class="form-check-input" type="checkbox">
+                                            </label>
+                                        </td>
+                                        <td>20</td>
+                                        <td class="text-start">티제이넷</td>
+                                        <td>P0000000193874</td>
+                                        <td class="text-start"><a href="javascript:;" class="link">[글라스락] 클래식 12조 세트(핑크)</a></td>
+                                        <td>대기</td>
+                                        <td>5%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label class="form-check form-check-inline m-0">
+                                                <input class="form-check-input" type="checkbox">
+                                            </label>
+                                        </td>
+                                        <td>20</td>
+                                        <td class="text-start">제이에스엘퐁딩스</td>
+                                        <td>P0000000193874</td>
+                                        <td class="text-start"><a href="javascript:;" class="link">[글라스락] 클래식 12조 세트(핑크)</a></td>
+                                        <td>승인</td>
+                                        <td>5%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="list-btns justify-content-between mt-2">
+                <div>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-secondary" onclick="window.close();">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</script>
+<script src="/resources/static/dist/js/tabler.min.js"></script>
+</body>
+</html>

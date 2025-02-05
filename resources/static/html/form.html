@@ -1,0 +1,569 @@
+
+<!DOCTYPE html>
+<html lang="ko" xml:lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+<meta charset="UTF-8">
+<meta name="author" content="">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<title>통합관리자 파일 목록</title>
+<!--[if lt IE 9]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<link href="/resources/static/dist/css/tabler.css" rel="stylesheet"/>
+<link href="/resources/static/dist/css/tabler-vendors.css" rel="stylesheet"/>
+<link href="/resources/static/dist/css/style.css" rel="stylesheet"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/>
+<link rel="shortcut icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+<script src="/resources/static/dist/js/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- Libs JS -->
+<script src="/resources/static/dist/libs/litepicker/dist/litepicker.js?1674944402"></script>
+<script src="/resources/static/dist/js/jquery.validate.js"></script>
+    <!-- Tabler Core -->
+
+<script src="/resources/static/dist/js/common.js"></script>
+<!-- code highlight -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-okaidia.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-go.min.js"></script>
+<style type="text/css">
+    *{margin:0;padding:0;font-size:12px;}
+	#guide_wrap {padding:10px}
+	table {border-collapse:collapse;border-spacing:0;}
+	table th, strong {font-weight:normal;}
+	h1{
+		margin:0 0 10px 0;
+		text-align:center;
+		font-size:2.4em;
+		color:#000
+	}
+	a {text-decoration:none;}
+	a:hover {text-decoration:underline;}
+	table {
+		width:100%;
+		margin-top:5px;
+		border-top:2px solid #1e61a8;
+	}
+	table th, table td{
+		padding:5px 7px;
+		border-left:1px solid #ccc; border-bottom:1px solid #ccc;
+	}
+	table th:rowspan + th, table td:rowspan + td{border-left:1px solid #ccc;}
+	td.lineli, th.lineli {border-left:1px solid #ccc !important;}
+	table th:first-child, table td:first-child{border-left:0 none}
+	table thead th {
+		font-family:'ngB';
+		font-size:13px;
+		color:#000;
+		border-bottom:1px solid #ccc;
+		background-color:#f2f2f2;
+	}
+	.no, .date, .work {
+		text-align:center;
+		padding:5px 0
+	}
+
+	tr.on {background-color: #f5fed0}
+
+	.lastmdate {color: #1155CC;}
+	.stand_by {color:#777;}
+	.ing, .per_2 {color:#4848D4 !important;}
+	.curr_n, .per, .end {color:#ff0000 !important;}
+
+	.division td{border-top:2px solid #7e8e9e}
+	table tr.division:first-child td{border-top:0 none;}
+	td a {text-decoration: none;}
+	pre[class*=language-]{padding:0 20px;margin:0;border-radius:0;height:100%;}
+	.guide_links{display:flex;text-align:center;margin-bottom:20px;}
+	.guide_links a{flex:1 1;background-color: #ddd;color:#000;font-size:15px;font-weight:bold;padding:10px;}
+    .guide_links a + a{border-left:1px solid #ccc;}
+	.guide_links a.active{background-color:#000;color:#fff;}
+    .common_function{}
+    .common_function .box{display:flex;box-shadow: 0 0 10px rgba(0,0,0,.2);margin-top:20px;}
+    .common_function .box .dec{width:30%;background-color:#41734b;padding:20px;font-size:15px;color:#fff;}
+    .common_function .box .dec a{color:#3aff62;text-decoration: underline;}
+    .common_function .box .code{flex:1 1 auto;}
+    .common_function .box .preview{width:100%;background-color:#f1f5f9;}
+</style>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        Prism.highlightAll();
+    });
+    </script>
+</head>
+<body>
+<div id="wrap" class="wrap">
+<!-- eniter wrap -->
+<div id="guide_wrap">
+	<div class="guide_links">
+		<a href="/resources/static/html/index.html">통합관리자 파일 목록</a>
+		<a href="/resources/static/html/notice.html">개발참고사항</a>
+		<a href="/resources/static/html/guide_js.html">가이드(JS)</a>
+		<a href="/resources/static/html/form.html" class="active">Form html</a>
+	</div>
+	<div class="header">
+		<h1>Form html</h1>
+	</div>
+
+	<div class="common_function">
+        <div class="box">
+			<div class="preview form-container grid_grid4">
+                <div class="card form_area">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="form_item">
+                                <div class="subheader mb-1 required">required</div>
+                                <div class="subcontent">
+                                    <div class="input-group">
+                                        <select name="" class="form-select">
+                                            <option value="" selected="">홍*동</option>
+                                        </select>
+                                        <button type="button" class="btn btn-xs btn-secondary">
+                                            부담당자(10)
+                                        </button>
+                                    </div>
+                                    <small class="form_error">이미 사용중 입니다.</small>
+                                    <small class="form-hint">※모바일 앱 접속 시 사용하는 코드입니다.</small>
+                                </div>
+                            </div>
+                            <div class="form_item size_lg">
+                                <div class="subheader mb-1 required">size_lg</div>
+                                <div class="subcontent">
+                                    <div class="input-group">
+                                        <select name="" class="form-select">
+                                            <option value="" selected="">홍*동</option>
+                                        </select>
+                                        <button type="button" class="btn btn-xs btn-secondary">
+                                            부담당자(10)
+                                        </button>
+                                    </div>
+                                    <small class="form_error">이미 사용중 입니다.</small>
+                                    <small class="form-hint">※모바일 앱 접속 시 사용하는 코드입니다.</small>
+                                </div>
+                            </div>
+                            <div class="form_item size_xl">
+                                <div class="subheader mb-1 required">size_xl</div>
+                                <div class="subcontent">
+                                    <div class="input-group">
+                                        <select name="" class="form-select">
+                                            <option value="" selected="">홍*동</option>
+                                        </select>
+                                        <button type="button" class="btn btn-xs btn-secondary">
+                                            부담당자(10)
+                                        </button>
+                                    </div>
+                                    <small class="form_error">이미 사용중 입니다.</small>
+                                    <small class="form-hint">※모바일 앱 접속 시 사용하는 코드입니다.</small>
+                                </div>
+                            </div>
+                            <div class="form_item">
+                                <div class="subheader mb-1 required">검색 가능한 selectbox</div>
+                                <div class="subcontent">
+                                    <div class="input-group">
+                                        <div class="search_select">
+                                            <input type="hidden">
+                                            <button type="button" class="btn_select form-select text-start" onclick="searchSelectOpen(this);">전체</button>
+                                            <div class="search_select_options" style="display:none;">
+                                                <input type="text" class="form-control" placeholder="검색어 입력" oninput="searchSelectSearch(this);">
+                                                <div class="items">
+                                                    <div class="item"><a href="javascript:;" data-id="" class="active" onclick="searchSelectSelect(this);">전체</a></div>
+                                                    <div class="item"><a href="javascript:;" data-id="123" onclick="searchSelectSelect(this);">고객사1</a></div>
+                                                    <div class="item"><a href="javascript:;" data-id="655" onclick="searchSelectSelect(this);">고객사2</a></div>
+                                                    <div class="item"><a href="javascript:;" data-id="499" onclick="searchSelectSelect(this);">고객사3</a></div>
+                                                    <div class="item"><a href="javascript:;" data-id="233" onclick="searchSelectSelect(this);">시크릿스토어</a></div>
+                                                    <div class="item"><a href="javascript:;" data-id="125" onclick="searchSelectSelect(this);">에스씨케이컴퍼니</a></div>
+                                                    <div class="item"><a href="javascript:;" data-id="2356" onclick="searchSelectSelect(this);">강원랜드</a></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form_item">
+                                <div class="subheader mb-1">영업담당</div>
+                                <div class="subcontent">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control">
+                                    </div>
+                                    <small class="form-hint">※ 고객사에서 마일리지를 사용하는 경우만 입력한 마일리지를 사용할 수 있습니다. <a href="javascript:;" class="link">회원 &gt; 마일리지 &gt; 마일리지 설정</a></small>
+                                </div>
+                            </div>
+                            <div class="form_item">
+                                <div class="subheader mb-1">영업담당</div>
+                                <div class="subcontent">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control">
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control">
+                                    </div>
+                                    <small class="form-hint">※모바일 앱 접속 시 사용하는 코드입니다.</small>
+                                </div>
+                            </div>
+                            <div class="form_item">
+                                <div class="subheader mb-1">영업담당</div>
+                                <div class="subcontent">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" readonly>
+                                    </div>
+                                    <div class="input-group">
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox">
+                                            <span class="form-check-label">체크박스</span>
+                                        </label>
+                                        <button class="btn bg-secondary text-light btn-sm" type="button">상세보기</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form_item">
+                                <div class="subheader mb-1">글자수계산</div>
+                                <div class="subcontent">
+                                    <div class="input-group">
+                                        <input class="form-control max-text" maxlength="20" type="text" name="">
+                                        <span class="input-group-text text max-len"><b>0</b> / 20</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form_item">
+                                <div class="subheader mb-1">글자수계산</div>
+                                <div class="subcontent">
+                                    <div class="input-group">
+                                        <textarea class="form-control max-text" maxlength="20" name=""></textarea>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text text max-len"><b>0</b> / 20</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form_item">
+                                <div class="subheader mb-1">byte계산</div>
+                                <div class="subcontent">
+                                    <div class="input-group">
+                                        <textarea class="form-control max-byte" name=""></textarea>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text text max-len"><b>0</b> / <strong>80</strong>byte</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form_item">
+                                <div class="subheader mb-1">영업담당</div>
+                                <div class="subcontent">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control datepicker-icon" placeholder="시작일자">
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control datepicker-icon" placeholder="종료일자">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form_item">
+                                <div class="subheader mb-1">영업담당</div>
+                                <div class="subcontent">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control datepicker-icon" placeholder="시작일자">
+                                        <span class="input-group-text text">~</span>
+                                        <input type="text" class="form-control datepicker-icon" placeholder="종료일자">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form_item">
+                                <div class="subheader mb-1">영업담당</div>
+                                <div class="subcontent">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control">
+                                        <span class="input-group-text text">원</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form_item">
+                                <div class="subheader mb-1">영업담당</div>
+                                <div class="subcontent">
+                                    <div class="input-group">
+                                        <span class="input-group-text text">시작가격</span>
+                                        <input type="text" class="form-control">
+                                        <span class="input-group-text text">원</span>
+                                    </div>
+                                    <div class="input-group">
+                                        <span class="input-group-text text">종료가격</span>
+                                        <input type="text" class="form-control">
+                                        <span class="input-group-text text">원</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form_item">
+                                <div class="subheader mb-1">영업담당</div>
+                                <div class="subcontent">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="영업담당을 입력하세요.">
+                                        <input type="text" class="form-control" placeholder="입력하세요.">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form_item">
+                                <div class="subheader mb-1">영업담당</div>
+                                <div class="subcontent">
+                                    <div class="input-group">
+                                        <select name="" class="form-select">
+                                            <option value="" selected="">영업담당</option>
+                                        </select>
+                                        <select name="" class="form-select">
+                                            <option value="">선택</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form_item">
+                                <div class="subheader mb-1 required">영업담당</div>
+                                <div class="subcontent">
+                                    <div>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="member_type" checked="">
+                                            <span class="form-check-label">고객사</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="member_type">
+                                            <span class="form-check-label">그룹사</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form_item">
+                                <div class="subheader mb-1 required">영업담당</div>
+                                <div class="subcontent">
+                                    <div>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" checked="">
+                                            <span class="form-check-label">고객사</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox">
+                                            <span class="form-check-label">그룹사</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form_item">
+                                <div class="subheader mb-1 required">영업담당</div>
+                                <div class="subcontent">
+                                    <div>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" checked="">
+                                            <span class="form-check-label">고객사</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox">
+                                            <span class="form-check-label">그룹사</span>
+                                        </label>
+                                    </div>
+                                    <div class="input-group mt-1">
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form_item">
+                                <div class="subheader mb-1 required">영업담당</div>
+                                <div class="subcontent">
+                                    <button class="btn bg-secondary text-light btn-sm" type="button">버튼1</button>
+                                    <button class="btn bg-secondary text-light btn-sm" type="button">버튼2</button>
+                                </div>
+                            </div>
+                            <div class="form_item size_xl">
+                                <div class="subheader mb-1">제목</div>
+                                <div class="subcontent">
+                                    <div class="input-group">
+                                        <span class="badge badge-outline text-primary fs-5">공지</span>
+                                        <span class="badge badge-outline text-info fs-5">시스템</span>
+                                        <span class="badge badge-outline text-danger fs-5">중요</span>
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" value="24년 차세대 시스템에 등록되어 있는 계약서 공유합니다." readonly="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form_item size_lg">
+                                <div class="subheader mb-1">첨부파일</div>
+                                <div class="subcontent">
+                                    <div class="me-2 my-1 d-inline-flex">
+                                        <a href="https://naver.com" download="" class="badge bg-blue-lt">d1e0_차세대.zip</a>
+                                        <a href="javacript:;" class="badge bg-secondary-lt ms-1 copy-link" onclick="copyUrl(this);">파일다운주소복사</a>
+                                    </div>
+                                    <div class="me-2 my-1 d-inline-flex">
+                                        <a href="https://daum.net" download="" class="badge bg-blue-lt">abcdefg.zip</a>
+                                        <a href="javacript:;" class="badge bg-secondary-lt ms-1 copy-link" onclick="copyUrl(this);">파일다운주소복사</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form_item size_lg">
+                                <div class="subheader mb-1">첨부파일</div>
+                                <div class="subcontent" id="uploadFiles">
+
+                                    <!-- 업로드된 파일이 있는 경우 -->
+                                    <div class="input-group">
+                                        <input type="file" class="form-control" style="display:none;" onchange="updateFileSize(this);">
+                                        <input type="text" class="form-control" value="aaaa.zip" data-file-size="370.4" readonly>
+                                        <button class="btn btn-xs btn-danger" type="button" onclick="removeUploadedFile(this)">기존파일 삭제</button>
+                                        <span class="input-group-text text">370.4MB</span>
+                                        <button class="btn btn-xs btn-warning" type="button" onclick="removeFile(this)">삭제</button>
+                                        <button class="btn btn-xs btn-primary" type="button" onclick="addFile()">추가</button>
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="file" class="form-control" style="display:none;" onchange="updateFileSize(this);">
+                                        <input type="text" class="form-control" value="qwe123.zip" data-file-size="20" readonly>
+                                        <button class="btn btn-xs btn-danger" type="button" onclick="removeUploadedFile(this)">기존파일 삭제</button>
+                                        <span class="input-group-text text">20MB</span>
+                                        <button class="btn btn-xs btn-warning" type="button" onclick="removeFile(this)">삭제</button>
+                                    </div>
+
+                                    <!-- 업로드된 파일이 없는 경우 -->
+                                    <!-- <div class="input-group">
+                                        <input type="file" class="form-control" data-file-size="" onchange="updateFileSize(this);">
+                                        <span class="input-group-text text">0 MB</span>
+                                        <button class="btn btn-xs btn-warning" type="button" onclick="removeFile(this)">삭제</button>
+                                        <button class="btn btn-xs btn-primary" type="button" onclick="addFile()">추가</button>
+                                    </div> -->
+                                </div>
+                                <small class="form-hint text-danger mt-2">※ 첨부파일 전체 파일용량은 400M 입니다</small>
+                                <script>
+                                    let fileSizeTotal = 0;
+                                
+                                    function updateFileSize(elm) {
+                                        const file = elm.files[0];
+                                        if (file) {
+                                            const fileSize = file.size / (1024 * 1024); // MB 단위로 변환
+                                            elm.setAttribute('data-file-size', fileSize.toFixed(2));
+                                            const fileSizeText = `${fileSize.toFixed(2)} MB`;
+                                            const inputGroup = elm.closest('.input-group');
+                                            const fileSizeSpan = inputGroup.querySelector('.input-group-text');
+                                            fileSizeSpan.textContent = fileSizeText;
+                                            updateTotalFileSize();
+                                        }
+                                    }
+                                
+                                    function updateTotalFileSize() {
+                                        fileSizeTotal = 0;
+                                        document.querySelectorAll('#uploadFiles .input-group').forEach(function(item) {
+                                            let fileItem;
+                                            const inputFile = item.querySelector('input[type="file"]');
+                                            const inputText = item.querySelector('input[type="text"]');
+                                            if (inputText) {
+                                                fileItem = inputText;
+                                            } else if (inputFile) {
+                                                fileItem = inputFile;
+                                            };
+                                            const fileSize = parseFloat(fileItem.getAttribute('data-file-size')) || 0;
+                                            fileSizeTotal += fileSize;
+                                        });
+                                        console.log(fileSizeTotal)
+                                        if (fileSizeTotal > 400) {
+                                            alert('총 파일 용량이 400MB를 초과합니다. 파일을 제거하거나 용량을 줄여주세요.');
+                                        }
+                                    }
+                                
+                                    window.onload = function() {
+                                        updateTotalFileSize();
+                                    };
+                                
+                                    function addFile() {
+                                        const uploadFiles = document.getElementById('uploadFiles');
+                                        const fileHtml = `
+                                            <div class="input-group">
+                                                <input type="file" class="form-control" data-file-size="" onchange="updateFileSize(this);">
+                                                <span class="input-group-text text">0 MB</span>
+                                                <button class="btn btn-xs btn-warning" type="button" onclick="removeFile(this)">삭제</button>
+                                            </div>
+                                        `;
+                                        uploadFiles.insertAdjacentHTML('beforeend', fileHtml);
+                                    }
+                                
+                                    //업로드 있었던 파일 삭제
+                                    function removeUploadedFile(button) {
+                                        const inputGroup = button.closest('.input-group');
+                                        const inputFile = inputGroup.querySelector('input[type="file"]');
+                                        const inputUploadedFileName = inputGroup.querySelector('input[type="text"]');
+                                        const fileSize = parseFloat(inputUploadedFileName.getAttribute('data-file-size'));
+                                        const fileSizeSpan = inputGroup.querySelector('.input-group-text');
+                                        fileSizeSpan.textContent = '0MB';
+                                        fileSizeTotal -= fileSize;
+                                        inputFile.style.display = 'block';
+                                        inputUploadedFileName.remove();
+                                        button.remove();
+                                        updateTotalFileSize();
+                                    }
+                                
+                                    function removeFile(button) {
+                                        const uploadFiles = document.getElementById('uploadFiles');
+                                        const inputGroup = button.closest('.input-group');
+                                        const inputFile = inputGroup.querySelector('input[type="file"]');
+                                        const fileSize = parseFloat(inputFile.getAttribute('data-file-size')) || 0;
+                                        const fileSizeSpan = inputGroup.querySelector('.input-group-text');
+                                        const inputGroups = Array.from(uploadFiles.children);
+                                        const index = inputGroups.indexOf(inputGroup);
+                                        if (index === 0) {//첫번째 input이면 삭제 안하고 값만 초기화함.
+                                            if(inputGroup.querySelector('input[type="text"]')){
+                                                alert(`첫번째 첨부파일의 경우 기존파일 삭제만 가능합니다.`)
+                                                return false;
+                                            }
+                                            inputGroup.querySelector('input').value = '';
+                                            fileSizeSpan.textContent = '0MB';
+                                        } else {
+                                            inputGroup.remove();
+                                        }
+                                        fileSizeTotal -= fileSize;
+                                        updateTotalFileSize();
+                                    }
+                                </script>
+                            </div>
+                        </div>
+                        <div class="row bg-red-lt">
+                            <div class="form_item">
+                                <div class="subheader mb-1 required">영업담당</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                        <input type="text" class="form-control" value="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form_item">
+                                <div class="subheader mb-1 required">영업담당</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                        <input type="text" class="form-control" value="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form_item">
+                                <div class="subheader mb-1 required">영업담당</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                        <input type="text" class="form-control" value="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form_item">
+                                <div class="subheader mb-1 required">영업담당</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                        <input type="text" class="form-control" value="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+			</div>
+		</div>
+
+	</div>
+</div>
+<script>
+
+</script>
+
+</div><!-- //wrap -->
+</body>
+</html>

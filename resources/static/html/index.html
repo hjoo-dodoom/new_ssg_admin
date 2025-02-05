@@ -1,0 +1,4057 @@
+
+<!DOCTYPE html>
+<html lang="ko" xml:lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+<meta charset="UTF-8">
+<meta name="author" content="">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<title>통합관리자 파일 목록</title>
+<!--[if lt IE 9]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<link href="/resources/static/dist/css/tabler.css" rel="stylesheet"/>
+<link href="/resources/static/dist/css/tabler-vendors.css" rel="stylesheet"/>
+<link href="/resources/static/dist/css/style.css" rel="stylesheet"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/>
+<link rel="shortcut icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+<script src="/resources/static/dist/js/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- Libs JS -->
+<script src="/resources/static/dist/libs/litepicker/dist/litepicker.js?1674944402"></script>
+<script src="/resources/static/dist/js/jquery.validate.js"></script>
+    <!-- Tabler Core -->
+
+<script src="/resources/static/dist/js/common.js"></script>
+<!-- code highlight -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-okaidia.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-go.min.js"></script>
+<style type="text/css">
+    *{margin:0;padding:0;font-size:12px;}
+	#guide_wrap {padding:10px}
+	table {border-collapse:collapse;border-spacing:0;}
+	table th, strong {font-weight:normal;}
+	h1{
+		margin:0 0 10px 0;
+		text-align:center;
+		font-size:2.4em;
+		color:#000
+	}
+	a {text-decoration:none;}
+	a:hover {text-decoration:underline;}
+	table {
+		width:100%;
+		margin-top:5px;
+		border-top:2px solid #1e61a8;
+	}
+	table th, table td{
+		padding:5px 7px;
+		border-left:1px solid #ccc; border-bottom:1px solid #ccc;
+	}
+	table th:rowspan + th, table td:rowspan + td{border-left:1px solid #ccc;}
+	td.lineli, th.lineli {border-left:1px solid #ccc !important;}
+	table th:first-child, table td:first-child{border-left:0 none}
+	table thead th {
+		font-family:'ngB';
+		font-size:13px;
+		color:#000;
+		border-bottom:1px solid #ccc;
+		background-color:#f2f2f2;
+	}
+	.no, .date, .work,.confirm {
+		text-align:center;
+		padding:5px 0
+	}
+
+	tr.on {background-color: #f5fed0}
+
+	.lastmdate {color: #1155CC;}
+	.stand_by {color:#777;}
+	.ing, .per_2 {color:#4848D4 !important;}
+	.curr_n, .per, .end {color:#ff0000 !important;}
+	.confirm{color:green !important;}
+
+	.division td{border-top:2px solid #7e8e9e}
+	table tr.division:first-child td{border-top:0 none;}
+	td a {text-decoration: none;}
+	.guide_links{display:flex;text-align:center;margin-bottom:20px;}
+	.guide_links a{flex:1 1;background-color: #ddd;color:#000;font-size:15px;font-weight:bold;padding:10px;}
+    .guide_links a + a{border-left:1px solid #ccc;}
+	.guide_links a.active{background-color:#000;color:#fff;}
+</style>
+</head>
+<body>
+<div id="wrap" class="wrap">
+<!-- eniter wrap -->
+<div id="guide_wrap">
+	<div class="guide_links">
+		<a href="/resources/static/html/index.html" class="active">통합관리자 파일 목록</a>
+		<a href="/resources/static/html/notice.html">개발참고사항</a>
+		<a href="/resources/static/html/guide_js.html">가이드(JS)</a>
+		<a href="/resources/static/html/form.html">Form html</a>
+	</div>
+	<div class="header">
+		<h1>통합관리자 파일 목록</h1>
+		<p>진행중 : <span class="ing_n"></span>p / 미완료 : <span class="notcurr_n"></span>p / 완료 : <span class="curr_n"></span>p / 전체 : <span class="total_n"></span>p</p>
+		<p>진행율 : <span class="per_2"></span> / 완료율 : <span class="per"></span></p>
+	</div>
+
+	<div class="list_w">
+		<table class="codinglist">
+			<colgroup>
+				<col style="width:40px">
+				<col>
+				<col>
+				<col>
+				<col>
+				<col>
+				<col style="width:70px">
+				<col style="width:50px">
+				<col>
+			</colgroup>
+			<thead>
+				<tr>
+					<th rowspan="2">no.</th>
+					<th colspan="4">navi</th>
+					<th rowspan="2">filename/link</th>
+					<th rowspan="2">date</th>
+					<th rowspan="2">work</th>
+					<th rowspan="2">최형민차장컨펌</th>
+					<th rowspan="2">etc.</th>
+				</tr>
+				<tr>
+					<th class="lineli">1depth</th>
+					<th>2depth</th>
+					<th>3depth</th>
+					<th>4depth</th>
+				</tr>
+			</thead>
+			<tbody>
+                <tr>
+					<td class="no"></td>
+					<td>로그인</td>
+					<td>법인영업 로그인</td>
+					<td></td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/login/login.html" target="_blank">login.html</a></td>
+					<td class="date">2024-05-17</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">관리자_공통_메인,로그인_0528_최형민</td>
+				</tr>
+                <tr>
+					<td class="no"></td>
+					<td></td>
+					<td>협력회사 로그인</td>
+					<td></td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/login/login_joint.html" target="_blank">login_joint.html</a></td>
+					<td class="date">2024-05-17</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">관리자_공통_메인,로그인_0528_최형민</td>
+				</tr>
+                <tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>협력회사 등록</td>
+					<td>사업자 번호 체크<br/>페이지 삭제 로그인페이지에서 모달창으로 변경</td>
+					<td class="link"><a href="/resources/static/html/login/join_business_number.html" target="_blank">join_business_number.html</a></td>
+					<td class="date"></td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">관리자_공통_메인,로그인_0528_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>협력회사 - 약관동의<br/>페이지 삭제 로그인페이지에서 모달창으로 변경</td>
+					<td class="link"><a href="/resources/static/html/login/join_terms_joint.html" target="_blank">join_terms_joint.html</a></td>
+					<td class="date"></td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">관리자_공통_메인,로그인_0528_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>협력회사 - 정보입력<br/>페이지 삭제 로그인페이지에서 모달창으로 변경</td>
+					<td class="link"><a href="/resources/static/html/login/join_form_joint.html" target="_blank">join_form_joint.html</a></td>
+					<td class="date"></td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">관리자_공통_메인,로그인_0528_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>협력회사 - 가입완료<br/>페이지 삭제 로그인페이지에서 모달창으로 변경</td>
+					<td class="link"><a href="/resources/static/html/login/join_comp_joint.html" target="_blank">join_comp_joint.html</a></td>
+					<td class="date"></td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">관리자_공통_메인,로그인_0528_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>신세계백화점매장 - 약관동의<br/>페이지 삭제 로그인페이지에서 모달창으로 변경</td>
+					<td class="link"><a href="/resources/static/html/login/join_terms_store.html" target="_blank">join_terms_store.html</a></td>
+					<td class="date"></td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">관리자_공통_메인,로그인_0528_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>신세계백화점매장 - 정보입력<br/>페이지 삭제 로그인페이지에서 모달창으로 변경</td>
+					<td class="link"><a href="/resources/static/html/login/join_form_store.html" target="_blank">join_form_store.html</a></td>
+					<td class="date"></td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">관리자_공통_메인,로그인_0528_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>신세계백화점매장 - 가입완료<br/>페이지 삭제 로그인페이지에서 모달창으로 변경</td>
+					<td class="link"><a href="/resources/static/html/login/join_comp_store.html" target="_blank">join_comp_store.html</a></td>
+					<td class="date"></td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">관리자_공통_메인,로그인_0528_최형민</td>
+				</tr>
+                <tr>
+					<td class="no"></td>
+					<td></td>
+					<td>고객사 로그인</td>
+					<td></td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/login/login_client.html" target="_blank">login_client.html</a></td>
+					<td class="date">2024-05-17</td>
+					<td class="work"></td>
+					<td class="confirm"></td>
+					<td class="etc"></td>
+				</tr>
+                <tr>
+					<td class="no"></td>
+					<td></td>
+					<td>아이디/비밀번호 찾기</td>
+					<td></td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/login/find_info.html" target="_blank">find_info.html</a></td>
+					<td class="date">2024-05-17</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">관리자_공통_메인,로그인_0528_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td>메인</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/main/main.html" target="_blank">main.html</a></td>
+					<td class="date"></td>
+					<td class="work"></td>
+					<td class="confirm"></td>
+					<td class="etc">보안서약서<br/>보안체크리스트</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td>상단 공통영역</td>
+					<td>통합관리자</td>
+					<td></td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/page/empty_main.html" target="_blank">empty_main.html</a></td>
+					<td class="date">2024-05-29</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">관리자_공통_메인,로그인_0528_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td>협력회사</td>
+					<td></td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/page/empty_joint.html" target="_blank">empty_joint.html</a></td>
+					<td class="date">2024-05-29</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">관리자_공통_메인,로그인_0528_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td>고객사</td>
+					<td></td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/page/empty_client.html" target="_blank">empty_client.html</a></td>
+					<td class="date">2024-05-29</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">관리자_공통_메인,로그인_0528_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td>회원</td>
+					<td>고객사관리</td>
+					<td>그룹사</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/member/ptn_mng_member_list.html" target="_blank">ptn_mng_member_list.html</a></td>
+					<td class="date">2024-06-12</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_02. 회원_ver_0.1.7_20240606_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>그룹사 수정</td>
+					<td class="link"><a href="/resources/static/html/member/ptn_mng_member_modify.html" target="_blank">ptn_mng_member_modify.html</a></td>
+					<td class="date">2024-06-12</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_02. 회원_ver_0.1.7_20240606_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>그룹사 등록</td>
+					<td class="link"><a href="/resources/static/html/member/ptn_mng_member_register.html" target="_blank">ptn_mng_member_register.html</a></td>
+					<td class="date">2024-06-12</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_02. 회원_ver_0.1.7_20240606_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>고객사</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/member/ptn_member_list.html" target="_blank">ptn_member_list.html</a></td>
+					<td class="date">2024-06-12</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_02. 회원_ver_0.1.7_20240606_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>고객사 수정</td>
+					<td class="link"><a href="/resources/static/html/member/ptn_member_modify.html" target="_blank">ptn_member_modify.html</a></td>
+					<td class="date">2024-06-12</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_02. 회원_ver_0.1.7_20240606_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>고객사 등록</td>
+					<td class="link"><a href="/resources/static/html/member/ptn_member_register.html" target="_blank">ptn_member_register.html</a></td>
+					<td class="date">2024-06-12</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_02. 회원_ver_0.1.7_20240606_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>쇼핑몰 설정</td>
+					<td>기본설정</td>
+					<td class="link"><a href="/resources/static/html/member/set_mall.html" target="_blank">set_mall.html</a></td>
+					<td class="date">2024-07-20</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_02. 회원_ver_0.1.6_20240516_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>회원설정</td>
+					<td class="link"><a href="/resources/static/html/member/set_mall_member.html" target="_blank">set_mall_member.html</a></td>
+					<td class="date">XX</td>
+					<td class="work">XX</td>
+					<td class="confirm">XX</td>
+					<td class="etc">SSGB2E_REN_BO_DE_02. 회원_ver_0.1.6_20240516_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>포인트설정</td>
+					<td class="link"><a href="/resources/static/html/member/set_mall_point.html" target="_blank">set_mall_point.html</a></td>
+					<td class="date">XX</td>
+					<td class="work">XX</td>
+					<td class="confirm">XX</td>
+					<td class="etc">SSGB2E_REN_BO_DE_02. 회원_ver_0.1.6_20240516_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>디자인설정</td>
+					<td class="link"><a href="/resources/static/html/member/set_mall_design.html" target="_blank">set_mall_design.html</a></td>
+					<td class="date">XX</td>
+					<td class="work">XX</td>
+					<td class="confirm">XX</td>
+					<td class="etc">SSGB2E_REN_BO_DE_02. 회원_ver_0.1.6_20240516_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>메시지설정</td>
+					<td class="link"><a href="/resources/static/html/member/set_mall_message.html" target="_blank">set_mall_message.html</a></td>
+					<td class="date">XX</td>
+					<td class="work">XX</td>
+					<td class="confirm">XX</td>
+					<td class="etc">SSGB2E_REN_BO_DE_02. 회원_ver_0.1.6_20240516_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>하위관리자</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/member/sub_administrator.html" target="_blank">sub_administrator.html</a></td>
+					<td class="date">2024-06-12</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_02. 회원_ver_0.1.7_20240606_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>수정</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/member/sub_administrator_modify.html" target="_blank">sub_administrator_modify.html</a></td>
+					<td class="date">2024-06-12</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_02. 회원_ver_0.1.7_20240606_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>등록</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/member/sub_administrator_register.html" target="_blank">sub_administrator_register.html</a></td>
+					<td class="date">2024-06-12</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_02. 회원_ver_0.1.7_20240606_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td>고객사회원관리</td>
+					<td>고객사회원</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/member/nor_member_list.html" target="_blank">nor_member_list.html</a></td>
+					<td class="date">2024-06-12</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_02. 회원_ver_0.1.7_20240606_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>수정</td>
+					<td class="link"><a href="/resources/static/html/member/nor_member_modify.html" target="_blank">nor_member_modify.html</a></td>
+					<td class="date">2024-06-12</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_02. 회원_ver_0.1.7_20240606_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>등록</td>
+					<td class="link"><a href="/resources/static/html/member/nor_member_register.html" target="_blank">nor_member_register.html</a></td>
+					<td class="date">2024-06-12</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_02. 회원_ver_0.1.7_20240606_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>고객사회원대량등록</td>
+					<td>현황</td>
+					<td class="link"><a href="/resources/static/html/member/nor_member_large_list.html" target="_blank">nor_member_large_list.html</a></td>
+					<td class="date">2024-06-12</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_02. 회원_ver_0.1.7_20240606_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>등록</td>
+					<td class="link"><a href="/resources/static/html/member/nor_member_large_register.html" target="_blank">nor_member_large_register.html</a></td>
+					<td class="date">2024-07-19</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_02. 회원_ver_0.1.7_20240606_최형민<br/>
+						통합관리자_회원_수정요청_0715</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>대량등록결과</td>
+					<td class="link"><a href="/resources/static/html/member/nor_member_large_result.html" target="_blank">nor_member_large_result.html</a></td>
+					<td class="date">2024-06-12</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_02. 회원_ver_0.1.7_20240606_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td>포인트관리</td>
+					<td>포인트현황</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/member/point_status.html" target="_blank">point_status.html</a></td>
+					<td class="date">2024-06-12</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_02. 회원_ver_0.1.7_20240606_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>회원 포인트관리</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/member/point_member_list.html" target="_blank">point_member_list.html</a></td>
+					<td class="date">2024-06-12</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_02. 회원_ver_0.1.7_20240606_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>상세</td>
+					<td class="link"><a href="/resources/static/html/member/point_detail.html" target="_blank">point_detail.html</a></td>
+					<td class="date">2024-06-12</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_02. 회원_ver_0.1.7_20240606_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>포인트이력관리</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/member/point_history_list.html" target="_blank">point_history_list.html</a></td>
+					<td class="date">2024-06-12</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_02. 회원_ver_0.1.7_20240606_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>포인트대량등록</td>
+					<td>현황</td>
+					<td class="link"><a href="/resources/static/html/member/point_large_list.html" target="_blank">point_large_list.html</a></td>
+					<td class="date">2024-06-12</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_02. 회원_ver_0.1.7_20240606_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>등록</td>
+					<td class="link"><a href="/resources/static/html/member/point_large_register.html" target="_blank">point_large_register.html</a></td>
+					<td class="date">2024-07-19</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_02. 회원_ver_0.1.7_20240606_최형민<br/>
+						통합관리자_회원_수정요청_0715</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>대량등록결과</td>
+					<td class="link"><a href="/resources/static/html/member/point_large_result.html" target="_blank">point_large_result.html</a></td>
+					<td class="date">2024-06-12</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_02. 회원_ver_0.1.7_20240606_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>포인트승인</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/member/point_approval_list.html" target="_blank">point_approval_list.html</a></td>
+					<td class="date">2024-06-12</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_02. 회원_ver_0.1.7_20240606_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td>마일리지관리</td>
+					<td>마일리지목록</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/member/mileage_list.html" target="_blank">mileage_list.html</a></td>
+					<td class="date">2024-07-19</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_02. 회원_ver_0.1.7_20240606_최형민<br/>
+						통합관리자_회원_수정요청_0715</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>등록</td>
+					<td class="link"><a href="/resources/static/html/member/mileage_register.html" target="_blank">mileage_register.html</a></td>
+					<td class="date">2024-07-19</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_02. 회원_ver_0.1.7_20240606_최형민<br/>
+						통합관리자_회원_수정요청_0715
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>수정</td>
+					<td class="link"><a href="/resources/static/html/member/mileage_modify.html" target="_blank">mileage_modify.html</a></td>
+					<td class="date">2024-06-12</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_02. 회원_ver_0.1.7_20240606_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>마일리지현황</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/member/mileage_status.html" target="_blank">mileage_status.html</a></td>
+					<td class="date">2024-06-12</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_02. 회원_ver_0.1.7_20240606_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>회원 마일리지관리</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/member/mileage_member_list.html" target="_blank">mileage_member_list.html</a></td>
+					<td class="date">2024-06-12</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_02. 회원_ver_0.1.7_20240606_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>상세</td>
+					<td class="link"><a href="/resources/static/html/member/mileage_detail.html" target="_blank">mileage_detail.html</a></td>
+					<td class="date">2024-06-12</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_02. 회원_ver_0.1.7_20240606_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>마일리지이력관리</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/member/mileage_history_list.html" target="_blank">mileage_history_list.html</a></td>
+					<td class="date">2024-06-12</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_02. 회원_ver_0.1.7_20240606_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>마일리지대량등록</td>
+					<td>현황</td>
+					<td class="link"><a href="/resources/static/html/member/mileage_large_list.html" target="_blank">mileage_large_list.html</a></td>
+					<td class="date">2024-06-12</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_02. 회원_ver_0.1.7_20240606_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>등록</td>
+					<td class="link"><a href="/resources/static/html/member/mileage_large_register.html" target="_blank">mileage_large_register.html</a></td>
+					<td class="date">2024-07-19</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_02. 회원_ver_0.1.7_20240606_최형민<br/>
+						통합관리자_회원_수정요청_0715</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>대량등록결과</td>
+					<td class="link"><a href="/resources/static/html/member/mileage_large_result.html" target="_blank">mileage_large_result.html</a></td>
+					<td class="date">2024-06-12</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_02. 회원_ver_0.1.7_20240606_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td>상품</td>
+					<td>상품목록</td>
+					<td>상품전체목록</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/goods/goods_list.html" target="_blank">goods_list.html</a></td>
+					<td class="date">2024-06-21</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_03. 상품_주관사관리자_ver_0.3.1_20240621_윤지환</td>
+				</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>상품수정</td>
+					<td class="link"><a href="/resources/static/html/goods/goods_modify.html" target="_blank">goods_modify.html</a></td>
+					<td class="date">2024-06-21</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_03. 상품_주관사관리자_ver_0.5.4_20240822_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>상품등록</td>
+					<td class="link"><a href="/resources/static/html/goods/goods_register.html" target="_blank">goods_register.html</a></td>
+					<td class="date">2024-06-21</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_03. 상품_주관사관리자_ver_0.5.4_20240822_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>대량업로드현황</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/goods/goods_large_list.html" target="_blank">goods_large_list.html</a></td>
+					<td class="date">2024-06-27</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_03. 상품_주관사관리자_ver_0.3.1_20240621_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>등록</td>
+					<td class="link"><a href="/resources/static/html/goods/goods_large_register.html" target="_blank">goods_large_register.html</a></td>
+					<td class="date">2024-06-27</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_03. 상품_주관사관리자_ver_0.3.1_20240621_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>성공</td>
+					<td class="link"><a href="/resources/static/html/goods/goods_large_comp.html" target="_blank">goods_large_comp.html</a></td>
+					<td class="date">2024-06-27</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_03. 상품_주관사관리자_ver_0.3.1_20240621_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>실패</td>
+					<td class="link"><a href="/resources/static/html/goods/goods_large_fail.html" target="_blank">goods_large_fail.html</a></td>
+					<td class="date">2024-06-27</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_03. 상품_주관사관리자_ver_0.3.1_20240621_윤지환</td>
+				</tr>
+                <tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>상품승인목록</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/goods/request_list.html" target="_blank">request_list.html</a></td>
+					<td class="date">2024-06-21</td>
+					<td class="work"></td>
+					<td class="confirm"></td>
+					<td class="etc"></td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>상품재고목록</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/goods/inventory_list.html" target="_blank">inventory_list.html</a></td>
+					<td class="date">2024-08-20</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_03. 상품_주관사관리자_ver_0.5.3_20240820_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>상품삭제목록</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/goods/remove_list.html" target="_blank">remove_list.html</a></td>
+					<td class="date">2024-08-20</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_03. 상품_주관사관리자_ver_0.5.3_20240820_윤지환</td>
+				</tr>
+                <tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>상품반송목록</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/goods/return_list.html" target="_blank">return_list.html</a></td>
+					<td class="date">XX</td>
+					<td class="work"></td>
+					<td class="confirm">XX</td>
+					<td class="etc"></td>
+				</tr>
+                <tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>신규상품대기</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/goods/new_wait_list.html" target="_blank">new_wait_list.html</a></td>
+					<td class="date">XX</td>
+					<td class="work"></td>
+					<td class="confirm">XX</td>
+					<td class="etc"></td>
+				</tr>
+                <tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>수정상품대기</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/goods/update_wait_list.html" target="_blank">update_wait_list.html</a></td>
+					<td class="date">XX</td>
+					<td class="work"></td>
+					<td class="confirm">XX</td>
+					<td class="etc"></td>
+				</tr>
+                <tr>
+					<td class="no"></td>
+					<td>주문</td>
+					<td>주문목록</td>
+					<td>전체주문조회</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/order/order_list_all.html" target="_blank">order_list_all.html</a></td>
+					<td class="date">2024-06-14</td>
+					<td class="work"></td>
+					<td class="confirm"></td>
+					<td class="etc">주문_통합관리자_ver_0.3.7_0614_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>상세</td>
+					<td class="link"><a href="/resources/static/html/order/order_detail.html" target="_blank">order_detail.html</a></td>
+					<td class="date">2024-06-14</td>
+					<td class="work"></td>
+					<td class="confirm"></td>
+					<td class="etc">주문_통합관리자_ver_0.3.7_0614_최형민</td>
+				</tr>
+                <tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>고객사별 주문현황</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/order/order_status_info.html" target="_blank">order_status_info.html</a></td>
+					<td class="date"></td>
+					<td class="work"></td>
+					<td class="confirm"></td>
+					<td class="etc"></td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td>반품목록</td>
+					<td></td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/order/return_list.html" target="_blank">return_list.html</a></td>
+					<td class="date">2024-06-14</td>
+					<td class="work"></td>
+					<td class="confirm"></td>
+					<td class="etc">주문_통합관리자_ver_0.5.1_0923_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td>교환목록</td>
+					<td></td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/order/change_list.html" target="_blank">change_list.html</a></td>
+					<td class="date">2024-06-14</td>
+					<td class="work"></td>
+					<td class="confirm"></td>
+					<td class="etc">주문_통합관리자_ver_0.5.1_0923_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td>베스트판매상품</td>
+					<td></td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/order/best_list.html" target="_blank">best_list.html</a></td>
+					<td class="date">2024-06-14</td>
+					<td class="work"></td>
+					<td class="confirm"></td>
+					<td class="etc">주문_통합관리자_ver_0.5.1_0923_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td>고객사별주문통계</td>
+					<td></td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/order/client_statistics.html" target="_blank">client_statistics.html</a></td>
+					<td class="date">2024-06-14</td>
+					<td class="work"></td>
+					<td class="confirm"></td>
+					<td class="etc">주문_통합관리자_ver_0.5.1_0923_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td>송장업로드</td>
+					<td>등록</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/offline/tracknum_upload_register.html" target="_blank">tracknum_upload_register.html</a></td>
+					<td class="date">2024-07-31</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">오프라인 주문 송장업로드와 같음<br/>주문_통합관리자_ver_0.5.1_0923_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>등록내역</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/offline/upload_list.html" target="_blank">upload_list.html</a></td>
+					<td class="date">2024-07-31</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">오프라인 주문 송장업로드와 같음<br/>주문_통합관리자_ver_0.5.1_0923_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td>현금영수증</td>
+					<td></td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/order/cash_receipt.html" target="_blank">cash_receipt.html</a></td>
+					<td class="date">2024-06-14</td>
+					<td class="work"></td>
+					<td class="confirm"></td>
+					<td class="etc">주문_통합관리자_ver_0.5.1_0923_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td>오프라인주문</td>
+					<td>주문목록</td>
+					<td>오프라인주문조회</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/offline/offline_order_list_all.html" target="_blank">offline_order_list_all.html</a></td>
+					<td class="date">2024-07-31</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_07. 오프라인주문_주관사관리자_ver_0.2.1_20240724_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>주문상세 정보</td>
+					<td class="link"><a href="/resources/static/html/offline/offline_order_detail.html" target="_blank">offline_order_detail.html</a></td>
+					<td class="date">2024-07-31</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_07. 오프라인주문_주관사관리자_ver_0.2.1_20240724_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>고객사별 주문통계</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/offline/offline_statistics.html" target="_blank">offline_statistics.html</a></td>
+					<td class="date">2024-07-31</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_07. 오프라인주문_주관사관리자_ver_0.2.1_20240724_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>주문대량등록</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/offline/order_large_list.html" target="_blank">order_large_list.html</a></td>
+					<td class="date">2024-07-31</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_07. 오프라인주문_주관사관리자_ver_0.2.1_20240724_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>등록</td>
+					<td class="link"><a href="/resources/static/html/offline/order_large_register.html" target="_blank">order_large_register.html</a></td>
+					<td class="date">2024-07-31</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_07. 오프라인주문_주관사관리자_ver_0.2.1_20240724_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>결과</td>
+					<td class="link"><a href="/resources/static/html/offline/order_large_result.html" target="_blank">order_large_result.html</a></td>
+					<td class="date">2024-07-31</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_07. 오프라인주문_주관사관리자_ver_0.2.1_20240724_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>송장업로드</td>
+					<td>등록</td>
+					<td class="link"><a href="/resources/static/html/offline/tracknum_upload_register.html" target="_blank">tracknum_upload_register.html</a></td>
+					<td class="date">2024-07-31</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_07. 오프라인주문_주관사관리자_ver_0.2.1_20240724_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>등록내역</td>
+					<td class="link"><a href="/resources/static/html/offline/upload_list.html" target="_blank">upload_list.html</a></td>
+					<td class="date">2024-07-31</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_07. 오프라인주문_주관사관리자_ver_0.2.1_20240724_윤지환</td>
+				</tr>
+				<!-- <tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>결과</td>
+					<td class="link"><a href="/resources/static/html/offline/tracknum_upload_result.html" target="_blank">tracknum_upload_result.html</a></td>
+					<td class="date">2024-07-31</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_07. 오프라인주문_주관사관리자_ver_0.2.1_20240724_윤지환</td>
+				</tr> -->
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td>주문정산</td>
+					<td>주문정산</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/offline/order_calculate.html" target="_blank">order_calculate.html</a></td>
+					<td class="date">2024-08-05</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_07. 오프라인주문_주관사관리자_ver_0.2.1_20240724_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td>협력회사문의</td>
+					<td>협력회사문의</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/offline/offline_inquiry.html" target="_blank">offline_inquiry.html</a></td>
+					<td class="date">2024-08-05</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_07. 오프라인주문_주관사관리자_ver_0.2.1_20240724_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>상세</td>
+					<td class="link"><a href="/resources/static/html/offline/offline_inquiry_detail.html" target="_blank">offline_inquiry_detail.html</a></td>
+					<td class="date">2024-11-29</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">기능수정_ver_0.05_1128_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>등록</td>
+					<td class="link"><a href="/resources/static/html/offline/offline_inquiry_register.html" target="_blank">offline_inquiry_register.html</a></td>
+					<td class="date">2024-11-29</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">기능수정_ver_0.05_1128_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td>주문정보삭제</td>
+					<td></td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/offline/order_info_remove.html" target="_blank">order_info_remove.html</a></td>
+					<td class="date">2024-08-05</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_07. 오프라인주문_주관사관리자_ver_0.2.1_20240724_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td>쇼핑몰</td>
+					<td>진열관리</td>
+					<td>메인진열</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/shop/display_list.html" target="_blank">display_list.html</a></td>
+					<td class="date">2024-08-22</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">쇼핑몰_통합관리자_ver_0.0.1_0806_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>상세</td>
+					<td class="link"><a href="/resources/static/html/shop/display_modify.html" target="_blank">display_modify.html</a></td>
+					<td class="date">2024-08-27</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						상세와 등록은  고객사 필드, 순서필드, 상하단 버튼만 다름<br/>
+						쇼핑몰_통합관리자_ver_0.0.2_0822_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>등록</td>
+					<td class="link"><a href="/resources/static/html/shop/display_register.html" target="_blank">display_register.html</a></td>
+					<td class="date">2024-08-27</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						상세와 등록은  고객사 필드, 순서필드, 상하단 버튼만 다름<br/>
+						쇼핑몰_통합관리자_ver_0.0.2_0822_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>기획전</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/shop/exhibitions_list.html" target="_blank">exhibitions_list.html</a></td>
+					<td class="date">2024-08-28</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						쇼핑몰_통합관리자_ver_0.0.2_0822_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>상세</td>
+					<td class="link"><a href="/resources/static/html/shop/exhibitions_modify.html" target="_blank">exhibitions_modify.html</a></td>
+					<td class="date">2024-08-28</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						쇼핑몰_통합관리자_ver_0.0.2_0822_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>등록</td>
+					<td class="link"><a href="/resources/static/html/shop/exhibitions_register.html" target="_blank">exhibitions_register.html</a></td>
+					<td class="date">2024-08-28</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						쇼핑몰_통합관리자_ver_0.0.2_0822_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>브랜드관</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/shop/brand_list.html" target="_blank">brand_list.html</a></td>
+					<td class="date">2024-08-29</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						쇼핑몰_통합관리자_ver_0.0.2_0822_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>상세</td>
+					<td class="link"><a href="/resources/static/html/shop/brand_modify.html" target="_blank">brand_modify.html</a></td>
+					<td class="date">2024-08-29</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						쇼핑몰_통합관리자_ver_0.0.2_0822_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>등록</td>
+					<td class="link"><a href="/resources/static/html/shop/brand_register.html" target="_blank">brand_register.html</a></td>
+					<td class="date">2024-08-29</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						쇼핑몰_통합관리자_ver_0.0.2_0822_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td>배너관리</td>
+					<td>메인배너</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/shop/banner_list.html" target="_blank">banner_list.html</a></td>
+					<td class="date">2024-08-29</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						쇼핑몰_통합관리자_ver_0.0.2_0822_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>상세</td>
+					<td class="link"><a href="/resources/static/html/shop/banner_modify.html" target="_blank">banner_modify.html</a></td>
+					<td class="date">2024-08-29</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						쇼핑몰_통합관리자_ver_0.0.2_0822_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>등록</td>
+					<td class="link"><a href="/resources/static/html/shop/banner_register.html" target="_blank">banner_register.html</a></td>
+					<td class="date">2024-08-29</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						쇼핑몰_통합관리자_ver_0.0.2_0822_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>퀵배너</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/shop/quick_list.html" target="_blank">quick_list.html</a></td>
+					<td class="date">2024-08-29</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						쇼핑몰_통합관리자_ver_0.0.2_0822_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>상세</td>
+					<td class="link"><a href="/resources/static/html/shop/quick_modify.html" target="_blank">quick_modify.html</a></td>
+					<td class="date">2024-08-29</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						쇼핑몰_통합관리자_ver_0.0.2_0822_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>등록</td>
+					<td class="link"><a href="/resources/static/html/shop/quick_register.html" target="_blank">quick_register.html</a></td>
+					<td class="date">2024-08-29</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						쇼핑몰_통합관리자_ver_0.0.2_0822_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td>팝업관리</td>
+					<td>내부팝업</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/shop/popup_admin_list.html" target="_blank">popup_admin_list.html</a></td>
+					<td class="date">2024-08-29</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						쇼핑몰_통합관리자_ver_0.0.2_0822_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>수정</td>
+					<td class="link"><a href="/resources/static/html/shop/popup_admin_modify.html" target="_blank">popup_admin_modify.html</a></td>
+					<td class="date">2024-08-29</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						쇼핑몰_통합관리자_ver_0.0.2_0822_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>등록</td>
+					<td class="link"><a href="/resources/static/html/shop/popup_admin_register.html" target="_blank">popup_admin_register.html</a></td>
+					<td class="date">2024-08-30</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						쇼핑몰_통합관리자_ver_0.0.2_0822_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>쇼핑몰팝업</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/shop/popup_shop_list.html" target="_blank">popup_shop_list.html</a></td>
+					<td class="date">2024-08-29</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						쇼핑몰_통합관리자_ver_0.0.2_0822_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>수정</td>
+					<td class="link"><a href="/resources/static/html/shop/popup_shop_modify.html" target="_blank">popup_shop_modify.html</a></td>
+					<td class="date">2024-08-29</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						쇼핑몰_통합관리자_ver_0.0.2_0822_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>등록</td>
+					<td class="link"><a href="/resources/static/html/shop/popup_shop_register.html" target="_blank">popup_shop_register.html</a></td>
+					<td class="date">2024-08-30</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						쇼핑몰_통합관리자_ver_0.0.2_0822_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>협력회사팝업</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/shop/popup_joint_list.html" target="_blank">popup_joint_list.html</a></td>
+					<td class="date">2024-08-29</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						쇼핑몰_통합관리자_ver_0.0.2_0822_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>수정</td>
+					<td class="link"><a href="/resources/static/html/shop/popup_joint_modify.html" target="_blank">popup_joint_modify.html</a></td>
+					<td class="date">2024-08-29</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						쇼핑몰_통합관리자_ver_0.0.2_0822_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>등록</td>
+					<td class="link"><a href="/resources/static/html/shop/popup_joint_register.html" target="_blank">popup_joint_register.html</a></td>
+					<td class="date">2024-08-30</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						쇼핑몰_통합관리자_ver_0.0.2_0822_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>고객사팝업</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/shop/popup_client_list.html" target="_blank">popup_client_list.html</a></td>
+					<td class="date">2024-08-29</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						쇼핑몰_통합관리자_ver_0.0.2_0822_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>수정</td>
+					<td class="link"><a href="/resources/static/html/shop/popup_client_modify.html" target="_blank">popup_client_modify.html</a></td>
+					<td class="date">2024-08-29</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						쇼핑몰_통합관리자_ver_0.0.2_0822_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>등록</td>
+					<td class="link"><a href="/resources/static/html/shop/popup_client_register.html" target="_blank">popup_client_register.html</a></td>
+					<td class="date">2024-08-30</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						쇼핑몰_통합관리자_ver_0.0.2_0822_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td>고객센터</td>
+					<td>공지사항</td>
+					<td>내부공지사항</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/customer/notice_list.html" target="_blank">notice_list.html</a></td>
+					<td class="date">2024-06-07</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_01.고객센터_ver_0.1.5_20240606_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>상세</td>
+					<td class="link"><a href="/resources/static/html/customer/notice_detail.html" target="_blank">notice_detail.html</a></td>
+					<td class="date">2024-06-11</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_01.고객센터_ver_0.1.5_20240606_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>수정</td>
+					<td class="link"><a href="/resources/static/html/customer/notice_modify.html" target="_blank">notice_modify.html</a></td>
+					<td class="date">2024-06-11</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_01.고객센터_ver_0.1.5_20240606_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>등록</td>
+					<td class="link"><a href="/resources/static/html/customer/notice_register.html" target="_blank">notice_register.html</a></td>
+					<td class="date">2024-06-11</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_01.고객센터_ver_0.1.5_20240606_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>고객사공지사항</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/customer/notice_client_list.html" target="_blank">notice_client_list.html</a></td>
+					<td class="date">2024-06-07</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_01.고객센터_ver_0.1.5_20240606_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>상세</td>
+					<td class="link"><a href="/resources/static/html/customer/notice_client_detail.html" target="_blank">notice_client_detail.html</a></td>
+					<td class="date">2024-06-11</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_01.고객센터_ver_0.1.5_20240606_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>수정</td>
+					<td class="link"><a href="/resources/static/html/customer/notice_client_modify.html" target="_blank">notice_client_modify.html</a></td>
+					<td class="date">2024-06-11</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_01.고객센터_ver_0.1.5_20240606_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>등록</td>
+					<td class="link"><a href="/resources/static/html/customer/notice_client_register.html" target="_blank">notice_client_register.html</a></td>
+					<td class="date">2024-06-11</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_01.고객센터_ver_0.1.5_20240606_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>협력회사공지사항</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/customer/notice_joint_list.html" target="_blank">notice_joint_list.html</a></td>
+					<td class="date">2024-06-11</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_01.고객센터_ver_0.1.6_20240607_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>상세</td>
+					<td class="link"><a href="/resources/static/html/customer/notice_joint_detail.html" target="_blank">notice_joint_detail.html</a></td>
+					<td class="date">2024-06-11</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_01.고객센터_ver_0.1.6_20240607_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>수정</td>
+					<td class="link"><a href="/resources/static/html/customer/notice_joint_modify.html" target="_blank">notice_joint_modify.html</a></td>
+					<td class="date">2024-06-11</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_01.고객센터_ver_0.1.6_20240607_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>등록</td>
+					<td class="link"><a href="/resources/static/html/customer/notice_joint_register.html" target="_blank">notice_joint_register.html</a></td>
+					<td class="date">2024-06-11</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_01.고객센터_ver_0.1.6_20240607_최형민</td>
+				</tr>
+				<!-- <tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>내부게시판</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/customer/cb_list.html" target="_blank">cb_list.html</a></td>
+					<td class="date">2024-07-16</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_01.고객센터_ver_0.1.7_20240626_최형민</td>
+				</tr> -->
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>파일게시판</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/customer/file_list.html" target="_blank">file_list.html</a></td>
+					<td class="date">2024-07-16</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_01.고객센터_ver_0.1.7_20240626_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>상세</td>
+					<td class="link"><a href="/resources/static/html/customer/file_detail.html" target="_blank">file_detail.html</a></td>
+					<td class="date">2024-07-16</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_01.고객센터_ver_0.1.7_20240626_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>수정</td>
+					<td class="link"><a href="/resources/static/html/customer/file_modify.html" target="_blank">file_modify.html</a></td>
+					<td class="date">2024-07-16</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_01.고객센터_ver_0.1.7_20240626_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>등록</td>
+					<td class="link"><a href="/resources/static/html/customer/file_register.html" target="_blank">file_register.html</a></td>
+					<td class="date">2024-07-16</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_01.고객센터_ver_0.1.7_20240626_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>작업요청게시판</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/customer/request_list.html" target="_blank">request_list.html</a></td>
+					<td class="date">2024-07-16</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_01.고객센터_ver_0.1.7_20240626_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>상세</td>
+					<td class="link"><a href="/resources/static/html/customer/request_detail.html" target="_blank">request_detail.html</a></td>
+					<td class="date">2024-07-16</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_01.고객센터_ver_0.1.7_20240626_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>수정</td>
+					<td class="link"><a href="/resources/static/html/customer/request_modify.html" target="_blank">request_modify.html</a></td>
+					<td class="date">2024-07-16</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_01.고객센터_ver_0.1.7_20240626_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>등록</td>
+					<td class="link"><a href="/resources/static/html/customer/request_register.html" target="_blank">request_register.html</a></td>
+					<td class="date">2024-07-16</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_01.고객센터_ver_0.1.7_20240626_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>답변-상세</td>
+					<td class="link"><a href="/resources/static/html/customer/request_answer_detail.html" target="_blank">request_answer_detail.html</a></td>
+					<td class="date">2024-07-16</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_01.고객센터_ver_0.1.7_20240626_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>답변-수정</td>
+					<td class="link"><a href="/resources/static/html/customer/request_answer_modify.html" target="_blank">request_answer_modify.html</a></td>
+					<td class="date">2024-07-16</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_01.고객센터_ver_0.1.7_20240626_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>답변-등록</td>
+					<td class="link"><a href="/resources/static/html/customer/request_answer_register.html" target="_blank">request_answer_register.html</a></td>
+					<td class="date">2024-07-16</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_01.고객센터_ver_0.1.7_20240626_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td>고객문의</td>
+					<td>상품요청</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/customer/product_list.html" target="_blank">product_list.html</a></td>
+					<td class="date">2024-07-17</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_01.고객센터_ver_0.1.7_20240626_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>상품문의</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/customer/product_inquiry.html" target="_blank">product_inquiry.html</a></td>
+					<td class="date">2024-07-17</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_01.고객센터_ver_0.1.7_20240626_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>배송/주문 문의</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/customer/delivery_inquiry.html" target="_blank">delivery_inquiry.html</a></td>
+					<td class="date">2024-07-17</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_01.고객센터_ver_0.1.7_20240626_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>1:1 문의</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/customer/qna_list.html" target="_blank">qna_list.html</a></td>
+					<td class="date">2024-07-17</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_01.고객센터_ver_0.1.7_20240626_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>시스템 문의</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/customer/system_list.html" target="_blank">system_list.html</a></td>
+					<td class="date">2024-07-17</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_01.고객센터_ver_0.1.7_20240626_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>등록</td>
+					<td class="link"><a href="/resources/static/html/customer/system_register.html" target="_blank">system_register.html</a></td>
+					<td class="date">2025-01-15</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">0114_퍼블수정_0.05</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>자주묻는질문</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/customer/faq_list.html" target="_blank">faq_list.html</a></td>
+					<td class="date">2024-07-17</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_01.고객센터_ver_0.1.7_20240626_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>상세</td>
+					<td class="link"><a href="/resources/static/html/customer/faq_detail.html" target="_blank">faq_detail.html</a></td>
+					<td class="date">2024-07-17</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_01.고객센터_ver_0.1.7_20240626_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>수정</td>
+					<td class="link"><a href="/resources/static/html/customer/faq_modify.html" target="_blank">faq_modify.html</a></td>
+					<td class="date">2024-07-17</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_01.고객센터_ver_0.1.7_20240626_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>등록</td>
+					<td class="link"><a href="/resources/static/html/customer/faq_register.html" target="_blank">faq_register.html</a></td>
+					<td class="date">2024-07-17</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_01.고객센터_ver_0.1.7_20240626_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td>오피스</td>
+					<td>법인영업</td>
+					<td>공지사항</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/customer/notice_list.html" target="_blank">notice_list.html</a></td>
+					<td class="date">2024-07-25</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">고객센터 내부공지사항과 같음<br/>SSGB2E_REN_BO_DE_09.오피스_ver_0.1.0_20240729_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>상세</td>
+					<td class="link"><a href="/resources/static/html/customer/notice_detail.html" target="_blank">notice_detail.html</a></td>
+					<td class="date">2024-07-25</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">고객센터 내부공지사항과 같음<br/>SSGB2E_REN_BO_DE_09.오피스_ver_0.1.0_20240729_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>수정</td>
+					<td class="link"><a href="/resources/static/html/customer/notice_modify.html" target="_blank">notice_modify.html</a></td>
+					<td class="date">2024-07-25</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">고객센터 내부공지사항과 같음<br/>SSGB2E_REN_BO_DE_09.오피스_ver_0.1.0_20240729_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>등록</td>
+					<td class="link"><a href="/resources/static/html/customer/notice_register.html" target="_blank">notice_register.html</a></td>
+					<td class="date">2024-07-25</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">고객센터 내부공지사항과 같음<br/>SSGB2E_REN_BO_DE_09.오피스_ver_0.1.0_20240729_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>기업체 구매상담</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/office/corporate_counseling_list.html" target="_blank">corporate_counseling_list.html</a></td>
+					<td class="date">2024-08-06</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">>SSGB2E_REN_BO_DE_09.오피스_ver_0.1.0_20240729_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>상세</td>
+					<td class="link"><a href="/resources/static/html/office/corporate_counseling_detail.html" target="_blank">corporate_counseling_detail.html</a></td>
+					<td class="date">2024-08-06</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">>SSGB2E_REN_BO_DE_09.오피스_ver_0.1.0_20240729_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>협력회사상담</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/office/partner_counseling_list.html" target="_blank">partner_counseling_list.html</a></td>
+					<td class="date">2024-08-06</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">>SSGB2E_REN_BO_DE_09.오피스_ver_0.1.0_20240729_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>상세</td>
+					<td class="link"><a href="/resources/static/html/office/partner_counseling_detail.html" target="_blank">partner_counseling_detail.html</a></td>
+					<td class="date">2024-08-06</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">>SSGB2E_REN_BO_DE_09.오피스_ver_0.1.0_20240729_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>등록</td>
+					<td class="link"><a href="/resources/static/html/office/partner_counseling_register.html" target="_blank">partner_counseling_register.html</a></td>
+					<td class="date">2024-08-06</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">>SSGB2E_REN_BO_DE_09.오피스_ver_0.1.0_20240729_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td>협력회사</td>
+					<td>협력회사관리</td>
+					<td></td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/partner/partner_list.html" target="_blank">partner_list.html</a></td>
+					<td class="date">2024-07-25</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_06. 협력회사관리_주관사관리자_ver_0.4.0_20240724_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td>협력회사등록</td>
+					<td></td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/partner/partner_register.html" target="_blank">partner_register.html</a></td>
+					<td class="date">2024-07-25</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_06. 협력회사관리_주관사관리자_ver_0.4.0_20240724_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>상세</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/partner/partner_detail.html" target="_blank">partner_detail.html</a></td>
+					<td class="date">2024-07-25</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_06. 협력회사관리_주관사관리자_ver_0.4.0_20240724_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td>협력회사 계약관리</td>
+					<td></td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/partner/partner_contract.html" target="_blank">partner_contract.html</a></td>
+					<td class="date">2024-07-25</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_06. 협력회사관리_주관사관리자_ver_0.4.0_20240724_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td>하위관리자</td>
+					<td></td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/partner/partner_sub_administrator.html" target="_blank">partner_sub_administrator.html</a></td>
+					<td class="date">2024-07-25</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_06. 협력회사관리_주관사관리자_ver_0.4.0_20240724_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>수정</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/partner/partner_sub_administrator_modify.html" target="_blank">partner_sub_administrator_modify.html</a></td>
+					<td class="date">2024-07-25</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_06. 협력회사관리_주관사관리자_ver_0.4.0_20240724_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>등록</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/partner/partner_sub_administrator_register.html" target="_blank">partner_sub_administrator_register.html</a></td>
+					<td class="date">2024-07-25</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_06. 협력회사관리_주관사관리자_ver_0.4.0_20240724_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td>보안관리</td>
+					<td>보안서약서</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/partner/security_file.html" target="_blank">security_file.html</a></td>
+					<td class="date">2024-07-25</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_06. 협력회사관리_주관사관리자_ver_0.4.0_20240724_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>보안체크리스트</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/partner/security_check.html" target="_blank">security_check.html</a></td>
+					<td class="date">2024-07-25</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_06. 협력회사관리_주관사관리자_ver_0.4.0_20240724_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>파기확인서</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/partner/destroy_check.html" target="_blank">destroy_check.html</a></td>
+					<td class="date">2024-07-25</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_06. 협력회사관리_주관사관리자_ver_0.4.0_20240724_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td>메시지</td>
+					<td>발송내역</td>
+					<td>메시지자동발송</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/message/auto_list.html" target="_blank">auto_list.html</a></td>
+					<td class="date">2024-07-15</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_05. 메시지_주관사관리자_ver_0.2.0_20240715_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>메시지수동발송</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/message/manual_list.html" target="_blank">manual_list.html</a></td>
+					<td class="date">2024-07-15</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_05. 메시지_주관사관리자_ver_0.2.0_20240715_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>수정</td>
+					<td class="link"><a href="/resources/static/html/message/message_modify.html" target="_blank">message_modify.html</a></td>
+					<td class="date">2024-07-15</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_05. 메시지_주관사관리자_ver_0.2.0_20240715_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>문자발송</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/message/message_send.html" target="_blank">message_send.html</a></td>
+					<td class="date">2024-07-15</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_05. 메시지_주관사관리자_ver_0.2.0_20240715_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>알림톡발송</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/message/alram_send.html" target="_blank">alram_send.html</a></td>
+					<td class="date">2024-07-15</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_05. 메시지_주관사관리자_ver_0.2.0_20240715_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>친구톡발송</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/message/talk_send.html" target="_blank">talk_send.html</a></td>
+					<td class="date">2024-07-15</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_05. 메시지_주관사관리자_ver_0.2.0_20240715_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td>배포</td>
+					<td>개발배포</td>
+					<td></td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/deploy/deploy_list.html" target="_blank">deploy_list.html</a></td>
+					<td class="date">2024-08-21</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						SSGB2E_REN_BO_DE_09. 배포_주관사관리자_ver_0.3.1_20240805_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>상세</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/deploy/deploy_modify.html" target="_blank">deploy_modify.html</a></td>
+					<td class="date">2024-08-21</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						SSGB2E_REN_BO_DE_09. 배포_주관사관리자_ver_0.3.1_20240805_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>등록</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/deploy/deploy_register.html" target="_blank">deploy_register.html</a></td>
+					<td class="date">2024-08-21</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						SSGB2E_REN_BO_DE_09. 배포_주관사관리자_ver_0.3.1_20240805_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td>설정</td>
+					<td>관리자관리</td>
+					<td>관리자목록</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/setting/admin_list.html" target="_blank">admin_list.html</a></td>
+					<td class="date">2024-08-07</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						SSGB2E_REN_BO_DE_08. 설정_주관사관리자_ver_0.3.1_20240730_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>상세</td>
+					<td class="link"><a href="/resources/static/html/setting/admin_detail.html" target="_blank">admin_detail.html</a></td>
+					<td class="date">2024-08-07</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						SSGB2E_REN_BO_DE_08. 설정_주관사관리자_ver_0.3.4_20240820_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>접속기록</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/setting/login_list.html" target="_blank">login_list.html</a></td>
+					<td class="date">2024-08-08</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						SSGB2E_REN_BO_DE_08. 설정_주관사관리자_ver_0.3.1_20240730_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>상세</td>
+					<td class="link"><a href="/resources/static/html/setting/login_detail.html" target="_blank">login_detail.html</a></td>
+					<td class="date">2024-08-08</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						SSGB2E_REN_BO_DE_08. 설정_주관사관리자_ver_0.3.1_20240730_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>계정권한</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/setting/power_list.html" target="_blank">power_list.html</a></td>
+					<td class="date">2024-08-08</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						SSGB2E_REN_BO_DE_08. 설정_주관사관리자_ver_0.3.1_20240730_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>상세</td>
+					<td class="link"><a href="/resources/static/html/setting/power_detail.html" target="_blank">power_detail.html</a></td>
+					<td class="date">2024-08-08</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						SSGB2E_REN_BO_DE_08. 설정_주관사관리자_ver_0.3.2_20240808_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>부정로그인</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/setting/login_fail.html" target="_blank">login_fail.html</a></td>
+					<td class="date">2024-08-08</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						SSGB2E_REN_BO_DE_08. 설정_주관사관리자_ver_0.3.1_20240730_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td>이용약관</td>
+					<td>
+						고객사 이용약관,<br/>
+						고객사 개인정보 수집 및 이용,<br/>
+						협력회사 이용약관,<br/>
+						협력회사 개인정보 수집 및 이용
+					</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/setting/terms_list.html" target="_blank">terms_list.html</a></td>
+					<td class="date">2024-09-09</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						08.설정_ver_0.2.2_20240909_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>수정</td>
+					<td class="link"><a href="/resources/static/html/setting/terms_modify.html" target="_blank">terms_modify.html</a></td>
+					<td class="date">2024-09-09</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						08.설정_ver_0.2.2_20240909_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>등록</td>
+					<td class="link"><a href="/resources/static/html/setting/terms_register.html" target="_blank">terms_register.html</a></td>
+					<td class="date">2024-09-09</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						08.설정_ver_0.2.2_20240909_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td>카테고리</td>
+					<td>상품카테고리</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/setting/goods_category.html" target="_blank">goods_category.html</a></td>
+					<td class="date">2024-08-09</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						SSGB2E_REN_BO_DE_08. 설정_주관사관리자_ver_0.3.2_20240808_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>상품정보고시</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/setting/goods_gosi.html" target="_blank">goods_gosi.html</a></td>
+					<td class="date">2024-08-09</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						SSGB2E_REN_BO_DE_08. 설정_주관사관리자_ver_0.3.2_20240808_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td>코드관리</td>
+					<td>공통코드</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/setting/code_common.html" target="_blank">code_common.html</a></td>
+					<td class="date">2024-08-12</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						SSGB2E_REN_BO_DE_08. 설정_주관사관리자_ver_0.3.2_20240808_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>메뉴코드</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/setting/code_menu.html" target="_blank">code_menu.html</a></td>
+					<td class="date">2024-08-12</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						SSGB2E_REN_BO_DE_08. 설정_주관사관리자_ver_0.3.2_20240808_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>배송코드</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/setting/code_delivery.html" target="_blank">code_delivery.html</a></td>
+					<td class="date">2024-08-12</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						SSGB2E_REN_BO_DE_08. 설정_주관사관리자_ver_0.3.2_20240808_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>
+						대량업로드코드<br/>
+                        주문다운로드코드<br/>
+                        정산다운로드코드
+					</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/setting/code_large.html" target="_blank">code_large.html</a></td>
+					<td class="date">2024-08-12</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						SSGB2E_REN_BO_DE_08. 설정_주관사관리자_ver_0.3.2_20240808_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td>VDI망</td>
+					<td>관리자관리</td>
+					<td>관리자</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/vdi/admin_list.html" target="_blank">admin_list.html</a></td>
+					<td class="date">2024-08-13</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_14. VID망_주관사관리자_ver_0.2.0_20240730_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>수정</td>
+					<td class="link"><a href="/resources/static/html/vdi/admin_modify.html" target="_blank">admin_modify.html</a></td>
+					<td class="date">2024-08-13</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_14. VID망_주관사관리자_ver_0.2.2_20240814_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>등록</td>
+					<td class="link"><a href="/resources/static/html/vdi/admin_register.html" target="_blank">admin_register.html</a></td>
+					<td class="date">2024-08-13</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">SSGB2E_REN_BO_DE_14. VID망_주관사관리자_ver_0.2.2_20240814_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>관리자별 접근권한</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/vdi/admin_power.html" target="_blank">admin_power.html</a></td>
+					<td class="date">2024-09-24</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">14. VID망_ver_0.2.0_20240913_최형민 (2)</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>등급별 접근권한</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/vdi/level_power.html" target="_blank">level_power.html</a></td>
+					<td class="date">2024-09-24</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">14. VID망_ver_0.2.0_20240913_최형민 (2)</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td>초기화</td>
+					<td>고객사삭제</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/vdi/remove_client.html" target="_blank">remove_client.html</a></td>
+					<td class="date">2024-09-24</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">14. VID망_ver_0.2.0_20240913_최형민 (2)</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>회원정보 초기화/삭제</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/vdi/remove_member.html" target="_blank">remove_member.html</a></td>
+					<td class="date">2024-08-14</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">14. VID망_ver_0.2.0_20240913_최형민 (2)</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>주문정보 초기화/삭제</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/vdi/remove_order.html" target="_blank">remove_order.html</a></td>
+					<td class="date">2024-08-14</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">14. VID망_ver_0.2.0_20240913_최형민 (2)</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>오프라인주문정보 초기화/삭제</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/vdi/remove_offline.html" target="_blank">remove_offline.html</a></td>
+					<td class="date">2024-08-14</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">14. VID망_ver_0.2.0_20240913_최형민 (2)</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td>연동</td>
+					<td>안심번호</td>
+					<td>안심번호 현황</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/integration/safe_number.html" target="_blank">safe_number.html</a></td>
+					<td class="date">2024-12-26</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">09.연동_ver_0.5_1219_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td>삼성총괄</td>
+					<td>주문리스트</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/integration/ss_order_list.html" target="_blank">ss_order_list.html</a></td>
+					<td class="date">2024-12-26</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">09.연동_ver_0.5_1219_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>상세</td>
+					<td class="link"><a href="/resources/static/html/integration/ss_order_detail.html" target="_blank">ss_order_detail.html</a></td>
+					<td class="date">2024-12-26</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">09.연동_ver_0.5_1219_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>매출마감</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/integration/closing_sale.html" target="_blank">closing_sale.html</a></td>
+					<td class="date">2024-12-26</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">09.연동_ver_0.5_1219_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>대량등록</td>
+					<td class="link"><a href="/resources/static/html/integration/integration_large.html" target="_blank">integration_large.html</a></td>
+					<td class="date">2024-12-26</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">09.연동_ver_0.5_1219_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>매출마감</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/integration/deposit_sale.html" target="_blank">deposit_sale.html</a></td>
+					<td class="date">2024-12-26</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">09.연동_ver_0.5_1219_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>주문정산</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/integration/order_calculate.html" target="_blank">order_calculate.html</a></td>
+					<td class="date">2024-12-26</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">09.연동_ver_0.5_1219_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>미입금조회</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/integration/unpaid_deposit.html" target="_blank">unpaid_deposit.html</a></td>
+					<td class="date">2024-12-26</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">09.연동_ver_0.5_1219_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>연동내역</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/integration/integration_list.html" target="_blank">integration_list.html</a></td>
+					<td class="date">2024-12-26</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">09.연동_ver_0.5_1219_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td>프로모션</td>
+					<td>쿠폰관리</td>
+					<td>쿠폰리스트</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/promotion/coupon_list.html" target="_blank">coupon_list.html</a></td>
+					<td class="date">2025-01-02</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">06.프로모션_ver_0.5_20241125_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>상세</td>
+					<td class="link"><a href="/resources/static/html/promotion/coupon_detail.html" target="_blank">coupon_detail.html</a></td>
+					<td class="date">2025-01-02</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">06.프로모션_ver_0.5_20241125_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>등록</td>
+					<td class="link"><a href="/resources/static/html/promotion/coupon_register.html" target="_blank">coupon_register.html</a></td>
+					<td class="date">2025-01-02</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">06.프로모션_ver_0.5_20241125_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td>출석체크</td>
+					<td>출석체크리스트</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/promotion/attendance_list.html" target="_blank">attendance_list.html</a></td>
+					<td class="date">2025-01-02</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">06.프로모션_ver_0.5_20241125_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>상세</td>
+					<td class="link"><a href="/resources/static/html/promotion/attendance_detail.html" target="_blank">attendance_detail.html</a></td>
+					<td class="date">2025-01-02</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">06.프로모션_ver_0.5_20241125_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>등록</td>
+					<td class="link"><a href="/resources/static/html/promotion/attendance_register.html" target="_blank">attendance_register.html</a></td>
+					<td class="date">2025-01-02</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">06.프로모션_ver_0.5_20241125_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td>럭키박스</td>
+					<td>럭키박스리스트</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/promotion/lucky_list.html" target="_blank">lucky_list.html</a></td>
+					<td class="date">2025-01-02</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">06.프로모션_ver_0.5_20241125_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>상세</td>
+					<td class="link"><a href="/resources/static/html/promotion/lucky_detail.html" target="_blank">lucky_detail.html</a></td>
+					<td class="date">2025-01-02</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">06.프로모션_ver_0.5_20241125_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>등록</td>
+					<td class="link"><a href="/resources/static/html/promotion/lucky_register.html" target="_blank">lucky_register.html</a></td>
+					<td class="date">2025-01-02</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">06.프로모션_ver_0.5_20241125_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td>팝업</td>
+					<td>로그인</td>
+					<td>관리자등록</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/admin_join_pop.html" target="_blank">admin_join_pop.html</a></td>
+					<td class="date">2024-05-17</td>
+					<td class="work"></td>
+					<td class="confirm"></td>
+					<td class="etc">로그인 관리자등록<br/>
+						SSGB2E_REN_BO_DE_02. 회원_ver_0.1.6_20240516_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td>관리자정보수정</td>
+					<td></td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/admin_modify_pop.html" target="_blank">admin_modify_pop.html</a></td>
+					<td class="date">2024-05-17</td>
+					<td class="work"></td>
+					<td class="confirm"></td>
+					<td class="etc">관리자 헤더 버튼<br/>
+						SSGB2E_REN_BO_DE_02. 회원_ver_0.1.6_20240516_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>비밀번호 변경</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/password_change_pop.html" target="_blank">password_change_pop.html</a></td>
+					<td class="date">2024-05-17</td>
+					<td class="work"></td>
+					<td class="confirm"></td>
+					<td class="etc">
+						SSGB2E_REN_BO_DE_02. 회원_ver_0.1.6_20240516_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>이용약관</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/terms_pop.html" target="_blank">terms_pop.html</a></td>
+					<td class="date">2024-05-17</td>
+					<td class="work"></td>
+					<td class="confirm"></td>
+					<td class="etc">SSGB2E_REN_BO_DE_02. 회원_ver_0.1.6_20240516_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td>상품</td>
+					<td>상품이용고객사</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/product_use_client_pop.html" target="_blank">product_use_client_pop.html</a></td>
+					<td class="date">2024-06-20</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">상품리스트 고객사버튼<br/>
+						SSGB2E_REN_BO_DE_03. 상품_주관사관리자_ver_0.3.0_20240620_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>상품 미리보기</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/product_preview_pop.html" target="_blank">product_preview_pop.html</a></td>
+					<td class="date"></td>
+					<td class="work"></td>
+					<td class="confirm"></td>
+					<td class="etc">상품리스트 미리버튼<br/>
+						SSGB2E_REN_BO_DE_03. 상품_주관사관리자_ver_0.3.0_20240620_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>옵션정보 일괄변경</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/goods_option_change_all.html" target="_blank">goods_option_change_all.html</a></td>
+					<td class="date">2024-06-26</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">상품상세,등록 일괄벼경<br/>
+						SSGB2E_REN_BO_DE_03. 상품_주관사관리자_ver_0.3.0_20240621_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>가격 및 상태 변동 리스트(원본)</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/product_status_pop.html" target="_blank">product_status_pop.html</a></td>
+					<td class="date">2024-06-20</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">상품리스트 상태버튼<br/>
+						SSGB2E_REN_BO_DE_03. 상품_주관사관리자_ver_0.3.0_20240620_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>가격 및 상태 변동 리스트(복사)</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/product_status_copy_pop.html" target="_blank">product_status_copy_pop.html</a></td>
+					<td class="date">2024-06-20</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">상품리스트 상태버튼<br/>
+						SSGB2E_REN_BO_DE_03. 상품_주관사관리자_ver_0.3.0_20240620_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>마진율 일괄 변경</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/product_margin_pop.html" target="_blank">product_margin_pop.html</a></td>
+					<td class="date">2024-06-20</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">상품리스트 마진율 일괄변경 버튼<br/>
+						SSGB2E_REN_BO_DE_03. 상품_주관사관리자_ver_0.3.0_20240620_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>반송사유</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/product_return_pop.html" target="_blank">product_return_pop.html</a></td>
+					<td class="date">2024-06-21</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">상품리스트 반송 버튼<br/>
+						SSGB2E_REN_BO_DE_03. 상품_주관사관리자_ver_0.3.0_20240620_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>임시저장</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/temporary_save_pop.html" target="_blank">temporary_save_pop.html</a></td>
+					<td class="date">2024-09-04</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">상품리스트 반송 버튼<br/>
+						SSGB2E_REN_BO_DE_03. 상품_주관사관리자_ver_0.5.5_20240903_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>고객사선택</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/client_select.html" target="_blank">client_select.html</a></td>
+					<td class="date">2024-10-04</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">상품리스트 고객사선택 버튼<br/>
+						0930_수정요청</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>재고관리</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/set_stock.html" target="_blank">set_stock.html</a></td>
+					<td class="date">2024-11-22</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc"></td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td>주문</td>
+					<td>추가 송장번호 입력</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/delivery_number_add_pop.html" target="_blank">delivery_number_add_pop.html</a></td>
+					<td class="date">2024-06-14</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">주문_통합관리자_ver_0.3.7_0614_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>배송지 설정</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/delivery_address_pop.html" target="_blank">delivery_address_pop.html</a></td>
+					<td class="date">2024-06-03</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">상세 배송지설정 - 수정<br/>
+						SSGB2E_REN_BO_DE_02. 회원_ver_0.1.6_20240604_최형민
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>거래내역서</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/order_transaction_pop.html" target="_blank">order_transaction_pop.html</a></td>
+					<td class="date">2024-09-25</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">주문상세 거래내역서 버튼<br/>주문_통합관리자_ver_0.5.1_0923_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>거래영수증</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/order_receipt_pop.html" target="_blank">order_receipt_pop.html</a></td>
+					<td class="date">2024-09-25</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">주문상세 거래영수증 버튼<br/>주문_통합관리자_ver_0.5.1_0923_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>협력회사 정보</td>
+					<td>매장</td>
+					<td class="link"><a href="/resources/static/html/popup/partner_info_pop.html" target="_blank">partner_info_pop.html</a></td>
+					<td class="date">2024-09-25</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">주문_통합관리자_ver_0.5.1_0923_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>기획</td>
+					<td class="link"><a href="/resources/static/html/popup/partner_info_pop2.html" target="_blank">partner_info_pop2.html</a></td>
+					<td class="date">2024-09-25</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">주문_통합관리자_ver_0.5.1_0923_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>주문취소</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/order_cancel_pop.html" target="_blank">order_cancel_pop.html</a></td>
+					<td class="date">2024-09-25</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">리스트 주문취소버튼, 상세버튼<br/>주문_통합관리자_ver_0.5.1_0923_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>반품관리</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/order_return_pop.html" target="_blank">order_return_pop.html</a></td>
+					<td class="date">2024-07-08</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">주문_통합관리자_ver_0.5.1_0923_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>교환관리</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/order_change_pop.html" target="_blank">order_change_pop.html</a></td>
+					<td class="date">2024-07-08</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">주문_통합관리자_ver_0.5.1_0923_최형민</td>
+				</tr>
+				<!-- <tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>반품신청</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/order_return_pop.html" target="_blank">order_return_pop.html</a></td>
+					<td class="date">2024-06-04</td>
+					<td class="work"></td>
+					<td class="confirm"></td>
+					<td class="etc">SSGB2E_REN_BO_DE_04. 주문_주관사관리자_ver_0.3.2_20240603_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>반품완료</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/order_return_comp_pop.html" target="_blank">order_return_comp_pop.html</a></td>
+					<td class="date">2024-06-04</td>
+					<td class="work"></td>
+					<td class="confirm"></td>
+					<td class="etc">SSGB2E_REN_BO_DE_04. 주문_주관사관리자_ver_0.3.2_20240603_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>교환신청</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/order_change_pop.html" target="_blank">order_change_pop.html</a></td>
+					<td class="date">2024-06-04</td>
+					<td class="work"></td>
+					<td class="confirm"></td>
+					<td class="etc">SSGB2E_REN_BO_DE_04. 주문_주관사관리자_ver_0.3.2_20240603_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>교품배송지</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/order_change_adress_pop.html" target="_blank">order_change_adress_pop.html</a></td>
+					<td class="date">2024-06-04</td>
+					<td class="work"></td>
+					<td class="confirm"></td>
+					<td class="etc">SSGB2E_REN_BO_DE_04. 주문_주관사관리자_ver_0.3.2_20240603_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>교환완료</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/order_change_comp_pop.html" target="_blank">order_change_comp_pop.html</a></td>
+					<td class="date">2024-06-04</td>
+					<td class="work"></td>
+					<td class="confirm"></td>
+					<td class="etc">SSGB2E_REN_BO_DE_04. 주문_주관사관리자_ver_0.3.2_20240603_윤지환</td>
+				</tr> -->
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>협력회사 상세내역</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/partner_detail_pop.html" target="_blank">partner_detail_pop.html</a></td>
+					<td class="date">2024-07-31</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">주문상세 협력회사, 상세버튼<br/>SSGB2E_REN_BO_DE_07. 오프라인주문_주관사관리자_ver_0.2.1_20240724_윤지환</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>현금영수증 신청내역</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/cash_receipt_modify.html" target="_blank">cash_receipt_modify.html</a></td>
+					<td class="date">2024-09-27</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">현금영수증 아이디클릭<br/>주문_통합관리자_ver_0.5.2_0927_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>현금영수증 발행내역</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/cash_receipt_history.html" target="_blank">cash_receipt_history.html</a></td>
+					<td class="date">2024-09-27</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">현금영수증 상태클릭<br/>주문_통합관리자_ver_0.5.2_0927_최형민</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td>오프라인주문</td>
+					<td>주문정보 삭제</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/order_remove.html" target="_blank">order_remove.html</a></td>
+					<td class="date">2024-07-31</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						대량등록 결과 - 주문정보 삭제<br/>
+						SSGB2E_REN_BO_DE_07. 오프라인주문_주관사관리자_ver_0.2.1_20240724_윤지환
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>송장업로드 결과</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/upload_result.html" target="_blank">upload_result.html</a></td>
+					<td class="date">2024-09-27</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						송장업로드 <br/>
+						주문_통합관리자_ver_0.5.2_0927_최형민
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>택배사코드</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/parcel_code_pop.html" target="_blank">parcel_code_pop.html</a></td>
+					<td class="date">2024-07-31</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						송장업로드 결과 - 택배사코드확인<br/>
+						SSGB2E_REN_BO_DE_07. 오프라인주문_주관사관리자_ver_0.2.1_20240724_윤지환
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>다운로드 사유</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/download_reason_pop.html" target="_blank">download_reason_pop.html</a></td>
+					<td class="date">2024-07-31</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						오프라인주문 - 주문정상 - 통계저장,정산주문 저장<br/>
+						SSGB2E_REN_BO_DE_07. 오프라인주문_주관사관리자_ver_0.2.1_20240724_윤지환
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>답변하기</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/offline_answer_pop.html" target="_blank">offline_answer_pop.html</a></td>
+					<td class="date">2024-07-31</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						오프라인주문 - 협력회사문의 - 답변대기<br/>
+						SSGB2E_REN_BO_DE_07. 오프라인주문_주관사관리자_ver_0.2.1_20240724_윤지환
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>답변하기(완료)</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/offline_answer_comp_pop.html" target="_blank">offline_answer_comp_pop.html</a></td>
+					<td class="date">2024-07-31</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						오프라인주문 - 협력회사문의 - 답변완료<br/>
+						SSGB2E_REN_BO_DE_07. 오프라인주문_주관사관리자_ver_0.2.1_20240724_윤지환
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>취소신청</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/order_cancle_reason.html" target="_blank">order_cancle_reason.html</a></td>
+					<td class="date">2024-07-31</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						퍼블수정요청_1113.pptx
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td>쇼핑몰</td>
+					<td>상품등록</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/main_display_product_pop.html" target="_blank">main_display_product_pop.html</a></td>
+					<td class="date">2024-08-26</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						메인진열관리 상품등록<br/>
+						쇼핑몰_통합관리자_ver_0.0.2_0822_최형민
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>기획전/브랜드관</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/exhibitions_brand_pop.html" target="_blank">exhibitions_brand_pop.html</a></td>
+					<td class="date">2024-08-27</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						메인진열관리 상품등록<br/>
+						쇼핑몰_통합관리자_ver_0.0.2_0822_최형민
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>룰렛/출석체크</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/roulette_attendance_pop.html" target="_blank">roulette_attendance_pop.html</a></td>
+					<td class="date">2024-08-27</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						메인진열관리 상품등록<br/>
+						쇼핑몰_통합관리자_ver_0.0.2_0822_최형민
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>카테고리 설정</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/category_set_pop3.html" target="_blank">category_set_pop3.html</a></td>
+					<td class="date">2024-08-28</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						기획전 리스트 카테고리<br/>
+						쇼핑몰_통합관리자_ver_0.0.2_0822_최형민
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>쇼핑몰 팝업 미리보기 샘플</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/preview_shop_pop.html" target="_blank">preview_shop_pop.html</a></td>
+					<td class="date">2024-08-28</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						쇼핑몰팝업 리스트 미리보기<br/>
+						쇼핑몰_통합관리자_ver_0.0.2_0822_최형민
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>카테고리 아이콘 미리보기</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/popup_cate_icons.html" target="_blank">popup_cate_icons.html</a></td>
+					<td class="date">2024-12-24</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>아이콘 관리</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/popup_icon_setting.html" target="_blank">popup_icon_setting.html</a></td>
+					<td class="date">2024-12-24</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td>회원</td>
+					<td>부담당자 정보</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/assi_manager_info_pop.html" target="_blank">assi_manager_info_pop.html</a></td>
+					<td class="date">2024-06-07</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						회원 부담당자 버튼<br/>
+						SSGB2E_REN_BO_DE_02. 회원_ver_0.1.7_20240606_최형민
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>하위관리자 정보</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/sub_manager_info_pop.html" target="_blank">sub_manager_info_pop.html</a></td>
+					<td class="date">2024-06-05</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						회원 관리자 버튼<br/>
+						SSGB2E_REN_BO_DE_02. 회원_ver_0.1.6_20240604_최형민
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>메모</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/memo_pop.html" target="_blank">memo_pop.html</a></td>
+					<td class="date">2024-05-21</td>
+					<td class="work"></td>
+					<td class="confirm"></td>
+					<td class="etc">
+						회원 관리자 버튼<br/>
+						SSGB2E_REN_BO_DE_02. 회원_ver_0.1.6_20240516_윤지환
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>금액대 설정</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/price_setting_pop.html" target="_blank">price_setting_pop.html</a></td>
+					<td class="date">2024-07-17</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						고객사리스트 금액대설정 버튼<br/>
+						통합관리자_회원_수정요청_0715
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>계열사 설정</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/affiliates_setting_pop.html" target="_blank">affiliates_setting_pop.html</a></td>
+					<td class="date">2024-07-17</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						고객사리스트 계열사설정 버튼<br/>
+						통합관리자_회원_수정요청_0715
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>카테고리 설정</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/category_set_pop.html" target="_blank">category_set_pop.html</a></td>
+					<td class="date">2024-07-17</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						고객사리스트 카테고리설정 버튼<br/>
+						통합관리자_회원_수정요청_0715
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>카테고리 설정(1차만)</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/category_set_pop2.html" target="_blank">category_set_pop2.html</a></td>
+					<td class="date">2024-07-19</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						고객사 마일리지등록 카테고리설정 버튼<br/>
+						통합관리자_회원_수정요청_0715
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>고객사 정보</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/client_info_pop.html" target="_blank">client_info_pop.html</a></td>
+					<td class="date">2024-06-07</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						그룹사 고객사 버튼<br/>
+						SSGB2E_REN_BO_DE_02. 회원_ver_0.1.7_20240606_최형민
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>회원대량등록검수</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/nor_member_large_inspection_pop.html" target="_blank">nor_member_large_inspection_pop.html</a></td>
+					<td class="date">2024-06-07</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						회원대량등록폼<br/>
+						SSGB2E_REN_BO_DE_02. 회원_ver_0.1.7_20240606_최형민
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>문자발송</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/sms_pop.html" target="_blank">sms_pop.html</a></td>
+					<td class="date">2024-06-07</td>
+					<td class="work"></td>
+					<td class="confirm">컴펌완료</td>
+					<td class="etc">
+						고객센터 상품요청 -> 문자발송<br/>
+						대량 -> 문자발송<br/>
+						SSGB2E_REN_BO_DE_02. 회원_ver_0.1.6_20240516_윤지환
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>포인트 지급/회수</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/point_in_out.html" target="_blank">point_in_out.html</a></td>
+					<td class="date">2024-06-10</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						포인트 현황 - 지급/회수<br/>
+						SSGB2E_REN_BO_DE_02. 회원_ver_0.1.7_20240606_최형민
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>포인트 대량등록 검수</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/point_large_inspection_pop.html" target="_blank">point_large_inspection_pop.html</a></td>
+					<td class="date">2024-06-10</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						포인트대량등록폼<br/>
+						SSGB2E_REN_BO_DE_02. 회원_ver_0.1.7_20240606_최형민
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>마일리지 지급/회수</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/mileage_in_out.html" target="_blank">mileage_in_out.html</a></td>
+					<td class="date">2024-06-10</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						회원 마일리지관리 - 지급/회수<br/>
+						SSGB2E_REN_BO_DE_02. 회원_ver_0.1.7_20240606_최형민
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>마일리지 대량등록 검수</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/mileage_large_inspection_pop.html" target="_blank">mileage_large_inspection_pop.html</a></td>
+					<td class="date">2024-06-10</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						마일리지대량등록폼<br/>
+						SSGB2E_REN_BO_DE_02. 회원_ver_0.1.7_20240606_최형민
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>상품별 최대주문금액 제한</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/goods_limit_price_pop.html" target="_blank">goods_limit_price_pop.html</a></td>
+					<td class="date">2024-11-28</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						기능수정_ver_0.05_1128_최형민
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>불가사유</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/impossible_reason.html" target="_blank">impossible_reason.html</a></td>
+					<td class="date">2024-11-28</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						회원_포인트승인.pptx
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td>고객센터</td>
+					<td>고객사 검색</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/client_search_pop.html" target="_blank">client_search_pop.html</a></td>
+					<td class="date">2024-06-11</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						고객사공지상세 고객사 선택<br/>
+						SSGB2E_REN_BO_DE_01.고객센터_ver_0.1.6_20240607_최형민
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>고객사 확인</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/client_pop.html" target="_blank">client_pop.html</a></td>
+					<td class="date">2024-06-11</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						고객사공지상세 고객사 선택<br/>
+						SSGB2E_REN_BO_DE_01.고객센터_ver_0.1.6_20240607_최형민
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>협력회사 제안 요청 현황</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/joint_proposal_status_pop.html" target="_blank">joint_proposal_status_pop.html</a></td>
+					<td class="date">2024-06-11</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						고객사공지상세 고객사 선택<br/>
+						SSGB2E_REN_BO_DE_01.고객센터_ver_0.1.6_20240607_최형민
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>협력회사 제안 요청 제안서 리스트</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/joint_proposal_list_pop.html" target="_blank">joint_proposal_list_pop.html</a></td>
+					<td class="date">2024-06-11</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						고객사공지상세 고객사 선택<br/>
+						SSGB2E_REN_BO_DE_01.고객센터_ver_0.1.6_20240607_최형민
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>협력회사 선택</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/joint_search_pop.html" target="_blank">joint_search_pop.html</a></td>
+					<td class="date">2024-06-11</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						메시지 협력회사 선택<br/>
+						고객사공지 협력회사 선택<br/>
+						SSGB2E_REN_BO_DE_01.고객센터_ver_0.1.6_20240607_최형민
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>답변하기</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/answer_pop.html" target="_blank">answer_pop.html</a></td>
+					<td class="date">2024-07-17</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						고객센터 상품문의 답변대기<br/>
+						SSGB2E_REN_BO_DE_01.고객센터_ver_0.1.7_20240626_최형민
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>답변하기(완료)</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/answer_comp_pop.html" target="_blank">answer_comp_pop.html</a></td>
+					<td class="date">2024-07-17</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						고객센터 상품문의 답변완료<br/>
+						SSGB2E_REN_BO_DE_01.고객센터_ver_0.1.7_20240626_최형민
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td>협력회사</td>
+					<td>하위관리자 정보</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/sub_manager_info_pop2.html" target="_blank">sub_manager_info_pop2.html</a></td>
+					<td class="date">2024-07-25</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						협력회사 관리자 버튼<br/>
+						SSGB2E_REN_BO_DE_06. 협력회사관리_주관사관리자_ver_0.4.0_20240724_윤지환 
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>보안서약서 히스토리</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/security_history_pop.html" target="_blank">security_history_pop.html</a></td>
+					<td class="date">2024-07-26</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						협력회사 보안서약서 상세보기 버튼<br/>
+						SSGB2E_REN_BO_DE_06. 협력회사관리_주관사관리자_ver_0.4.0_20240724_윤지환 
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>정보보안 체크리스트</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/security_check_pop.html" target="_blank">security_check_pop.html</a></td>
+					<td class="date">2024-07-26</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						협력회사 보안서약서 날짜 버튼<br/>
+						SSGB2E_REN_BO_DE_06. 협력회사관리_주관사관리자_ver_0.4.0_20240724_윤지환 
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>파기확인서</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/destroy_check_pop.html" target="_blank">destroy_check_pop.html</a></td>
+					<td class="date">2024-07-26</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						협력회사 파기확인서 날짜 버튼<br/>
+						SSGB2E_REN_BO_DE_06. 협력회사관리_주관사관리자_ver_0.4.0_20240724_윤지환 
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td>메시지</td>
+					<td>메시지발송 내역</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/message_history_pop.html" target="_blank">message_history_pop.html</a></td>
+					<td class="date">2024-07-15</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						SSGB2E_REN_BO_DE_05. 메시지_주관사관리자_ver_0.2.0_20240715_윤지환
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>고객사회원 선택</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/client_member_search_pop.html" target="_blank">client_member_search_pop.html</a></td>
+					<td class="date">2024-06-11</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						메시지 고객사 수신인 선택<br/>
+						SSGB2E_REN_BO_DE_05. 메시지_주관사관리자_ver_0.2.0_20240715_윤지환
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td>배포</td>
+					<td>반려사유</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/return_pop.html" target="_blank">return_pop.html</a></td>
+					<td class="date">2024-08-21</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						배포 수정 - 반려버튼<br/>
+						SSGB2E_REN_BO_DE_09. 배포_주관사관리자_ver_0.3.1_20240805_윤지환
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td>연동</td>
+					<td>매출마감</td>
+					<td>상세내역</td>
+					<td class="link"><a href="/resources/static/html/popup/closing_sale_detail.html" target="_blank">closing_sale_detail.html</a></td>
+					<td class="date">2024-12-30</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						09.연동_ver_0.5_1219_최형민
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>연동내역</td>
+					<td>상세내역</td>
+					<td class="link"><a href="/resources/static/html/popup/integration_detail.html" target="_blank">integration_detail.html</a></td>
+					<td class="date">2024-12-30</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						09.연동_ver_0.5_1219_최형민
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td>프로모션</td>
+					<td>쿠폰사용현황</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/coupon_list_pop.html" target="_blank">coupon_list_pop.html</a></td>
+					<td class="date">2024-12-30</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						06.프로모션_ver_0.5_20241125_최형민
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>상품선택</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/product_select_pop.html" target="_blank">product_select_pop.html</a></td>
+					<td class="date">2024-12-30</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						06.프로모션_ver_0.5_20241125_최형민
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>출석체크현황</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/attendance_list_pop.html" target="_blank">attendance_list_pop.html</a></td>
+					<td class="date">2024-12-30</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						06.프로모션_ver_0.5_20241125_최형민
+					</td>
+				</tr>
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td>럭키박스현황</td>
+					<td></td>
+					<td class="link"><a href="/resources/static/html/popup/lucky_list_pop.html" target="_blank">lucky_list_pop.html</a></td>
+					<td class="date">2024-12-30</td>
+					<td class="work"></td>
+					<td class="confirm">컨펌완료</td>
+					<td class="etc">
+						06.프로모션_ver_0.5_20241125_최형민
+					</td>
+				</tr>
+				
+
+				<!-- 
+				<tr>
+					<td class="no"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td class="link"><a href="html/.html" target="_blank"></a>.html</td>
+					<td class="date"></td>
+					<td class="work"></td>
+					<td class="etc"></td>
+				</tr>
+				-->
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(function () {
+		$(".tab_menu li a").click(function () {
+			$(".tab_menu li a").removeClass("active");
+			$(this).addClass("active");
+			$(".list_w").hide().removeClass("codinglist")
+			var activeTab = $(this).attr("rel");
+			$("#" + activeTab).fadeIn().addClass("codinglist");
+			chkList();
+		});
+		chkList();
+	});
+
+	function chkList(){
+		var tatal_n = $(".codinglist tbody tr").length;
+		var curr_n = 0;
+		var ing_n = 0;
+		$(".codinglist td a").each(function() {
+			$(this).closest('tr').find('.work').text('대기중').addClass('stand_by');
+			if($(this).attr('href') != '#' && $(this).text().length > 0 && $(this).closest('tr').find('.date').text().length > 4){
+				curr_n++;
+				$(this).closest('tr').find('.work').text('완료').addClass('end');
+			} else if ($(this).text().length > 0 && $(this).attr('href') != '#') {
+				ing_n++;
+				$(this).closest('tr').find('.work').text('진행중').addClass('ing');
+			}
+		});
+
+		$(".codinglist tbody tr").each(function() {
+			var index = $(this).index()+1;
+			$(this).children(".codinglist td.no").text(index);
+		});
+		$(".codinglist .no + td").each(function() {
+			if($(this).text() != ""){
+				$(this).parent('tr').addClass('division');
+			}
+		});
+
+		$(".codinglist td").click(function() {
+			$(".codinglist tr").removeClass("on");
+			$(this).parent(".codinglist tr").addClass("on");
+		});
+
+		$('.total_n').text(tatal_n);
+		$('.curr_n').text(curr_n);
+		$('.notcurr_n').text(tatal_n - curr_n);
+		$('.ing_n').text(ing_n).addClass('ing');
+		$('.per').text(Math.floor((curr_n/tatal_n)*100) + '%');
+		$('.per_2').text(Math.floor((ing_n/tatal_n)*100) + '%');
+	}
+</script>
+</div><!-- //wrap -->
+</body>
+</html>

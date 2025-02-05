@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=1400"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>신세계 관리자</title>
+    <!-- CSS files -->
+    <link href="/resources/static/dist/css/tabler.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/tabler-vendors.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/>
+    <link rel="shortcut icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <script src="/resources/static/dist/js/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/resources/static/dist/libs/litepicker/dist/litepicker.js?1674944402"></script>
+    <script src="/resources/static/dist/js/jquery.validate.js"></script>
+    <!-- Tabler Core -->
+    
+    <script src="/resources/static/dist/js/common.js"></script>
+    <style>
+    :root {
+        --theme-admin-type: #cf3f42;
+        /* #cf3f42 통합관리자 컬러 코드*/
+        /* #4b9b52 협력회사 컬러 코드 */
+        /* #214c9c 고객사 컬러 코드 */
+    }
+    </style>
+</head>
+<body>
+
+<div class="popup-wrapper">
+    <h2 class="popup-title">대량등록 검수</h2>
+    <form action="">
+    <div class="row">
+        <div class="text_box">
+            <p class="text-muted fs-5 my-1">※오류체크를 통해 업로드한 파일의 오류내용을 확인해주세요. 오류내용을 모두 수정해야 파일을 등록 할 수 있습니다.</p>
+            <p class="text-muted fs-5 my-1">※아이디 : 2~30자 / 비밀번호 : 8~20자 / 상태 : 미 입력 시 “정상승인“ /  이메일수신, SMS수신 : 수신동의(Y), 수신거부(N)</p>
+            <p class="text-muted fs-5 my-1">※”포인트지급액, 사원번호, 사업자번호, 전화번호, 휴대폰번호, 종사업자번호, 감사장수량, 우편번호”는 숫자만 입력해주세요</p>
+            <p class="text-muted fs-5 my-1">※*표기는 필수 입력 항목입니다.</p>
+        </div>
+        <div class="list-btns justify-content-between">
+            <div></div>
+            <div class="d-flex">
+                <button type="button" class="btn btn-secondary ms-2">오류체크</button>
+                <button type="button" class="btn btn-warning ms-2">삭제</button>
+                <button type="button" class="btn btn-primary ms-2">등록</button>
+                <button type="button" class="btn btn-secondary ms-2" onclick="window.close();">닫기</button>
+            </div>
+        </div>
+
+        <div class="list-btns justify-content-between">
+            <div>
+                <div class="list_count me-2">* 전체 : <strong class="text-primary">111,592</strong>건 / 성공 : <strong class="text-primary">50</strong>건 / 오류 : <strong class="text-danger">50</strong>건</div>
+                <div class="d-flex align-items-center">
+                    <div class="me-2">
+                        <label class="form-check form-check-inline mt-1">
+                            <input class="form-check-input" type="checkbox">
+                            <span class="form-check-label fs-4">오류항목만 보기</span>
+                        </label>
+                    </div>
+                    <p class="text-dark fs-4 text_underline mb-0 me-2">등록된 정보를 수정하는 “□ 중복무시”를 체크하였습니다</p>
+                </div>
+            </div>
+            <div>
+                <div class="d-flex">
+                    <button type="button" class="btn btn-secondary ms-2">오류체크</button>
+                    <button type="button" class="btn btn-warning ms-2">삭제</button>
+                    <button type="button" class="btn btn-primary ms-2">등록</button>
+                    <button type="button" class="btn btn-secondary ms-2" onclick="window.close();">닫기</button>
+                </div>
+                <p class="text-danger fs-4 mb-0 mt-1 text-end"><span class="text-danger">*</span>표기는 필수 입력 항목입니다.</p>
+            </div>
+        </div>
+        <div class="content-area mt-1">
+            <div class="card table-mb-card">
+                <div class="table-responsive">
+                    <table class="table table-vcenter table-line card-table text-center table-mb label-control tr_hover">
+                        <thead>
+                            <tr>
+                                <th>[1]번호</th>
+                                <th class="required">*[2]협력회사아이디</th>
+                                <th class="required">*[3]상품권</th>
+                                <th class="required">*[4]과세구분</th>
+                                <th>[5]주문일</th>
+                                <th class="required">[6]주문번호</th>
+                                <th class="required">[7]배송번호</th>
+                                <th class="required">[8]상품코드</th>
+                                <th class="required">[9]상품명</th>
+                                <th>[10]상품옵션</th>
+                                <th>[11]박스선택옵션</th>
+                                <th class="required">[12]상품수량</th>
+                                <th>[13]배송비</th>
+                                <th class="required">[14]매입금액</th>
+                                <th>[15]에누리</th>
+                                <th class="required">[16]결제금액</th>
+                                <th>[17]주문자아이디</th>
+                                <th>[18]주문자명</th>
+                                <th class="required">[19]수령인명</th>
+                                <th class="required">[20]수령인 핸드폰 번호</th>
+                                <th>[21]우편번호</th>
+                                <th class="required">[22]주소</th>
+                                <th>[23]상세주소</th>
+                                <th>[24]배송메시지</th>
+                                <th>[25]통관번호</th>
+                                <th>[26]1차구분</th>
+                                <th>[27]2차구분</th>
+                                <th>[28]정책번호</th>
+                                <th>[29]자사발주여부</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>20</td><!-- 1 -->
+                                <td><input type="text" class="form-control" value="0" style="width:125px;"></td><!-- 2 -->
+                                <td><input type="text" class="form-control bg_pink" value="0" style="width:120px;"></td><!-- 3 -->
+                                <td><input type="text" class="form-control" value="0" style="width:120px;"></td><!-- 4 -->
+                                <td><input type="text" class="form-control" value="0" style="width:70px;"></td><!-- 5 -->
+                                <td><input type="text" class="form-control bg_pink" value="0" style="width:120px;"></td><!-- 6 -->
+                                <td><input type="text" class="form-control" value="0" style="width:120px;"></td><!-- 7 -->
+                                <td><input type="text" class="form-control" value="0" style="width:156px;"></td><!-- 8 -->
+                                <td><input type="text" class="form-control" value="0" style="width:100px;"></td><!-- 9 -->
+                                <td><input type="text" class="form-control" value="0" style="width:100px;"></td><!-- 10 -->
+                                <td><input type="text" class="form-control" value="0" style="width:100px;"></td><!-- 11 -->
+                                <td><input type="text" class="form-control" value="0" style="width:120px;"></td><!-- 12 -->
+                                <td><input type="text" class="form-control" value="0" style="width:140px;"></td><!-- 13 -->
+                                <td><input type="text" class="form-control" value="0" style="width:150px;"></td><!-- 14 -->
+                                <td><input type="text" class="form-control" value="0" style="width:150px;"></td><!-- 15 -->
+                                <td><input type="text" class="form-control" value="0" style="width:180px;"></td><!-- 16 -->
+                                <td><input type="text" class="form-control" value="0" style="width:180px;"></td><!-- 17 -->
+                                <td><input type="text" class="form-control" value="0" style="width:110px;"></td><!-- 18 -->
+                                <td><input type="text" class="form-control" value="0" style="width:120px;"></td><!-- 19 -->
+                                <td><input type="text" class="form-control" value="0" style="width:115px;"></td><!-- 20 -->
+                                <td><input type="text" class="form-control" value="0" style="width:100px;"></td><!-- 21 -->
+                                <td><input type="text" class="form-control" value="0" style="width:300px;"></td><!-- 22 -->
+                                <td><input type="text" class="form-control" value="0" style="width:300px;"></td><!-- 23 -->
+                                <td><input type="text" class="form-control" value="0" style="width:200px;"></td><!-- 24 -->
+                                <td><input type="text" class="form-control" value="0" style="width:120px;"></td><!-- 25 -->
+                                <td><input type="text" class="form-control" value="0" style="width:120px;"></td><!-- 26 -->
+                                <td><input type="text" class="form-control" value="0" style="width:120px;"></td><!-- 27 -->
+                                <td><input type="text" class="form-control" value="0" style="width:120px;"></td><!-- 28 -->
+                                <td><input type="text" class="form-control" value="0" style="width:120px;"></td><!-- 29 -->
+                            </tr>
+                            <tr>
+                                <td colspan="100" class="text-start text-danger fw-bold">[3]중복된 아이디입니다. 다시 확인해 주세요.</td>
+                            </tr>
+                            <tr>
+                                <td>20</td><!-- 1 -->
+                                <td><input type="text" class="form-control bg_pink" value="0" style="width:125px;"></td><!-- 2 -->
+                                <td><input type="text" class="form-control bg_pink" value="0" style="width:120px;"></td><!-- 3 -->
+                                <td><input type="text" class="form-control" value="0" style="width:120px;"></td><!-- 4 -->
+                                <td><input type="text" class="form-control" value="0" style="width:70px;"></td><!-- 5 -->
+                                <td><input type="text" class="form-control" value="0" style="width:120px;"></td><!-- 6 -->
+                                <td><input type="text" class="form-control" value="0" style="width:120px;"></td><!-- 7 -->
+                                <td><input type="text" class="form-control" value="0" style="width:156px;"></td><!-- 8 -->
+                                <td><input type="text" class="form-control" value="0" style="width:100px;"></td><!-- 9 -->
+                                <td><input type="text" class="form-control bg_pink" value="0" style="width:100px;"></td><!-- 10 -->
+                                <td><input type="text" class="form-control" value="0" style="width:100px;"></td><!-- 11 -->
+                                <td><input type="text" class="form-control" value="0" style="width:120px;"></td><!-- 12 -->
+                                <td><input type="text" class="form-control" value="0" style="width:140px;"></td><!-- 13 -->
+                                <td><input type="text" class="form-control" value="0" style="width:150px;"></td><!-- 14 -->
+                                <td><input type="text" class="form-control" value="0" style="width:150px;"></td><!-- 15 -->
+                                <td><input type="text" class="form-control" value="0" style="width:180px;"></td><!-- 16 -->
+                                <td><input type="text" class="form-control" value="0" style="width:180px;"></td><!-- 17 -->
+                                <td><input type="text" class="form-control" value="0" style="width:110px;"></td><!-- 18 -->
+                                <td><input type="text" class="form-control" value="0" style="width:120px;"></td><!-- 19 -->
+                                <td><input type="text" class="form-control" value="0" style="width:115px;"></td><!-- 20 -->
+                                <td><input type="text" class="form-control" value="0" style="width:100px;"></td><!-- 21 -->
+                                <td><input type="text" class="form-control" value="0" style="width:300px;"></td><!-- 22 -->
+                                <td><input type="text" class="form-control" value="0" style="width:300px;"></td><!-- 23 -->
+                                <td><input type="text" class="form-control" value="0" style="width:200px;"></td><!-- 24 -->
+                                <td><input type="text" class="form-control" value="0" style="width:120px;"></td><!-- 25 -->
+                                <td><input type="text" class="form-control" value="0" style="width:120px;"></td><!-- 26 -->
+                                <td><input type="text" class="form-control" value="0" style="width:120px;"></td><!-- 27 -->
+                                <td><input type="text" class="form-control" value="0" style="width:120px;"></td><!-- 28 -->
+                                <td><input type="text" class="form-control" value="0" style="width:120px;"></td><!-- 29 -->
+                            </tr>
+                            <tr>
+                                <td colspan="100" class="text-start text-danger fw-bold">[3]중복된 아이디입니다. 다시 확인해 주세요.[13]일괄지급 포인트가 0입니다. [14]이메일 형식에 맞게 입력해 주세요. [18]회원상태를 입력해 주세요.</td>
+                            </tr>
+                            <tr>
+                                <td>20</td><!-- 1 -->
+                                <td><input type="text" class="form-control" value="0" style="width:125px;"></td><!-- 2 -->
+                                <td><input type="text" class="form-control" value="0" style="width:120px;"></td><!-- 3 -->
+                                <td><input type="text" class="form-control" value="0" style="width:120px;"></td><!-- 4 -->
+                                <td><input type="text" class="form-control" value="0" style="width:70px;"></td><!-- 5 -->
+                                <td><input type="text" class="form-control bg_pink" value="0" style="width:120px;"></td><!-- 6 -->
+                                <td><input type="text" class="form-control" value="0" style="width:120px;"></td><!-- 7 -->
+                                <td><input type="text" class="form-control" value="0" style="width:156px;"></td><!-- 8 -->
+                                <td><input type="text" class="form-control bg_pink" value="0" style="width:100px;"></td><!-- 9 -->
+                                <td><input type="text" class="form-control" value="0" style="width:100px;"></td><!-- 10 -->
+                                <td><input type="text" class="form-control" value="0" style="width:100px;"></td><!-- 11 -->
+                                <td><input type="text" class="form-control" value="0" style="width:120px;"></td><!-- 12 -->
+                                <td><input type="text" class="form-control" value="0" style="width:140px;"></td><!-- 13 -->
+                                <td><input type="text" class="form-control" value="0" style="width:150px;"></td><!-- 14 -->
+                                <td><input type="text" class="form-control" value="0" style="width:150px;"></td><!-- 15 -->
+                                <td><input type="text" class="form-control" value="0" style="width:180px;"></td><!-- 16 -->
+                                <td><input type="text" class="form-control" value="0" style="width:180px;"></td><!-- 17 -->
+                                <td><input type="text" class="form-control" value="0" style="width:110px;"></td><!-- 18 -->
+                                <td><input type="text" class="form-control" value="0" style="width:120px;"></td><!-- 19 -->
+                                <td><input type="text" class="form-control" value="0" style="width:115px;"></td><!-- 20 -->
+                                <td><input type="text" class="form-control" value="0" style="width:100px;"></td><!-- 21 -->
+                                <td><input type="text" class="form-control" value="0" style="width:300px;"></td><!-- 22 -->
+                                <td><input type="text" class="form-control" value="0" style="width:300px;"></td><!-- 23 -->
+                                <td><input type="text" class="form-control" value="0" style="width:200px;"></td><!-- 24 -->
+                                <td><input type="text" class="form-control" value="0" style="width:120px;"></td><!-- 25 -->
+                                <td><input type="text" class="form-control" value="0" style="width:120px;"></td><!-- 26 -->
+                                <td><input type="text" class="form-control" value="0" style="width:120px;"></td><!-- 27 -->
+                                <td><input type="text" class="form-control" value="0" style="width:120px;"></td><!-- 28 -->
+                                <td><input type="text" class="form-control" value="0" style="width:120px;"></td><!-- 29 -->
+                            </tr>
+                            <tr>
+                                <td colspan="100" class="text-start text-danger fw-bold">[3]중복된 아이디입니다. 다시 확인해 주세요.[13]일괄지급 포인트가 0입니다. [14]이메일 형식에 맞게 입력해 주세요. [18]회원상태를 입력해 주세요.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="list-btns justify-content-between">
+            <div>
+            </div>
+            <div>
+                <button type="button" class="btn btn-secondary" onclick="window.close();">닫기</button>
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
+<script src="/resources/static/dist/js/tabler.min.js"></script>
+</body>
+</html>

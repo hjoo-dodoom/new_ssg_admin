@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=1400"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>신세계 관리자</title>
+    <!-- CSS files -->
+    <link href="/resources/static/dist/css/tabler.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/tabler-vendors.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/>
+    <link rel="shortcut icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <script src="/resources/static/dist/js/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/resources/static/dist/libs/litepicker/dist/litepicker.js?1674944402"></script>
+    <script src="/resources/static/dist/js/jquery.validate.js"></script>
+    <!-- Tabler Core -->
+    
+    <script src="/resources/static/dist/js/common.js"></script>
+    <style>
+    :root {
+        --theme-admin-type: #cf3f42;
+        /* #cf3f42 통합관리자 컬러 코드*/
+        /* #4b9b52 협력회사 컬러 코드 */
+        /* #214c9c 고객사 컬러 코드 */
+    }
+    </style>
+</head>
+<body>
+
+<div class="popup-wrapper">
+
+    <div class="row">
+        <div class="col-12">
+            <h2 class="popup-title">룰렛/출석체크</h2>
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="seasrch_popup">
+                        <div class="search_options">
+                            <div class="option_item w100">
+                                <div class="subheader">구분</div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="input-group">
+                                            <label class="form-check form-check-inline ms-2">
+                                                <input class="form-check-input" type="radio" name="search_type">
+                                                <span class="form-check-label">전체</span>
+                                            </label>
+                                            <label class="form-check form-check-inline ms-2">
+                                                <input class="form-check-input" type="radio" name="search_type">
+                                                <span class="form-check-label">룰렛</span>
+                                            </label>
+                                            <label class="form-check form-check-inline ms-2">
+                                                <input class="form-check-input" type="radio" name="search_type">
+                                                <span class="form-check-label">출석체크</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="option_item w100">
+                                <div class="subheader">검색</div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="input-group">
+                                            <select class="form-select">
+                                                <option value="" selected="">프로모션명</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="search_btns">
+                            <button type="button" class="btn btn-primary">
+                                검색
+                            </button>
+                            <button type="button" class="btn btn-secondary">
+                                검색 초기화
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card-body">
+                    <p class="text-mustad mb-1">※ “진행“ 상태의 룰렛/출석체크만 검색됩니다.</p>
+                    <div class="card table-mb-card">
+                        <div class="table-responsive">
+                            <table class="table table-vcenter table-line card-table text-center table-mb label-control tr_hover">
+                                <colgroup>
+                                    <col style="width:60px;">
+                                    <col style="width:90px;">
+                                    <col>
+                                    <col style="width:60px;">
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                        <th>번호</th>
+                                        <th>구분</th>
+                                        <th>제목</th>
+                                        <th>선택</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="4" class="list-empty">
+                                            검색 내역이 존재하지 않습니다.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td class="text-start">룰렛</td>
+                                        <td class="text-start">룰렛이벤트</td>
+                                        <td>
+                                            <button type="button" class="btn btn-xs btn-secondary">
+                                                선택
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td class="text-start">룰렛</td>
+                                        <td class="text-start">룰렛이벤트</td>
+                                        <td>
+                                            <button type="button" class="btn btn-xs btn-secondary">
+                                                선택
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td class="text-start">룰렛</td>
+                                        <td class="text-start">룰렛이벤트</td>
+                                        <td>
+                                            <button type="button" class="btn btn-xs btn-secondary">
+                                                선택
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/resources/static/dist/js/tabler.min.js"></script>
+</body>
+</html>

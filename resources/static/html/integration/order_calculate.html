@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=1400"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>신세계 관리자</title>
+    <!-- CSS files -->
+    <link href="/resources/static/dist/css/tabler.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/tabler-vendors.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/>
+    <link rel="shortcut icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <script src="/resources/static/dist/js/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/resources/static/dist/libs/litepicker/dist/litepicker.js?1674944402"></script>
+    <script src="/resources/static/dist/js/jquery.validate.js"></script>
+    <!-- Tabler Core -->
+    
+    <script src="/resources/static/dist/js/common.js"></script>
+    <style>
+    :root {
+        --theme-admin-type: #cf3f42;
+        /* #cf3f42 통합관리자 컬러 코드*/
+        /* #4b9b52 협력회사 컬러 코드 */
+        /* #214c9c 고객사 컬러 코드 */
+    }
+    </style>
+</head>
+<body>
+
+<!-- 공통영역1 -->
+<aside id="header" class="navbar navbar-vertical navbar-expand-lg header_left"></aside>
+<script>
+    //html include
+    //헤더&푸터 개발 완료시 삭제해주세요
+    function includeFile(path, targetId) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', path, true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById(targetId).innerHTML = xhr.responseText;
+        }
+    };
+    xhr.send();
+    }
+    var includePath = "/resources/static/layout/header.html";
+    includeFile(includePath, 'header');
+</script>
+<!-- //공통영역1 -->
+
+<div class="page-wrapper">
+    <!-- 공통영역2 -->
+    <div class="member_info">
+        <div class="info">
+            <span>관리권한 : 최상위관리자</span>
+            <!-- 통합관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <!-- 협력관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <!-- 고객사관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <span class="login_session">로그인 유지시간 <strong>30:00</strong> <button type="button" class="btn btn-xs btn-primary">연장</button></span>
+            <button type="button" class="btn btn-xs btn-secondary">관리자 매뉴얼 보기</button><!-- 공통 -->
+            <button type="button" class="btn btn-xs btn-secondary">기본양식다운로드</button><!-- 통합,협력사만 -->
+            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/admin_modify_pop.html', '900', '640')">관리자정보수정</button><!-- 공통 -->
+            <button type="button" class="btn btn-xs btn-secondary">보안체크</button><!-- 협력사만 -->
+            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/terms_pop.html', '600', '540')">이용약관</button><!-- 협력사만 -->
+        </div>
+        <div>
+            <a href="javascript:;" class="logout">홍길동(admin_01)님 로그아웃</a>
+            <a href="javascript:;" class="home">홈으로</a>
+        </div>
+    </div>
+
+    <!-- 페이지 히스토리 탭 -->
+    <div class="page-history">
+        <div class="history_toggle">
+            <label class="form-check form-switch">
+                <span class="form-check-label">History</span>
+                <input id="historyUse" class="form-check-input" type="checkbox" >
+            </label>
+        </div>
+        <button class="close_all" type="button" title="히스토리 모두 삭제" onclick="historyRemoveAll();">히스토리 모두 삭제</button>
+    </div>
+    <!-- //공통영역2 -->
+
+    <div class="page-header d-print-none">
+        <div class="container-xl">
+            <div class="row g-2 align-items-center">
+                <div class="col">
+                    <!-- Page pre-title -->
+                    <div class="page-pretitle">
+                        홈 > 연동 > 삼성총괄 > 정산조회
+                    </div>
+                    <h2 class="page-title">
+                        정산조회
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page body -->
+    <div class="page-body search_left">
+        <div class="container-xl">
+            <div class="row row-cards aside_wrap">
+
+                <!-- 검색시작 -->
+                <div class="aside-search" id="asideSearch">
+                    <form action="" class="card">
+                        <div class="card-body">
+                            <div class="display_type">
+                                <button type="button" class="left active" title="검색영역 좌측배치">검색영역 좌측배치</button>
+                                <button type="button" class="top " title="검색영역 상단배치">검색영역 상단배치</button>
+                                <button type="button" class="right" title="검색영역 우측배치">검색영역 우측배치</button>
+                            </div>
+                            <div class="search_options">
+                                <div class="option_item w30">
+                                    <div class="subheader">발주일</div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <input class="form-control datepicker-icon startDate" placeholder="시작일"
+                                                value="" />
+                                        </div>
+                                        <div class="col-6">
+                                            <input class="form-control datepicker-icon endDate" placeholder="종료일"
+                                                value="" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="search_btns">
+                                <button class="btn btn-primary">
+                                    검색
+                                </button>
+                                <a href="#" class="btn btn-secondary">
+                                    검색 초기화
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                    
+                </div>
+                <!-- //검색시작 -->
+
+                <!-- 콘텐츠 시작 -->
+                <div class="content-area">
+                    <div class="mt-4">
+                        <div class="card table-mb-card">
+                            <div class="table-responsive">
+                                <table class="table table-vcenter table-line card-table text-center table-mb">
+                                    <caption>매장 협력회사 별(10)</caption>
+                                    <thead class="dark">
+                                        <tr>
+                                            <th>협력회사명</th>
+                                            <th>점포</th>
+                                            <th>MD번호</th>
+                                            <th>총건수</th>
+                                            <th>매출건수</th>
+                                            <th>취소건수</th>
+                                            <th>실건수</th>
+                                            <th>(+)<br/>매출</th>
+                                            <th>(-)<br/>매출</th>
+                                            <th>배송비</th>
+                                            <th>실매출</th>
+                                            <th>에누리</th>
+                                            <th>매입</th>
+                                            <th>제안가<br/>(공급가)</th>
+                                            <th>세액</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>신세계강남_노스페이스</td>
+                                            <td>신세계강남</td>
+                                            <td class="text-end">004333</td>
+                                            <td class="text-end">12</td>
+                                            <td class="text-end">11</td>
+                                            <td class="text-end">1</td>
+                                            <td class="text-end">10</td>
+                                            <td class="text-end">888,250</td>
+                                            <td class="text-end">25,500</td>
+                                            <td class="text-end">0</td>
+                                            <td class="text-end">862,750</td>
+                                            <td class="text-end">152,250</td>
+                                            <td class="text-end">1,015,000</td>
+                                            <td class="text-end">922,727</td>
+                                            <td class="text-end">99,273</td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <td colspan="3">합계</td>
+                                        <td class="text-end">21</td>
+                                        <td class="text-end">20</td>
+                                        <td class="text-end">1</td>
+                                        <td class="text-end">19</td>
+                                        <td class="text-end">1,442,160</td>
+                                        <td class="text-end">25,500</td>
+                                        <td class="text-end">0</td>
+                                        <td class="text-end">1,416,660</td>
+                                        <td class="text-end">257,820</td>
+                                        <td class="text-end">1,674,480</td>
+                                        <td class="text-end">1,522,255</td>
+                                        <td class="text-end">159.225</td>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <div class="list-btns justify-content-between mb-1">
+                            <div></div>
+                            <div>
+                                <small class="ms-2 mt-1 float-start">
+                                    ※ 아래 해당업체에 세금계산서 요청 문자를 발송합니다. 
+                                </small>
+                                <button type="button" class="btn btn-secondary btn-sm ms-2 float-start">전체문자발송</button>
+                            </div>
+                        </div>
+                        <div class="card table-mb-card">
+                            <div class="table-responsive">
+                                <table class="table table-vcenter table-line card-table text-center table-mb">
+                                    <caption>기획 협력회사 별(10)</caption>
+                                    <thead class="dark">
+                                        <tr>
+                                            <th>협력회사명</th>
+                                            <th>사업자번호</th>
+                                            <th>총건수</th>
+                                            <th>매출건수</th>
+                                            <th>취소건수</th>
+                                            <th>실건수</th>
+                                            <th>(+)매출</th>
+                                            <th>(-)매출</th>
+                                            <th>배송비</th>
+                                            <th>실매출</th>
+                                            <th>매입</th>
+                                            <th>공급가</th>
+                                            <th>세액</th>
+                                            <th>이익</th>
+                                            <th>비율</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>(주)돋움</td>
+                                            <td>123-12-12345</td>
+                                            <td class="text-end">156</td>
+                                            <td class="text-end">147</td>
+                                            <td class="text-end">9</td>
+                                            <td class="text-end">138</td>
+                                            <td class="text-end">1,840,000</td>
+                                            <td class="text-end">120,000</td>
+                                            <td class="text-end">0</td>
+                                            <td class="text-end">1,720,000</td>
+                                            <td class="text-end">1,599,600</td>
+                                            <td class="text-end">1,454,182</td>
+                                            <td class="text-end">145,418</td>
+                                            <td class="text-end">120,400</td>
+                                            <td class="text-end">7%</td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <td colspan="2">합계</td>
+                                        <td class="text-end">0</td>
+                                        <td class="text-end">0</td>
+                                        <td class="text-end">0</td>
+                                        <td class="text-end">0</td>
+                                        <td class="text-end">0</td>
+                                        <td class="text-end">0</td>
+                                        <td class="text-end">0</td>
+                                        <td class="text-end">0</td>
+                                        <td class="text-end">0</td>
+                                        <td class="text-end">0</td>
+                                        <td class="text-end">0</td>
+                                        <td class="text-end">0</td>
+                                        <td class="text-end"></td>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="mt-4">
+                        <div class="card table-mb-card">
+                            <div class="table-responsive">
+                                <table class="table table-vcenter table-line card-table text-center table-mb">
+                                    <caption>[매장] 주식회사 돋움</caption>
+                                    <thead class="dark">
+                                        <tr>
+                                            <th>상품명</th>
+                                            <th>과세구분</th>
+                                            <th>총 수량</th>
+                                            <th>매출수량</th>
+                                            <th>취소수량</th>
+                                            <th>실수량</th>
+                                            <th>(+)매출</th>
+                                            <th>(-)매출</th>
+                                            <th>배송비</th>
+                                            <th>실매출</th>
+                                            <th>에누리</th>
+                                            <th>매입</th>
+                                            <th>이익</th>
+                                            <th>비율</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>[햄튼]아트라믹 IH 웍 30cm / HQA-IH</td>
+                                            <td>과세</td>
+                                            <td class="text-end">10</td>
+                                            <td class="text-end">10</td>
+                                            <td class="text-end">0</td>
+                                            <td class="text-end">10</td>
+                                            <td class="text-end">100,000</td>
+                                            <td class="text-end">0</td>
+                                            <td class="text-end">3,000</td>
+                                            <td class="text-end">97,000</td>
+                                            <td class="text-end"></td>
+                                            <td class="text-end">10,000</td>
+                                            <td class="text-end">86,000</td>
+                                            <td class="text-end">86%</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- 콘텐츠 끝 -->
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 공통영역 -->
+    <div id="footer"></div>
+    <script>
+        //헤더&푸터 개발 완료시 삭제해주세요
+        var includePath = "/resources/static/layout/footer.html";
+        includeFile(includePath, 'footer');
+    </script>
+    <!-- //공통영역 -->
+</div>
+<script src="/resources/static/dist/js/tabler.min.js"></script>
+</body>
+</html>

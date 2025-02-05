@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=1400"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>신세계 관리자</title>
+    <!-- CSS files -->
+    <link href="/resources/static/dist/css/tabler.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/tabler-vendors.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/>
+    <link rel="shortcut icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <script src="/resources/static/dist/js/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/resources/static/dist/libs/litepicker/dist/litepicker.js?1674944402"></script>
+    <script src="/resources/static/dist/js/jquery.validate.js"></script>
+    <!-- Tabler Core -->
+    
+    <script src="/resources/static/dist/js/common.js"></script>
+    <style>
+    :root {
+        --theme-admin-type: #cf3f42;
+        /* #cf3f42 통합관리자 컬러 코드*/
+        /* #4b9b52 협력회사 컬러 코드 */
+        /* #214c9c 고객사 컬러 코드 */
+    }
+    </style>
+</head>
+<body>
+<aside id="header" class="navbar navbar-vertical navbar-expand-lg header_left"></aside>
+<script>
+    //html include
+    function includeFile(path, targetId) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', path, true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById(targetId).innerHTML = xhr.responseText;
+        }
+    };
+    xhr.send();
+    }
+    var includePath = "/resources/static/layout/header.html";
+    includeFile(includePath, 'header');
+</script>
+
+<div class="page-wrapper">
+    <!-- 공통영역2 -->
+    <div class="member_info">
+        <div class="info">
+            <span>관리권한 : 최상위관리자</span>
+            <!-- 통합관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <!-- 협력관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <!-- 고객사관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <span class="login_session">로그인 유지시간 <strong>30:00</strong> <button type="button" class="btn btn-xs btn-primary">연장</button></span>
+            <button type="button" class="btn btn-xs btn-secondary">관리자 매뉴얼 보기</button><!-- 공통 -->
+            <button type="button" class="btn btn-xs btn-secondary">기본양식다운로드</button><!-- 통합,협력사만 -->
+            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/admin_modify_pop.html', '900', '640')">관리자정보수정</button><!-- 공통 -->
+            <button type="button" class="btn btn-xs btn-secondary">보안체크</button><!-- 협력사만 -->
+            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/terms_pop.html', '600', '540')">이용약관</button><!-- 협력사만 -->
+        </div>
+        <div>
+            <a href="javascript:;" class="logout">홍길동(admin_01)님 로그아웃</a>
+            <a href="javascript:;" class="home">홈으로</a>
+        </div>
+    </div>
+
+    <!-- 페이지 히스토리 탭 -->
+    <div class="page-history">
+        <div class="history_toggle">
+            <label class="form-check form-switch">
+                <span class="form-check-label">History</span>
+                <input id="historyUse" class="form-check-input" type="checkbox" >
+            </label>
+        </div>
+        <button class="close_all" type="button" title="히스토리 모두 삭제" onclick="historyRemoveAll();">히스토리 모두 삭제</button>
+    </div>
+    <!-- //공통영역2 -->
+
+    <div class="page-header d-print-none">
+        <div class="container-xl">
+            <div class="row g-2 align-items-center">
+                <div class="col">
+                    <!-- Page pre-title -->
+                    <div class="page-pretitle">
+                        홈 > 프로모션 > 출석체크 > 출석체크 리스트 > 출석체크 상세
+                    </div>
+                    <h2 class="page-title">
+                        출석체크상세(이벤트명출력)
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page body -->
+    <div class="page-body">
+        <div class="container-xl form-container grid_grid4">
+            <div class="row">
+                <form action="">
+                <div class="list-btns justify-content-between align-items-center mb-3">
+                    <div>
+                        <div class="display_type mb-0">
+                            <button type="button" class="grid4 active" title="폼 그리드 1x4">폼 그리드 1x4</button>
+                            <button type="button" class="grid3 " title="폼 그리드 1x3">폼 그리드 1x3</button>
+                            <button type="button" class="grid2" title="폼 그리드 1x2">폼 그리드 1x2</button>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary">등록</button>
+                        <a href="/resources/static/html/promotion/attendance_list.html" class="btn btn-secondary">목록</a>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card form_area">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">고객사</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" value="시크릿스토어" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form_item size_xl">
+                                        <div class="subheader mb-1 required">이벤트명</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input class="form-control max-text" maxlength="20" name="">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text text max-len"><b>0</b> / 20</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1 required">이벤트기간</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input class="form-control datepicker-icon">
+                                                <span class="input-group-text text"> ~ </span>
+                                                <input class="form-control datepicker-icon">
+                                            </div>
+                                            <small class="form-hint">! 주의 : 이벤트 기간은 최소 7일 ~ 최대 31일까지 가능합니다.</small>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">출석제외 요일</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <select name="" id="" class="form-select">
+                                                    <option value="">매일 출석체크</option>
+                                                    <option value="">주말제외</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item size_lg">
+                                        <div class="subheader mb-1 required">출석수 혜택지급</div>
+                                        <div class="subcontent">
+                                            <table class="table table-vcenter table-line card-table table-mb">
+                                                <colgroup>
+                                                    <col style="width:15%;">
+                                                    <col style="width:35%;">
+                                                    <col style="width:15%;">
+                                                    <col style="width:35%;">
+                                                    <col>
+                                                </colgroup>
+                                                <tbody>
+                                                    <tr>
+                                                        <th>출석체크 형태</th>
+                                                        <td>
+                                                            <div>
+                                                                <label class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="attendance_type" checked="">
+                                                                    <span class="form-check-label">누적 출석</span>
+                                                                </label>
+                                                                <label class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="attendance_type">
+                                                                    <span class="form-check-label">연속 출석</span>
+                                                                </label>
+                                                            </div>
+                                                        </td>
+                                                        <th>출석수</th>
+                                                        <td>
+                                                            <div class="input-group">
+                                                                <input type="tel" name="" class="form-control" value="0">
+                                                                <span class="input-group-text text">일 / 최대 출석 30일</span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>지급방식</th>
+                                                        <td>
+                                                            <div class="input-group">
+                                                                <select name="" id="" class="form-select">
+                                                                    <option value="">출석할 때 마다</option>
+                                                                    <option value="">출석수 달성 시</option>
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                        <th>지급혜택</th>
+                                                        <td>
+                                                            <div class="input-group">
+                                                                <span class="input-group-text text">출석할 때 마다</span>
+                                                                <input type="tel" name="" class="form-control text-end" value="0">
+                                                                <span class="input-group-text text">마일리지 지급</span>
+                                                            </div>
+                                                            <div class="input-group">
+                                                                <span class="input-group-text text">출석 수 달성 시</span>
+                                                                <input type="tel" name="" class="form-control text-end" value="0">
+                                                                <span class="input-group-text text">마일리지 지급</span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>사용기간</th>
+                                                        <td>
+                                                            <div class="input-group">
+                                                                <input class="form-control datepicker-icon">
+                                                                <span class="input-group-text text"> ~ </span>
+                                                                <input class="form-control datepicker-icon">
+                                                            </div>
+                                                        </td>
+                                                        <th></th>
+                                                        <td></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="form_item size_lg">
+                                        <div class="subheader mb-1">배너(PC)</div>
+                                        <div class="subcontent">
+                                            <!-- 
+                                            등록된 이미지가 있을 경우 
+                                            preview_image -> display:block;
+                                            preview_image img -> 이미지 경로
+                                            file_name -> 파일명 출력
+                                            -->
+                                            <div class="photo_input_box">
+                                                <div class="preview_image" style="display:none;">
+                                                    <img src="" alt="">
+                                                </div>
+                                                <div class="photo_input">
+                                                    <label class="input-group file_name_input">
+                                                        <span class="file_name form-control">파일을 선택해주세요.</span>
+                                                        <span class="file_btn btn btn-xs btn-secondary">파일선택</span>
+                                                        <input type="file">
+                                                        <button class="btn bg-warning text-light btn-sm" type="button" onclick="removePhotoFile(this)">
+                                                        삭제
+                                                        </button>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item size_lg">
+                                        <div class="subheader mb-1">배너(MOBILE)</div>
+                                        <div class="subcontent">
+                                            <!-- 
+                                            등록된 이미지가 있을 경우 
+                                            preview_image -> display:block;
+                                            preview_image img -> 이미지 경로
+                                            file_name -> 파일명 출력
+                                            -->
+                                            <div class="photo_input_box">
+                                                <div class="preview_image" style="display:none;">
+                                                    <img src="" alt="">
+                                                </div>
+                                                <div class="photo_input">
+                                                    <label class="input-group file_name_input">
+                                                        <span class="file_name form-control">파일을 선택해주세요.</span>
+                                                        <span class="file_btn btn btn-xs btn-secondary">파일선택</span>
+                                                        <input type="file">
+                                                        <button class="btn bg-warning text-light btn-sm" type="button" onclick="removePhotoFile(this)">
+                                                        삭제
+                                                        </button>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1 required">상품</div>
+                                        <div class="subcontent">
+                                            <button 
+                                            class="btn bg-secondary text-light btn-sm" 
+                                            type="button"
+                                            onclick="windowPopup('/resources/static/html/popup/product_select_pop.html', '1420', '650')"
+                                            >
+                                            상품(0)
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">상태</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <select name="" id="" class="form-select">
+                                                    <option value="">대기</option>
+                                                    <option value="">진행</option>
+                                                    <option value="">종료</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">등록일 아이디</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" value="abc123" readonly="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">등록일</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" value="2024-06-12 11:11:11" readonly="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">최종 수정 아이디</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" value="abc123" readonly="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">최종 수정일</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" value="2024-06-12 11:11:11" readonly="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-12">
+                        <div class="card form_area">
+                            <div class="card-header"><h3 class="card-title">안내 메시지  |  미 입력 시 기본문구가 발송됩니다.</h3></div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="form_item size_xl">
+                                        <div class="subheader mb-1">출석체크 성공</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" placeholder="출석체크 처리되었습니다.">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item size_xl">
+                                        <div class="subheader mb-1">출석체크 제한</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" placeholder="이미 이벤트에 참여하였습니다.">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item size_xl">
+                                        <div class="subheader mb-1">혜택 지급</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" placeholder="미션에 성공하여 {0} 마일리지가 지급되었습니다.">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="list-btns justify-content-between align-items-center mt-2">
+                        <div>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-primary">등록</button>
+                            <a href="/resources/static/html/promotion/attendance_list.html" class="btn btn-secondary">목록</a>
+                        </div>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 공통영역 -->
+    <div id="footer"></div>
+    <script>
+        //헤더&푸터 개발 완료시 삭제해주세요
+        var includePath = "/resources/static/layout/footer.html";
+        includeFile(includePath, 'footer');
+    </script>
+    <!-- //공통영역 -->
+</div>
+
+<script src="/resources/static/dist/js/tabler.min.js"></script>
+</body>
+</html>

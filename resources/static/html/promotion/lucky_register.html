@@ -1,0 +1,696 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=1400"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>신세계 관리자</title>
+    <!-- CSS files -->
+    <link href="/resources/static/dist/css/tabler.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/tabler-vendors.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/>
+    <link rel="shortcut icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <script src="/resources/static/dist/js/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/resources/static/dist/libs/litepicker/dist/litepicker.js?1674944402"></script>
+    <script src="/resources/static/dist/js/jquery.validate.js"></script>
+    <!-- Tabler Core -->
+    
+    <script src="/resources/static/dist/js/common.js"></script>
+    <style>
+    :root {
+        --theme-admin-type: #cf3f42;
+        /* #cf3f42 통합관리자 컬러 코드*/
+        /* #4b9b52 협력회사 컬러 코드 */
+        /* #214c9c 고객사 컬러 코드 */
+    }
+    </style>
+</head>
+<body>
+<aside id="header" class="navbar navbar-vertical navbar-expand-lg header_left"></aside>
+<script>
+    //html include
+    function includeFile(path, targetId) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', path, true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById(targetId).innerHTML = xhr.responseText;
+        }
+    };
+    xhr.send();
+    }
+    var includePath = "/resources/static/layout/header.html";
+    includeFile(includePath, 'header');
+</script>
+
+<div class="page-wrapper">
+    <!-- 공통영역2 -->
+    <div class="member_info">
+        <div class="info">
+            <span>관리권한 : 최상위관리자</span>
+            <!-- 통합관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <!-- 협력관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <!-- 고객사관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <span class="login_session">로그인 유지시간 <strong>30:00</strong> <button type="button" class="btn btn-xs btn-primary">연장</button></span>
+            <button type="button" class="btn btn-xs btn-secondary">관리자 매뉴얼 보기</button><!-- 공통 -->
+            <button type="button" class="btn btn-xs btn-secondary">기본양식다운로드</button><!-- 통합,협력사만 -->
+            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/admin_modify_pop.html', '900', '640')">관리자정보수정</button><!-- 공통 -->
+            <button type="button" class="btn btn-xs btn-secondary">보안체크</button><!-- 협력사만 -->
+            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/terms_pop.html', '600', '540')">이용약관</button><!-- 협력사만 -->
+        </div>
+        <div>
+            <a href="javascript:;" class="logout">홍길동(admin_01)님 로그아웃</a>
+            <a href="javascript:;" class="home">홈으로</a>
+        </div>
+    </div>
+
+    <!-- 페이지 히스토리 탭 -->
+    <div class="page-history">
+        <div class="history_toggle">
+            <label class="form-check form-switch">
+                <span class="form-check-label">History</span>
+                <input id="historyUse" class="form-check-input" type="checkbox" >
+            </label>
+        </div>
+        <button class="close_all" type="button" title="히스토리 모두 삭제" onclick="historyRemoveAll();">히스토리 모두 삭제</button>
+    </div>
+    <!-- //공통영역2 -->
+
+    <div class="page-header d-print-none">
+        <div class="container-xl">
+            <div class="row g-2 align-items-center">
+                <div class="col">
+                    <!-- Page pre-title -->
+                    <div class="page-pretitle">
+                        홈 > 프로모션 > 럭키박스 > 럭키박스 등록
+                    </div>
+                    <h2 class="page-title">
+                        럭키박스등록
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page body -->
+    <div class="page-body">
+        <div class="container-xl form-container grid_grid4">
+            <div class="row">
+                <form action="">
+                <div class="list-btns justify-content-between align-items-center mb-3">
+                    <div>
+                        <div class="display_type mb-0">
+                            <button type="button" class="grid4 active" title="폼 그리드 1x4">폼 그리드 1x4</button>
+                            <button type="button" class="grid3 " title="폼 그리드 1x3">폼 그리드 1x3</button>
+                            <button type="button" class="grid2" title="폼 그리드 1x2">폼 그리드 1x2</button>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary">등록</button>
+                        <a href="/resources/static/html/promotion/lucky_list.html" class="btn btn-secondary">목록</a>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card form_area">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">고객사</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" value="시크릿스토어" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form_item size_xl">
+                                        <div class="subheader mb-1 required">이벤트명</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input class="form-control max-text" maxlength="20" name="">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text text max-len"><b>0</b> / 20</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1 required">이벤트기간</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input class="form-control datepicker-icon">
+                                                <span class="input-group-text text"> ~ </span>
+                                                <input class="form-control datepicker-icon">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">혜택지급설정</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <label class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="give_type">
+                                                    <span class="form-check-label">즉시지급</span>
+                                                </label>
+                                            </div>
+                                            <div class="input-group">
+                                                <label class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" id="giveType2" name="give_type">
+                                                    <span class="form-check-label">일괄지급</span>
+                                                </label>
+                                                <input type="text" class="form-control datepicker-icon" id="giveType2Input">
+                                            </div>
+                                            <script>
+                                                //일정기간 미 구매 회원 대상
+                                                const giveType = document.querySelectorAll('input[name="give_type"]');
+                                                const giveType2 = document.getElementById('giveType2');
+                                                const giveType2Input = document.getElementById('giveType2Input');
+                                                function giveTypeCheck(){
+                                                    if (giveType2.checked) {
+                                                        giveType2Input.removeAttribute('readonly')
+                                                    }else{
+                                                        giveType2Input.setAttribute('readonly', true);
+                                                        giveType2Input.value = ''
+                                                    }
+                                                }
+                                                giveType.forEach(function (item) {
+                                                    item.addEventListener('change', function() {
+                                                        giveTypeCheck()
+                                                    });
+                                                });
+                                                giveTypeCheck()
+                                            </script>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">참여횟수 제한</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <label class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="join_limit">
+                                                    <span class="form-check-label">1일 1회</span>
+                                                </label>
+                                            </div>
+                                            <div class="input-group">
+                                                <label class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="join_limit">
+                                                    <span class="form-check-label">이벤트 기간 내 1회</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">회원가입 기간</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input class="form-control datepicker-icon">
+                                                <span class="input-group-text text"> ~ </span>
+                                            </div>
+                                            <small class="form-hint">! 주의 : 설정한 기간 부터 가입한 회원만 이벤트에 참여할 수 있습니다.</small>
+                                        </div>
+                                    </div>
+                                    <div class="form_item size_lg">
+                                        <div class="subheader mb-1 required">주문금액 설정</div>
+                                        <div class="subcontent">
+                                            <table class="table table-vcenter table-line card-table table-mb">
+                                                <colgroup>
+                                                    <col style="width:25%;">
+                                                    <col style="width:25%;">
+                                                    <col style="width:25%;">
+                                                    <col style="width:25%;">
+                                                </colgroup>
+                                                <thead class="text-center">
+                                                    <tr>
+                                                        <th>이상</th>
+                                                        <th>미만</th>
+                                                        <th>참여횟수</th>
+                                                        <th>추가/삭제</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="buttonList" class="text-center">
+                                                    <tr>
+                                                        <td>
+                                                            <div class="input-group">
+                                                                <input class="form-control" type="tel" data-ammount-comma>
+                                                                <span class="input-group-text text">원</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="input-group">
+                                                                <input class="form-control" type="tel" data-ammount-comma>
+                                                                <span class="input-group-text text">원</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="input-group">
+                                                                <input class="form-control" type="tel">
+                                                                <span class="input-group-text text">회</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <button class="btn btn-xs btn-primary" type="button" onclick="addButton()">추가</button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <script>
+                                            function addButton() {
+                                                const buttonList = document.getElementById('buttonList');
+                                                const fileHtml = `
+                                                <tr>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input class="form-control" type="tel" data-ammount-comma>
+                                                            <span class="input-group-text text">원</span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input class="form-control" type="tel" data-ammount-comma>
+                                                            <span class="input-group-text text">원</span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input class="form-control" type="tel">
+                                                            <span class="input-group-text text">회</span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-xs btn-warning" type="button" onclick="removeButton()">삭제</button>
+                                                    </td>
+                                                </tr>
+                                                `;
+                                                buttonList.insertAdjacentHTML('beforeend', fileHtml);
+                                            }
+                                            function removeButton(button){
+                                                button.closest('tr').remove();
+                                            }
+                                        </script>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form_item size_xl">
+                                        <div class="subheader mb-1">혜택설정</div>
+                                        <div class="subcontent">
+                                            <small class="form-hint mb-1">혜택설정은 기본6개  ~ 최대 9개까지 설정하실 수 있습니다.</small>
+
+                                            <table class="table table-vcenter table-line card-table table-mb">
+                                                <colgroup>
+                                                    <col style="width:40px;">
+                                                    <col style="width:12%;">
+                                                    <col>
+                                                    <col>
+                                                    <col>
+                                                    <col>
+                                                    <col style="width:12%;">
+                                                </colgroup>
+                                                <thead class="text-center">
+                                                    <tr>
+                                                        <th>순서</th>
+                                                        <th>혜택설정</th>
+                                                        <th>혜택노출문구</th>
+                                                        <th>총 당첨수량</th>
+                                                        <th>1일 당첨수량</th>
+                                                        <th>당첨활율</th>
+                                                        <th>사용</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="text-center">
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>
+                                                            <div class="input-group">
+                                                                <select name="" id="" class="form-select select-display">
+                                                                    <option value="" select-display="">혜택선택</option>
+                                                                    <option value="" select-display="">꽝</option>
+                                                                    <option value="" select-display="benefit_mileage1">마일리지</option>
+                                                                    <option value="" select-display="">경품</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="input-group benefit_mileage1" style="display:none">
+                                                                <input type="tel" class="form-control text-end" data-amount-comma>
+                                                            </div>
+                                                        </td>
+                                                        <td><div class="input-group"><input class="form-control" type="text"></div></td>
+                                                        <td><div class="input-group"><input class="form-control" type="text"></div></td>
+                                                        <td><div class="input-group"><input class="form-control" type="text"></div></td>
+                                                        <td><div class="input-group"><input class="form-control" type="text"></div></td>
+                                                        <td>
+                                                            <div class="input-group">
+                                                                <select name="" id="" class="form-select">
+                                                                    <option value="">사용함</option>
+                                                                    <option value="">사용안함</option>
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2</td>
+                                                        <td>
+                                                            <div class="input-group">
+                                                                <select name="" id="" class="form-select select-display">
+                                                                    <option value="" select-display="">혜택선택</option>
+                                                                    <option value="" select-display="">꽝</option>
+                                                                    <option value="" select-display="benefit_mileage1">마일리지</option>
+                                                                    <option value="" select-display="">경품</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="input-group benefit_mileage1" style="display:none">
+                                                                <input type="tel" class="form-control text-end" data-amount-comma>
+                                                            </div>
+                                                        </td>
+                                                        <td><div class="input-group"><input class="form-control" type="text"></div></td>
+                                                        <td><div class="input-group"><input class="form-control" type="text"></div></td>
+                                                        <td><div class="input-group"><input class="form-control" type="text"></div></td>
+                                                        <td><div class="input-group"><input class="form-control" type="text"></div></td>
+                                                        <td>
+                                                            <div class="input-group">
+                                                                <select name="" id="" class="form-select">
+                                                                    <option value="">사용함</option>
+                                                                    <option value="">사용안함</option>
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>3</td>
+                                                        <td>
+                                                            <div class="input-group">
+                                                                <select name="" id="" class="form-select select-display">
+                                                                    <option value="" select-display="">혜택선택</option>
+                                                                    <option value="" select-display="">꽝</option>
+                                                                    <option value="" select-display="benefit_mileage1">마일리지</option>
+                                                                    <option value="" select-display="">경품</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="input-group benefit_mileage1" style="display:none">
+                                                                <input type="tel" class="form-control text-end" data-amount-comma>
+                                                            </div>
+                                                        </td>
+                                                        <td><div class="input-group"><input class="form-control" type="text"></div></td>
+                                                        <td><div class="input-group"><input class="form-control" type="text"></div></td>
+                                                        <td><div class="input-group"><input class="form-control" type="text"></div></td>
+                                                        <td><div class="input-group"><input class="form-control" type="text"></div></td>
+                                                        <td>
+                                                            <div class="input-group">
+                                                                <select name="" id="" class="form-select">
+                                                                    <option value="">사용함</option>
+                                                                    <option value="">사용안함</option>
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>4</td>
+                                                        <td>
+                                                            <div class="input-group">
+                                                                <select name="" id="" class="form-select select-display">
+                                                                    <option value="" select-display="">혜택선택</option>
+                                                                    <option value="" select-display="">꽝</option>
+                                                                    <option value="" select-display="benefit_mileage1">마일리지</option>
+                                                                    <option value="" select-display="">경품</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="input-group benefit_mileage1" style="display:none">
+                                                                <input type="tel" class="form-control text-end" data-amount-comma>
+                                                            </div>
+                                                        </td>
+                                                        <td><div class="input-group"><input class="form-control" type="text"></div></td>
+                                                        <td><div class="input-group"><input class="form-control" type="text"></div></td>
+                                                        <td><div class="input-group"><input class="form-control" type="text"></div></td>
+                                                        <td><div class="input-group"><input class="form-control" type="text"></div></td>
+                                                        <td>
+                                                            <div class="input-group">
+                                                                <select name="" id="" class="form-select">
+                                                                    <option value="">사용함</option>
+                                                                    <option value="">사용안함</option>
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>5</td>
+                                                        <td>
+                                                            <div class="input-group">
+                                                                <select name="" id="" class="form-select select-display">
+                                                                    <option value="" select-display="">혜택선택</option>
+                                                                    <option value="" select-display="">꽝</option>
+                                                                    <option value="" select-display="benefit_mileage1">마일리지</option>
+                                                                    <option value="" select-display="">경품</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="input-group benefit_mileage1" style="display:none">
+                                                                <input type="tel" class="form-control text-end" data-amount-comma>
+                                                            </div>
+                                                        </td>
+                                                        <td><div class="input-group"><input class="form-control" type="text"></div></td>
+                                                        <td><div class="input-group"><input class="form-control" type="text"></div></td>
+                                                        <td><div class="input-group"><input class="form-control" type="text"></div></td>
+                                                        <td><div class="input-group"><input class="form-control" type="text"></div></td>
+                                                        <td>
+                                                            <div class="input-group">
+                                                                <select name="" id="" class="form-select">
+                                                                    <option value="">사용함</option>
+                                                                    <option value="">사용안함</option>
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>6</td>
+                                                        <td>
+                                                            <div class="input-group">
+                                                                <select name="" id="" class="form-select select-display">
+                                                                    <option value="" select-display="">혜택선택</option>
+                                                                    <option value="" select-display="">꽝</option>
+                                                                    <option value="" select-display="benefit_mileage1">마일리지</option>
+                                                                    <option value="" select-display="">경품</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="input-group benefit_mileage1" style="display:none">
+                                                                <input type="tel" class="form-control text-end" data-amount-comma>
+                                                            </div>
+                                                        </td>
+                                                        <td><div class="input-group"><input class="form-control" type="text"></div></td>
+                                                        <td><div class="input-group"><input class="form-control" type="text"></div></td>
+                                                        <td><div class="input-group"><input class="form-control" type="text"></div></td>
+                                                        <td><div class="input-group"><input class="form-control" type="text"></div></td>
+                                                        <td>
+                                                            <div class="input-group">
+                                                                <select name="" id="" class="form-select">
+                                                                    <option value="">사용함</option>
+                                                                    <option value="">사용안함</option>
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="bg-muted-lt">
+                                                        <td>7</td>
+                                                        <td>
+                                                            <div class="input-group">
+                                                                <select name="" id="" class="form-select select-display">
+                                                                    <option value="" select-display="">혜택선택</option>
+                                                                    <option value="" select-display="">꽝</option>
+                                                                    <option value="" select-display="benefit_mileage1">마일리지</option>
+                                                                    <option value="" select-display="">경품</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="input-group benefit_mileage1" style="display:none">
+                                                                <input type="tel" class="form-control text-end" data-amount-comma>
+                                                            </div>
+                                                        </td>
+                                                        <td><div class="input-group"><input class="form-control" type="text"></div></td>
+                                                        <td><div class="input-group"><input class="form-control" type="text"></div></td>
+                                                        <td><div class="input-group"><input class="form-control" type="text"></div></td>
+                                                        <td><div class="input-group"><input class="form-control" type="text"></div></td>
+                                                        <td>
+                                                            <div class="input-group">
+                                                                <select name="" id="" class="form-select">
+                                                                    <option value="">사용함</option>
+                                                                    <option value="" selected>사용안함</option>
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="bg-muted-lt">
+                                                        <td>8</td>
+                                                        <td>
+                                                            <div class="input-group">
+                                                                <select name="" id="" class="form-select select-display">
+                                                                    <option value="" select-display="">혜택선택</option>
+                                                                    <option value="" select-display="">꽝</option>
+                                                                    <option value="" select-display="benefit_mileage1">마일리지</option>
+                                                                    <option value="" select-display="">경품</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="input-group benefit_mileage1" style="display:none">
+                                                                <input type="tel" class="form-control text-end" data-amount-comma>
+                                                            </div>
+                                                        </td>
+                                                        <td><div class="input-group"><input class="form-control" type="text"></div></td>
+                                                        <td><div class="input-group"><input class="form-control" type="text"></div></td>
+                                                        <td><div class="input-group"><input class="form-control" type="text"></div></td>
+                                                        <td><div class="input-group"><input class="form-control" type="text"></div></td>
+                                                        <td>
+                                                            <div class="input-group">
+                                                                <select name="" id="" class="form-select">
+                                                                    <option value="">사용함</option>
+                                                                    <option value="" selected>사용안함</option>
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="bg-muted-lt">
+                                                        <td>9</td>
+                                                        <td>
+                                                            <div class="input-group">
+                                                                <select name="" id="" class="form-select select-display">
+                                                                    <option value="" select-display="">혜택선택</option>
+                                                                    <option value="" select-display="">꽝</option>
+                                                                    <option value="" select-display="benefit_mileage1">마일리지</option>
+                                                                    <option value="" select-display="">경품</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="input-group benefit_mileage1" style="display:none">
+                                                                <input type="tel" class="form-control text-end" data-amount-comma>
+                                                            </div>
+                                                        </td>
+                                                        <td><div class="input-group"><input class="form-control" type="text"></div></td>
+                                                        <td><div class="input-group"><input class="form-control" type="text"></div></td>
+                                                        <td><div class="input-group"><input class="form-control" type="text"></div></td>
+                                                        <td><div class="input-group"><input class="form-control" type="text"></div></td>
+                                                        <td>
+                                                            <div class="input-group">
+                                                                <select name="" id="" class="form-select">
+                                                                    <option value="">사용함</option>
+                                                                    <option value="" selected>사용안함</option>
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            
+                                            <div class="input-group w-25">
+                                                <span class="input-group-text text">마일리지 유효기간</span>
+                                                <input class="form-control datepicker-icon">
+                                            </div>
+                                            <small class="form-hint">! 주의 : 마일리지 혜택의 경우 지급일로부터 유효기간을 설정합니다.</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form_item size_xl">
+                                        <div class="subheader mb-1 required">유의사항</div>
+                                        <div class="subcontent">
+                                            <div class="subcontent">
+                                                <div class="input-group">
+                                                    <textarea class="form-control max-text" maxlength="50" name=""></textarea>
+                                                    <span class="input-group-text text max-len"><b>0</b> / 500</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item size_lg">
+                                        <div class="subheader mb-1">배너(PC)</div>
+                                        <div class="subcontent">
+                                            <!-- 
+                                            등록된 이미지가 있을 경우 
+                                            preview_image -> display:block;
+                                            preview_image img -> 이미지 경로
+                                            file_name -> 파일명 출력
+                                            -->
+                                            <div class="photo_input_box">
+                                                <div class="preview_image" style="display:none;">
+                                                    <img src="" alt="">
+                                                </div>
+                                                <div class="photo_input">
+                                                    <label class="input-group file_name_input">
+                                                        <span class="file_name form-control">파일을 선택해주세요.</span>
+                                                        <span class="file_btn btn btn-xs btn-secondary">파일선택</span>
+                                                        <input type="file">
+                                                        <button class="btn bg-warning text-light btn-sm" type="button" onclick="removePhotoFile(this)">
+                                                        삭제
+                                                        </button>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item size_lg">
+                                        <div class="subheader mb-1">배너(MOBILE)</div>
+                                        <div class="subcontent">
+                                            <!-- 
+                                            등록된 이미지가 있을 경우 
+                                            preview_image -> display:block;
+                                            preview_image img -> 이미지 경로
+                                            file_name -> 파일명 출력
+                                            -->
+                                            <div class="photo_input_box">
+                                                <div class="preview_image" style="display:none;">
+                                                    <img src="" alt="">
+                                                </div>
+                                                <div class="photo_input">
+                                                    <label class="input-group file_name_input">
+                                                        <span class="file_name form-control">파일을 선택해주세요.</span>
+                                                        <span class="file_btn btn btn-xs btn-secondary">파일선택</span>
+                                                        <input type="file">
+                                                        <button class="btn bg-warning text-light btn-sm" type="button" onclick="removePhotoFile(this)">
+                                                        삭제
+                                                        </button>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">상태</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <select name="" id="" class="form-select">
+                                                    <option value="">대기</option>
+                                                    <option value="">진행</option>
+                                                    <option value="">종료</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="list-btns justify-content-between align-items-center mt-2">
+                        <div>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-primary">등록</button>
+                            <a href="/resources/static/html/promotion/lucky_list.html" class="btn btn-secondary">목록</a>
+                        </div>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 공통영역 -->
+    <div id="footer"></div>
+    <script>
+        //헤더&푸터 개발 완료시 삭제해주세요
+        var includePath = "/resources/static/layout/footer.html";
+        includeFile(includePath, 'footer');
+    </script>
+    <!-- //공통영역 -->
+</div>
+
+<script src="/resources/static/dist/js/tabler.min.js"></script>
+</body>
+</html>

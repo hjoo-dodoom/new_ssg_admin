@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=1400"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>신세계 관리자</title>
+    <!-- CSS files -->
+    <link href="/resources/static/dist/css/tabler.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/tabler-vendors.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/>
+    <link rel="shortcut icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <script src="/resources/static/dist/js/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/resources/static/dist/libs/litepicker/dist/litepicker.js?1674944402"></script>
+    <script src="/resources/static/dist/js/jquery.validate.js"></script>
+    <!-- Tabler Core -->
+    
+    <script src="/resources/static/dist/js/common.js"></script>
+    <style>
+    :root {
+        --theme-admin-type: #cf3f42;
+        /* #cf3f42 통합관리자 컬러 코드*/
+        /* #4b9b52 협력회사 컬러 코드 */
+        /* #214c9c 고객사 컬러 코드 */
+    }
+    </style>
+</head>
+<body>
+
+<div class="popup-wrapper">
+    <h2 class="popup-title">**화재 7월 시책 상품 제안 요청 협력회사 현황</h2>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="seasrch_popup">
+                        <form action="">
+                            <div class="search_options">
+                                <div class="option_item ">
+                                    <div class="subheader">공지/제안</div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <select name="" id="" class="form-select">
+                                                <option value="" selected>전체</option>
+                                                <option value="">열람</option>
+                                                <option value="">미열람</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-6">
+                                            <select name="" id="" class="form-select">
+                                                <option value="" selected>전체</option>
+                                                <option value="">제안</option>
+                                                <option value="">미제안</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="option_item ">
+                                    <div class="subheader">협력회사명</div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <input type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="search_btns">
+                                <button class="btn btn-primary">
+                                    검색
+                                </button>
+                                <button type="button" class="btn btn-secondary">
+                                    검색 초기화
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="list-btns justify-content-between mb-1">
+                <div>
+                    <button type="button" class="btn btn-sm btn-secondary">미 열람 업체만 문자발송</button>
+                    <button type="button" class="btn btn-sm btn-secondary">미 제안 업체만 문자발송</button>
+                    <button type="button" class="btn btn-sm btn-secondary">전체 문자발송</button>
+                </div>
+                <div>
+                </div>
+            </div>
+            <div class="list-btns justify-content-between mb-1">
+                <div>
+                    <div class="list_count">* 총 : <strong class="text-primary">100</strong>개 / 
+                        미열람 : <strong class="text-primary">10</strong>,
+                        열람 : <strong class="text-primary">90</strong> (제안 : 50 / 미제안 : 40)
+                    </div>
+                </div>
+                <div>
+                    <a href="javascript:;" class="icon_btn excel ms-2 float-start">엑셀저장</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="card table-mb-card">
+                        <div class="table-responsive">
+                            <table class="table table-vcenter table-line card-table text-center table-mb label-control tr_hover">
+                                <thead>
+                                    <tr>
+                                        <th>번호</th>
+                                        <th>협력회사명</th>
+                                        <th>협력회사 아이디</th>
+                                        <th>공지사항</th>
+                                        <th>열람일</th>
+                                        <th>제안서</th>
+                                        <th>제안서제출일</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>20</td>
+                                        <td class="text-start">(주)농협홍삼</td>
+                                        <td class="text-start">abvc2dd</td>
+                                        <td>열람</td>
+                                        <td>2024-06-11 11:11:11</td>
+                                        <td>제안</td>
+                                        <td>2024-06-11 11:11:11</td>
+                                    </tr>
+                                    <tr>
+                                        <td>20</td>
+                                        <td class="text-start">(주)농협홍삼</td>
+                                        <td class="text-start">abvc2dd</td>
+                                        <td>열람</td>
+                                        <td>2024-06-11 11:11:11</td>
+                                        <td>미제안</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>20</td>
+                                        <td class="text-start">(주)농협홍삼</td>
+                                        <td class="text-start">abvc2dd</td>
+                                        <td>미열람</td>
+                                        <td></td>
+                                        <td>미제안</td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="list-btns justify-content-between mt-2">
+                <div>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-secondary" onclick="window.close();">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</script>
+<script src="/resources/static/dist/js/tabler.min.js"></script>
+</body>
+</html>
