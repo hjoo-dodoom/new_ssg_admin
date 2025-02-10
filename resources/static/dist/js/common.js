@@ -1339,3 +1339,22 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   });
 });
+
+
+//이미지 상세보기
+function imageDetail(src) {
+  const previewLayer = document.getElementById('image_detail').querySelector('.layer_content ');
+  const previewImg = document.getElementById('preview_image');
+  if (previewImg) {
+      previewImg.onerror = () => {
+          box_alert('이미지를 불러올 수 없습니다.', 'info');
+          closeLayer('', 'image_detail');
+      };
+      previewImg.onload = () => {
+          const adjustment = window.innerWidth >= 1260 ? 80 : 40;
+          previewLayer.style.width = (previewImg.naturalWidth + adjustment) + 'px';
+          console.log(adjustment)
+      };
+      previewImg.src = src;
+  }
+}

@@ -360,6 +360,22 @@
                                                 브랜드 상관없이 탄산수 요청 드립니다.<br/>
                                                 감사합니다
                                             </div>
+                                            <div class="uploaded_photos p-2">
+                                                <div class="item">
+                                                    <!-- 미리보기는 작은 썸네일로 레이어팝업에는 원본으로 -->
+                                                    <button type="button" class="btn_photo" onclick="showModal('image_detail');imageDetail('/resources/static/dist/img/img.jpg')">
+                                                        <span style="background-image: url('/resources/static/dist/img/img.jpg');"></span>
+                                                        첨부 이미지 상세보기
+                                                    </button>
+                                                </div>
+                                                <div class="item">
+                                                    <!-- 미리보기는 작은 썸네일로 레이어팝업에는 원본으로 -->
+                                                    <button type="button" class="btn_photo" onclick="showModal('image_detail');imageDetail('/resources/static/dist/img/img2.jpg')">
+                                                    <span style="background-image: url('/resources/static/dist/img/img2.jpg');"></span>
+                                                    첨부 이미지 상세보기
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
                                     <tr>
@@ -411,6 +427,22 @@
                                                 탄산수는 없나요?<br/>
                                                 브랜드 상관없이 탄산수 요청 드립니다.<br/>
                                                 감사합니다
+                                            </div>
+                                            <div class="uploaded_photos p-2">
+                                                <div class="item">
+                                                    <!-- 미리보기는 작은 썸네일로 레이어팝업에는 원본으로 -->
+                                                    <button type="button" class="btn_photo" onclick="showModal('image_detail');imageDetail('/resources/static/dist/img/img.jpg')">
+                                                        <span style="background-image: url('/resources/static/dist/img/img.jpg');"></span>
+                                                        첨부 이미지 상세보기
+                                                    </button>
+                                                </div>
+                                                <div class="item">
+                                                    <!-- 미리보기는 작은 썸네일로 레이어팝업에는 원본으로 -->
+                                                    <button type="button" class="btn_photo" onclick="showModal('image_detail');imageDetail('/resources/static/dist/img/img2.jpg')">
+                                                    <span style="background-image: url('/resources/static/dist/img/img2.jpg');"></span>
+                                                    첨부 이미지 상세보기
+                                                    </button>
+                                                </div>
                                             </div>
                                         </td>
                                     </tr>
@@ -497,6 +529,31 @@
             </div>
         </div>
     </div>
+
+
+    <!-- 자세히 보기 -->
+    <div class="modal modal-blur fade " id="image_detail" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop='static'><!-- data-bs-backdrop='static' 백그라운드 클릭시 모달 안닫힘 -->
+        <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">자세히 보기</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="card-body">
+                        <div class="preview_image">
+                            <img src="/resources/static/dist/images/dummy/prd_image1.jpg" id="preview_image">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal">확인</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- //자세히보기 -->
+
 
     <!-- 공통영역 -->
     <div id="footer"></div>

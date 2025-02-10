@@ -734,3 +734,8 @@ background-image: var(--tblr-form-select-bg-img), var(--tblr-form-select-bg-icon
 .info_hover .info_cnt:before{content:"";position: absolute;left:-8px;top:0;height:100%;width:8px;}
 .info_hover .info_cnt p{margin-bottom:0;color:#444;font-size:13px;}
 .info_hover .info_cnt p + p{margin-top:8px;}
+
+.uploaded_photos{display: flex;flex-wrap: wrap;gap:10px;margin-top:10px;}
+.uploaded_photos .item{width:70px;}
+.uploaded_photos .item button{width:70px;height:70px;border:0;text-indent:-999em;overflow:hidden;padding:0;}
+.uploaded_photos .item button span{display:block;padding-top:100%;background-size: cover;background-repeat:no-repeat;background-position: center center;}
