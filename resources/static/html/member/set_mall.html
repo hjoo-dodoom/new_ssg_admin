@@ -505,13 +505,71 @@
                                             //결제수단 급여공제 체크 시
                                             const paymentDeduct = document.getElementById('paymentDeduct');
                                             const paymentDeductName = document.getElementById('paymentDeductName');
-                                            paymentDeduct.addEventListener('change', function() {
+                                            function paymentDeductCheck(){
+                                                const paymentDeductReceipt = document.getElementById('paymentDeductReceipt');
                                                 if (paymentDeduct.checked) {
                                                     paymentDeductName.removeAttribute('readonly');
+                                                    paymentDeductReceipt.style.display = 'block';
                                                 }else{
                                                     paymentDeductName.setAttribute('readonly', true);
                                                     paymentDeductName.value = '';
+                                                    paymentDeductReceipt.style.display = 'none';
                                                 }
+                                            }
+                                            paymentDeduct.addEventListener('change', function() {
+                                                paymentDeductCheck()
+                                            });
+                                            window.onload = function() {
+                                                paymentDeductCheck()
+                                            };
+                                        </script>
+                                    </div>
+                                </div>
+                                <div class="form_item" id="paymentDeductReceipt" style="display:none;">
+                                    <div class="subheader mb-1">현금영수증발행</div>
+                                    <div class="subcontent">
+                                        <p class="text-mustad">※ 세금계산서 발행 업체는 "사용함"을 선택해주세요.</p>
+                                        <div>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="cash_receipt">
+                                                <span class="form-check-label">사용안함</span>
+                                            </label>
+                                        </div>
+                                        <div class="">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="cash_receipt" id="cashReceiptUse">
+                                                <span class="form-check-label">사용함</span>
+                                            </label>
+                                            (
+                                                <label class="form-check form-check-inline">
+                                                    <input class="form-check-input receipt_checkes" type="checkbox" disabled>
+                                                    <span class="form-check-label">개인소득공제</span>
+                                                </label>
+                                                <label class="form-check form-check-inline">
+                                                    <input class="form-check-input receipt_checkes" type="checkbox" disabled>
+                                                    <span class="form-check-label">사업자지출증빙</span>
+                                                </label>
+                                            )
+                                        </div>
+                                        <script>
+                                            //현금영수증발행 사용함 체크 시
+                                            const cashReceipt = document.querySelectorAll('input[name="cash_receipt"]');
+                                            const cashReceiptUse = document.getElementById('cashReceiptUse');
+                                            const receiptCheckes = document.querySelectorAll('.receipt_checkes');
+                                                cashReceipt.forEach(function(elm){
+                                                    elm.addEventListener('change', function() {
+                                                    if (cashReceiptUse.checked) {
+                                                        receiptCheckes.forEach(function(check){
+                                                            check.checked = true;
+                                                        })
+                                                    }else{
+                                                        orderLimitInput.setAttribute('readonly', true);
+                                                        orderLimitInput.value = '';
+                                                        receiptCheckes.forEach(function(check){
+                                                            check.checked = false;
+                                                        })
+                                                    }
+                                                });
                                             });
                                         </script>
                                     </div>
@@ -1175,7 +1233,26 @@
                                 </div>
 
                                 <div class="form_item size_xl">
-                                    <div class="subheader mb-1">로그인설명</div>
+                                    <div class="subheader mb-1">사이트명</div>
+                                    <div class="subcontent">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form_item size_xl">
+                                    <div class="subheader mb-1">쇼핑몰소개</div>
+                                    <div class="subcontent">
+                                        <p class="text-mustad my-2 fs-4">※ 입력한 소개문구는 로그인페이지 로고 아래에 노출됩니다.</p>
+                                        <div class="input-group">
+                                            <textarea class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form_item size_xl">
+                                    <div class="subheader mb-1">쇼핑몰 이용안내</div>
                                     <div class="subcontent">
                                         <p class="text-mustad my-2 fs-4">※ 입력한 설명문구는 로그인화면 하단에 노출됩니다</p>
                                         <textarea class="ckeditor" name="editor1"></textarea>
