@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=1400"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>신세계 관리자</title>
+    <!-- CSS files -->
+    <link href="/resources/static/dist/css/tabler.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/tabler-vendors.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/>
+    <link rel="shortcut icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <script src="/resources/static/dist/js/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/resources/static/dist/libs/litepicker/dist/litepicker.js?1674944402"></script>
+    <script src="/resources/static/dist/js/jquery.validate.js"></script>
+    <!-- Tabler Core -->
+    
+    <script src="/resources/static/dist/js/common.js"></script>
+    <style>
+    :root {
+        --theme-admin-type: #cf3f42;
+        /* #cf3f42 통합관리자 컬러 코드*/
+        /* #4b9b52 협력회사 컬러 코드 */
+        /* #214c9c 고객사 컬러 코드 */
+    }
+    </style>
+</head>
+<body>
+
+<!-- 공통영역1 -->
+<aside id="header" class="navbar navbar-vertical navbar-expand-lg header_left"></aside>
+<script>
+    //html include
+    //헤더&푸터 개발 완료시 삭제해주세요
+    function includeFile(path, targetId) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', path, true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById(targetId).innerHTML = xhr.responseText;
+        }
+    };
+    xhr.send();
+    }
+    var includePath = "/resources/static/layout/header.html";
+    includeFile(includePath, 'header');
+</script>
+<!-- //공통영역1 -->
+
+<div class="page-wrapper">
+    <!-- 공통영역2 -->
+    <div class="member_info">
+        <div class="info">
+            <span>관리권한 : 최상위관리자</span>
+            <!-- 통합관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <!-- 협력관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <!-- 고객사관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <span class="login_session">로그인 유지시간 <strong>30:00</strong> <button type="button" class="btn btn-xs btn-primary">연장</button></span>
+            <button type="button" class="btn btn-xs btn-secondary">관리자 매뉴얼 보기</button><!-- 공통 -->
+            <button type="button" class="btn btn-xs btn-secondary">기본양식다운로드</button><!-- 통합,협력사만 -->
+            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/admin_modify_pop.html', '900', '640')">관리자정보수정</button><!-- 공통 -->
+            <button type="button" class="btn btn-xs btn-secondary">보안체크</button><!-- 협력사만 -->
+            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/terms_pop.html', '600', '540')">이용약관</button><!-- 협력사만 -->
+        </div>
+        <div>
+            <a href="javascript:;" class="logout">홍길동(admin_01)님 로그아웃</a>
+            <a href="javascript:;" class="home">홈으로</a>
+        </div>
+    </div>
+
+    <!-- 페이지 히스토리 탭 -->
+    <div class="page-history">
+        <div class="history_toggle">
+            <label class="form-check form-switch">
+                <span class="form-check-label">History</span>
+                <input id="historyUse" class="form-check-input" type="checkbox" >
+            </label>
+        </div>
+        <button class="close_all" type="button" title="히스토리 모두 삭제" onclick="historyRemoveAll();">히스토리 모두 삭제</button>
+    </div>
+    <!-- //공통영역2 -->
+
+    <div class="page-header d-print-none">
+        <div class="container-xl">
+            <div class="row g-2 align-items-center">
+                <div class="col">
+                    <!-- Page pre-title -->
+                    <div class="page-pretitle">
+                        홈 > 통계 > 통계관리 > 고객사별 주문통계
+                    </div>
+                    <h2 class="page-title">
+                    고객사별 주문통계
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page body -->
+    <div class="page-body search_left">
+        <div class="container-xl">
+            <div class="row row-cards aside_wrap">
+
+                <!-- 검색시작 -->
+                <div class="aside-search" id="asideSearch">
+                    <form action="" class="card">
+                        <div class="card-body">
+                            <div class="display_type">
+                                <button type="button" class="left active" title="검색영역 좌측배치">검색영역 좌측배치</button>
+                                <button type="button" class="top " title="검색영역 상단배치">검색영역 상단배치</button>
+                                <button type="button" class="right" title="검색영역 우측배치">검색영역 우측배치</button>
+                            </div>
+                            <div class="search_options">
+                                <div class="option_item">
+                                    <div class="subheader">기간</div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <input class="form-control datepicker-icon startDate" placeholder="시작일"
+                                                value="" />
+                                        </div>
+                                        <div class="col-12">
+                                            <input class="form-control datepicker-icon endDate" placeholder="종료일"
+                                                value="" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="option_item">
+                                    <div class="subheader">검색타입</div>
+                                    <div>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="search_type">
+                                        <span class="form-check-label">전체</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="search_type">
+                                            <span class="form-check-label">온라인</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="search_type">
+                                            <span class="form-check-label">오프라인</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="option_item">
+                                    <div class="subheader">구분</div>
+                                    <div>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="search_type">
+                                            <span class="form-check-label">상품별</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="search_type">
+                                            <span class="form-check-label">결제수단별</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="search_btns">
+                                <button class="btn btn-primary">
+                                    검색
+                                </button>
+                                <a href="#" class="btn btn-secondary">
+                                    검색 초기화
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                    
+                </div>
+                <!-- //검색시작 -->
+
+                <!-- 콘텐츠 시작 -->
+                <div class="content-area">
+
+                    <div class="list-btns justify-content-between mb-1">
+                        <div>
+                            <h3 class="mb-0">결제수단별 매출통계</h3>
+                        </div>
+                        <div>
+                            <a href="javascript:;" class="icon_btn excel ms-2 float-start">엑셀저장</a>
+                        </div>
+                    </div>
+
+                    <div class="list-btns justify-content-between table_actions">
+                        <div>
+                        </div>
+                        <div>
+                            <span>(단위 변환: 소수점 둘째 자리까지 반올림)</span>
+                            <button type="button" class="btn btn-sm ms-1 btn-primary unit-change-btn" onclick="unitChange('')">단위 - 원</button>
+                            <button type="button" class="btn btn-sm ms-1 btn-secondary unit-change-btn" onclick="unitChange('thousand')">단위 - 천</button>
+                            <button type="button" class="btn btn-sm ms-1 btn-secondary unit-change-btn" onclick="unitChange('million')">단위 - 백만</button>
+                        </div>
+                        <script>
+                        function unitChange(unit) {
+                            document.querySelectorAll('.unit-change-btn').forEach(btn => {
+                                btn.classList.remove('btn-primary');
+                                btn.classList.add('btn-secondary');
+                            });
+                            event.target.classList.remove('btn-secondary');
+                            event.target.classList.add('btn-primary');
+                            document.querySelectorAll('.price_unit').forEach(td => {
+                                let originalValue = parseFloat(td.getAttribute('data-value'));
+
+                                if (isNaN(originalValue)) return;
+
+                                let newValue;
+                                switch (unit) {
+                                    case 'thousand':
+                                        newValue = (originalValue / 1000).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '천';
+                                        break;
+                                    case 'million':
+                                        newValue = (originalValue / 1000000).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '백만';
+                                        break;
+                                    default:
+                                        newValue = originalValue.toLocaleString();
+                                }
+                                td.textContent = newValue;
+                            });
+                        }
+                        </script>
+                    </div>
+
+                    <div class="card table-mb-card">
+                        <div class="table-responsive">
+                            <table class="table table-vcenter table-line card-table text-center table-mb">
+                                <thead>
+                                    <tr>
+                                        <th>파트</th>
+                                        <th>구분</th>
+                                        <th>고객사</th>
+                                        <th>담당자</th>
+                                        <th>신용카드</th>
+                                        <th>포인트</th>
+                                        <th>가상계좌</th>
+                                        <th>실시간이체</th>
+                                        <th>급여공제</th>
+                                        <th>취합후결제</th>
+                                        <th>SSGPAY</th>
+                                        <th>삼성페이</th>
+                                        <th>네이버페이</th>
+                                        <th>카카오페이</th>
+                                        <th>계</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1파트</td>
+                                        <td>온라인</td>
+                                        <td>미래에셋자산운용(임직원)</td>
+                                        <td>관**</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end bg_gray"></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>온라인</td>
+                                        <td>미래에셋자산운용(고객)</td>
+                                        <td>관**</td>
+                                        <td class="text-end"></td>
+                                        <td class="text-end"></td>
+                                        <td class="text-end"></td>
+                                        <td class="text-end"></td>
+                                        <td class="text-end"></td>
+                                        <td class="text-end"></td>
+                                        <td class="text-end"></td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end bg_gray"></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>오프라인</td>
+                                        <td>미래에셋(오프)</td>
+                                        <td></td>
+                                        <td class="text-end"></td>
+                                        <td class="text-end"></td>
+                                        <td class="text-end"></td>
+                                        <td class="text-end"></td>
+                                        <td class="text-end"></td>
+                                        <td class="text-end"></td>
+                                        <td class="text-end"></td>
+                                        <td class="text-end"></td>
+                                        <td class="text-end"></td>
+                                        <td class="text-end"></td>
+                                        <td class="text-end bg_gray"></td>
+                                    </tr>
+                                    <tr class="bg_gray">
+                                        <td colspan="4">파트계</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>2파트</td>
+                                        <td>온라인</td>
+                                        <td>삼성(카드)</td>
+                                        <td>관**</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end bg_gray"></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>온라인</td>
+                                        <td>한국전자</td>
+                                        <td>관**</td>
+                                        <td class="text-end"></td>
+                                        <td class="text-end"></td>
+                                        <td class="text-end"></td>
+                                        <td class="text-end"></td>
+                                        <td class="text-end"></td>
+                                        <td class="text-end"></td>
+                                        <td class="text-end"></td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end bg_gray"></td>
+                                    </tr>
+                                    <tr class="bg_gray">
+                                        <td colspan="4">파트계</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end bg_gray"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>MD운영</td>
+                                        <td>온라인</td>
+                                        <td>(스마일)아모제</td>
+                                        <td>관**</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end bg_gray"></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>온라인</td>
+                                        <td>한국전자</td>
+                                        <td>관**</td>
+                                        <td class="text-end"></td>
+                                        <td class="text-end"></td>
+                                        <td class="text-end"></td>
+                                        <td class="text-end"></td>
+                                        <td class="text-end"></td>
+                                        <td class="text-end"></td>
+                                        <td class="text-end"></td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end bg_gray"></td>
+                                    </tr>
+                                    <tr class="bg_gray">
+                                        <td colspan="4">파트계</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>유니폼파트</td>
+                                        <td>온라인</td>
+                                        <td>한라</td>
+                                        <td>관**</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end bg_gray"></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>온라인</td>
+                                        <td>아우</td>
+                                        <td>관**</td>
+                                        <td class="text-end"></td>
+                                        <td class="text-end"></td>
+                                        <td class="text-end"></td>
+                                        <td class="text-end"></td>
+                                        <td class="text-end"></td>
+                                        <td class="text-end"></td>
+                                        <td class="text-end"></td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end bg_gray"></td>
+                                    </tr>
+                                    <tr class="bg_gray">
+                                        <td colspan="4">파트계</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end"></td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr class="bg_dark">
+                                        <td colspan="3">법인팀계</td>
+                                        <td class="text-end"></td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end price_unit" data-value="2432662">2,432,662</td>
+                                        <td class="text-end"></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- 콘텐츠 끝 -->
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 공통영역 -->
+    <div id="footer"></div>
+    <script>
+        //헤더&푸터 개발 완료시 삭제해주세요
+        var includePath = "/resources/static/layout/footer.html";
+        includeFile(includePath, 'footer');
+    </script>
+    <!-- //공통영역 -->
+</div>
+<script src="/resources/static/dist/js/tabler.min.js"></script>
+</body>
+</html>

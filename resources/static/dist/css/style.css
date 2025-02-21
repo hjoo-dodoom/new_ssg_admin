@@ -742,3 +742,18 @@ background-image: var(--tblr-form-select-bg-img), var(--tblr-form-select-bg-icon
 .uploaded_photos .item{width:70px;}
 .uploaded_photos .item button{width:70px;height:70px;border:0;text-indent:-999em;overflow:hidden;padding:0;}
 .uploaded_photos .item button span{display:block;padding-top:100%;background-size: cover;background-repeat:no-repeat;background-position: center center;}
+
+.list_thum{max-width:90px;}
+
+.highcharts-figure,
+.highcharts-data-table table {min-width: 310px;width:100%;}
+.chart{height: 400px;}
+.highcharts-data-table table {font-family: Verdana, sans-serif;border-collapse: collapse;border: 1px solid #ebebeb;margin: 10px auto;text-align: center;width: 100%;max-width: 500px;}
+.highcharts-data-table caption {padding: 1em 0;font-size: 1.2em;color: #555;}
+.highcharts-data-table th {font-weight: 600;padding: 0.5em;}
+.highcharts-data-table td,.highcharts-data-table th,.highcharts-data-table caption {padding: 0.5em;}
+.highcharts-data-table thead tr,.highcharts-data-table tr:nth-child(even) {background: #f8f8f8;}
+.highcharts-data-table tr:hover {background: #f1f7ff;}
+.highcharts-description {margin: 0.3rem 10px;}
+.highcharts-exporting-group{display: none;}
+.highcharts-credits{display: none;}
