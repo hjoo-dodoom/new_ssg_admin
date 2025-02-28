@@ -441,62 +441,128 @@
 
 
 
+<!-- 본인인증 비밀번호 세팅 없음-->
+<div class="modal modal-blur fade " id="LoginCertify2" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop='static'><!-- data-bs-backdrop='static' 백그라운드 클릭시 모달 안닫힘 -->
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">본인인증</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="" autocomplete="off">
+            <div class="modal-body">
+                <div class="card-body">
+                    <p class="keep-all">* 본인확인(휴대폰 인증) 이후 로그인이 가능합니다.</p>
+                    <div class="al_form">
+                        <div class="item">
+                            <div class="input-group">
+                                <input type="text" placeholder="아이디">
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="input-group">
+                                <input type="tel" placeholder="휴대폰인증" maxlength="11">
+                                <button id="sendSmsCertify2" class="btn" type="button">인증발송</button>
+                                <button id="reSendSmsCertify2" class="btn" type="button" style="display:none;">재발송</button>
+                            </div>
+                            <small class="form-hint">* 휴대폰번호 '-'없이 입력</small>
+                        </div>
+                        <div class="item">
+                            <div class="input-group">
+                                <div class="count_wrap">
+                                    <input type="tel" placeholder="인증번호" >
+                                    <span id="countDownCertify2" class="count">3:00</span>
+                                </div>
+                                <button id="checkSmsCertify2" class="btn" type="button">인증확인</button>
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+                        let countdownIntervalCertify2;
+                    
+                        function startCountdownCertify2(buttonId, reButtonId, countdownId) {
+                            const button = document.getElementById(buttonId);
+                            const reButton = document.getElementById(reButtonId);
+                            const countdownSpan = document.getElementById(countdownId);
+                            button.style.display = 'none';
+                            reButton.style.display = 'block';
+                            let secondsLeft = 180;
+                    
+                            countdownIntervalCertify2 = setInterval(function() {
+                                secondsLeft--;
+                                const minutes = Math.floor(secondsLeft / 60);
+                                const seconds = secondsLeft % 60;
+                                countdownSpan.textContent = `${minutes}:${(seconds < 10 ? '0' : '')}${seconds}`;
+                    
+                                if (secondsLeft <= 0) {
+                                    clearInterval(countdownIntervalCertify2);
+                                    countdownSpan.textContent = '3:00';
+                                    alert('시간이 만료되었습니다. 다시 시도해주세요.');
+                                }
+                            }, 1000);
+                        }
+                    
+                        document.getElementById('sendSmsCertify2').addEventListener('click', function() {
+                            clearInterval(countdownIntervalCertify);
+                            startCountdownCertify('sendSmsCertify2', 'reSendSmsCertify2', 'countDownCertify2');
+                        });
+                    
+                        document.getElementById('reSendSmsCertify2').addEventListener('click', function() {
+                            clearInterval(countdownIntervalCertify);
+                            startCountdownCertify('sendSmsCertify2', 'reSendSmsCertify2', 'countDownCertify2');
+                        });
+                    
+                        document.getElementById('checkSmsCertify2').addEventListener('click', function() {
+                            clearInterval(countdownIntervalCertify);
+                            document.getElementById('countDownCertify2').textContent = '0:00';
+                            alert('인증 확인!');
+                            document.querySelectorAll('.certify_complete2').forEach(function(item){
+                                item.style.display = 'block';
+                            });
+                        });
+                    </script>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="al_btns">
+                    <button type="button" class="btn" data-bs-dismiss="modal">취소</button>
+                    <button type="button" class="btn submit" onclick="hideModal('LoginCertify2');">확인</button>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- //본인인증 -->
+
+
+
 <!-- 첫로그인 약관동의 -->
 <div class="modal modal-blur fade " id="firstLoginTerms" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop='static'><!-- data-bs-backdrop='static' 백그라운드 클릭시 모달 안닫힘 -->
     <div class="modal-dialog modal-md modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">약관동의</h5>
+                <h5 class="modal-title">보안서약서</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="card-body label-control">
-                    <div class="mb-3">
-                        <div class="input-group">
-                            <label class="form-selectgroup-item flex-fill">
-                                <input type="checkbox" name="" value="" class="form-selectgroup-input check-all">
-                                <div class="form-selectgroup-label d-flex align-items-center p-3">
-                                    <div class="me-3">
-                                        <span class="form-selectgroup-check"></span>
-                                    </div>
-                                    <div class="form-check-label text-start">
-                                    개인정보이용약관, 개인정보수집 및 이용에 대한 안내,<br/>개인정보의 취급위탁 동의에 모두 동의합니다.
-                                    </div>
-                                </div>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="mb-2">
-                        <div class="input-group align-items-center">
-                            <label class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox">
-                                <span class="form-check-label">개인정보이용약관에 동의합니다.</span>
-                            </label>
-                            <button type="button" class="btn btn-outline-dark btn-sm ms-auto" onclick="showModal('terms1');">
-                            자세히보기
-                            </button>
-                        </div>
-                    </div>
-                    <div class="mb-2">
-                        <div class="input-group align-items-center">
-                            <label class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox">
-                                <span class="form-check-label">개인정보의 취급위탁 동의에 동의합니다.</span>
-                            </label>
-                            <button type="button" class="btn btn-outline-dark btn-sm ms-auto" onclick="showModal('terms2');">
-                                자세히보기
-                            </button>
-                        </div>
+                <div class="card-body">
+                    <div class="terms_scroll">
+                    본인은 ㈜신세계(이하 “신세계)에서 개인정보 및 정보보안 업무를 수행함에 있어 다음사항을 준수할 것을 엄숙히 
+                    서약합니다.<br/><br/>
+
+                    1. 본인은 “신세계”에서 “보안 업무”를 수행 중 취득한 제반 비밀사항을 업무 수행 중은 물론 종료 후에도 일체 누설하지 않을 것을 서약합니다.<br/><br/>
+
+                    2. 본인은 “신세계”의 개인정보 및 내부정보를 제3자에게 유출하거나, 누설하였을 때는 그 결과에 대한 제반 법규에 의거하여 엄중한 처벌을 받을 것을 서약합니다.<br/><br/>
+
+                    3. 본인은 업무상 고의 또는 중대한 과실로 인해 “신세계”의 브랜드 이미지 실추 및 재산 상 손해를 끼쳤을 경우에는 그에 대한 민 · 형사상의 책임을 집니다.
                     </div>
                     <div>
                         <div class="input-group align-items-center">
                             <label class="form-check form-check-inline">
                                 <input class="form-check-input" type="checkbox">
-                                <span class="form-check-label">개인정보 제3자제공 동의에 동의합니다.</span>
+                                <span class="form-check-label">보안서약서 내용에 대해 동의합니다.</span>
                             </label>
-                            <button type="button" class="btn btn-outline-dark btn-sm ms-auto" onclick="showModal('terms3');">
-                                자세히보기
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -504,118 +570,13 @@
             <div class="modal-footer">
                 <div class="al_btns">
                     <button type="button" class="btn" data-bs-dismiss="modal">취소</button>
-                    <button type="button" class="btn submit" onclick="showModal('LoginCertify');" data-bs-dismiss="modal">다음</button>
+                    <button type="button" class="btn submit" onclick="showModal('LoginCertify2');" data-bs-dismiss="modal">다음</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <!-- //첫로그인 약관동의 -->
-
-<!-- 개인정보이용약관 -->
-<div class="modal modal-blur fade " id="terms1" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">개인정보이용약관</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="card-body">
-                    <div class="terms_scroll">
-                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
-                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
-                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
-                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
-                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
-                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
-                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
-                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
-                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
-                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
-                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <div class="al_btns">
-                    <button type="button" class="btn submit" data-bs-dismiss="modal">확인</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- //개인정보이용약관 -->
-<!-- 취급위탁동의 -->
-<div class="modal modal-blur fade " id="terms2" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">개인정보의 취급위탁 동의</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="card-body">
-                    <div class="terms_scroll">
-                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
-                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
-                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
-                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
-                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
-                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
-                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
-                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
-                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
-                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
-                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <div class="al_btns">
-                    <button type="button" class="btn submit" data-bs-dismiss="modal">확인</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- //취급위탁동의 -->
-<!-- 개인정보 제3자제공 -->
-<div class="modal modal-blur fade " id="terms3" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">개인정보 제3자제공</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="card-body">
-                    <div class="terms_scroll">
-                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
-                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
-                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
-                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
-                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
-                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
-                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
-                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
-                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
-                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
-                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <div class="al_btns">
-                    <button type="button" class="btn submit" data-bs-dismiss="modal">확인</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- //개인정보이용약관 -->
-
-
 
 <!-- 30일 비밀번호 변경 -->
 <div class="modal modal-blur fade " id="monthPasswordChange" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop='static'><!-- data-bs-backdrop='static' 백그라운드 클릭시 모달 안닫힘 -->
