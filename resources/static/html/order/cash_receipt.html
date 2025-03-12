@@ -177,12 +177,29 @@
                                         }
                                     </script>
                                 </div>
+                                <div class="option_item w30">
+                                    <div class="subheader">주문일</div>
+                                    <div class="row date_cwrap">
+                                        <div class="col-6">
+                                            <input class="form-control datepicker-icon" placeholder="시작일"
+                                                value="" />
+                                        </div>
+                                        <div class="col-6">
+                                            <input class="form-control datepicker-icon" placeholder="종료일"
+                                                value="" />
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="option_item">
                                     <div class="subheader">상태</div>
                                     <div class="row">
                                         <div class="col-12">
                                             <select class="form-select">
                                                 <option value="" selected>전체</option>
+                                                <option value="">완료</option>
+                                                <option value="">취소</option>
+                                                <option value="">대기</option>
+                                                <option value="">실패</option>
                                             </select>
                                         </div>
                                     </div>
@@ -192,8 +209,9 @@
                                     <div class="row">
                                         <div class="col-6">
                                             <select class="form-select">
-                                                <option value="" selected="">아이디</option>
-                                                <option value="">주문번호</option>
+                                                <option value="" selected="">주문자명</option>
+                                                <option value="">아이디</option>
+                                                <option value="">주문자 휴대폰번호</option>
                                             </select>
                                         </div>
                                         <div class="col-6">
@@ -238,7 +256,11 @@
                             <div>
                                 <span class="check_pred_action">선택한 항목을</span>
                                 <button type="button" class="btn btn-sm ms-1 btn-outline-secondary">발행신청</button>
-                                <button type="button" class="btn btn-sm ms-1 btn-outline-secondary">발행취소</button>
+                                <button
+                                    type="button"
+                                    class="btn btn-sm ms-1 btn-outline-secondary"
+                                    onclick="windowPopup('/resources/static/html/popup/cash_receipt_cancle.html', '650', '320')"
+                                >발행취소</button>
                             </div>
                         </div>
                         <div class="table-responsive">
@@ -282,8 +304,8 @@
                                         <td></td>
                                         <td></td>
                                         <td>
-                                            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/cash_receipt_history.html', '600', '500')">
-                                                대기
+                                            <button type="button" class="btn btn-xs btn-success" onclick="windowPopup('/resources/static/html/popup/cash_receipt_history.html', '600', '500')">
+                                                완료
                                             </button>
                                         </td>
                                     </tr>
@@ -302,8 +324,28 @@
                                         <td></td>
                                         <td></td>
                                         <td>
-                                            <button type="button" class="btn btn-xs btn-success" onclick="windowPopup('/resources/static/html/popup/cash_receipt_history.html', '600', '500')">
-                                                성공
+                                            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/cash_receipt_history.html', '600', '500')">
+                                                취소
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label class="form-check form-check-inline m-0">
+                                                <input class="form-check-input" type="checkbox">
+                                            </label>
+                                        </td>
+                                        <td>20</td>
+                                        <td>시크릿스토어</td>
+                                        <td>O012301230123</td>
+                                        <td><a href="javascript:;" class="list_link" onclick="windowPopup('/resources/static/html/popup/cash_receipt_modify.html', '600', '500')">n1234</a></td>
+                                        <td>개인소득공제</td>
+                                        <td>2024-09-27</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <button type="button" class="btn btn-xs btn-secondary disabled" onclick="windowPopup('/resources/static/html/popup/cash_receipt_history.html', '600', '500')">
+                                                대기
                                             </button>
                                         </td>
                                     </tr>
@@ -334,7 +376,13 @@
                             <div>
                                 <span class="check_pred_action">선택한 항목을</span>
                                 <button type="button" class="btn btn-sm ms-1 btn-outline-secondary">발행신청</button>
-                                <button type="button" class="btn btn-sm ms-1 btn-outline-secondary">발행취소</button>
+                                <button
+                                    type="button"
+                                    class="btn btn-sm ms-1 btn-outline-secondary"
+                                    onclick="windowPopup('/resources/static/html/popup/cash_receipt_cancle.html', '650', '320')"
+                                >
+                                    발행취소
+                                </button>
                             </div>
                         </div>
                     </div>
