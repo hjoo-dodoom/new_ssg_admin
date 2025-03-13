@@ -31,12 +31,11 @@
 <body>
 
 <div class="popup-wrapper">
-    <h2 class="popup-title">관리자 정보 수정</h2>
+    <h2 class="popup-title">협력사관리자 정보 수정</h2>
     
     <div class="row">
         <form action="">
         <div class="text_box">
-            <p class="text-muted fs-5 my-1">* 관리등급, 팀 변경은 최상위관리자 승인 이후 반영됩니다.</p>
             <p class="text-muted fs-5 my-1">* 비밀번호는 영문과 숫자, 특수문자(~!@#$%^&*()+|=)를 조합하여 8~20자로 입력해주세요.</p>
             <p class="text-muted fs-5 my-1">* 비밀번호는 3개 이상의 중복문자, 연속문자, 키보드패턴 문자를 사용할 수 없습니다.</p>
         </div>
@@ -46,60 +45,31 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="form_item">
-                                <div class="subheader mb-1 required">관리등급</div>
-                                <div class="subcontent">
-                                    <select name="" class="form-select">
-                                        <option value="" selected="">최상위관리</option>
-                                        <option value="">MD담당자</option>
-                                        <option value="">고객사담당자</option>
-                                        <option value="">CS담당자</option>
-                                        <option value="">시스템관리</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form_item">
-                                <div class="subheader mb-1">팀/파트</div>
-                                <div class="subcontent">
-                                    <div class="input-group">
-                                        <select name="" class="form-select">
-                                            <option value="" selected="">팀 전체</option>
-                                        </select>
-                                        <select name="" class="form-select">
-                                            <option value="" selected="">파트 전체</option>
-                                        </select>
-                                        <label class="form-check form-check-inline ms-1">
-                                            <input class="form-check-input" type="checkbox">
-                                            <span class="form-check-label">파트장</span>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form_item">
-                                <div class="subheader mb-1 required">아이디</div>
+                                <div class="subheader mb-1">아이디</div>
                                 <div class="subcontent">
                                     abcd12
                                 </div>
                             </div>
                             <div class="form_item">
-                                <div class="subheader mb-1 required">비밀번호</div>
+                                <div class="subheader mb-1">비밀번호</div>
                                 <div class="subcontent">
                                     <button 
                                         class="btn bg-secondary text-light btn-sm" 
                                         type="button"
-                                        onclick="windowPopup('/resources/static/html/popup/password_change_pop.html', '500', '420')"
+                                        onclick="windowPopup('/resources/static/html/popup/joint_password_change_pop.html', '500', '420')"
                                     >
                                         비밀번호 변경
                                     </button>
                                 </div>
                             </div>
                             <div class="form_item">
-                                <div class="subheader mb-1 required">관리자명</div>
+                                <div class="subheader mb-1 required">담당자명</div>
                                 <div class="subcontent">
                                     <input type="text" class="form-control">
                                 </div>
                             </div>
                             <div class="form_item">
-                                <div class="subheader mb-1">관리자 이메일</div>
+                                <div class="subheader mb-1 required">담당자 이메일</div>
                                 <div class="subcontent">
                                     <div class="input-group">
                                         <input type="email" class="form-control" value="abcd12">
@@ -107,25 +77,42 @@
                                 </div>
                             </div>
                             <div class="form_item">
-                                <div class="subheader mb-1">관리자 전화번호</div>
+                                <div class="subheader mb-1">담당자 전화번호</div>
                                 <div class="subcontent">
                                     <input type="tel" class="form-control" placeholder="'-없이 숫자만'" value="03122223333">
                                 </div>
                             </div>
                             <div class="form_item">
-                                <div class="subheader mb-1 required">관리자 휴대폰</div>
+                                <div class="subheader mb-1 required">담당자 휴대폰</div>
                                 <div class="subcontent">
                                     <input type="tel" class="form-control" placeholder="'-없이 숫자만'" value="01045678945">
                                 </div>
                             </div>
                             <div class="form_item">
-                                <div class="subheader mb-1 required">승인상태</div>
+                                <div class="subheader mb-1 required">담당업무</div>
+                                <div class="subcontent">
+                                    <label class="form-check single form-check-inline">
+                                        <input class="form-check-input" type="checkbox">
+                                        <span class="form-check-label">영업담당자</span>
+                                    </label>
+                                    <label class="form-check single form-check-inline">
+                                        <input class="form-check-input" type="checkbox">
+                                        <span class="form-check-label">발주담당자</span>
+                                    </label>
+                                    <label class="form-check single form-check-inline">
+                                        <input class="form-check-input" type="checkbox">
+                                        <span class="form-check-label">세금계산서담당자</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form_item">
+                                <div class="subheader mb-1">승인상태</div>
                                 <div class="subcontent">
                                     승인
                                 </div>
                             </div>
                             <div class="form_item size_xl">
-                                <div class="subheader mb-1 required">기타정보</div>
+                                <div class="subheader mb-1">기타정보</div>
                                 <div class="subcontent">
                                     방문횟수 : 26회 / 마지막방문일 : 2024-04-22 16:04:25 / 마지막방문 IP : 10.100.111.230<br/>
                                     회원가입일 : 2024-04-03 10:05:56
