@@ -39,50 +39,36 @@
                 <div class="table-responsive">
                     <table class="table table-vcenter table-line card-table label-control text-center table-mb">
                         <colgroup>
-                            <col style="width:100px;">
-                            <col style="width:100px;">
-                            <col style="width:75px;">
+                            <col style="width:160px;">
+                            <col style="width:80px;">
                             <col>
-                            <col style="width:60px;">
-                            <col style="width:75px;">
-                            <col style="width:75px;">
-                            <col style="width:75px;">
-                            <col style="width:75px;">
-                            <col style="width:70px;">
+                            <col style="width:80px;">
+                            <col style="width:45px;">
+                            <col style="width:80px;">
                             <col style="width:70px;">
                         </colgroup>
                         <thead class="dark">
                             <tr>
                                 <th>주문번호</th>
-                                <th>협력회사</th>
                                 <th>상품별<br/>주문번호</th>
-                                <th>상품</th>
+                                <th>상품명</th>
+                                <th>옵션</th>
                                 <th>수량</th>
-                                <th>판매가</th>
-                                <th>(+) 개별<br/> 배송비</th>
-                                <th>(-) 상품별<br/> 쿠폰할인</th>
-                                <th>(=)  주문<br/>금액</th>
-                                <th>주문<br/>상태</th>
+                                <th>주문상태</th>
                                 <th>반품/교환<br/>상태</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>O000000002800871-01</td>
-                                <td><a href="javascript:;" class="link">㈜베네파트너</a></td>
                                 <td>3201150</td>
                                 <td class="text-start">
                                     <a href="javascript:;" class="link">P0000001234</a>
-                                    <a href="javascript:;" class="link">
-                                    [테팔] 팬&냄비 PTFE IH 뉴 셰프터치 2종세트 (프라이팬 20cm + 28cm)<br/>
-                                    ㆍ기본세트 / 블랙
-                                    </a>
+                                    <br/>
+                                    <a href="javascript:;" class="link">[테팔] 팬&냄비 PTFE IH 뉴 셰프터치 2종세트 (프라이팬 20cm + 28cm)</a>
                                 </td>
+                                <td>블랙/S</td>
                                 <td>2</td>
-                                <td class="text-end">80,000</td>
-                                <td class="text-end">+5,000</td>
-                                <td class="text-end">-10,000</td>
-                                <td class="text-end">150,000</td>
                                 <td>주문취소</td>
                                 <td>-</td>
                             </tr>
@@ -92,7 +78,7 @@
             </div>
         </div>
 
-        <div class="form-container">
+        <div class="form-container grid_grid2">
             <div class="card form_area">
                 <div class="card-header"><h3 class="card-title">반품상태</h3></div>
                 <div class="card-body">
@@ -102,28 +88,72 @@
                                 <div class="card-header">
                                     <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs" role="tablist">
                                         <li class="nav-item" role="presentation">
-                                            <a href="#tap1" class="nav-link active" data-bs-toggle="tab" aria-selected="true" role="tab" tabindex="-1">01. 반품신청/취소</a>
+                                            <a href="#tap1" class="nav-link active" data-bs-toggle="tab" aria-selected="true" role="tab" tabindex="-1">01. 반품신청</a>
                                         </li>
                                         <li class="nav-item" role="presentation">
-                                            <a href="#tap2" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1">02. 반품진행/불가</a>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <a href="#tap3" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1">03. 반품거부/완료</a>
+                                            <a href="#tap2" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1">02. 반품진행</a>
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="card-body">
                                     <div class="tab-content">
-                                        <!-- 반품신청/취소 -->
+                                        <!-- 반품신청 -->
                                         <div class="tab-pane active show" id="tap1" role="tabpanel">
                                             <small class="form-hint">
-                                                ! 반품신청은 고객 및 통합관리자만 신청이 가능합니다.<br/>
-                                                ! 반품신청 후 반품진행 전 단계까지 반품취소가 가능합니다.<br/>
-                                                ! 결제수단이 “가상계좌＂인 경우 환불계좌 입력 후 반품신청이 가능합니다.<br/>
-                                                ! 반품완료 후 익일 입력한 계좌에 입금 처리됩니다.<br/>
-                                                ! *환불계좌를 정확히 입력해주세요. 오 기입 시 타인명의 계좌에 입금될 수 있습니다.
+                                                ! 반품신청은 고객 및 통합관리자만 신청이 가능하며, 반품진행 단계 전까지 반품철회가 가능합니다.<br/>
+                                                ! 결제수단이 “가상계좌＂인 경우 환불계좌 입력 후 반품신청이 가능합니다. 단, 예금주명은 변경이 불가합니다.<br/>
+                                                ! 반품완료 후 주문취소처리를 하셔야 환불완료 처리됩니다. 환불은 주문취소 후 익일 입금 처리됩니다.
                                             </small>
                                             <div class="row m-0 mt-2">
+                                                <div class="form_item">
+                                                    <div class="subheader mb-1 required">상태</div>
+                                                    <div class="subcontent">
+                                                        <div class="input-group">
+                                                            <select name="" id="" class="form-select">
+                                                                <option value="">반품신청</option>
+                                                                <option value="">반품철회</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form_item">
+                                                    <div class="subheader mb-1 required">사유</div>
+                                                    <div class="subcontent">
+                                                        <div class="input-group">
+                                                            <select name="" id="" class="form-select select-display">
+                                                                <option value="" selected>상품이 마음에 들지 않아요</option>
+                                                                <option value="">다른상품이랑 같이 주문할게요</option>
+                                                                <option value="">사이즈/색상 변경 후 다시 주문할게요</option>
+                                                                <option value="">어머! 최저가 상품이 아니에요</option>
+                                                                <!-- <option value="직접입력" select-display="return_reason_input">직접입력</option> -->
+                                                            </select>
+                                                        </div>
+                                                        <div class="input-group return_reason_input" style="display: none;"><!-- 직접입력 -->
+                                                            <input type="text" class="form-control" placeholder="사유를 직접입력해주세요.">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form_item size_xl">
+                                                    <div class="subheader mb-1">제품사진</div>
+                                                    <div class="subcontent">
+                                                        <div class="input-group">
+                                                            <label class="btn btn-sm btn-secondary">
+                                                                <input type="file" onchange="FileUploader.handleFileUpload(event, 'returnStatus')" max-size="10" max-count="3" class="hidden_input">
+                                                                제품사진 첨부하기
+                                                            </label>
+                                                            <span class="input-group-text"><span class="count multiple_count">0</span>개(<span class="size multiple_size">0MB</span>)</span>
+                                                        </div>
+                                                        <div class="file_photo_view multiple_preview">
+                                                            <!-- <div class="item">
+                                                                <div class="thum"><img src="../../assets/images/card_kb.jpg"/></div>
+                                                                <button type="button" class="remove_btn">파일삭제</button>
+                                                            </div> -->
+                                                        </div>
+                                                        <small class="form-hint">! 제품사진은 최대 3개까지 jpg(jpeg),png 파일만 등록 하실 수 있습니다.</small>
+                                                    </div>
+                                                </div>
+
+                                                <!-- 결제수단이 가상계좌인 경우만 환불계좌, 예금주명 -->
                                                 <div class="form_item">
                                                     <div class="subheader mb-1 required">환불계좌</div>
                                                     <div class="subcontent">
@@ -136,128 +166,72 @@
                                                     </div>
                                                 </div>
                                                 <div class="form_item">
-                                                    <div class="subheader mb-1">제품사진</div>
+                                                    <div class="subheader mb-1">예금주명</div>
                                                     <div class="subcontent">
                                                         <div class="input-group">
-                                                            <label class="btn btn-sm btn-secondary">
-                                                                <input type="file" onchange="FileUploader.handleFileUpload(event, 'returnStatus')" max-size="10" max-count="5" class="hidden_input">
-                                                                제품사진 첨부하기
-                                                            </label>
-                                                            <span class="input-group-text"><span class="count multiple_count">0</span>개(<span class="size multiple_size">0MB</span>)</span>
+                                                            <input type="text" class="form-control" value="홍길동" disabled>
                                                         </div>
-                                                        <div class="file_photo_view multiple_preview">
-                                                            <!-- <div class="item">
-                                                                <div class="thum"><img src="../../assets/images/card_kb.jpg"/></div>
-                                                                <button type="button" class="remove_btn">파일삭제</button>
-                                                            </div> -->
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form_item">
-                                                    <div class="subheader mb-1 required">반품신청 사유</div>
-                                                    <div class="subcontent">
-                                                        <div class="input-group">
-                                                            <select name="" id="" class="form-select select-display">
-                                                                <option value="단순변심에 의한 취소" selected>단순변심에 의한 취소</option>
-                                                                <option value="재 주문">재 주문</option>
-                                                                <option value="사이트/색상 변경">사이트/색상 변경</option>
-                                                                <option value="최저가 아님">최저가 아님</option>
-                                                                <option value="직접입력" select-display="return_reason_input">직접입력</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="input-group return_reason_input" style="display: none;"><!-- 직접입력 -->
-                                                            <input type="text" class="form-control" placeholder="사유를 직접입력해주세요.">
-                                                        </div>
+                                                        <small class="form-hint">! 예금주명은 수정하실 수 없습니다.</small>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="list-btns justify-content-between mt-3">
                                                 <div>
-                                                    <button type="button" class="btn btn-primary">반품취소</button>
+                                                    <!-- <button type="button" class="btn btn-primary">반품취소</button> -->
                                                 </div>
                                                 <div>
-                                                    <button type="button" class="btn btn-primary">반품신청</button>
+                                                    <button type="button" class="btn btn-primary">저장</button>
                                                     <button type="button" class="btn btn-secondary" onclick="window.close();">닫기</button>
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- //반품신청/취소 -->
-                                        <!-- 반품진행/불가 -->
+                                        <!-- //반품신청 -->
+                                        <!-- 반품진행 -->
                                         <div class="tab-pane" id="tap2" role="tabpanel">
                                             <small class="form-hint">
                                                 ! 반품진행 시 협력회사에서 고객에게 직접 연락하여 반품주소 및 배송비 등 을 협의해주세요.<br/>
-                                                ! 협력회사 반품불가 처리에 대한 최종결정은 신세계담당자가 진행합니다.<br/>
-                                                ! 신세계담당자가 최종 반품불가 확정 시 고객에게 반품불가 사유를 안내합니다.
+                                                ! 협력회사 반품불가 또는 반품거부에 대한 최종결정은 신세계담당자가 진행합니다.<br/>
+                                                ! 신세계담당자가 반품불가 또는 반품거부 확정 시 고객에게 최종 안내됩니다.
                                             </small>
                                             <div class="row m-0 mt-2">
-                                                <div class="form_item">
-                                                    <div class="subheader mb-1 required">반품불가 사유</div>
+                                                <div class="form_item size_xl">
+                                                    <div class="subheader mb-1 required">상태</div>
                                                     <div class="subcontent">
                                                         <div class="input-group">
-                                                            <input type="text" class="form-control" placeholder="반품불가 사유를 입력해주세요.">
+                                                            <select name="" id="" class="form-select">
+                                                                <option value="">선택</option>
+                                                                <option value="">반품진행</option>
+                                                                <option value="">반품불가</option>
+                                                                <!-- 반품거부, 반품완료: 반품진행 선택 후 저장버튼 클릭 시 노출 -->
+                                                                <option value="">반품거부</option>
+                                                                <option value="">반품완료</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form_item size_xl">
+                                                    <div class="subheader mb-1 required">사유</div>
+                                                    <div class="subcontent">
+                                                        <div class="input-group return_reason_input"><!-- 직접입력 -->
+                                                            <textarea class="form-control max-text" placeholder="반품불가 또는 반품거부 시 사유를 입력해주세요."  maxlength="50" name=""></textarea>
+                                                            <span class="input-group-text text max-len"><b>0</b> / 50</span>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="list-btns justify-content-between mt-3">
                                                 <div>
-                                                    <button type="button" class="btn btn-primary">불가확정</button>
+                                                    <!-- 반품불가확정, 반품거부확정 버튼: 통합관리자만 노출 -->
+                                                    <button type="button" class="btn btn-primary">반품불가확정</button>
+                                                    <button type="button" class="btn btn-primary">반품거부확정</button>
                                                 </div>
                                                 <div>
-                                                    <button type="button" class="btn btn-primary">반품불가</button>
-                                                    <button type="button" class="btn btn-primary">반품진행</button>
+                                                    <button type="button" class="btn btn-primary">저장</button>
                                                     <button type="button" class="btn btn-secondary" onclick="window.close();">닫기</button>
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- //반품진행/불가 -->
-                                        <!-- 반품거부/완료 -->
-                                        <div class="tab-pane" id="tap3" role="tabpanel">
-                                            <small class="form-hint">
-                                                ! 반품신청은 고객 및 통합관리만 신청이 가능합니다.<br/>
-                                                ! 반품신청 후 반품진행 전 단계까지 반품취소가 가능합니다.<br/>
-                                                ! 결제수단이 “가상계좌”인 경우 사용자만 반품신청이 가능합니다.
-                                            </small>
-                                            <div class="row m-0 mt-2">
-                                                <div class="form_item">
-                                                    <div class="subheader mb-1">제품사진</div>
-                                                    <div class="subcontent">
-                                                        <div class="input-group">
-                                                            <label class="btn btn-sm btn-secondary">
-                                                                <input type="file" onchange="FileUploader.handleFileUpload(event, 'returnRefusal')" max-size="10" max-count="5" class="hidden_input">
-                                                                제품사진 첨부하기
-                                                            </label>
-                                                            <span class="input-group-text"><span class="count multiple_count">0</span>개(<span class="size multiple_size">0MB</span>)</span>
-                                                        </div>
-                                                        <div class="file_photo_view multiple_preview">
-                                                            <!-- <div class="item">
-                                                                <div class="thum"><img src="../../assets/images/card_kb.jpg"/></div>
-                                                                <button type="button" class="remove_btn">파일삭제</button>
-                                                            </div> -->
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form_item">
-                                                    <div class="subheader mb-1 required">반품거부사유</div>
-                                                    <div class="subcontent">
-                                                        <div class="input-group">
-                                                            <input type="text" class="form-control" placeholder="반품거부 사유를 입력해주세요.">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="list-btns justify-content-between mt-3">
-                                                <div>
-                                                    <button type="button" class="btn btn-primary">거부확정</button>
-                                                </div>
-                                                <div>
-                                                    <button type="button" class="btn btn-primary">반품거부</button>
-                                                    <button type="button" class="btn btn-primary">반품완료</button>
-                                                    <button type="button" class="btn btn-secondary" onclick="window.close();">닫기</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- //반품거부/완료 -->
+                                        <!-- //반품진행 -->
                                     </div>
                                 </div>
                             </div>
@@ -267,9 +241,9 @@
             </div>
         </div>
 
-        <div class="form-container grid_grid2">
+        <div id="expected_refund" class="form-container">
             <div class="card form_area">
-                <div class="card-header"><h3 class="card-title">환불금액</h3></div>
+                <div class="card-header"><h3 class="card-title">환불예정금액</h3></div>
                 <div class="card-body">
                     <div class="row">
                         <div class="form_item">
@@ -281,7 +255,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form_item bg-danger-lt">
+                        <!-- <div class="form_item bg-danger-lt">
                             <div class="subheader mb-1">포인트</div>
                             <div class="subcontent">
                                 <div class="input-group">
@@ -300,7 +274,7 @@
                                     <span class="input-group-text text w-25">원</span>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="form_item bg-info-lt">
                             <div class="subheader mb-1">취소 시 부과 배송비</div>
                             <div class="subcontent">
@@ -309,11 +283,10 @@
                                     <input type="tel" class="form-control" data-amount-comma="" value="185000">
                                     <span class="input-group-text text w-25">원</span>
                                 </div>
-                                <small class="form-hint">! 무료배송 조건이 해제되어 추가 배송비가 발생할 수 있습니다.</small>
                             </div>
                         </div>
                         <div class="form_item bg-primary-lt">
-                            <div class="subheader mb-1">환불 예상금액</div>
+                            <div class="subheader mb-1">환불 예정금액</div>
                             <div class="subcontent">
                                 <div class="input-group">
                                     <input type="tel" class="form-control" data-amount-comma="" value="185000">
@@ -321,18 +294,17 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form_item">
+                        <!-- <div class="form_item">
                             <div class="subheader mb-1">반환되는 쿠폰</div>
                             <div class="subcontent">
                                 <div class="input-group">
                                     <input type="text" class="form-control" value="쿠폰명이 표기됩니다." readonly>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
-            <small class="form-hint text-black mt-1">* 적립마일리지 자동회수 : 75마일리지</small>
         </div>
 
         <div class="content-area">
@@ -353,7 +325,7 @@
                             <tbody>
                                 <tr>
                                     <td>1</td>
-                                    <td>교환신청</td>
+                                    <td>반품신청</td>
                                     <td class="text-start">사이즈 교환 요청</td>
                                     <td>user_id</td>
                                     <td>2024-09-26 11:11:11</td>
@@ -379,6 +351,20 @@ const returnRefusal = FileUploader.getPhotoCollection('returnRefusal');
 
 console.log(returnStatus);//반품신청 취소 담긴파일 확인
 console.log(returnRefusal);//반품거부완료 취소 담긴파일 확인
+
+const tabs = document.querySelectorAll('.form-container .nav-item a');
+const expected_refund = document.getElementById('expected_refund');
+tabs.forEach(function(tab, idx){
+
+    tab.addEventListener('click', function() {
+        if(idx == 1){ // 02. 반품진행
+            expected_refund.classList.add('d-none');
+        }else{
+            expected_refund.classList.remove('d-none');
+        }
+    });
+   
+});
 </script>
 </body>
 </html>
