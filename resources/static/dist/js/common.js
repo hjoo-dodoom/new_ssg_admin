@@ -1209,6 +1209,7 @@ const FileUploader = (function() {
       const files = Array.from(event.target.files);
       const maxSize = parseInt(event.target.getAttribute('max-size'), 10);
       const maxCount = parseInt(event.target.getAttribute('max-count'), 10);
+      const RegExtensions = /(\.jpg|\.jpeg|\.png)$/i; // 허용 확장자
       const formItem = event.target.closest('.form_item');
       const preview = formItem.querySelector('.multiple_preview');
       const countElement = formItem.querySelector('.multiple_count');
@@ -1219,6 +1220,12 @@ const FileUploader = (function() {
       files.forEach(file => {
           const fileSizeMB = file.size / (1024 * 1024);
           const totalSizeMB = currentFiles.reduce((sum, f) => sum + f.size / (1024 * 1024), 0);
+          const isAccept = RegExtensions.exec(file.name);
+
+          if(!isAccept){
+            alert('jpg(jpeg), png 파일만 등록 하실 수 있습니다.');
+            return false;
+          }
 
           if (currentFiles.length < maxCount && totalSizeMB + fileSizeMB <= maxSize) {
               currentFiles.push(file);
