@@ -64,7 +64,7 @@ transition:all 0.3s;}
 .tm_cnt img{max-width:220px;max-height:80px;}
 .short_cut{display:block;max-width:220px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
 .table.table-line{border-spacing:1px;border-collapse: separate;--tblr-table-accent-bg:transparent;--tblr-table-border-color:transparnt;border-color:transparent;background-color: #b1b1b1;}
-.table.table-line th{background-color: var(--tblr-bg-surface-tertiary);}
+.table.table-line th{background-color: #DDE0E9;}
 .table.table-line .dark th,
 .table .dark th{background-color: #9a9a9a;color:#fff;outline:1px solid #828282;}
 .table.table-line .primary th,
@@ -318,7 +318,7 @@ aside .display_type button.active{opacity:1;background-color:#fff;}
 .page-body.search_top .content-area{width:100%;}
 .page-body.search_top .aside-search .display_type{position:absolute;left:10px;bottom:10px;margin:0;}
 .page-body.search_top .option_item{width:20%;display:flex;align-items: center;background-color: #fff;border:1px solid #d7d6e5;box-shadow: 0 0 0 1px #d7d6e5;}
-.page-body.search_top .option_item .subheader{min-width:80px;max-width:80px;background-color: #f0f1f7;border-right:1px solid #d7d6e5;padding:0 10px 0 5px;margin:0;height:100%;display:flex;align-items: center;}
+.page-body.search_top .option_item .subheader{min-width:80px;max-width:80px;background-color: #DDE0E9;border-right:1px solid #d7d6e5;padding:0 10px 0 5px;margin:0;height:100%;display:flex;align-items: center;}
 .page-body.search_top .option_item .subheader + div{padding:3px 3px 3px 5px;flex:1 1 auto;}
 .page-body.search_top .option_item .subheader + div.row{padding:3px 0 3px 2px;}
 .page-body.search_top .option_item .tilde{padding:0;}
@@ -338,7 +338,7 @@ aside .display_type button.active{opacity:1;background-color:#fff;}
 .seasrch_popup .content-area{width:100%;}
 .seasrch_popup .display_type{position:absolute;left:10px;bottom:10px;margin:0;}
 .seasrch_popup .option_item{width:50%;display:flex;align-items: center;background-color: #fff;border:1px solid #d7d6e5;box-shadow: 0 0 0 1px #d7d6e5;}
-.seasrch_popup .option_item .subheader{min-width:80px;max-width:80px;background-color: #f0f1f7;border-right:1px solid #d7d6e5;padding:0 10px 0 5px;margin:0;height:100%;display:flex;align-items: center;}
+.seasrch_popup .option_item .subheader{min-width:80px;max-width:80px;background-color: #DDE0E9;border-right:1px solid #d7d6e5;padding:0 10px 0 5px;margin:0;height:100%;display:flex;align-items: center;}
 .seasrch_popup .option_item .subheader + div{padding:3px 3px 3px 5px;flex:1 1 auto;}
 .seasrch_popup .option_item .subheader + div.row{padding:3px 0 3px 2px;}
 .seasrch_popup .option_item .tilde{padding:0;}
