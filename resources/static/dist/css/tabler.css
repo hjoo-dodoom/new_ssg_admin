@@ -455,9 +455,8 @@ table {
 }
 
 caption {
-  padding:5px 10px;
-  color: #fff;
-  background-color: #363636;
+  padding:5px 0px;
+  color: #000;
   font-size:0.8rem;font-weight:800;
   text-align: left;
   border-style: solid;
@@ -2237,7 +2236,7 @@ progress {
   width: 100%;
   height:26px;
   font-family: var(--tblr-font-sans-serif);
-  font-size: 13px;
+  font-size: 14px;
   padding-left:5px;
   font-weight: 400;
   line-height: 1.4285714286;
@@ -2445,7 +2444,7 @@ textarea.form-control-lg {
   padding-left:5px;
   padding-right:18px;
   font-family: var(--tblr-font-sans-serif);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 400;
   line-height: 1.4285714286;
   color: inherit;
@@ -2507,7 +2506,7 @@ textarea.form-control-lg {
   display: block;
   padding-left: 1.3rem;
   margin-top:0.35rem;
-  font-size:13px;
+  font-size:14px;
 }
 .form-check .form-check-input {
   float: left;
@@ -15403,7 +15402,7 @@ Navbar vertical
 }
 
 .page-pretitle {
-  font-size: 12px;
+  font-size: 13px;
   margin-bottom:5px;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -15413,7 +15412,7 @@ Navbar vertical
 
 .page-title h2{
   margin: 0;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   line-height: 1.75rem;
   font-weight: var(--tblr-font-weight-bold);
   color: inherit;
@@ -15422,7 +15421,7 @@ Navbar vertical
 }
 .page-title {
   margin: 0;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   line-height: 1.75rem;
   font-weight: var(--tblr-font-weight-bold);
   color: inherit;
@@ -15431,7 +15430,7 @@ Navbar vertical
 }
 .page-title2{
   margin: 0;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   line-height: 1.75rem;
   font-weight: var(--tblr-font-weight-bold);
   color: inherit;
@@ -21721,7 +21720,7 @@ a.step-item:hover {
 .table thead th, .markdown > table thead th {
   color: var(--tblr-muted);
   background: var(--tblr-bg-surface-tertiary);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.04em;
