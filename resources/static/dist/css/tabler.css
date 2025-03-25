@@ -258,7 +258,7 @@ body {
   color: var(--tblr-body-color);
   text-align: var(--tblr-body-text-align);
   /*background-color: var(--tblr-body-bg);*/
-  background-color: #e7e8ef;
+  background-color: #f3f3f3;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
