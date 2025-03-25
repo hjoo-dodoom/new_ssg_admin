@@ -14162,7 +14162,7 @@ Navbar
   }
   .navbar-expand-lg.navbar-vertical ~ .navbar,
   .navbar-expand-lg.navbar-vertical ~ .page-wrapper {
-    margin-left: 235px;
+    margin-left: 255px;
   }
   .navbar-expand-lg.navbar-vertical.navbar-right ~ .navbar,
   .navbar-expand-lg.navbar-vertical.navbar-right ~ .page-wrapper {
@@ -14869,7 +14869,7 @@ Navbar vertical
   }
 }
   .navbar-vertical.navbar-expand-lg {
-    width: 70px;
+    width: 90px;
     position: fixed;
     top: 0;
     left: 0;
