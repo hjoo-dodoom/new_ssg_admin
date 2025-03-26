@@ -85,3 +85,5 @@ body.login_page .form-selectgroup-input:focus + .form-selectgroup-label{outline:
 body.login_page .form-selectgroup-check{width:20px;height:20px;}
 body.login_page .form-check-input:checked{background-color: #000;}
 body.login_page .form-check{color:#222;font-size:14px;}
+
+.underline{text-decoration: underline !important;}

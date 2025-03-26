@@ -446,7 +446,7 @@
                                         <span class="form-selectgroup-check"></span>
                                     </div>
                                     <div class="form-check-label text-start">
-                                    개인정보이용약관, 개인정보수집 및 이용에 대한 안내,<br/>개인정보의 취급위탁 동의에 모두 동의합니다.
+                                        이용약관, 개인정보 수집 및 이용에 대한 안내에 모두 동의합니다.
                                     </div>
                                 </div>
                             </label>
@@ -456,7 +456,7 @@
                         <div class="input-group align-items-center">
                             <label class="form-check form-check-inline">
                                 <input class="form-check-input" type="checkbox">
-                                <span class="form-check-label">개인정보이용약관에 동의합니다.</span>
+                                <span class="form-check-label">이용약관 동의(필수)</span>
                             </label>
                             <button type="button" class="btn btn-outline-dark btn-sm ms-auto" onclick="showModal('terms1');">
                             자세히보기
@@ -467,7 +467,7 @@
                         <div class="input-group align-items-center">
                             <label class="form-check form-check-inline">
                                 <input class="form-check-input" type="checkbox">
-                                <span class="form-check-label">개인정보의 취급위탁 동의에 동의합니다.</span>
+                                <span class="form-check-label">개인정보 수집 및 이용 동의(필수)</span>
                             </label>
                             <button type="button" class="btn btn-outline-dark btn-sm ms-auto" onclick="showModal('terms2');">
                                 자세히보기
@@ -498,12 +498,12 @@
 </div>
 <!-- //첫로그인 약관동의 -->
 
-<!-- 개인정보이용약관 -->
+<!-- 이용약관 동의(필수) -->
 <div class="modal modal-blur fade " id="terms1" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-md modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">개인정보이용약관</h5>
+                <h5 class="modal-title">이용약관 동의(필수)</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -531,30 +531,67 @@
         </div>
     </div>
 </div>
-<!-- //개인정보이용약관 -->
-<!-- 취급위탁동의 -->
+<!-- //이용약관 동의(필수) -->
+<!-- 개인정보 수집 및 이용 동의(필수) -->
 <div class="modal modal-blur fade " id="terms2" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">개인정보의 취급위탁 동의</h5>
+                <h5 class="modal-title">개인정보 수집 및 이용 동의(필수)</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="card-body">
-                    <div class="terms_scroll">
-                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
-                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
-                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
-                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
-                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
-                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
-                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
-                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
-                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
-                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.<br/>
-                        약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다. 약관내용이 들어갑니다.
+                    <div class="table-responsive mt-2">
+                        <table class="table table-vcenter table-line card-table table-mb table-lg">
+                            <colgroup>
+                                <!-- <col>
+                                <col style="width:150px;"> -->
+                            </colgroup>
+                            <thead>
+                                <tr class="text-center">
+                                    <th>분류</th>
+                                    <th>항목</th>
+                                    <th>목적</th>
+                                    <th>보유 및 이용기간</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th class="fs-4">기획</th>
+                                    <td>
+                                        ㆍ회사정보 <br/>
+                                        [필수항목] 협력회사명, 사업자등록번호, 주요 브랜드, 주요상품, 우편번호, 주소, 상세주소, 택배사 선택, 배송비설정
+                                        <br/> <br/>
+                                        ㆍ관리자정보 <br/>
+                                        [필수항목] 아이디, 비밀번호, 비밀번호 확인, 담당자명, 휴대폰번호
+                                    </td>
+                                    <td rowspan="2">협력회사등록 및 관리자 식별, 협력회사 관리</td>
+                                    <td rowspan="2">
+                                        <span class="mb_cnt">
+                                            - <span class="underline">계약종료 시</span>
+                                            <br/>
+                                            - <span class="underline">협력회사 요청 시</span>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="fs-4">매장</th>
+                                    <td>
+                                        ㆍ회사정보 <br/>
+                                        [필수항목] 협력회사명, 사업자등록번호, MD등록번호, 브랜드명, 주요 상품, 우편번호, 주소, 상세주소, 택배사 선택, 배송비설정
+                                        <br/> <br/>
+                                        ㆍ관리자정보 <br/>
+                                        [필수항목] 아이디, 비밀번호, 비밀번호 확인, 담당자명, 휴대폰번호
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
+                    <ul class="dot mt-2">
+                        <li>선택 항목은 가입 시 입력 또는 서비스 이용 시점에 수집되어 이용됩니다.</li>
+                        <li>동의를 거부할 수 있으나 동의 거부 시 서비스 이용이 제한됩니다.</li>
+                    </ul>
                 </div>
             </div>
             <div class="modal-footer">
@@ -565,7 +602,7 @@
         </div>
     </div>
 </div>
-<!-- //취급위탁동의 -->
+<!-- //개인정보 수집 및 이용 동의(필수) -->
 <!-- 개인정보 제3자제공 -->
 <div class="modal modal-blur fade " id="terms3" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-md modal-dialog-centered" role="document">
