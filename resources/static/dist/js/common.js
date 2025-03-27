@@ -474,9 +474,23 @@ function displayPageHistory() {
 
 document.addEventListener('DOMContentLoaded', function() {
   const pageTitleElement = document.querySelector('.page-title');
+
+  const nav = document.getElementById('nav');
+  const cate3List = nav.querySelectorAll('li ul li ul li a'); // 3차 카테고리 항목
+
   if(pageTitleElement){
     const pageTitle = pageTitleElement.innerHTML;
-    addPageToCookie(window.location.href, pageTitle);
+
+    let found = false;
+    cate3List.forEach((element) => {
+      if (element.innerHTML === pageTitle.trim()) {
+        found = true;
+      }
+    });
+
+    if (found) {
+      addPageToCookie(window.location.href, pageTitle);
+    }
   }
   displayPageHistory();
 });
