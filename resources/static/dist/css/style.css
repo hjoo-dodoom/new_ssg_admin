@@ -89,7 +89,7 @@ transition:all 0.3s;}
 .table tfoot .bg_dark:hover{background-color: #5f5f5f;}
 .table .bold{font-weight:500;}
 .table thead th{font-weight:600;}
-.table tbody th{font-size:12px;}
+.table tbody th{font-size:13px;}
 .table.table-lg th,
 .table.table-lg td{padding:10px;}
 
