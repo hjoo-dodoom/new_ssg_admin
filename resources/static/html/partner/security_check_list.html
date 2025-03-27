@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=1400"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>신세계 관리자</title>
+    <!-- CSS files -->
+    <link href="/resources/static/dist/css/tabler.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/tabler-vendors.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/>
+    <link rel="shortcut icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <script src="/resources/static/dist/js/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/resources/static/dist/libs/litepicker/dist/litepicker.js?1674944402"></script>
+    <script src="/resources/static/dist/js/jquery.validate.js"></script>
+    <!-- Tabler Core -->
+    
+    <script src="/resources/static/dist/js/common.js"></script>
+    <style>
+    :root {
+        --theme-admin-type: #cf3f42;
+        /* #cf3f42 통합관리자 컬러 코드*/
+        /* #4b9b52 협력회사 컬러 코드 */
+        /* #214c9c 고객사 컬러 코드 */
+    }
+    </style>
+</head>
+<body>
+
+<!-- 공통영역1 -->
+<aside id="header" class="navbar navbar-vertical navbar-expand-lg header_left"></aside>
+<script>
+    //html include
+    //헤더&푸터 개발 완료시 삭제해주세요
+    function includeFile(path, targetId) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', path, true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById(targetId).innerHTML = xhr.responseText;
+        }
+    };
+    xhr.send();
+    }
+    var includePath = "/resources/static/layout/header.html";
+    includeFile(includePath, 'header');
+</script>
+<!-- //공통영역1 -->
+
+<div class="page-wrapper">
+    <!-- 공통영역2 -->
+    <div class="member_info">
+        <div class="info">
+            <span>관리권한 : 최상위관리자</span>
+            <!-- 통합관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <!-- 협력관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <!-- 고객사관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <span class="login_session">로그인 유지시간 <strong>30:00</strong> <button type="button" class="btn btn-xs btn-primary">연장</button></span>
+            <button type="button" class="btn btn-xs btn-secondary">관리자 매뉴얼 보기</button><!-- 공통 -->
+            <button type="button" class="btn btn-xs btn-secondary">기본양식다운로드</button><!-- 통합,협력사만 -->
+            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/admin_modify_pop.html', '900', '640')">관리자정보수정</button><!-- 공통 -->
+            <button type="button" class="btn btn-xs btn-secondary">보안체크</button><!-- 협력사만 -->
+            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/terms_pop.html', '600', '540')">이용약관</button><!-- 협력사만 -->
+        </div>
+        <div>
+            <a href="javascript:;" class="logout">홍길동(admin_01)님 로그아웃</a>
+            <a href="javascript:;" class="home">홈으로</a>
+        </div>
+    </div>
+
+    <!-- 페이지 히스토리 탭 -->
+    <div class="page-history">
+        <div class="history_toggle">
+            <label class="form-check form-switch">
+                <span class="form-check-label">History</span>
+                <input id="historyUse" class="form-check-input" type="checkbox" >
+            </label>
+        </div>
+        <button class="close_all" type="button" title="히스토리 모두 삭제" onclick="historyRemoveAll();">히스토리 모두 삭제</button>
+    </div>
+    <!-- //공통영역2 -->
+
+    <div class="page-header d-print-none">
+        <div class="container-xl">
+            <div class="row g-2 align-items-center">
+                <div class="col">
+                    <!-- Page pre-title -->
+                    <div class="page-pretitle">
+                        홈 > 협력회사 > 보안관리 > 보안체크리스트
+                    </div>
+                    <h2 class="page-title">
+                        보안체크리스트
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page body -->
+    <div class="page-body search_left">
+        <div class="container-xl">
+            <div class="row row-cards aside_wrap">
+
+                <!-- 검색시작 -->
+                <div class="aside-search" id="asideSearch">
+                    <form action="" class="card">
+                        <div class="card-body">
+                            <div class="display_type">
+                                <button type="button" class="left active" title="검색영역 좌측배치">검색영역 좌측배치</button>
+                                <button type="button" class="top " title="검색영역 상단배치">검색영역 상단배치</button>
+                                <button type="button" class="right" title="검색영역 우측배치">검색영역 우측배치</button>
+                            </div>
+                            <div class="search_options">
+                                <div class="option_item">
+                                    <div class="subheader">기간</div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <select name="" id="" class="form-select">
+                                                <option value="">2024년</option>
+                                                <option value="">2023년</option>
+                                                <option value="">2022년</option>
+                                                <option value="">2021년</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="option_item">
+                                    <div class="subheader">인증</div>
+                                    <div class="row">
+                                        <div>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="certify_status" checked="">
+                                                <span class="form-check-label">전체</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="certify_status">
+                                                <span class="form-check-label">인증완료</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="certify_status">
+                                                <span class="form-check-label">미인증</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="option_item">
+                                    <div class="subheader">협력회사</div>
+                                    <div class="row">
+                                        <div class="col-12 member_type_status3"><!-- member_type_status3 협력회사 상태 -->
+                                            <select class="form-select select-display" onchange="partnerStatusChange();">
+                                                <option value="" select-display="partnerStatus1 partnerStatus2 partnerStatus3">전체</option>
+                                                <option value="" select-display="partnerStatus1" selected="">정상승인</option>
+                                                <option value="" select-display="partnerStatus2">승인대기</option>
+                                                <option value="" select-display="partnerStatus3">정지</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-12 member_type_select8"><!-- member_type_select8 협력회사 -->
+                                            <div class="search_select">
+                                                <input type="hidden" value="">
+                                                <button type="button" class="btn_select form-select text-start" onclick="searchSelectOpen(this);">협력회사 전체</button>
+                                                <div class="search_select_options" style="display:none;">
+                                                    <input type="text" class="form-control" placeholder="검색어 입력" oninput="searchSelectSearch(this);">
+                                                    <div class="items">
+                                                        <div class="item"><a href="javascript:;" data-id="" class="active" onclick="searchSelectSelect(this);">협력회사 전체</a></div>
+                                                        <div class="item partnerStatus1"><a href="javascript:;" data-id="code458i95i5" onclick="searchSelectSelect(this);">협력회사1(정상승인)</a></div>
+                                                        <div class="item partnerStatus2"><a href="javascript:;" data-id="codeeye44576" onclick="searchSelectSelect(this);">협력회사2(승인대기)</a></div>
+                                                        <div class="item partnerStatus3"><a href="javascript:;" data-id="code45urt48u" onclick="searchSelectSelect(this);">협력회사2(정지)</a></div>
+                                                        <div class="item partnerStatus1"><a href="javascript:;" data-id="code4575eyry" onclick="searchSelectSelect(this);">협력회사3(정상승인)</a></div>
+                                                        <div class="item partnerStatus1"><a href="javascript:;" data-id="code12565" onclick="searchSelectSelect(this);">협력회사4(정상승인)</a></div>
+                                                        <div class="item partnerStatus1"><a href="javascript:;" data-id="code6556677" onclick="searchSelectSelect(this);">협력회사5(정상승인)</a></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <script>
+                                        //셀렉트 변경시  그룹사,고객사,계열사,상위몰 하위몰 선택초기화 (맨위에 항목으로)
+                                        function resetSelection(selector) {
+                                            let container = document.querySelector(selector);
+                                            let items = container.querySelectorAll('.items .item a');
+                                            let firstItem = container.querySelector('.items .item:first-child a');
+                                            
+                                            container.querySelector('input[type="hidden"]').value = firstItem.getAttribute('data-id');
+                                            container.querySelector('.btn_select').textContent = firstItem.textContent;
+                                            
+                                            items.forEach(function(item){
+                                                item.classList.remove('active');
+                                            });
+                                            firstItem.classList.add('active');
+                                        }
+                                        
+                                        function partnerStatusChange(){
+                                            //협력회사 상태변경시 하위 셀렉트 초기화
+                                            resetSelection('.member_type_select8');//협력회사
+                                        }
+                                    </script>
+                                </div>
+                                <div class="option_item">
+                                    <div class="subheader">매장/기획</div>
+                                    <div class="row">
+                                        <div>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="partner_type" checked="">
+                                                <span class="form-check-label">전체</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="partner_type">
+                                                <span class="form-check-label">매장</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="partner_type">
+                                                <span class="form-check-label">기획</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="option_item w30">
+                                    <div class="subheader">검색</div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <select class="form-select">
+                                                <option value="" selected="">점포/회사명</option>
+                                                <option value="">아이디</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-6">
+                                            <input type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="search_btns">
+                                <button class="btn btn-primary">
+                                    검색
+                                </button>
+                                <a href="#" class="btn btn-secondary">
+                                    검색 초기화
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                    
+                </div>
+                <!-- //검색시작 -->
+
+                <!-- 콘텐츠 시작 -->
+                <div class="content-area">
+                    <div class="list-btns justify-content-between mb-1">
+                        <div>
+                            <div class="list_count">* 전체 : <strong class="text-primary">111,592</strong>건 / 검색 : <strong class="text-primary">50</strong>건</div>
+                        </div>
+                        <div>
+                            <select class="form-select ms-2 float-start w-auto">
+                                <option selected="">등록일 역순 ⬆</option>
+                                <option>등록일 순 ⬇</option>
+                                <option>수정일 역순⬆</option>
+                                <option>수정일 순 ⬇</option>
+                                <option>접속일 역순⬆</option>
+                                <option>접속일 순 ⬇</option>
+                            </select>
+                            <select class="form-select ms-2 float-start w-auto">
+                                <option selected>20개씩 보기</option>
+                                <option>30개씩 보기</option>
+                                <option>50개씩 보기</option>
+                                <option>100개씩 보기</option>
+                                <option>200개씩 보기</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="card table-mb-card">
+                        <div class="table-responsive">
+                            <table class="table table-vcenter table-line card-table text-center table-mb label-control tr_hover">
+                                <colgroup>
+                                    <col style="">
+                                    <col style="">
+                                    <col style="">
+                                    <col style="width:75px;">
+                                    <col style="width:75px;">
+                                    <col style="width:75px;">
+                                    <col style="width:75px;">
+                                    <col style="width:75px;">
+                                    <col style="width:75px;">
+                                    <col style="width:75px;">
+                                    <col style="width:75px;">
+                                    <col style="width:75px;">
+                                    <col style="width:75px;">
+                                    <col style="width:75px;">
+                                    <col style="width:75px;">
+                                </colgroup>
+                                <thead class="dark">
+                                    <tr>
+                                        <th>번호</th>
+                                        <th>점포/회사명</th>
+                                        <th>아이디</th>
+                                        <th>1월</th>
+                                        <th>2월</th>
+                                        <th>3월</th>
+                                        <th>4월</th>
+                                        <th>5월</th>
+                                        <th>6월</th>
+                                        <th>7월</th>
+                                        <th>8월</th>
+                                        <th>9월</th>
+                                        <th>10월</th>
+                                        <th>11월</th>
+                                        <th>12월</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="15" class="list-empty">
+                                            검색된 내역이 존재하지 않습니다.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>20</td>
+                                        <td>베네파트너20</td>
+                                        <td>abc1234</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <a href="javascript:;" class="list_link text-primary"
+                                            onclick="windowPopup('/resources/static/html/popup/security_check_pop.html', '700', '550')"
+                                            >04-03</a>
+                                        </td>
+                                        <td>
+                                            <a href="javascript:;" class="list_link text-primary"
+                                            onclick="windowPopup('/resources/static/html/popup/security_check_pop.html', '700', '550')"
+                                            >05-07</a>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>20</td>
+                                        <td>베네파트너20</td>
+                                        <td>abc1234</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <a href="javascript:;" class="list_link text-primary"
+                                            onclick="windowPopup('/resources/static/html/popup/security_check_pop.html', '700', '550')"
+                                            >03-03</a>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <a href="javascript:;" class="list_link text-primary"
+                                            onclick="windowPopup('/resources/static/html/popup/security_check_pop.html', '700', '550')"
+                                            >06-07</a>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="ip_pagenation display-flex justify-content-center mt-4">
+                        <div class="pg_btn disabled">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                                <!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevrons-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M11 7l-5 5l5 5"></path>
+                                    <path d="M17 7l-5 5l5 5"></path>
+                                    </svg>
+                            </a>
+                        </div>
+                        <div class="pg_btn disabled">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                                <!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M15 6l-6 6l6 6"></path>
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="pg_ip">
+                            <input type="tel" value="1" class="form-control"> / 250
+                        </div>
+                        <div class="pg_btn">
+                            <a class="page-link" href="#">
+                                <!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M9 6l6 6l-6 6"></path>
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="pg_btn">
+                            <a class="page-link" href="#">
+                                <!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevrons-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M7 7l5 5l-5 5"></path>
+                                <path d="M13 7l5 5l-5 5"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- 콘텐츠 끝 -->
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 공통영역 -->
+    <div id="footer"></div>
+    <script>
+        //헤더&푸터 개발 완료시 삭제해주세요
+        var includePath = "/resources/static/layout/footer.html";
+        includeFile(includePath, 'footer');
+    </script>
+    <!-- //공통영역 -->
+</div>
+<script src="/resources/static/dist/js/tabler.min.js"></script>
+</body>
+</html>
