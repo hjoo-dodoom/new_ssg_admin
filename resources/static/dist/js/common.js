@@ -27,10 +27,44 @@ function initializeLitepicker(element) {
 
 // 페이지 로드 시 기존 datepicker 초기화
 document.addEventListener("DOMContentLoaded", function () {
-  var datepickerIcons = document.getElementsByClassName('datepicker-icon');
-  for (var i = 0; i < datepickerIcons.length; i++) {
-    initializeLitepicker(datepickerIcons[i]);
+
+  const periodWrap = document.querySelector('.period_wrap');
+
+  if(periodWrap){
+    const periodInput = periodWrap.querySelectorAll('.datepicker-icon');
+    new Litepicker({
+      lang: 'ko-KR',
+      format: 'YYYY-MM-DD',
+      element: periodInput[0], // 시작일
+      elementEnd: periodInput[1], // 종료일
+      buttonText: {
+        previousMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 6l-6 6l6 6" /></svg>`,
+        nextMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24V24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>`,
+      },
+      dropdowns: {
+        minYear: 1980,
+        maxYear: 2030,
+        months: true,
+        years: true,
+      },
+      allowRepick: true,
+      autoApply: true,
+      singleMode: false,
+      // minDays: 3,
+      maxDays: 30 * 6, // 최대 6개월 선택 가능
+    });
+
+  }else{
+    var datepickerIcons = document.getElementsByClassName('datepicker-icon');
+
+    for (var i = 0; i < datepickerIcons.length; i++) {
+      initializeLitepicker(datepickerIcons[i]);
+    }
+
   }
+
 });
 
 // Input mask 초기화
@@ -476,7 +510,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const pageTitleElement = document.querySelector('.page-title');
 
   const nav = document.getElementById('nav');
-  const cate3List = nav.querySelectorAll('li ul li ul li a'); // 3차 카테고리 항목
+  const cate3List = nav?.querySelectorAll('li ul li ul li a'); // 3차 카테고리 항목
 
   if(pageTitleElement){
     const pageTitle = pageTitleElement.innerHTML;
