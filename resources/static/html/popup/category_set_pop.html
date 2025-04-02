@@ -320,5 +320,16 @@
     </div>
 </div>
 <script src="/resources/static/dist/js/tabler.min.js"></script>
+<script>
+    document.querySelectorAll('.label-control input[type="checkbox"]').forEach(function (check) {
+        check.addEventListener('change', function (event) {
+            const target = check.closest('tr').querySelector('td .form-check-input')
+
+            if(check.checked){
+                target.checked = true;
+            }
+        });
+    });
+</script>
 </body>
 </html>
