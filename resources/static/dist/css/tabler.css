@@ -136,7 +136,7 @@
   --tblr-font-sans-serif:    "Pretendard", 'sans-serif';
   --tblr-font-monospace:  "Pretendard", 'sans-serif';
   --tblr-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
-  --tblr-body-font-size: 0.8rem;
+  --tblr-body-font-size: 0.9rem;
   --tblr-body-font-weight: 400;
   --tblr-body-line-height: 1.4285714286;
   --tblr-body-color: #1d273b;
@@ -15986,7 +15986,7 @@ body:not(.theme-dark) .hide-theme-light {
 }
 
 .avatar {
-  --tblr-avatar-size: 2.5rem;
+  --tblr-avatar-size: 10rem;
   position: relative;
   width: var(--tblr-avatar-size);
   height: var(--tblr-avatar-size);

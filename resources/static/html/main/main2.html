@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=1400"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>신세계 관리자</title>
+    <!-- CSS files -->
+    <link href="/resources/static/dist/css/tabler.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/tabler-vendors.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/>
+    <link rel="shortcut icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <script src="/resources/static/dist/js/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/resources/static/dist/libs/litepicker/dist/litepicker.js?1674944402"></script>
+    <script src="/resources/static/dist/js/jquery.validate.js"></script>
+    <!-- Tabler Core -->
+    
+    <script src="/resources/static/dist/js/common.js"></script>
+    <style>
+    :root {
+        --theme-admin-type: #cf3f42;
+        /* #cf3f42 통합관리자 컬러 코드*/
+        /* #4b9b52 협력회사 컬러 코드 */
+        /* #214c9c 고객사 컬러 코드 */
+    }
+    </style>
+</head>
+<body>
+
+<!-- 공통영역1 -->
+<aside id="header" class="navbar navbar-vertical navbar-expand-lg header_left"></aside>
+<script>
+    //html include
+    //헤더&푸터 개발 완료시 삭제해주세요
+    function includeFile(path, targetId) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', path, true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById(targetId).innerHTML = xhr.responseText;
+        }
+    };
+    xhr.send();
+    }
+    var includePath = "/resources/static/layout/header.html";
+    includeFile(includePath, 'header');
+</script>
+<!-- //공통영역1 -->
+
+<div class="page-wrapper">
+    <!-- 공통영역2 -->
+    <div class="member_info">
+        <div class="info">
+            <span>관리권한 : 최상위관리자</span>
+            <!-- 통합관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <!-- 협력관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <!-- 고객사관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <span class="login_session">로그인 유지시간 <strong>30:00</strong> <button type="button" class="btn btn-xs btn-primary">연장</button></span>
+            <button type="button" class="btn btn-xs btn-secondary">관리자 매뉴얼 보기</button><!-- 공통 -->
+            <button type="button" class="btn btn-xs btn-secondary">기본양식다운로드</button><!-- 통합,협력사만 -->
+            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/admin_modify_pop.html', '900', '640')">관리자정보수정</button><!-- 공통 -->
+            <button type="button" class="btn btn-xs btn-secondary">보안체크</button><!-- 협력사만 -->
+            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/terms_pop.html', '600', '540')">이용약관</button><!-- 협력사만 -->
+        </div>
+        <div>
+            <a href="javascript:;" class="logout">홍길동(admin_01)님 로그아웃</a>
+            <a href="javascript:;" class="home">홈으로</a>
+        </div>
+    </div>
+
+    <!-- 페이지 히스토리 탭 -->
+    <div class="page-history">
+        <div class="history_toggle">
+            <label class="form-check form-switch">
+                <span class="form-check-label">History</span>
+                <input id="historyUse" class="form-check-input" type="checkbox" >
+            </label>
+        </div>
+        <button class="close_all" type="button" title="히스토리 모두 삭제" onclick="historyRemoveAll();">히스토리 모두 삭제</button>
+    </div>
+    <!-- //공통영역2 -->
+
+    <div class="page-header d-print-none">
+        <div class="container-xl">
+            <div class="row g-2 align-items-center">
+                <div class="col">
+                    <!-- Page pre-title -->
+                    <div class="page-pretitle">
+                        메인
+                    </div>
+                    <h2 class="page-title">
+                        메인
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Page body -->
+    <div class="page-body">
+        <div class="container-xl">
+            <div class="row">
+                <div class="col-sm-6 col-lg-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <h3 class="card-title">1:1문의</h3>
+                                <div class="mt-1">
+                                    25/03/26 ~ 25/04/01
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-vcenter table-line card-table text-center">
+                                    <colgroup>
+                                        <col style="width:33.333%;">
+                                        <col style="width:33.333%;">
+                                        <col style="width:33.333%;">
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th>총</th>
+                                            <th>답변대기</th>
+                                            <th>답변완료</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>10</td>
+                                            <td class="text-red">6</td>
+                                            <td class="text-green">4</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <h3 class="card-title">배송/주문문의</h3>
+                                <div class="mt-1">
+                                    25/03/26 ~ 25/04/01
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-vcenter table-line card-table text-center">
+                                    <colgroup>
+                                        <col style="width:33.333%;">
+                                        <col style="width:33.333%;">
+                                        <col style="width:33.333%;">
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th>총</th>
+                                            <th>답변대기</th>
+                                            <th>답변완료</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>10</td>
+                                            <td class="text-red">6</td>
+                                            <td class="text-green">4</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <h3 class="card-title">상품문의</h3>
+                                <div class="mt-1">
+                                    25/03/26 ~ 25/04/01
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-vcenter table-line card-table text-center">
+                                    <colgroup>
+                                        <col style="width:33.333%;">
+                                        <col style="width:33.333%;">
+                                        <col style="width:33.333%;">
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th>총</th>
+                                            <th>답변대기</th>
+                                            <th>답변완료</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>10</td>
+                                            <td class="text-red">6</td>
+                                            <td class="text-green">4</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <h3 class="card-title">고객사별 통계</h3>
+                                <div class="mt-1">
+                                    25/04/01 am 10:00
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-vcenter table-line card-table text-center table-mb label-control tr_hover">
+                                    <colgroup>
+                                        <col style="width:5%;">
+                                        <col style="width:9.5%;">
+                                        <col style="width:9.5%;">
+                                        <col style="width:9.5%;">
+                                        <col style="width:9.5%;">
+                                        <col style="width:9.5%;">
+                                        <col style="width:9.5%;">
+                                        <col style="width:9.5%;">
+                                        <col style="width:9.5%;">
+                                        <col style="width:9.5%;">
+                                        <col style="width:9.5%;">
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th rowspan="2">순위</th>
+                                            <th rowspan="2">고객사</th>
+                                            <th colspan="3">상품</th>
+                                            <th colspan="3">주문</th>
+                                            <th colspan="3">클레임</th>
+                                        </tr>
+                                        <tr>
+                                            <th>기획</th>
+                                            <th>매장</th>
+                                            <th>합계</th>
+                                            <th>주문접수</th>
+                                            <th>발송준비중</th>
+                                            <th>배송시작</th>
+                                            <th>취소</th>
+                                            <th>반품</th>
+                                            <th>교환</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>-</td>
+                                            <td>시크릿스토어</td>
+                                            <td>11,261,440</td>
+                                            <td>0</td>
+                                            <td class="fw-semibold">11,261,440</td>
+                                            <td>30건</td>
+                                            <td>30건</td>
+                                            <td>60건</td>
+                                            <td>10건</td>
+                                            <td>0건</td>
+                                            <td>2건</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="text-blue">
+                                                    <!-- Download SVG icon from https://tabler.io/icons/icon/caret-down -->
+                                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="currentColor"  class="icon icon-tabler icons-tabler-filled icon-tabler-caret-down"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 9c.852 0 1.297 .986 .783 1.623l-.076 .084l-6 6a1 1 0 0 1 -1.32 .083l-.094 -.083l-6 -6l-.083 -.094l-.054 -.077l-.054 -.096l-.017 -.036l-.027 -.067l-.032 -.108l-.01 -.053l-.01 -.06l-.004 -.057v-.118l.005 -.058l.009 -.06l.01 -.052l.032 -.108l.027 -.067l.07 -.132l.065 -.09l.073 -.081l.094 -.083l.077 -.054l.096 -.054l.036 -.017l.067 -.027l.108 -.032l.053 -.01l.06 -.01l.057 -.004l12.059 -.002z" /></svg>
+                                                </span>
+                                            </td>
+                                            <td>아우디코리아</td>
+                                            <td>11,261,440</td>
+                                            <td>0</td>
+                                            <td class="fw-semibold">11,261,440</td>
+                                            <td>30건</td>
+                                            <td>30건</td>
+                                            <td>60건</td>
+                                            <td>10건</td>
+                                            <td>0건</td>
+                                            <td>2건</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="text-red">
+                                                    <!-- Download SVG icon from https://tabler.io/icons/icon/caret-up -->
+                                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="currentColor"  class="icon icon-tabler icons-tabler-filled icon-tabler-caret-up"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M11.293 7.293a1 1 0 0 1 1.32 -.083l.094 .083l6 6l.083 .094l.054 .077l.054 .096l.017 .036l.027 .067l.032 .108l.01 .053l.01 .06l.004 .057l.002 .059l-.002 .059l-.005 .058l-.009 .06l-.01 .052l-.032 .108l-.027 .067l-.07 .132l-.065 .09l-.073 .081l-.094 .083l-.077 .054l-.096 .054l-.036 .017l-.067 .027l-.108 .032l-.053 .01l-.06 .01l-.057 .004l-.059 .002h-12c-.852 0 -1.297 -.986 -.783 -1.623l.076 -.084l6 -6z" /></svg>
+                                                </span>
+                                            </td>
+                                            <td>삼성화재 RC 생생택배몰</td>
+                                            <td>11,261,440</td>
+                                            <td>0</td>
+                                            <td class="fw-semibold">11,261,440</td>
+                                            <td>30건</td>
+                                            <td>30건</td>
+                                            <td>60건</td>
+                                            <td>10건</td>
+                                            <td>0건</td>
+                                            <td>2건</td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="2">합계</td>
+                                            <td>11,261,440</td>
+                                            <td>0</td>
+                                            <td class="fw-semibold">11,261,440</td>
+                                            <td>30건</td>
+                                            <td>30건</td>
+                                            <td>60건</td>
+                                            <td>10건</td>
+                                            <td>0건</td>
+                                            <td>2건</td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <h3 class="card-title">내부공지사항</h3>
+                                <div class="">
+                                    <a href="#" class="move-btn">내부공지사항 게시판 바로가기</a>
+                                </div>
+                            </div>
+                            <div class="list-group list-group-flush lst-notice">
+                                <a href="#" class="list-group-item list-group-item-action">
+                                    <span class="subject">[시스템][중요]법인영업몰 시스템 재 구축에 따른 서비스 중단 안내</span>
+                                    <span class="text-secondary float-end">25.04.01</span>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action">
+                                    <span class="subject">24년 차세대 시스템에 등록 되어있는 계약서 공유합니다.</span>
+                                    <span class="text-secondary float-end">25.03.28</span>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action">
+                                    <span class="subject">CJ택배접수 매뉴얼 변경에 따른 영업담당자 숙지사항 공유합니다.</span>
+                                    <span class="text-secondary float-end">25.03.26</span>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action">
+                                    <span class="subject">25년 신세계임직원몰 근로자의날 선물 제안안내</span>
+                                    <span class="text-secondary float-end">25.03.26</span>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action">
+                                    <span class="subject">삼성화재RC 시책몰 운영 건</span>
+                                    <span class="text-secondary float-end">25.03.20</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <h3 class="card-title">협력회사공지사항</h3>
+                                <div class="">
+                                    <a href="#" class="move-btn">협력회사공지사항 게시판 바로가기</a>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-vcenter table-line card-table text-center">
+                                    <colgroup>
+                                        <col>
+                                        <col style="width:10%;">
+                                        <col style="width:10%;">
+                                        <col style="width:10%;">
+                                        <col style="width:10%;">
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th>제목</th>
+                                            <th>전체</th>
+                                            <th>열람</th>
+                                            <th>미열람</th>
+                                            <th>제안</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-start td-truncate text-truncate"><a href="#">[공지][키움OO]2025년 연말 선물 제안[공지][키움OO]2025년 연말 선물 제안[공지][키움OO]2025년 연말 선물 제안[공지][키움OO]2025년 연말 선물 제안</a></td>
+                                            <td>27</td>
+                                            <td>18</td>
+                                            <td>9</td>
+                                            <td class="text-nowrap">10건</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-start td-truncate text-truncate"><a href="#">[긴급] 포인트몰 근로자의날 행사 고액상품[긴급] 포인트몰 근로자의날 행사 고액상품[긴급] 포인트몰 근로자의날 행사 고액상품</a></td>
+                                            <td>27</td>
+                                            <td>18</td>
+                                            <td>9</td>
+                                            <td class="text-nowrap">10건</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-start td-truncate text-truncate"><a href="#">한국투자증권 연간 VIP생일 선물 제안 요청한국투자증권 연간 VIP생일 선물 제안 요청한국투자증권 연간 VIP생일 선물 제안 요청한국투자증권 연간 VIP생일 선물 제안 요청</a></td>
+                                            <td>27</td>
+                                            <td>18</td>
+                                            <td>9</td>
+                                            <td class="text-nowrap">10건</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-start td-truncate text-truncate"><a href="#">OO생명 25년 창립기념품 제안요청 건</a></td>
+                                            <td>27</td>
+                                            <td>18</td>
+                                            <td>9</td>
+                                            <td class="text-nowrap">10건</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-start td-truncate text-truncate"><a href="#">태경그룹 근로자의날 상품 제안 요청</a></td>
+                                            <td>27</td>
+                                            <td>18</td>
+                                            <td>9</td>
+                                            <td class="text-nowrap">10건</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 공통영역 -->
+    <div id="footer"></div>
+    <script>
+        //헤더&푸터 개발 완료시 삭제해주세요
+        var includePath = "/resources/static/layout/footer.html";
+        includeFile(includePath, 'footer');
+    </script>
+    <!-- //공통영역 -->
+</div>
+<script src="/resources/static/dist/js/tabler.min.js"></script>
+</body>
+</html>

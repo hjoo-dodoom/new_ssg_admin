@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=1400"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>신세계 관리자</title>
+    <!-- CSS files -->
+    <link href="/resources/static/dist/css/tabler.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/tabler-vendors.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/>
+    <link rel="shortcut icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <script src="/resources/static/dist/js/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/resources/static/dist/libs/litepicker/dist/litepicker.js?1674944402"></script>
+    <script src="/resources/static/dist/js/jquery.validate.js"></script>
+    <!-- Tabler Core -->
+    
+    <script src="/resources/static/dist/js/common.js"></script>
+    <style>
+    :root {
+        --theme-admin-type: #214c9c;
+        /* #cf3f42 통합관리자 컬러 코드*/
+        /* #4b9b52 협력회사 컬러 코드 */
+        /* #214c9c 고객사 컬러 코드 */
+    }
+    </style>
+</head>
+<body>
+
+<!-- 공통영역1 -->
+<aside id="header" class="navbar navbar-vertical navbar-expand-lg header_left"></aside>
+<script>
+    //html include
+    //헤더&푸터 개발 완료시 삭제해주세요
+    function includeFile(path, targetId) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', path, true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById(targetId).innerHTML = xhr.responseText;
+        }
+    };
+    xhr.send();
+    }
+    var includePath = "/resources/static/layout/header.html";
+    includeFile(includePath, 'header');
+</script>
+<!-- //공통영역1 -->
+
+<div class="page-wrapper">
+    <!-- 공통영역2 -->
+    <div class="member_info">
+        <div class="info">
+            <span>관리권한 : 최상위관리자</span>
+            <!-- 통합관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <!-- 협력관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <!-- 고객사관리자 - 관리권한 : 최상위관리, MD관리자, 영업담당자, 아르바이트, 시스템관리 -->
+            <span class="login_session">로그인 유지시간 <strong>30:00</strong> <button type="button" class="btn btn-xs btn-primary">연장</button></span>
+            <button type="button" class="btn btn-xs btn-secondary">관리자 매뉴얼 보기</button><!-- 공통 -->
+            <button type="button" class="btn btn-xs btn-secondary">기본양식다운로드</button><!-- 통합,협력사만 -->
+            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/admin_modify_pop.html', '900', '640')">관리자정보수정</button><!-- 공통 -->
+            <button type="button" class="btn btn-xs btn-secondary">보안체크</button><!-- 협력사만 -->
+            <button type="button" class="btn btn-xs btn-secondary" onclick="windowPopup('/resources/static/html/popup/terms_pop.html', '600', '540')">이용약관</button><!-- 협력사만 -->
+        </div>
+        <div>
+            <a href="javascript:;" class="logout">홍길동(admin_01)님 로그아웃</a>
+            <a href="javascript:;" class="home">홈으로</a>
+        </div>
+    </div>
+
+    <!-- 페이지 히스토리 탭 -->
+    <div class="page-history">
+        <div class="history_toggle">
+            <label class="form-check form-switch">
+                <span class="form-check-label">History</span>
+                <input id="historyUse" class="form-check-input" type="checkbox" >
+            </label>
+        </div>
+        <button class="close_all" type="button" title="히스토리 모두 삭제" onclick="historyRemoveAll();">히스토리 모두 삭제</button>
+    </div>
+    <!-- //공통영역2 -->
+
+    <div class="page-header d-print-none">
+        <div class="container-xl">
+            <div class="row g-2 align-items-center">
+                <div class="col">
+                    <!-- Page pre-title -->
+                    <div class="page-pretitle">
+                        메인
+                    </div>
+                    <h2 class="page-title">
+                        메인
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Page body -->
+    <div class="page-body">
+        <div class="container-xl">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <h3 class="card-title">고객사 정보</h3>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-vcenter table-line card-table text-center table-mb label-control tr_hover">
+                                    <thead>
+                                        <tr>
+                                            <th>고객사</th>
+                                            <th>몰 운영</th>
+                                            <th>운영기간</th>
+                                            <th>쇼핑몰 주소</th>
+                                            <th>고객사 담당자</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>시크릿스토어</td>
+                                            <td>한시몰</td>
+                                            <td>25/04/01-25/12/31</td>
+                                            <td>secret.ssgb2e.com</td>
+                                            <td>홍길동/02-3406-6907</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <h3 class="card-title">주문회원 통계
+                                    <button type="button" class="reset-btn mt-1">새로고침</button>
+                                </h3>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="table-responsive">
+                                        <table class="table table-vcenter table-line card-table text-center table-mb tr_hover">
+                                            <caption class="fw-bold">주문내역</caption>
+                                            <colgroup>
+                                                <col style="width:25%;">
+                                                <col style="width:25%;">
+                                                <col style="width:25%;">
+                                                <col style="width:25%;">
+                                            </colgroup>
+                                            <thead>
+                                                <tr>
+                                                    <th>총 회원</th>
+                                                    <th>주문회원</th>
+                                                    <th>미 주문회원</th>
+                                                    <th>주문율</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>7명</td>
+                                                    <td>1명</td>
+                                                    <td>6명</td>
+                                                    <td class="fw-bold">14%</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="table-responsive">
+                                        <table class="table table-vcenter table-line card-table text-center table-mb tr_hover">
+                                            <caption class="fw-bold">포인트내역</caption>
+                                            <colgroup>
+                                                <col style="width:25%;">
+                                                <col style="width:25%;">
+                                                <col style="width:25%;">
+                                                <col style="width:25%;">
+                                            </colgroup>
+                                            <thead>
+                                                <tr>
+                                                    <th>적립 포인트</th>
+                                                    <th>사용 포인트</th>
+                                                    <th>잔여 포인트</th>
+                                                    <th>사용율</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>220.000</td>
+                                                    <td>220,000</td>
+                                                    <td>0</td>
+                                                    <td class="fw-bold">100%</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-vcenter table-line card-table text-center table-mb tr_hover">
+                                            <caption class="fw-bold">매출통계</caption>
+                                            <colgroup>
+                                                <col>
+                                                <col style="width:9%;">
+                                                <col style="width:9%;">
+                                                <col style="width:9%;">
+                                                <col style="width:9%;">
+                                                <col style="width:9%;">
+                                                <col style="width:9%;">
+                                                <col style="width:9%;">
+                                                <col style="width:9%;">
+                                                <col style="width:9%;">
+                                                <col style="width:9%;">
+                                            </colgroup>
+                                            <thead class="dark">
+                                                <tr>
+                                                    <th>날짜</th>
+                                                    <th>25/03/21</th>
+                                                    <th>25/03/22</th>
+                                                    <th>25/03/23</th>
+                                                    <th>25/03/24</th>
+                                                    <th>25/03/25</th>
+                                                    <th>25/03/26</th>
+                                                    <th>25/03/27</th>
+                                                    <th>합계(7일)</th>
+                                                    <th>평균(7일)</th>
+                                                    <th>총계(전체)</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th>주문회원</th>
+                                                    <td>0명</td>
+                                                    <td>0명</td>
+                                                    <td>0명</td>
+                                                    <td>0명</td>
+                                                    <td>0명</td>
+                                                    <td>0명</td>
+                                                    <td>0명</td>
+                                                    <td>0명</td>
+                                                    <td>0명</td>
+                                                    <td class="fw-bold">1명</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>매출금액</th>
+                                                    <td>0원</td>
+                                                    <td>0원</td>
+                                                    <td>0원</td>
+                                                    <td>0원</td>
+                                                    <td>0원</td>
+                                                    <td>0원</td>
+                                                    <td>0원</td>
+                                                    <td>0원</td>
+                                                    <td>0원</td>
+                                                    <td class="fw-bold">64,400원</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <h3 class="card-title">베스트판매 상품</h3>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-vcenter table-line card-table text-center table-mb label-control tr_hover">
+                                    <thead>
+                                        <tr>
+                                            <th>순위</th>
+                                            <th>이미지</th>
+                                            <th>상품명</th>
+                                            <th>주문수량</th>
+                                            <th>매출금액</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>
+                                                <span class="avatar" style="background-image: url(https://i.pravatar.cc/60?9)"></span>
+                                            </td>
+                                            <td>[위더스]자색양파즙 100ml</td>
+                                            <td class="fw-bold">2개</td>
+                                            <td class="fw-bold">63,400원</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>
+                                                <span class="avatar" style="background-image: url(https://i.pravatar.cc/60?9)"></span>
+                                            </td>
+                                            <td>[위더스]자색양파즙 100ml</td>
+                                            <td class="fw-bold">2개</td>
+                                            <td class="fw-bold">63,400원</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>
+                                                <span class="avatar" style="background-image: url(https://i.pravatar.cc/60?9)"></span>
+                                            </td>
+                                            <td>[위더스]자색양파즙 100ml</td>
+                                            <td class="fw-bold">2개</td>
+                                            <td class="fw-bold">63,400원</td>
+                                        </tr>
+                                        <tr>
+                                            <td>4</td>
+                                            <td>
+                                                <span class="avatar" style="background-image: url(https://i.pravatar.cc/60?9)"></span>
+                                            </td>
+                                            <td>[위더스]자색양파즙 100ml</td>
+                                            <td class="fw-bold">2개</td>
+                                            <td class="fw-bold">63,400원</td>
+                                        </tr>
+                                        <tr>
+                                            <td>5</td>
+                                            <td>
+                                                <span class="avatar" style="background-image: url(https://i.pravatar.cc/60?9)"></span>
+                                            </td>
+                                            <td>[위더스]자색양파즙 100ml</td>
+                                            <td class="fw-bold">2개</td>
+                                            <td class="fw-bold">63,400원</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 공통영역 -->
+    <div id="footer"></div>
+    <script>
+        //헤더&푸터 개발 완료시 삭제해주세요
+        var includePath = "/resources/static/layout/footer.html";
+        includeFile(includePath, 'footer');
+    </script>
+    <!-- //공통영역 -->
+</div>
+<script src="/resources/static/dist/js/tabler.min.js"></script>
+</body>
+</html>
