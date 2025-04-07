@@ -212,6 +212,7 @@
                                 button.style.display = 'none';
                                 reButton.style.display = 'block';
                                 certifyNumberBox.style.display = 'block';
+                                reButton.disabled = true;
                                 let secondsLeft = 180;
                         
                                 countdownInterval = setInterval(function() {
@@ -224,6 +225,9 @@
                                         clearInterval(countdownInterval);
                                         countdownSpan.textContent = '3:00';
                                         alert('시간이 만료되었습니다. 다시 시도해주세요.');
+
+                                        // 버튼 활성화
+                                        reButton.disabled = false;
                                     }
                                 }, 1000);
                             }
@@ -239,6 +243,11 @@
                             });
                         
                             document.getElementById('loginSubmit').addEventListener('click', function() {
+                                // 미인증 시(인증번호 5회 실패 후)
+                                alert('인증번호를 연속으로 실패하였습니다. 해당화면은 초기화됩니다.');
+                                location.reload();
+
+                                //인증확인 로직 후
                                 clearInterval(countdownInterval);
                                 document.getElementById('countDown').textContent = '0:00';
                                 alert('인증 확인!');
@@ -390,6 +399,7 @@
                             const countdownSpan = document.getElementById(countdownId);
                             button.style.display = 'none';
                             reButton.style.display = 'block';
+                            reButton.disabled = true;
                             let secondsLeft = 180;
                     
                             countdownIntervalCertify = setInterval(function() {
@@ -402,6 +412,9 @@
                                     clearInterval(countdownIntervalCertify);
                                     countdownSpan.textContent = '3:00';
                                     alert('시간이 만료되었습니다. 다시 시도해주세요.');
+
+                                    // 버튼 활성화
+                                    reButton.disabled = false;
                                 }
                             }, 1000);
                         }
@@ -417,6 +430,11 @@
                         });
                     
                         document.getElementById('checkSmsCertify').addEventListener('click', function() {
+                            // 미인증 시(인증번호 5회 실패 후)
+                            alert('인증번호를 연속으로 실패하였습니다. 해당화면은 초기화됩니다.');
+                            location.reload();
+
+                            //인증확인 로직 후
                             clearInterval(countdownIntervalCertify);
                             document.getElementById('countDownCertify').textContent = '0:00';
                             alert('인증 확인!');
@@ -486,6 +504,7 @@
                             const countdownSpan = document.getElementById(countdownId);
                             button.style.display = 'none';
                             reButton.style.display = 'block';
+                            reButton.disabled = true;
                             let secondsLeft = 180;
                     
                             countdownIntervalCertify2 = setInterval(function() {
@@ -498,6 +517,9 @@
                                     clearInterval(countdownIntervalCertify2);
                                     countdownSpan.textContent = '3:00';
                                     alert('시간이 만료되었습니다. 다시 시도해주세요.');
+
+                                    // 버튼 활성화
+                                    reButton.disabled = false;
                                 }
                             }, 1000);
                         }
@@ -513,6 +535,11 @@
                         });
                     
                         document.getElementById('checkSmsCertify2').addEventListener('click', function() {
+                            // 미인증 시(인증번호 5회 실패 후)
+                            alert('인증번호를 연속으로 실패하였습니다. 해당화면은 초기화됩니다.');
+                            location.reload();
+
+                            //인증확인 로직 후
                             clearInterval(countdownIntervalCertify);
                             document.getElementById('countDownCertify2').textContent = '0:00';
                             alert('인증 확인!');
@@ -692,6 +719,7 @@
                             const countdownSpan = document.getElementById(countdownId);
                             button.style.display = 'none';
                             reButton.style.display = 'block';
+                            reButton.disabled = true;
                             let secondsLeft = 180;
                     
                             countdownIntervalFind = setInterval(function() {
@@ -704,6 +732,9 @@
                                     clearInterval(countdownIntervalFind);
                                     countdownSpan.textContent = '3:00';
                                     alert('시간이 만료되었습니다. 다시 시도해주세요.');
+
+                                    // 버튼 활성화
+                                    reButton.disabled = false;
                                 }
                             }, 1000);
                         }
@@ -719,6 +750,11 @@
                         });
                     
                         document.getElementById('checkSmsFind').addEventListener('click', function() {
+                            // 미인증 시(인증번호 5회 실패 후)
+                            alert('인증번호를 연속으로 실패하였습니다. 해당화면은 초기화됩니다.');
+                            location.reload();
+
+                            //인증확인 로직 후
                             clearInterval(countdownIntervalFind);
                             document.getElementById('countDownFind').textContent = '0:00';
                             alert('인증 확인!');
