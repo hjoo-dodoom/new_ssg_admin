@@ -209,6 +209,11 @@
                                                     <input type="file" id="photoImage1" accept="image/*">
                                                     <span class="thum"></span>
                                                 </label>
+                                                <!-- 이미지 허버 했을 때 크케 보기 코드 -->
+                                                <!-- 하단 테그 동적으로 추가 -->
+                                                <!-- <div class="thum_hover">
+                                                    <img src="/resources/static/dist/img/img2.jpg" alt="">
+                                                </div> -->
                                                 <div class="row">
                                                     <label for="photoImage1" class="col btn btn-xs btn-secondary">변경</label>
                                                     <button type="button" class="col btn btn-xs btn-warning">삭제</button>
@@ -262,6 +267,7 @@
                                                 document.querySelectorAll('.photo_item').forEach(item => {
                                                     const input = item.querySelector('input[type="file"]');
                                                     const thum = item.querySelector('.thum');
+                                                    let hoverThumb = item.querySelector('.thum_hover');
                                                     const label = item.querySelector('label[for]');
                                                     const deleteButton = item.querySelector('button');
 
@@ -298,6 +304,17 @@
                                                                     thum.style.backgroundImage = `url(`+e.target.result+`)`;
                                                                 };
                                                                 img.src = e.target.result;
+                                                                const thumHoverDiv = document.createElement('div');
+                                                                thumHoverDiv.classList.add('thum_hover');
+                                                                const hoverImg = document.createElement('img');
+                                                                hoverImg.src = e.target.result;
+                                                                hoverImg.alt = '미리보기 이미지';
+                                                                thumHoverDiv.appendChild(hoverImg);
+                                                                const photoArea = document.querySelector('.photo_area');
+                                                                photoArea.insertAdjacentElement('afterend', thumHoverDiv);
+
+                                                                // hoverThumb 업데이트
+                                                                hoverThumb = thumHoverDiv;
                                                             };
                                                             reader.readAsDataURL(file);
                                                             label.textContent = '변경';
@@ -307,6 +324,10 @@
                                                     deleteButton.addEventListener('click', () => {
                                                         input.value = '';
                                                         thum.style.backgroundImage = 'none';
+
+                                                        if (hoverThumb) {
+                                                            hoverThumb.parentNode.removeChild(hoverThumb);
+                                                        }
                                                         label.textContent = '등록';
                                                     });
                                                 });

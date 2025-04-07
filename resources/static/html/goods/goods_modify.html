@@ -219,6 +219,9 @@
                                                     <input type="file" id="photoImage1" accept="image/*">
                                                     <span class="thum" style="background-image: url('/resources/static/dist/img/img2.jpg');"></span>
                                                 </label>
+                                                <div class="thum_hover">
+                                                    <img src="/resources/static/dist/img/img2.jpg" alt="">
+                                                </div>
                                                 <div class="row">
                                                     <label for="photoImage1" class="col btn btn-xs btn-secondary">변경</label>
                                                     <button type="button" class="col btn btn-xs btn-warning">삭제</button>
@@ -230,6 +233,9 @@
                                                     <input type="file" id="photoImage2" accept="image/*">
                                                     <span class="thum" style="background-image: url('/resources/static/dist/img/img2.jpg');"></span>
                                                 </label>
+                                                <div class="thum_hover">
+                                                    <img src="/resources/static/dist/img/img2.jpg" alt="">
+                                                </div>
                                                 <div class="row">
                                                     <label for="photoImage2" class="col btn btn-xs btn-secondary">변경</label>
                                                     <button type="button" class="col btn btn-xs btn-warning">삭제</button>
@@ -241,6 +247,9 @@
                                                     <input type="file" id="photoImage3" accept="image/*">
                                                     <span class="thum" style="background-image: url('/resources/static/dist/img/img2.jpg');"></span>
                                                 </label>
+                                                <div class="thum_hover">
+                                                    <img src="/resources/static/dist/img/img2.jpg" alt="">
+                                                </div>
                                                 <div class="row">
                                                     <label for="photoImage3" class="col btn btn-xs btn-secondary">변경</label>
                                                     <button type="button" class="col btn btn-xs btn-warning">삭제</button>
@@ -252,6 +261,9 @@
                                                     <input type="file" id="photoImage4" accept="image/*">
                                                     <span class="thum" style="background-image: url('/resources/static/dist/img/img2.jpg');"></span>
                                                 </label>
+                                                <div class="thum_hover">
+                                                    <img src="/resources/static/dist/img/img2.jpg" alt="">
+                                                </div>
                                                 <div class="row">
                                                     <label for="photoImage4" class="col btn btn-xs btn-secondary">변경</label>
                                                     <button type="button" class="col btn btn-xs btn-warning">삭제</button>
@@ -272,6 +284,7 @@
                                                 document.querySelectorAll('.photo_item').forEach(item => {
                                                     const input = item.querySelector('input[type="file"]');
                                                     const thum = item.querySelector('.thum');
+                                                    let hoverThumb = item.querySelector('.thum_hover');
                                                     const label = item.querySelector('label[for]');
                                                     const deleteButton = item.querySelector('button');
 
@@ -308,6 +321,18 @@
                                                                     thum.style.backgroundImage = `url(`+e.target.result+`)`;
                                                                 };
                                                                 img.src = e.target.result;
+
+                                                                const thumHoverDiv = document.createElement('div');
+                                                                thumHoverDiv.classList.add('thum_hover');
+                                                                const hoverImg = document.createElement('img');
+                                                                hoverImg.src = e.target.result;
+                                                                hoverImg.alt = '미리보기 이미지';
+                                                                thumHoverDiv.appendChild(hoverImg);
+                                                                const photoArea = document.querySelector('.photo_area');
+                                                                photoArea.insertAdjacentElement('afterend', thumHoverDiv);
+
+                                                                // hoverThumb 업데이트
+                                                                hoverThumb = thumHoverDiv;
                                                             };
                                                             reader.readAsDataURL(file);
                                                             label.textContent = '변경';
@@ -317,6 +342,10 @@
                                                     deleteButton.addEventListener('click', () => {
                                                         input.value = '';
                                                         thum.style.backgroundImage = 'none';
+
+                                                        if (hoverThumb) {
+                                                            hoverThumb.parentNode.removeChild(hoverThumb);
+                                                        }
                                                         label.textContent = '등록';
                                                     });
                                                 });
