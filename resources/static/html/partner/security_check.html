@@ -159,7 +159,7 @@
                                                 <th class="text-center">보안체크</th>
                                                 <td>
                                                     <strong class="text-primary">인증완료</strong>
-                                                    <button type="button" class="btn btn-sm btn-secondary">정보보안 체크리스트 작성하기</button>
+                                                    <button type="button" class="btn btn-sm btn-secondary" onclick="showModal('check_list_popup');">정보보안 체크리스트 작성하기</button>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -282,6 +282,436 @@
 
         </div>
     </div>
+
+    <!-- 협력회사 정보보안ㆍ개인정보보호 체크리스트 -->
+    <div class="modal modal-blur fade " id="check_list_popup" tabindex="-1" role="dialog" aria-hidden="true"><!-- data-bs-backdrop='static' 백그라운드 클릭시 모달 안닫힘 -->
+        <div class="modal-dialog modal-md modal-dialog-centered" role="document" style="min-width: 750px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">협력회사 정보보안ㆍ개인정보보호 체크리스트</h5>
+                </div>
+                <form action="">
+                <div class="modal-body">
+                    <div class="card-body">
+                        <div class="table-responsive mt-2">
+                            <table class="table table-vcenter table-line card-table table-mb table-lg">
+                                <colgroup>
+                                    <col>
+                                    <col style="width:150px;">
+                                </colgroup>
+                                <tbody>
+                                    <tr>
+                                        <th colspan="2" class="fs-4">개인정보에 대한 접근통제 및 접근권한의 제한조치 (제6조 2항)</th>
+                                    </tr>
+                                    <tr>
+                                        <td class="fs-4">
+                                            본 시스템 관리자 계정을 지정되지 않은 PC접속 또는 담당자 이외 공유하고 있는가?<br/>
+                                            <small class="fs-5">
+                                            * 협력회사에 배송목적으로 위탁 제공된 개인정보는 개인정보 유출 및 오남용 사전예방 등 정보보호를 위해 최초 등록한 지정된 PC에서 담당자만 수행하여야 합니다.
+                                            </small>
+                                        </td>
+                                        <td class="text-center">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="check_list_popup1_1" value="">
+                                                <span class="form-check-label">예</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="check_list_popup1_1" value="">
+                                                <span class="form-check-label">아니오</span>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fs-4">
+                                            사용자 계정 및 암호를 윈도우에 저장 후 사용하고 있지는 않는가?
+                                        </td>
+                                        <td class="text-center">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="check_list_popup1_2" value="">
+                                                <span class="form-check-label">예</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="check_list_popup1_2" value="">
+                                                <span class="form-check-label">아니오</span>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fs-4">
+                                            사무실내 모든PC는 전원을 끄고 퇴근하는가?
+                                        </td>
+                                        <td class="text-center">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="check_list_popup1_3" value="">
+                                                <span class="form-check-label">예</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="check_list_popup1_3" value="">
+                                                <span class="form-check-label">아니오</span>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="2" class="fs-4">개인정보를 안전하게 저장/전송할 수 있는 암호화 기술의 적용 또는 이에 상응하는 조치 (제6조3항)</th>
+                                    </tr>
+                                    <tr>
+                                        <td class="fs-4">
+                                            업무PC내 개인정보가 포함된 화일은 암호가 설정 되어있는가?
+                                        </td>
+                                        <td class="text-center">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="check_list_popup2_1" value="">
+                                                <span class="form-check-label">예</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="check_list_popup2_1" value="">
+                                                <span class="form-check-label">아니오</span>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fs-4">
+                                            개인정보가 포함된 자료를 업무용PC이외의 저장장치(USB, 외장하드, CD, 웹하드등)에 저장하지는 하였는가?
+                                        </td>
+                                        <td class="text-center">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="check_list_popup2_2" value="">
+                                                <span class="form-check-label">예</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="check_list_popup2_2" value="">
+                                                <span class="form-check-label">아니오</span>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="2" class="fs-4">개인정보에 대한 보안프로그램의 설치 및 갱신여부 (제6조 5항)</th>
+                                    </tr>
+                                    <tr>
+                                        <td class="fs-4">
+                                            해당업무PC의 백신이 설치되어 있으며 최신버전으로 관리하는가?
+                                        </td>
+                                        <td class="text-center">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="check_list_popup3_1" value="">
+                                                <span class="form-check-label">예</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="check_list_popup3_1" value="">
+                                                <span class="form-check-label">아니오</span>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fs-4">
+                                            주1회 백신검사를 통해 바이러스 및 스파이웨어를 차단하고 있는가?
+                                        </td>
+                                        <td class="text-center">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="check_list_popup3_2" value="">
+                                                <span class="form-check-label">예</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="check_list_popup3_2" value="">
+                                                <span class="form-check-label">아니오</span>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="2" class="fs-4">개인정보의 안전한 보관을 위한 보관시설의 마련 또는 잠금장치의 설치 (제6조 6항)</th>
+                                    </tr>
+                                    <tr>
+                                        <td class="fs-4">
+                                            사용컴퓨터는 부팅 시 CMOS암호를 설정하여 사용하고 있는가?
+                                        </td>
+                                        <td class="text-center">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="check_list_popup4_1" value="">
+                                                <span class="form-check-label">예</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="check_list_popup4_1" value="">
+                                                <span class="form-check-label">아니오</span>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fs-4">
+                                            윈도우 화면보호기 실행 시 암호 설정을 하였는가? (8자리 이상, 영문/숫자 혼합형)
+                                        </td>
+                                        <td class="text-center">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="check_list_popup4_2" value="">
+                                                <span class="form-check-label">예</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="check_list_popup4_2" value="">
+                                                <span class="form-check-label">아니오</span>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fs-4">
+                                            개인정보가 포함된 자료가 포함된 문서를 잠금장치가 있는 서랍에 보관하였는가?
+                                        </td>
+                                        <td class="text-center">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="check_list_popup4_3" value="">
+                                                <span class="form-check-label">예</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="check_list_popup4_3" value="">
+                                                <span class="form-check-label">아니오</span>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fs-4">
+                                            사무실 출입 시 출입문 잠금장치는 작동하는가?
+                                        </td>
+                                        <td class="text-center">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="check_list_popup4_4" value="">
+                                                <span class="form-check-label">예</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="check_list_popup4_4" value="">
+                                                <span class="form-check-label">아니오</span>
+                                            </label>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th colspan="2" class="fs-4">목적 외 이용, 제공 및 재 위탁 금지 준수여부 (제8조 1항)</th>
+                                    </tr>
+                                    <tr>
+                                        <td class="fs-4">
+                                            <strong class="text-danger">상품 배송의 목적이외 제3자에게 고객정보를 전송하였는가?</strong>
+                                        </td>
+                                        <td class="text-center">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="check_list_popup5_1" value="">
+                                                <span class="form-check-label">예</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="check_list_popup5_1" value="">
+                                                <span class="form-check-label">아니오</span>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="2" class="fs-4">개인정보가 포함된 자료(송장/리스트)의 파기</th>
+                                    </tr>
+                                    <tr>
+                                        <td class="fs-4">
+                                            개인정보가 포함된 자료는 배송목적이 종료된 후 삭제하였는가?
+                                            <small class="fs-5">
+                                                * 협력회사 시스템에서 PC로 다운받은 주문리스트, 송장업로드 엑셀파일의 파기 정기점검을 통해 개인정보가 포함된 파일이 발견되는 협력회사는 계약이 파기될 수 있습니다.
+                                            </small>
+
+                                            <div class="table-responsive mt-2">
+                                                <table class="table table-vcenter table-line card-table text-center table-mb">
+                                                    <colgroup>
+                                                        <col style="width:33.333%;">
+                                                        <col>
+                                                    </colgroup>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>파기확인서 다운로드</th>
+                                                            <th>파기확인서 업로드</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <a href="javascript:;" download="" class="badge bg-blue-lt fs-5">다운로드</a>
+                                                            </td>
+                                                            <td>
+                                                                <div class="input-group">
+                                                                    <div class="file_single">
+                                                                        <div class="input">
+                                                                            <input type="text" class="file_name" readonly="" file-type="pdf, jpg, jpeg" max-size="5" placeholder="파일을 선택해주세요.">
+                                                                            <button type="button" class="remove_btn" style="display: none;">파일삭제</button>
+                                                                        </div>
+                                                                        <label>
+                                                                            <input type="file">
+                                                                            <span>파일선택</span>
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <p class="mb-0 mt-2">* 파기확인서 작성안내</p>
+                                            <small class="fs-5 mt-1">
+                                                ㆍ다운로드한 파기확인서에 회사직인 서명 스캔본을 업로드해주세요.
+                                                ㆍ파일용량은 최대 5MB이며, PDF, JPG(JPEG)만 업로드 가능합니다.
+                                            </small>
+                                        </td>
+                                        <td class="text-center">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="check_list_popup6_1" value="">
+                                                <span class="form-check-label">예</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="check_list_popup6_1" value="">
+                                                <span class="form-check-label">아니오</span>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fs-4">
+                                            개인정보자료 파기 시 사무실 내 파쇄기를 이용하여 파기하는가?
+                                        </td>
+                                        <td class="text-center">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="check_list_popup6_2" value="">
+                                                <span class="form-check-label">예</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="check_list_popup6_2" value="">
+                                                <span class="form-check-label">아니오</span>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="2" class="fs-4">회사내에 개인정보관리책임자 지정 운영</th>
+                                    </tr>
+                                    <tr>
+                                        <td class="fs-4">
+                                            개인정보관리책임자는 위 사항을 성실히 이행하는가?
+                                        </td>
+                                        <td class="text-center">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="check_list_popup7_1" value="">
+                                                <span class="form-check-label">예</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="check_list_popup7_1" value="">
+                                                <span class="form-check-label">아니오</span>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fs-4">
+                                            개인정보관리책임자는 회사내 다른 직원에게 위 사항에 대해 교육을 하고 있는가? 
+
+                                            <div class="table-responsive mt-2">
+                                                <table class="table table-vcenter table-line card-table text-center table-mb">
+                                                    <colgroup>
+                                                        <col style="width:33.333%;">
+                                                        <col style="width:33.333%;">
+                                                        <col style="width:33.333%;">
+                                                    </colgroup>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>개인정보보호책임자</th>
+                                                            <th>개인정보 시행일</th>
+                                                            <th>개인정보참석 인원</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="input-group">
+                                                                    <input type="text" class="form-control">
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="input-group">
+                                                                    <input type="text" class="form-control datepicker-icon">
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="input-group">
+                                                                    <input type="tel" class="form-control text-end">
+                                                                    <span class="input-group-text text">명</span>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="check_list_popup7_2" value="">
+                                                <span class="form-check-label">예</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="check_list_popup7_2" value="">
+                                                <span class="form-check-label">아니오</span>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <label class="form-check mt-4">
+                            <input class="form-check-input check-all mt-1" type="checkbox">
+                            <strong class="form-check-label fs-4">위 점검사항은 사실에 근거하여 작성 및 확인 하였으며, 이에 동의합니다.</strong>
+                        </label>
+
+                        <div class="table-responsive mt-2">
+                            <table class="table table-vcenter table-line card-table text-center table-mb">
+                                <colgroup>
+                                    <col style="width:25%;">
+                                    <col style="width:25%;">
+                                    <col style="width:25%;">
+                                    <col style="width:25%;">
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                        <th>협력회사</th>
+                                        <th>아이디</th>
+                                        <th>이름</th>
+                                        <th>인증수단</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>(주)돋움</td>
+                                        <td>dodoom</td>
+                                        <td>홍길동</td>
+                                        <td>
+                                            <div class="input-group">
+                                                <select name="" id="" class="form-select">
+                                                    <option value="">휴대폰인증</option>
+                                                    <option value="">범용공인인증서</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="mt-3">
+                            <a href="javascript:;" class="btn btn-primary w-100" onclick="hideModal('check_list_popup');showModal('privacy_destruction')">
+                                본인인증
+                            </a>
+                        </div>
+                        <div class="card bg-primary-lt mt-3">
+                            <div class="card-body">
+                                <h3 class="card-title mb-1">체크리스트 작성 및 본인인증 안내</h3>
+                                <p class="text-black mt-1 mb-0">ㆍ매달 10일 보안체크리스트 작성 후 시스템을 이용하실 수 있습니다.</p>
+                                <p class="text-black mt-1 mb-0">ㆍ보안체크리스트는 담당자중 한 분만 작성하시면 되며, 미 점검 시 시스템을 이용하실 수 없습니다.</p>
+                                <p class="text-black mt-1 mb-0">ㆍ작성한 체크리스트는 “회원 > 협력회사계약관리“ 메뉴에서 확인하실 수 있습니다.</p>
+                                <p class="text-black mt-1 mb-0">ㆍ시스템에 등록된 담당자 정보와 동일한 이름으로만 본인인증이 가능합니다.</p>
+                                <p class="text-black mt-1 mb-0">ㆍ휴대폰인증 시 개인명의 휴대폰만 인증이 가능합니다. *법인명의 휴대폰 인증 불가</p>
+                                <p class="text-black mt-1 mb-0">ㆍ공인인증서로 인증 시 개인 범용공인인증서만 인증이 가능합니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- //협력회사 정보보안ㆍ개인정보보호 체크리스트 -->
+
 
     <!-- 공통영역 -->
     <div id="footer"></div>
