@@ -289,6 +289,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">협력회사 정보보안ㆍ개인정보보호 체크리스트</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form action="">
                 <div class="modal-body">
@@ -707,10 +708,123 @@
                     </div>
                 </div>
                 </form>
+                <div class="modal-footer">
+                    <div class="al_btns">
+                        <button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal">닫기</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     <!-- //협력회사 정보보안ㆍ개인정보보호 체크리스트 -->
+
+    <!-- 파기확인서 -->
+    <div class="modal modal-blur fade " id="privacy_destruction" tabindex="-1" role="dialog" aria-hidden="true"><!-- data-bs-backdrop='static' 백그라운드 클릭시 모달 안닫힘 -->
+        <div class="modal-dialog modal-md modal-dialog-centered" role="document" style="min-width: 800px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">파기확인서</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="">
+                <div class="modal-body">
+                    <div class="card-body">
+                        <div class="text-center text-black fs-2">
+                            <strong>개인정보 파기확인서</strong>
+                        </div>
+                        <div class="text-start fs-4 mt-3">
+                            <p>당사는 귀사와 체결한 개인(신용) 정보 관련 보안관리 약정서에 따라 상품 배송목적으로 제공받은 개인정보 일체를 복구 불가능한 방법으로 업무목적 달성 즉시 
+                            파기하였으며, 업무 목적 외에 별도로 고객정보를 저장, 출력하거나 복사, 가공하지 않았음을 확인합니다.<br/>
+                            추후 당사의 고의 또는 과실로 고객정보가 유출되거나 고객정보 관리를 소홀히 하여 ㈜신세계에 손해가 발생하거나 법적 책임이 부과될 경우 당사는 이에 대한 모든 책임을 질 것을 확인합니다.
+                            </p>
+                        </div>
+                        <div class="table-responsive mt-2">
+                            <table class="table table-vcenter table-line card-table table-mb table-lg">
+                                <colgroup>
+                                    <col style="width:230px;">
+                                    <col>
+                                </colgroup>
+                                <tbody>
+                                    <tr>
+                                        <th class="fs-4">배송완료 처리기간</th>
+                                        <td><strong>2024-10-1~ 2024-10-31</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="fs-4">배송완료 건수</th>
+                                        <td>5,617건</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="fs-4">개인정보 파기항목</th>
+                                        <td>주문자(이름, 휴대폰번호, 주소), 받는사람(이름, 휴대폰번호, 휴대폰번호 안심번호, 주소)<br/>
+                                            체결번호, 주문번호, 상품코드, 상품명, 배송비 등
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="fs-4">개인정보 파기일(필수)</th>
+                                        <td>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control datepicker-icon">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="fs-4">파기확인자(필수)</th>
+                                        <td>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" placeholder="이름을 입력해주세요.">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="fs-4">다운로드</th>
+                                        <td><a href="javascript:;" download="" class="badge bg-blue-lt fs-5">파기확인서 다운로드</a></td>
+                                    </tr>
+                                    <tr>
+                                        <th>파일 업로드</th>
+                                        <td>
+                                            <div class="input-group">
+                                                <div class="file_single">
+                                                    <div class="input">
+                                                        <input type="text" class="file_name" readonly="" max-size="5" placeholder="파일을 선택해주세요.">
+                                                        <button type="button" class="remove_btn" style="display: none;">파일삭제</button>
+                                                    </div>
+                                                    <label>
+                                                        <input type="file">
+                                                        <span>파일선택</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="mt-3">
+                            <a href="javascript:;" class="btn btn-primary w-100">
+                                신청하기
+                            </a>
+                        </div>
+                        <div class="card bg-primary-lt mt-3">
+                            <div class="card-body">
+                                <h3 class="card-title mb-1">파기확인서 안내</h3>
+                                <p class="text-danger mt-1 mb-0">ㆍ업로드한 파기확인서는 수정 또는 삭제가 불가합니다.</p>
+                                <p class="text-black mt-1 mb-0">ㆍ다운로드한 파기확인서에 회사직인 날인 후 PDF파일로 재 업로드해주세요.</p>
+                                <p class="text-black mt-1 mb-0">ㆍ1개월 이상 파기확인서를 미 작성한 협력회사는 본 파기확인서 신청 후 시스템을 즉시 사용하실 수 없습니다. *MD관리자 검토 후 시스템 사용</p>
+                                <p class="text-black mt-1 mb-0">ㆍ파기확인서를 허위로 기재하여 제출 시 계약의 해지 사유에 해당됩니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </form>
+                <div class="modal-footer">
+                    <div class="al_btns">
+                        <button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal">닫기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- //파기확인서 -->
 
 
     <!-- 공통영역 -->
