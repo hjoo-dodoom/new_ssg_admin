@@ -254,6 +254,15 @@
                                     <button type="button" class="btn btn-sm ms-1 btn-outline-secondary">정지</button>
                                     <span class="ms-1">|</span>
                                     <button type="button" class="btn btn-sm ms-1 btn-outline-warning">삭제</button>
+                                    <span class="ms-1">|</span>
+                                    <div class="input-group d-inline-flex w-33 ms-1">
+                                        <span class="input-group-text text">진열순서</span>
+                                        <input type="tel" class="form-control w">
+                                        <span class="input-group-text text">로</span>
+                                        <button type="button" class="btn btn-sm btn-secondary" onclick="indexMoveInput(this);">
+                                            변경
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                             <div>
@@ -273,6 +282,8 @@
                                                 <input class="form-check-input check-all" type="checkbox">
                                             </label>
                                         </th>
+                                        <th>순서</th>
+                                        <th>순서정렬</th>
                                         <th>고객사</th>
                                         <th>제목</th>
                                         <th>게시기간</th>
@@ -283,7 +294,7 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td colspan="7" class="list-empty">
+                                        <td colspan="9" class="list-empty">
                                             검색 내역이 존재하지 않습니다.
                                         </td>
                                     </tr>
@@ -293,7 +304,15 @@
                                                 <input class="form-check-input" type="checkbox">
                                             </label>
                                         </td>
-                                        <td>시크릿스토어</td>
+                                        <td class="index_num">1</td>
+                                        <td>
+                                            <input type="hidden" value="1"><!-- index -->
+                                            <button onclick="indexMove(this , 'top')" type="button" class="btn btn-xs btn-secondary"><span class="icon_chevron top">최상단</span></button>
+                                            <button onclick="indexMove(this , 'up')" type="button" class="btn btn-xs btn-secondary"><span class="icon_chevron up">위로</span></button>
+                                            <button onclick="indexMove(this,'down')" type="button" class="btn btn-xs btn-secondary"><span class="icon_chevron down">아래로</span></button>
+                                            <button onclick="indexMove(this,'bottom')" type="button" class="btn btn-xs btn-secondary"><span class="icon_chevron bottom">최하단</span></button>
+                                        </td>
+                                        <td>시크릿스토어1</td>
                                         <td class="text-start">
                                             <a href="/resources/static/html/shop/exhibitions_modify.html" class="list_link short_cut" style="max-width:450px;">
                                                 삼성전자 AI패스타
@@ -320,7 +339,15 @@
                                                 <input class="form-check-input" type="checkbox">
                                             </label>
                                         </td>
-                                        <td>시크릿스토어</td>
+                                        <td class="index_num">2</td>
+                                        <td>
+                                            <input type="hidden" value="2"><!-- index -->
+                                            <button onclick="indexMove(this , 'top')" type="button" class="btn btn-xs btn-secondary"><span class="icon_chevron top">최상단</span></button>
+                                            <button onclick="indexMove(this , 'up')" type="button" class="btn btn-xs btn-secondary"><span class="icon_chevron up">위로</span></button>
+                                            <button onclick="indexMove(this,'down')" type="button" class="btn btn-xs btn-secondary"><span class="icon_chevron down">아래로</span></button>
+                                            <button onclick="indexMove(this,'bottom')" type="button" class="btn btn-xs btn-secondary"><span class="icon_chevron bottom">최하단</span></button>
+                                        </td>
+                                        <td>시크릿스토어2</td>
                                         <td class="text-start">
                                             <a href="/resources/static/html/shop/exhibitions_modify.html" class="list_link short_cut" style="max-width:450px;">
                                                 삼성전자 AI패스타
@@ -343,7 +370,15 @@
                                                 <input class="form-check-input" type="checkbox">
                                             </label>
                                         </td>
-                                        <td>시크릿스토어</td>
+                                        <td class="index_num">3</td>
+                                        <td>
+                                            <input type="hidden" value="3"><!-- index -->
+                                            <button onclick="indexMove(this , 'top')" type="button" class="btn btn-xs btn-secondary"><span class="icon_chevron top">최상단</span></button>
+                                            <button onclick="indexMove(this , 'up')" type="button" class="btn btn-xs btn-secondary"><span class="icon_chevron up">위로</span></button>
+                                            <button onclick="indexMove(this,'down')" type="button" class="btn btn-xs btn-secondary"><span class="icon_chevron down">아래로</span></button>
+                                            <button onclick="indexMove(this,'bottom')" type="button" class="btn btn-xs btn-secondary"><span class="icon_chevron bottom">최하단</span></button>
+                                        </td>
+                                        <td>시크릿스토어3</td>
                                         <td class="text-start">
                                             <a href="/resources/static/html/shop/exhibitions_modify.html" class="list_link short_cut" style="max-width:450px;">
                                                 삼성전자 AI패스타
@@ -371,6 +406,15 @@
                                     <button type="button" class="btn btn-sm ms-1 btn-outline-secondary">정지</button>
                                     <span class="ms-1">|</span>
                                     <button type="button" class="btn btn-sm ms-1 btn-outline-warning">삭제</button>
+                                    <span class="ms-1">|</span>
+                                    <div class="input-group d-inline-flex w-33 ms-1">
+                                        <span class="input-group-text text">진열순서</span>
+                                        <input type="tel" class="form-control w">
+                                        <span class="input-group-text text">로</span>
+                                        <button type="button" class="btn btn-sm btn-secondary" onclick="indexMoveInput(this);">
+                                            변경
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                             <div>
@@ -498,5 +542,93 @@
     <!-- //공통영역 -->
 </div>
 <script src="/resources/static/dist/js/tabler.min.js"></script>
+<script>
+    function indexMove(button, move) {
+        const row = button.closest('tr');
+        const table = row.closest('tbody');
+        const rows = Array.from(table.querySelectorAll('tr'));
+        const index = rows.indexOf(row);
+    
+        switch (move) {
+            case 'top':
+                if (index > 0) {
+                    table.insertBefore(row, rows[0]);
+                }
+                break;
+            case 'up':
+                if (index > 0) {
+                    table.insertBefore(row, rows[index - 1]);
+                }
+                break;
+            case 'down':
+                if (index < rows.length - 1) {
+                    table.insertBefore(row, rows[index + 2]);
+                }
+                break;
+            case 'bottom':
+                if (index < rows.length - 1) {
+                    table.appendChild(row);
+                }
+                break;
+        }
+    
+        // 인덱스 번호 재정렬
+        let i = 1;
+        table.querySelectorAll('.index_num').forEach(function(num){
+            num.textContent = i;
+            i++
+        });
+        table.querySelectorAll('input[type="hidden"]').forEach(function(input){
+            input.value = i;
+            i++
+        });
+    }
+    
+    function indexMoveInput(button) {
+        const inputGroup = button.closest('.input-group');
+        const input = inputGroup.querySelector('input[type="tel"]');
+        const value = parseInt(input.value);
+        if (isNaN(value) || value < 1) {
+            alert('유효한 순서 번호를 입력해주세요.');
+            return;
+        }
+    
+        const table = document.querySelector('.table-responsive table tbody');
+        const rows = Array.from(table.querySelectorAll('tr'));
+    
+        if (value > rows.length) {
+            alert('입력한 순서가 총 행의 수를 초과합니다.');
+            return;
+        }
+    
+        const checkedRows = rows.filter(row => row.querySelector('input[type="checkbox"]:checked'));
+        if (checkedRows.length === 0) {
+            alert('이동할 항목을 선택해주세요.');
+            return;
+        }
+        if(value == rows.length){
+            checkedRows.forEach(row => {
+                table.insertBefore(row, rows[rows.length]);
+            });
+        }else{
+            checkedRows.forEach(row => {
+                table.insertBefore(row, rows[value - 1]);
+            });
+        }
+        
+        // 인덱스 번호 재정렬
+        let i = 1;
+        table.querySelectorAll('.index_num').forEach(function(num){
+            num.textContent = i;
+            i++
+        });
+        table.querySelectorAll('input[type="hidden"]').forEach(function(input){
+            input.value = i;
+            i++
+        });
+    
+        input.value = '';
+    }
+    </script>
 </body>
 </html>
