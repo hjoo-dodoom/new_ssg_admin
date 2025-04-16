@@ -235,9 +235,25 @@ document.addEventListener("DOMContentLoaded", function () {
       const target = event.target;
       const labelControlParent = check.closest('.label-control-parent');
       const checkAllParentCheckbox = labelControlParent ? labelControlParent.querySelector('.check-all-parent') : null;
-      if (target.matches('input[type="checkbox"]') && target.classList.contains('check-all')) {
+      if (target.matches('input[type="checkbox"]') && target.classList.contains('check-all-second')) {
+        // check-all-second 클릭 시 (같은 테이블에서 두번째로 위치한 전체 클릭 checkbox)
         const isChecked = target.checked;
-        const checkboxes = check.closest('.label-control').querySelectorAll('input[type="checkbox"]');
+        const checkboxes = check.closest('.label-control').querySelectorAll('input[type="checkbox"].check-second');
+        checkboxes.forEach(function (checkbox) {
+          if (isVisible(checkbox) && !checkbox.disabled) {
+            checkbox.checked = isChecked;
+          }
+        });
+        if (!isChecked) {
+          target.checked = false; // check-all-second 비활성화
+          if (checkAllParentCheckbox) {
+            checkAllParentCheckbox.checked = false; // check-all-second 비활성화
+          }
+        }
+      } else if (target.matches('input[type="checkbox"]') && target.classList.contains('check-all')) {
+        // 일반 check-all 클릭 시
+        const isChecked = target.checked;
+        const checkboxes = check.closest('.label-control').querySelectorAll('input[type="checkbox"]:not(.check-all-second):not(.check-second)');
         checkboxes.forEach(function (checkbox) {
           if (isVisible(checkbox) && !checkbox.disabled) {
             checkbox.checked = isChecked;
@@ -249,7 +265,7 @@ document.addEventListener("DOMContentLoaded", function () {
             checkAllParentCheckbox.checked = false; // check-all 비활성화
           }
         }
-      } else if (target.matches('input[type="checkbox"]:not(.check-all)') && !target.checked) {
+      } else if (target.matches('input[type="checkbox"]:not(.check-all):not(.check-all-second):not(.check-second)') && !target.checked) {
         const checkAllCheckbox = check.closest('.label-control').querySelector('.check-all');
         if (checkAllCheckbox) {
           checkAllCheckbox.checked = false; // check-all 비활성화
@@ -257,6 +273,14 @@ document.addEventListener("DOMContentLoaded", function () {
         if (checkAllParentCheckbox) {
           checkAllParentCheckbox.checked = false; // check-all 비활성화
         }
+      }else if (target.matches('input[type="checkbox"].check-second') && !target.checked) {
+        const checkAllCheckbox = check.closest('.label-control').querySelector('.check-all-second');
+        if (checkAllCheckbox) {
+          checkAllCheckbox.checked = false; // check-all 비활성화
+        }
+        // if (checkAllParentCheckbox) {
+        //   checkAllParentCheckbox.checked = false; // check-all 비활성화
+        // }
       }
     });
   });

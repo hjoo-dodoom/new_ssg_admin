@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=1400"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>신세계 관리자</title>
+    <!-- CSS files -->
+    <link href="/resources/static/dist/css/tabler.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/tabler-vendors.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/style.css" rel="stylesheet"/>
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/> -->
+    <link rel="shortcut icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <script src="/resources/static/dist/js/jquery-3.6.0.min.js"></script>
+    <script src="/resources/static/dist/js/jquery-ui.js"></script>
+    <script src="/resources/static/dist/libs/litepicker/dist/litepicker.js?1674944402"></script>
+    <script src="/resources/static/dist/js/jquery.validate.js"></script>
+    <!-- Tabler Core -->
+    
+    <script src="/resources/static/dist/js/common.js"></script>
+    <style>
+    :root {
+        --theme-admin-type: #cf3f42;
+        /* #cf3f42 통합관리자 컬러 코드*/
+        /* #4b9b52 협력회사 컬러 코드 */
+        /* #214c9c 고객사 컬러 코드 */
+    }
+    </style>
+</head>
+<body>
+
+<div class="popup-wrapper">
+    <h2 class="popup-title">협력회사 세금계산서 요청 LMS 발송</h2>
+    <div class="row">
+        <form action="">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="seasrch_popup">
+                            <div>
+                                <small class="form-hint text-primary">※ 아래 업체목록 중 수신번호가 정상적이지 않을 경우 문자가 발송되지 않습니다.</small>
+                            </div>
+                                <div class="search_options">
+                                    <div class="option_item w100">
+                                        <div class="subheader">반송사유</div>
+                                        <div class="row">
+                                            [신세계법인] 세금계산서 발행요청<br/>
+                                            ○○○ 고객사<br/>
+                                            <br/>
+                                            발행일자 : ○○월 ○○일<br/>
+                                            매입액 : ○○○○원<br/>
+                                            공급액 : ○○○○원<br/>
+                                            세액 : ○○○○원<br/>
+                                            <br/>
+                                            담당자 홍길동 hong@navercom 로 지금 바로 발행해주세요.<br/>
+                                            금액 정확히 확인후 발행 바랍니다.<br/>
+                                            <br/>
+                                            사업자번호 000-00-00000 종사업자 00000<br/>
+                                            <br/>
+                                            ※ 위 내용의 형태로 발송됩니다.
+                                        </div>
+                                    </div>
+                                    <div class="option_item">
+                                        <div class="subheader">발신번호</div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <input type="text" class="form-control"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="option_item">
+                                        <div class="subheader">발행일자</div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <input class="form-control datepicker-icon"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="option_item">
+                                        <div class="subheader">담당자</div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <input type="text" class="form-control" value="홍길동"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="option_item">
+                                        <div class="subheader">담당자<br/>이메일</div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <input type="email" class="form-control"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="option_item w100">
+                                        <div class="subheader">추가 LMS내용</div>
+                                        <div class="row">
+                                            <div class="input-group">
+                                                <textarea name="" id="" class="form-control" style="height:200px;"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 mt-3">
+                <div class="row">
+                    <div class="content-area">
+                        <div class="list-btns justify-content-between mb-1">
+                            <div class="fs-4">
+                                ※ 세금계산서 담장자에게 추가로 발송을 원하시면 <strong class="text-primary">“우측의 체크박스”</strong>를 선택해주세요.
+                            </div>
+                        </div>
+
+                        <div class="card table-mb-card">
+                            <div class="table-responsive">
+                                <table class="table table-vcenter table-line card-table text-center table-mb label-control tr_hover">
+                                    <colgroup>
+                                        <col style="width:60px;">
+                                        <col>
+                                        <col>
+                                        <col>
+                                        <col>
+                                        <col>
+                                        <col>
+                                        <col style="width:60px;">
+                                        <col>
+                                    </colgroup>
+                                    <thead class="dark">
+                                        <tr>
+                                            <th class="check-all-box">
+                                                <label class="form-check form-check-inline m-0">
+                                                    <input class="form-check-input check-all" type="checkbox">
+                                                </label>
+                                            </th>
+                                            <th>협력회사명</th>
+                                            <th>과세구분</th>
+                                            <th>매입가</th>
+                                            <th>공급가</th>
+                                            <th>세액</th>
+                                            <th>영업담당자 번호</th>
+                                            <th class="check-all-box" style="border-left: 1px solid black">
+                                                <label class="form-check form-check-inline m-0">
+                                                    <input class="form-check-input check-all-second" type="checkbox">
+                                                </label>
+                                            </th>
+                                            <th>세금계산서담당자 번호</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="9" class="list-empty">
+                                                내역이 존재하지 않습니다.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                            <label class="form-check form-check-inline m-0">
+                                                    <input class="form-check-input" type="checkbox">
+                                                </label>
+                                            </td>
+                                            <td>(주)컴퍼니</td>
+                                            <td>면세</td>
+                                            <td class="text-end">1777,500</td>
+                                            <td class="text-end">161,363</td>
+                                            <td class="text-end">16,136</td>
+                                            <td>010-1234-1234</td>
+                                            <td style="border-left: 1px solid black">
+                                                <label class="form-check form-check-inline m-0">
+                                                    <input class="form-check-input check-second" type="checkbox">
+                                                </label>
+                                            </td>
+                                            <td>010-1234-1234</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                            <label class="form-check form-check-inline m-0">
+                                                    <input class="form-check-input" type="checkbox">
+                                                </label>
+                                            </td>
+                                            <td>(주)컴퍼니</td>
+                                            <td>유가증권</td>
+                                            <td class="text-end">1777,500</td>
+                                            <td class="text-end">161,363</td>
+                                            <td class="text-end">16,136</td>
+                                            <td>010-1234-1234</td>
+                                            <td style="border-left: 1px solid black"></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                            <label class="form-check form-check-inline m-0">
+                                                    <input class="form-check-input" type="checkbox">
+                                                </label>
+                                            </td>
+                                            <td>(주)컴퍼니</td>
+                                            <td>과세</td>
+                                            <td class="text-end">1777,500</td>
+                                            <td class="text-end">161,363</td>
+                                            <td class="text-end">16,136</td>
+                                            <td>010-1234-1234</td>
+                                            <td style="border-left: 1px solid black">
+                                                <label class="form-check form-check-inline m-0">
+                                                    <input class="form-check-input check-second" type="checkbox">
+                                                </label>
+                                            </td>
+                                            <td>010-1234-1234</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-btns justify-content-between mt-3">
+                <div></div>
+                <div>
+                    <button type="button" class="btn btn-primary">문자발송</button>
+                    <button type="button" class="btn btn-secondary" onclick="window.close();">닫기</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="/resources/static/dist/js/tabler.min.js"></script>
+</body>
+</html>
