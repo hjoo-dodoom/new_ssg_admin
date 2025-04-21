@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=1400"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>신세계 관리자</title>
+    <!-- CSS files -->
+    <link href="/resources/static/dist/css/tabler.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/tabler-vendors.css" rel="stylesheet"/>
+    <link href="/resources/static/dist/css/style.css" rel="stylesheet"/>
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/> -->
+    <link rel="shortcut icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/resources/static/dist/favicon.ico" type="image/x-icon">
+    <script src="/resources/static/dist/js/jquery-3.6.0.min.js"></script>
+    <script src="/resources/static/dist/js/jquery-ui.js"></script>
+    <script src="/resources/static/dist/libs/litepicker/dist/litepicker.js?1674944402"></script>
+    <script src="/resources/static/dist/js/jquery.validate.js"></script>
+    <!-- Tabler Core -->
+    
+    <script src="/resources/static/dist/js/common.js"></script>
+    <style>
+    :root {
+        --theme-admin-type: #cf3f42;
+        /* #cf3f42 통합관리자 컬러 코드*/
+        /* #4b9b52 협력회사 컬러 코드 */
+        /* #214c9c 고객사 컬러 코드 */
+    }
+    </style>
+</head>
+<body>
+
+<div class="popup-wrapper">
+    <div class="row">
+        <div class="col-5">
+            <h2 class="popup-title">문자발송</h2>
+            <form action="">
+                <div class=" form-container">
+                    <div class="col-12">
+                        <div class="card form_area">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">발신번호</div>
+                                        <div class="subcontent">
+                                            <input type="text" class="form-control" value="01012341234" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">수신번호</div>
+                                        <div class="subcontent">
+                                            <select class="form-select">
+                                                <option value="" selected="">01012341234 (홍*동, 영업담당자)</option>
+                                                <option value="">01011111111 (홍*일, 영업담당자)</option>
+                                                <option value="">01022222222 (홍*둘, 영업담당자)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form_item">
+                                        <div class="subheader mb-1">내용</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <textarea class="form-control max-byte" type="text" name="" style="height:200px;"></textarea>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text text max-len"><b>0</b> / <strong>90</strong>byte</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <small class="form-hint mt-1">문자 길이에 따라 SMS/LMS로 자동 전환 됩니다.</small>
+                                        <small class="form-hint mt-1">※ 문자발송 내역은 “메시지 > 발송내역”에서 확인해 주세요.</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-btns justify-content-between mt-3">
+                    <div>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary">문자발송</button>
+                        <button type="button" class="btn btn-secondary" onclick="window.close();">닫기</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-7">
+            <h2 class="popup-title">발송이력</h2>
+            <div class="card">
+                <div class="card-body">
+                    <div class="card table-mb-card">
+                        <div class="table-responsive" style="overflow-y:auto;max-height:calc(100vh - 110px);">
+                            <table class="table table-vcenter table-line card-table text-center table-mb label-control tr_hover">
+                                <colgroup>
+                                    <col>
+                                    <col style="width:120px">
+                                    <col style="width:100px">
+                                    <col style="width:100px">
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                        <th>내용</th>
+                                        <th>수신번호</th>
+                                        <th>보낸사람</th>
+                                        <th>일시</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-start">[신세계법인]포인트몰 2월 마감 세금계산서 미발행 상태입니다.발행 바랍니다.[신세계법인]포인트몰 2월 마감 세금계산서 미발행 상태입니다.발행 바랍니다.[신세계법인]포인트몰 2월 마감 세금계산서 미발행 상태입니다.발행 바랍니다.[신세계법인]포인트몰 2월 마감 세금계산서 미발행 상태입니다.발행 바랍니다.[신세계법인]포인트몰 2월 마감 세금계산서 미발행 상태입니다.발행 바랍니다.[신세계법인]포인트몰 2월 마감 세금계산서 미발행 상태입니다.발행 바랍니다.[신세계법인]포인트몰 2월 마감 세금계산서 미발행 상태입니다.발행 바랍니다.[신세계법인]포인트몰 2월 마감 세금계산서 미발행 상태입니다.발행 바랍니다.</td>
+                                        <td>01012341234</td>
+                                        <td>admin1</td>
+                                        <td>2025-04-21</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-start">[신세계법인]포인트몰 2월 마감 세금계산서 미발행 상태입니다.발행 바랍니다.</td>
+                                        <td>01012341234</td>
+                                        <td>admin1</td>
+                                        <td>2025-04-21</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-start">[신세계법인]포인트몰 2월 마감 세금계산서 미발행 상태입니다.발행 바랍니다.</td>
+                                        <td>01012341234</td>
+                                        <td>admin1</td>
+                                        <td>2025-04-21</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-start">[신세계법인]포인트몰 2월 마감 세금계산서 미발행 상태입니다.발행 바랍니다.</td>
+                                        <td>01012341234</td>
+                                        <td>admin1</td>
+                                        <td>2025-04-21</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-start">[신세계법인]포인트몰 2월 마감 세금계산서 미발행 상태입니다.발행 바랍니다.</td>
+                                        <td>01012341234</td>
+                                        <td>admin1</td>
+                                        <td>2025-04-21</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-start">[신세계법인]포인트몰 2월 마감 세금계산서 미발행 상태입니다.발행 바랍니다.</td>
+                                        <td>01012341234</td>
+                                        <td>admin1</td>
+                                        <td>2025-04-21</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-start">[신세계법인]포인트몰 2월 마감 세금계산서 미발행 상태입니다.발행 바랍니다.</td>
+                                        <td>01012341234</td>
+                                        <td>admin1</td>
+                                        <td>2025-04-21</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-start">[신세계법인]포인트몰 2월 마감 세금계산서 미발행 상태입니다.발행 바랍니다.</td>
+                                        <td>01012341234</td>
+                                        <td>admin1</td>
+                                        <td>2025-04-21</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-start">[신세계법인]포인트몰 2월 마감 세금계산서 미발행 상태입니다.발행 바랍니다.</td>
+                                        <td>01012341234</td>
+                                        <td>admin1</td>
+                                        <td>2025-04-21</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-start">[신세계법인]포인트몰 2월 마감 세금계산서 미발행 상태입니다.발행 바랍니다.</td>
+                                        <td>01012341234</td>
+                                        <td>admin1</td>
+                                        <td>2025-04-21</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-start">[신세계법인]포인트몰 2월 마감 세금계산서 미발행 상태입니다.발행 바랍니다.</td>
+                                        <td>01012341234</td>
+                                        <td>admin1</td>
+                                        <td>2025-04-21</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-start">[신세계법인]포인트몰 2월 마감 세금계산서 미발행 상태입니다.발행 바랍니다.</td>
+                                        <td>01012341234</td>
+                                        <td>admin1</td>
+                                        <td>2025-04-21</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-start">[신세계법인]포인트몰 2월 마감 세금계산서 미발행 상태입니다.발행 바랍니다.</td>
+                                        <td>01012341234</td>
+                                        <td>admin1</td>
+                                        <td>2025-04-21</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-start">[신세계법인]포인트몰 2월 마감 세금계산서 미발행 상태입니다.발행 바랍니다.</td>
+                                        <td>01012341234</td>
+                                        <td>admin1</td>
+                                        <td>2025-04-21</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-start">[신세계법인]포인트몰 2월 마감 세금계산서 미발행 상태입니다.발행 바랍니다.</td>
+                                        <td>01012341234</td>
+                                        <td>admin1</td>
+                                        <td>2025-04-21</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-start">[신세계법인]포인트몰 2월 마감 세금계산서 미발행 상태입니다.발행 바랍니다.</td>
+                                        <td>01012341234</td>
+                                        <td>admin1</td>
+                                        <td>2025-04-21</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-start">[신세계법인]포인트몰 2월 마감 세금계산서 미발행 상태입니다.발행 바랍니다.</td>
+                                        <td>01012341234</td>
+                                        <td>admin1</td>
+                                        <td>2025-04-21</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-start">[신세계법인]포인트몰 2월 마감 세금계산서 미발행 상태입니다.발행 바랍니다.</td>
+                                        <td>01012341234</td>
+                                        <td>admin1</td>
+                                        <td>2025-04-21</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-start">[신세계법인]포인트몰 2월 마감 세금계산서 미발행 상태입니다.발행 바랍니다.</td>
+                                        <td>01012341234</td>
+                                        <td>admin1</td>
+                                        <td>2025-04-21</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-start">[신세계법인]포인트몰 2월 마감 세금계산서 미발행 상태입니다.발행 바랍니다.</td>
+                                        <td>01012341234</td>
+                                        <td>admin1</td>
+                                        <td>2025-04-21</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-start">[신세계법인]포인트몰 2월 마감 세금계산서 미발행 상태입니다.발행 바랍니다.</td>
+                                        <td>01012341234</td>
+                                        <td>admin1</td>
+                                        <td>2025-04-21</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/resources/static/dist/js/tabler.min.js"></script>
+</body>
+</html>
