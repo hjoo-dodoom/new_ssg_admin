@@ -540,7 +540,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const pageTitle = pageTitleElement.innerHTML;
 
     let found = false;
-    cate3List.forEach((element) => {
+    cate3List?.forEach((element) => {
       if (element.innerHTML === pageTitle.trim()) {
         found = true;
       }
@@ -769,8 +769,8 @@ function handleSearchSelectChange() {
 
   // 모든 대상 요소 숨기기
   options.forEach(function(target) {
-      var displayTargets = target.getAttribute("select-display").split(" ");
-      displayTargets.forEach(function(targetClass) {
+      var displayTargets = target.getAttribute("select-display")?.split(" ");
+      displayTargets?.forEach(function(targetClass) {
           var elements = document.getElementsByClassName(targetClass);
           for (var i = 0; i < elements.length; i++) {
               elements[i].style.display = "none";
@@ -1223,8 +1223,8 @@ document.addEventListener('DOMContentLoaded', function() {
   if(searchSelects){
     searchSelects.forEach(function(item){
       const seletedOption = item.querySelector('.item a.active');
-      const seletedData = seletedOption.getAttribute('data-id');
-      const seletedText = seletedOption.textContent;
+      const seletedData = seletedOption?.getAttribute('data-id');
+      const seletedText = seletedOption?.textContent;
       item.querySelector('input[type="hidden"]').value = seletedData;
       item.querySelector('.btn_select').textContent = seletedText;
     });
