@@ -432,40 +432,8 @@
                                                         <option value="">고객사명</option>
                                                     </select>
                                                     <input type="text" class="form-control">
-                                                    <button type="button" class="btn btn-xs btn-warning" onclick="removeSearchItem(this);">삭제</button>
-                                                    <button type="button" class="btn btn-xs btn-secondary" onclick="addSearchItem(this);">추가</button>
                                                 </div>
                                             </div>
-                                            <script>
-                                                const group = document.querySelector('.add_remove_remove_group');
-                                                function addSearchItem(elm){
-                                                    const newItem = document.createElement('div');
-                                                    newItem.classList.add('item', 'mb-1');
-                                                    newItem.innerHTML = `
-                                                        <div class="input-group">
-                                                            <select class="form-select" style="max-width:100px;">
-                                                                <option value="" selected>상품명</option>
-                                                                <option value="">상품코드</option>
-                                                                <option value="">모델명</option>
-                                                                <option value="">협력회사명</option>
-                                                                <option value="">고객사명</option>
-                                                            </select>
-                                                            <input type="text" class="form-control">
-                                                            <button type="button" class="btn btn-xs btn-warning" onclick="removeSearchItem(this);">삭제</button>
-                                                            <button type="button" class="btn btn-xs btn-secondary" onclick="addSearchItem(this);">추가</button>
-                                                        </div>
-                                                    `;
-                                                    group.appendChild(newItem);
-                                                };
-                                            
-                                                function removeSearchItem(elm){
-                                                    if(group.querySelectorAll('.item').length <= 1){
-                                                        alert('검색은 최소 1개 이상이여야 합니다.');
-                                                        return false;
-                                                    }
-                                                    elm.closest('.item').remove();
-                                                };
-                                            </script>
                                         </div>
                                         <div class="col-12">
                                             <label class="form-check form-check-inline">
