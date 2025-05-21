@@ -1256,8 +1256,27 @@
                         <div class="card-header"><h3 class="card-title">재고관리옵션</h3></div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="form_item size_xl">
-                                    <div class="subheader mb-2 required">재고관리옵션</div>
+                                <div class="form_item size_lg">
+                                    <div class="subheader mb-2">재고상태</div>
+                                    <div class="subcontent">
+                                        <div>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="stock_status"/>
+                                                <span class="form-check-label">판매중</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="stock_status" checked />
+                                                <span class="form-check-label">일시품절</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="stock_status"/>
+                                                <span class="form-check-label">판매종료</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_item size_lg">
+                                    <div class="subheader mb-2">재고관리</div>
                                     <div class="subcontent">
                                         <div>
                                             <label class="form-check form-check-inline">
@@ -1279,14 +1298,6 @@
                                             <label class="form-check form-check-inline">
                                                 <input class="form-check-input" type="radio" name="stock_option" radio-display="stock_option_standalone">
                                                 <span class="form-check-label">옵션독립형</span>
-                                            </label>
-                                            <label class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="stock_option" radio-display="">
-                                                <span class="form-check-label">일시품절</span>
-                                            </label>
-                                            <label class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="stock_option" radio-display="">
-                                                <span class="form-check-label">판매종료</span>
                                             </label>
                                         </div>
                                     </div>
