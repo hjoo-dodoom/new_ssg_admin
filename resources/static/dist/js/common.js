@@ -1186,7 +1186,124 @@ function searchSelectOpen(button) {
   }
 }
 
-function searchSelectSearch(input) {
+function searchSelectSearch(input, type) { // 검색어 입력
+  if(!type){
+    onlySearchSelect(input);
+  }else{
+
+    if(type === 'commonMall' || type === 'affiliatedMall' || type === 'affiliatedCompany'){ // 공통몰 || 제휴몰 || 계열사
+      searchSelectByDataId(input, type)
+    }else{
+        // 고객사 || 그룹사
+
+        let select = '' ;
+
+        if(type === 'clientStatus'){ // 고객사
+          const radios = Array.from(document.querySelectorAll('input[name="member_type"]'));
+          const selected = document.querySelector('input[name="member_type"]:checked');
+          const index = radios.findIndex(el => el === selected);
+          if(index == 1){ // 그룹사로 선택되어있을 때
+            searchSelectByDataId(input, type);
+            return false;
+          }else{
+            select = document.querySelector('.member_type_status1 .select-display');
+          }
+        }else if(type === 'groupStatus'){ // 그룹사
+          select = document.querySelector('.member_type_status2 .select-display');
+        }else if(type === 'partnerStatus'){ // 협력회사
+          select = document.querySelector('.member_type_status3 .select-display');
+        }else if(type === 'commonMall'){ // 공통몰
+          onlySearchByDataId(input);
+        }else if(type === 'affiliatedMall'){ // 제휴몰
+          onlySearchByDataId(input);
+        }
+
+        const selectedOption = select.options[select.selectedIndex];
+
+        const filter = input.value.toLowerCase(); // 입력한 검색어
+        const items = input.nextElementSibling.querySelectorAll('.item a'); // 전체 옵션들
+
+        function removeNumbers(str) {
+          return str.replace(/[0-9]/g, '');
+        }
+
+        items.forEach(function(item) {
+          const optionClasses = Array.from(item.closest('.item').classList);
+          const clientValues = optionClasses.filter(c => c.includes(selectedOption.getAttribute('select-display')));
+          const text = item.textContent.toLowerCase();
+
+            if(type){
+
+                if(select.selectedIndex === 0){ // '전체' 선택
+                  item.closest('.item').style.display = text.includes(filter) ? '' : 'none';
+
+                }else{
+                  if(filter== ''){
+                    if(item.closest('.item').classList.contains(type+'All')){
+                      item.closest('.item').style.display = '';
+                    }else{
+                      item.closest('.item').style.display = clientValues.length > 0 ? '' : 'none';
+                    }
+                  }else{
+                    if(text.includes(filter) && clientValues.length > 0){
+                      item.closest('.item').style.display = '';
+                    }else{
+                      item.closest('.item').style.display = 'none';
+                    }
+                  }
+                }
+
+            }else{
+              item.closest('.item').style.display = text.includes(filter) ? '' : 'none';
+            }
+        });
+
+    }
+  }
+}
+
+function searchSelectByDataId(input, type){
+
+  let firstDepth;
+  if(type === 'clientStatus'){ // 고객사
+      firstDepth = document.querySelector('.member_type_select1 input[type="hidden"]').value;
+  }else if(type === 'commonMall'){ // 공통몰
+      firstDepth = document.querySelector('.member_type_select4 input[type="hidden"]').value;
+  }else if(type === 'affiliatedMall'){ // 제휴몰
+      firstDepth = document.querySelector('.member_type_select6 input[type="hidden"]').value;
+  }else if(type === 'affiliatedCompany'){ // 계열사
+      firstDepth = document.querySelector('.member_type_select2 input[type="hidden"]').value;
+  }
+
+  const filter = input.value.toLowerCase();
+  const items = input.nextElementSibling.querySelectorAll('.item a');
+
+  items.forEach(function(item) {
+      const optionClasses = Array.from(item.closest('.item').classList);
+      const clientValues = optionClasses.filter(c => c.includes(firstDepth));
+      const text = item.textContent.toLowerCase();
+
+      if(!firstDepth){ // '전체' 선택
+          item.closest('.item').style.display = text.includes(filter) ? '' : 'none';
+      }else{
+        if(filter== ''){
+          if(item.closest('.item').classList.contains(type+'All')){
+            item.closest('.item').style.display = '';
+          }else{
+            item.closest('.item').style.display = clientValues.length > 0 ? '' : 'none';
+          }
+        }else{
+          if(text.includes(filter) && clientValues.length > 0){
+            item.closest('.item').style.display = '';
+          }else{
+            item.closest('.item').style.display = 'none';
+          }
+        }
+      }
+  });
+}
+
+function onlySearchSelect(input){
   const filter = input.value.toLowerCase();
   const items = input.nextElementSibling.querySelectorAll('.item a');
   items.forEach(function(item) {

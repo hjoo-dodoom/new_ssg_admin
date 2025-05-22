@@ -174,8 +174,8 @@
                                                 <input type="hidden">
                                                 <button type="button" class="btn_select form-select text-start" onclick="searchSelectOpen(this);">그룹사 전체</button>
                                                 <div class="search_select_options" style="display:none;">
-                                                    <input type="text" class="form-control" placeholder="검색어 입력">
-                                                    <div class="items">
+                                                    <input type="text" class="form-control" placeholder="검색어 입력" oninput="searchSelectSearch(this, 'groupStatus');">
+                                                    <div class="item groupStatusAll">
                                                         <div class="item"><a href="javascript:;" data-id="" class="active" select-display="" select-display-hide="group_none" onclick="searchSelectSelect(this);resetUnderSelect(this);">그룹사 전체</a></div>
                                                         <div class="item groupStatus1"><a href="javascript:;" data-id="code456uru" select-display="member_type_select2 code456uru" select-display-hide="group_none" onclick="searchSelectSelect(this);resetUnderSelect(this);">그룹사1 고객사있음(정상승인)</a></div>
                                                         <div class="item groupStatus2"><a href="javascript:;" data-id="code456754eyr" select-display="member_type_select2 code456754eyr" select-display-hide="group_none" onclick="searchSelectSelect(this);resetUnderSelect(this);">그룹사2 고객사있음(정지)</a></div>
@@ -189,9 +189,9 @@
                                                 <input type="hidden">
                                                 <button type="button" class="btn_select form-select text-start" onclick="searchSelectOpen(this);">고객사 전체</button>
                                                 <div class="search_select_options" style="display:none;">
-                                                    <input type="text" class="form-control" placeholder="검색어 입력" oninput="searchSelectSearch(this);">
+                                                    <input type="text" class="form-control" placeholder="검색어 입력" oninput="searchSelectSearch(this, 'clientStatus');">
                                                     <div class="items">
-                                                        <div class="item"><a href="javascript:;" data-id="" class="active" select-display="" onclick="searchSelectSelect(this);resetUnderSelect(this);">고객사 전체</a></div>
+                                                        <div class="item clientStatusAll"><a href="javascript:;" data-id="" class="active" select-display="" onclick="searchSelectSelect(this);resetUnderSelect(this);">고객사 전체</a></div>
                                                         <div class="item clientStatus1 code456uru"><a href="javascript:;" data-id="code458i95i5" select-display="member_type_select3 code458i95i5" onclick="searchSelectSelect(this);resetUnderSelect(this);">고객사1-1 계열사있음(정상승인)</a></div>
                                                         <div class="item clientStatus2 code456uru"><a href="javascript:;" data-id="codeeye44576" select-display="member_type_select3 codeeye44576" onclick="searchSelectSelect(this);resetUnderSelect(this);">고객사1-2 계열사있음(가승인)</a></div>
                                                         <div class="item clientStatus3 code456754eyr"><a href="javascript:;" data-id="code45urt48u" select-display="member_type_select3 code45urt48u" onclick="searchSelectSelect(this);resetUnderSelect(this);">고객사2-1 계열사있음(정지)</a></div>
