@@ -1,71 +1,71 @@
 
-//datepicker 호출 yyyy mm dd
-function initializeLitepicker(element) {
-  // 이미 초기화된 경우 종료
-  if (element.dataset.initialized) return;
+// //datepicker 호출 yyyy mm dd
+// function initializeLitepicker(element) {
+//   // 이미 초기화된 경우 종료
+//   if (element.dataset.initialized) return;
 
-  new Litepicker({
-    lang: 'ko-KR',
-    format: 'YYYY-MM-DD',
-    element: element,
-    buttonText: {
-      previousMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 6l-6 6l6 6" /></svg>`,
-      nextMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24V24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>`,
-    },
-    dropdowns: {
-      minYear: 1980,
-      maxYear: 2030,
-      months: true,
-      years: true,
-    },
-  });
+//   new Litepicker({
+//     lang: 'ko-KR',
+//     format: 'YYYY-MM-DD',
+//     element: element,
+//     buttonText: {
+//       previousMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
+//         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 6l-6 6l6 6" /></svg>`,
+//       nextMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
+//         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24V24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>`,
+//     },
+//     dropdowns: {
+//       minYear: 1980,
+//       maxYear: 2030,
+//       months: true,
+//       years: true,
+//     },
+//   });
 
-  element.dataset.initialized = "true";
-}
+//   element.dataset.initialized = "true";
+// }
 
-// 페이지 로드 시 기존 datepicker 초기화
-document.addEventListener("DOMContentLoaded", function () {
+// // 페이지 로드 시 기존 datepicker 초기화
+// document.addEventListener("DOMContentLoaded", function () {
 
-  const periodWrap = document.querySelector('.period_wrap');
+//   const periodWrap = document.querySelector('.period_wrap');
 
-  if(periodWrap){
-    const periodInput = periodWrap.querySelectorAll('.datepicker-icon');
-    new Litepicker({
-      lang: 'ko-KR',
-      format: 'YYYY-MM-DD',
-      element: periodInput[0], // 시작일
-      elementEnd: periodInput[1], // 종료일
-      buttonText: {
-        previousMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 6l-6 6l6 6" /></svg>`,
-        nextMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24V24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>`,
-      },
-      dropdowns: {
-        minYear: 1980,
-        maxYear: 2030,
-        months: true,
-        years: true,
-      },
-      allowRepick: true,
-      autoApply: true,
-      singleMode: false,
-      // minDays: 3,
-      maxDays: 30 * 6, // 최대 6개월 선택 가능
-    });
+//   if(periodWrap){
+//     const periodInput = periodWrap.querySelectorAll('.datepicker-icon');
+//     new Litepicker({
+//       lang: 'ko-KR',
+//       format: 'YYYY-MM-DD',
+//       element: periodInput[0], // 시작일
+//       elementEnd: periodInput[1], // 종료일
+//       buttonText: {
+//         previousMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
+//           <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 6l-6 6l6 6" /></svg>`,
+//         nextMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
+//           <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24V24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>`,
+//       },
+//       dropdowns: {
+//         minYear: 1980,
+//         maxYear: 2030,
+//         months: true,
+//         years: true,
+//       },
+//       allowRepick: true,
+//       autoApply: true,
+//       singleMode: false,
+//       // minDays: 3,
+//       maxDays: 30 * 6, // 최대 6개월 선택 가능
+//     });
 
-  }else{
-    var datepickerIcons = document.getElementsByClassName('datepicker-icon');
+//   }else{
+//     var datepickerIcons = document.getElementsByClassName('datepicker-icon');
 
-    for (var i = 0; i < datepickerIcons.length; i++) {
-      initializeLitepicker(datepickerIcons[i]);
-    }
+//     for (var i = 0; i < datepickerIcons.length; i++) {
+//       initializeLitepicker(datepickerIcons[i]);
+//     }
 
-  }
+//   }
 
-});
+// });
 
 // 가이드(JS) litepicker 3가지 유형
 document.addEventListener("DOMContentLoaded", function () {
@@ -97,19 +97,52 @@ document.addEventListener("DOMContentLoaded", function () {
         if(maxDays){
           // 2. 일수 설정 (예시: 최대 4일 선택 가능)
 
-          const picker = new Litepicker({
+          const startInput = rangeDate.querySelector('.range-start');
+          const endInput = rangeDate.querySelector('.range-end');
+
+          const minSelectableDate = new Date();
+          minSelectableDate.setDate(minSelectableDate.getDate() - maxDays);
+
+          const startpicker = new Litepicker({
             ...commonOptions,
-            element: rangeDate.querySelector('.range-start'),
-            elementEnd: rangeDate.querySelector('.range-end'),
-            singleMode: false,
-            maxDays
+            element: startInput,
+            singleMode: true,
+            minDate: minSelectableDate,
+            maxDate:new Date(),
           });
 
-            rangeDate.querySelector('button.range-reset')?.addEventListener('click', function () {
-              picker.clearSelection();
+          const endpicker = new Litepicker({
+            ...commonOptions,
+            element: endInput,
+            singleMode: true,
+            minDate: minSelectableDate,
+            maxDate:new Date()
+          });
+
+          startpicker.on('selected', () => {
+            const startDate = startpicker.getDate()?.dateInstance;
+
+            if (!startDate) return;
+
+            endpicker.setOptions({ minDate: startpicker.getDate() });
+          });
+
+          endpicker.on('selected', () => {
+            const endtDate = endpicker.getDate()?.dateInstance;
+
+            if (!endtDate) return;
+
+            startpicker.setOptions({maxDate:endpicker.getDate() });
+          });
+
+          rangeDate.querySelector('button.range-reset')?.addEventListener('click', function () {
+              startpicker.clearSelection();
+              endpicker.clearSelection();
+              startpicker.setOptions({ minDate: minSelectableDate,  maxDate:new Date(), });
+              endpicker.setOptions({ minDate: minSelectableDate,  maxDate:new Date(), });
               rangeDate.querySelector('.range-start').value = '';
               rangeDate.querySelector('.range-end').value = '';
-            });
+          });
 
         }else if(rangeNumber){
           // 3. 종료일 지정
