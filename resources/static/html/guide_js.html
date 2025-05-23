@@ -758,7 +758,110 @@ function showLoading(){
                 </div>
             </div>
 		</div>
+        <div class="box">
+            <div class="dec">
+                # 날짜(시작일-종료일) 유형<br/><br/>
+                -> 혼합 사용 불가<br/>
+            </div>
+            <div class="code">
+                <pre>
+                    <code class="language-go">
+//common.js
+&lt;div&gt;
+    &lt;p&gt;1. 기본&lt;/p&gt;
+    &lt;div class="input-group range-date"&gt;
+        &lt;div class="col-6"&gt;
+            &lt;input class="form-control date-input range-start" placeholder="시작일" /&gt;
+        &lt;/div&gt;
+        &lt;div class="col-6"&gt;
+            &lt;input class="form-control date-input range-end" placeholder="종료일" /&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
 
+&lt;div&gt;
+    &lt;p&gt;2. 일수 설정 (예시: 최대 4일 선택 가능)&lt;/p&gt;
+    &lt;div class="input-group range-date" max-days="4"&gt;
+        &lt;div class="col-5"&gt;
+            &lt;input class="form-control date-input range-start" placeholder="시작일" /&gt;
+        &lt;/div&gt;
+        &lt;div class="col-5"&gt;
+            &lt;input class="form-control date-input range-end" placeholder="종료일" /&gt;
+        &lt;/div&gt;
+        &lt;div class="col-2"&gt;
+            &lt;button type="button" class="btn btn-xs btn-primary range-reset"&gt;초기화&lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div&gt;
+    &lt;p&gt;3. 종료일 지정&lt;/p&gt;
+    &lt;div class="range-date"&gt;
+        &lt;div class="col-12 mb-2"&gt;
+            &lt;div class="col-12 input-group"&gt;
+                &lt;input class="form-control date-input range-start" placeholder="시작일" /&gt;
+            &lt;/div&gt;
+            &lt;div class="col-12 input-group"&gt;
+                &lt;input type="number" class="form-control range-number" /&gt;
+                &lt;span class="input-group-text text"&gt;일 후&lt;/span&gt;
+                &lt;button type="button" class="btn btn-xs btn-primary get-end-date"&gt;종료일 지정하기&lt;/button&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="col-12"&gt;
+            &lt;input class="form-control date-input end-date" readonly placeholder="종료일" /&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+
+                    </code>
+                </pre>
+            </div>
+            <div class="preview">
+                <div>
+                    <p>1. 기본</p>
+                    <div class="input-group range-date">
+                        <div class="col-6">
+                            <input class="form-control date-input range-start" placeholder="시작일" />
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control date-input range-end" placeholder="종료일" />
+                        </div>
+                    </div>
+                </div>
+                <div class="my-4">
+                    <p>2. 일수 설정 (예시: 최대 4일 선택 가능)</p>
+                    <div class="input-group range-date" max-days="4">
+                        <div class="col-5">
+                            <input class="form-control date-input range-start" placeholder="시작일" />
+                        </div>
+                        <div class="col-5">
+                            <input class="form-control date-input range-end" placeholder="종료일" />
+                        </div>
+                        <div class="col-2">
+                            <button type="button" class="btn btn-xs btn-primary range-reset">초기화</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="my-4">
+                    <p>3. 종료일 지정</p>
+                    <div class="range-date">
+                        <div class="col-12 mb-2">
+                            <div class="col-12 input-group">
+                                <input class="form-control date-input range-start" placeholder="시작일" />
+                            </div>
+                            <div class="col-12 input-group">
+                                <input type="number" class="form-control range-number"/><span class="input-group-text text">일 후</span>
+                                <button type="button" class="btn btn-xs btn-primary get-end-date">종료일 지정하기</button>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <input class="form-control date-input end-date" readonly placeholder="종료일" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 	</div>
 </div>
 <script>

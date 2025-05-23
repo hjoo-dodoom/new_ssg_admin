@@ -67,6 +67,105 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
+// 가이드(JS) litepicker 3가지 유형
+document.addEventListener("DOMContentLoaded", function () {
+  const rangeDates = document.querySelectorAll('.range-date');
+
+  const commonOptions = {
+    lang: 'ko-KR',
+    format: 'YYYY-MM-DD',
+    buttonText: {
+      previousMonth: `<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 6l-6 6l6 6" /></svg>`,
+      nextMonth: `<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24V24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>`
+    },
+    dropdowns: {
+      minYear: 1980,
+      maxYear: 2030,
+      months: true,
+      years: true
+    },
+    allowRepick: true,
+    autoRefresh: true,
+    autoApply: true,
+  };
+
+  rangeDates.forEach(function(rangeDate){
+
+        const maxDays = Number(rangeDate.getAttribute('max-days'));
+        const rangeNumber = rangeDate.querySelector('.range-number'); 
+
+        if(maxDays){
+          // 2. 일수 설정 (예시: 최대 4일 선택 가능)
+
+          const picker = new Litepicker({
+            ...commonOptions,
+            element: rangeDate.querySelector('.range-start'),
+            elementEnd: rangeDate.querySelector('.range-end'),
+            singleMode: false,
+            maxDays
+          });
+
+            rangeDate.querySelector('button.range-reset')?.addEventListener('click', function () {
+              picker.clearSelection();
+              rangeDate.querySelector('.range-start').value = '';
+              rangeDate.querySelector('.range-end').value = '';
+            });
+
+        }else if(rangeNumber){
+          // 3. 종료일 지정
+
+            const picker = new Litepicker({
+              ...commonOptions,
+              element: rangeDate.querySelector('.range-start'),
+              singleMode: true,
+              startDate: new Date()
+            });
+
+            rangeDate.querySelector('.get-end-date')?.addEventListener('click', function () {
+                    const startDate = picker.getDate()?.dateInstance;
+                    const daysToAdd = Number(rangeNumber.value);
+
+                    if (!(startDate instanceof Date) || isNaN(daysToAdd)) {
+                      alert('시작일 또는 날짜 수를 확인해 주세요.');
+                      return;
+                    }
+
+                    const endDate = new Date(startDate);
+                    endDate.setDate(endDate.getDate() + daysToAdd);
+
+                    const formattedEndDate = `${endDate.getFullYear()}-${String(endDate.getMonth() + 1).padStart(2, '0')}-${String(endDate.getDate()).padStart(2, '0')}`;
+                    rangeDate.querySelector('.end-date').value = formattedEndDate;
+            });
+        }else{
+          // 1. 기본
+
+            const startInput = rangeDate.querySelector('.range-start');
+            const endInput = rangeDate.querySelector('.range-end');
+
+            const startpicker = new Litepicker({
+              ...commonOptions,
+              element: startInput,
+              singleMode: true
+            });
+
+            const endpicker = new Litepicker({
+              ...commonOptions,
+              element: endInput,
+              singleMode: true
+            });
+
+            startpicker.on('selected', () => {
+              endpicker.setOptions({ minDate: startpicker.getDate() });
+            });
+
+            endpicker.on('selected', () => {
+              startpicker.setOptions({ maxDate: endpicker.getDate() });
+            });
+
+        }
+  })
+});
+
 // Input mask 초기화
 function initializeInputMask(element) {
   IMask(element, {
