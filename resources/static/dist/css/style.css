@@ -73,6 +73,7 @@ transition:all 0.3s;}
 .table.table-line th.bg_pink{background-color: rgb(255, 212, 197);color:#000;}
 .table tr{background-color: #fff;}
 .table .border_blue{outline:2px solid #075db3;outline-offset: -2px;}
+.table .border_light_blue{outline:2px solid rgb(25, 183, 240);outline-offset: -2px;}
 .table .border_green{outline:2px solid rgb(17, 195, 61);outline-offset: -2px;}
 .table .border_red{outline:2px solid rgb(235, 27, 27);outline-offset: -2px;}
 .table .bg_blue{background-color: #dde9f5;}
