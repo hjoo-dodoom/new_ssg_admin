@@ -86,7 +86,7 @@
 
 
     <!-- Page body -->
-    <div class="page-body">
+    <div class="page-body main_page">
         <div class="container-xl">
             <div class="row">
                 <div class="col-sm-6 col-lg-4">
@@ -94,7 +94,7 @@
                         <div class="card-body">
                             <div class="d-flex justify-content-between">
                                 <h3 class="card-title">제안관리</h3>
-                                <div class="mt-1">
+                                <div class="mt-1 sub-text">
                                     25/03/26 ~ 25/04/01
                                 </div>
                             </div>
@@ -108,15 +108,15 @@
                                     <thead>
                                         <tr>
                                             <th>총</th>
-                                            <th>제안</th>
-                                            <th>미제안</th>
+                                            <th class="mode_red">제안</th>
+                                            <th class="mode_blue">미제안</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <td>10</td>
-                                            <td class="text-red">6</td>
-                                            <td class="text-green">4</td>
+                                            <td class="mode_red">6</td>
+                                            <td class="mode_blue">4</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -129,7 +129,7 @@
                         <div class="card-body">
                             <div class="d-flex justify-content-between">
                                 <h3 class="card-title">배송/주문문의</h3>
-                                <div class="mt-1">
+                                <div class="mt-1 sub-text">
                                     25/03/26 ~ 25/04/01
                                 </div>
                             </div>
@@ -143,15 +143,15 @@
                                     <thead>
                                         <tr>
                                             <th>총</th>
-                                            <th>답변대기</th>
-                                            <th>답변완료</th>
+                                            <th class="mode_red">답변대기</th>
+                                            <th class="mode_blue">답변완료</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <td>10</td>
-                                            <td class="text-red">6</td>
-                                            <td class="text-green">4</td>
+                                            <td class="mode_red">6</td>
+                                            <td class="mode_blue">4</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -164,7 +164,7 @@
                         <div class="card-body">
                             <div class="d-flex justify-content-between">
                                 <h3 class="card-title">상품문의</h3>
-                                <div class="mt-1">
+                                <div class="mt-1 sub-text">
                                     25/03/26 ~ 25/04/01
                                 </div>
                             </div>
@@ -178,15 +178,15 @@
                                     <thead>
                                         <tr>
                                             <th>총</th>
-                                            <th>답변대기</th>
-                                            <th>답변완료</th>
+                                            <th class="mode_red">답변대기</th>
+                                            <th class="mode_blue">답변완료</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <td>10</td>
-                                            <td class="text-red">6</td>
-                                            <td class="text-green">4</td>
+                                            <td class="mode_red">6</td>
+                                            <td class="mode_blue">4</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -201,8 +201,8 @@
                                 <h3 class="card-title">주문현황
                                     <button type="button" class="reset-btn mt-1">새로고침</button>
                                 </h3>
-                                <div class="mt-1">
-                                    25/04/01 am 10:00
+                                <div class="mt-1 sub-text">
+                                    25/04/01
                                 </div>
                             </div>
                             <div class="table-responsive">
@@ -302,7 +302,7 @@
                                     <tbody>
                                         <tr>
                                             <th>원본상품</th>
-                                            <td class="fw-semibold">20개</td>
+                                            <td class="mode_orange">20개</td>
                                             <td>10개</td>
                                             <td>4개</td>
                                             <td>1개</td>
@@ -312,7 +312,7 @@
                                         </tr>
                                         <tr>
                                             <th>복사상품</th>
-                                            <td class="fw-semibold">20개</td>
+                                            <td class="mode_orange">20개</td>
                                             <td>10개</td>
                                             <td>4개</td>
                                             <td>1개</td>
@@ -335,27 +335,60 @@
                                     <a href="#" class="move-btn">공지사항 게시판 바로가기</a>
                                 </div>
                             </div>
-                            <div class="list-group list-group-flush lst-notice">
-                                <a href="#" class="list-group-item list-group-item-action">
-                                    <span class="subject">[시스템][중요]법인영업몰 시스템 재 구축에 따른 서비스 중단 안내</span>
-                                    <span class="text-secondary float-end">25.04.01</span>
-                                </a>
-                                <a href="#" class="list-group-item list-group-item-action">
-                                    <span class="subject">24년 차세대 시스템에 등록 되어있는 계약서 공유합니다.</span>
-                                    <span class="text-secondary float-end">25.03.28</span>
-                                </a>
-                                <a href="#" class="list-group-item list-group-item-action">
-                                    <span class="subject">CJ택배접수 매뉴얼 변경에 따른 영업담당자 숙지사항 공유합니다.</span>
-                                    <span class="text-secondary float-end">25.03.26</span>
-                                </a>
-                                <a href="#" class="list-group-item list-group-item-action">
-                                    <span class="subject">25년 신세계임직원몰 근로자의날 선물 제안안내</span>
-                                    <span class="text-secondary float-end">25.03.26</span>
-                                </a>
-                                <a href="#" class="list-group-item list-group-item-action">
-                                    <span class="subject">삼성화재RC 시책몰 운영 건</span>
-                                    <span class="text-secondary float-end">25.03.20</span>
-                                </a>
+                             <div class="notice table-responsive">
+                                <table class="table table-vcenter table-line card-table text-center" style="table-layout:fixed;">
+                                    <colgroup>
+                                        <col>
+                                        <col style="width:100px;">
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th>제목</th>
+                                            <th>날짜</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-start td-truncate text-truncate">
+                                                <div class="mb-1">
+                                                    <span class="badge bg-black-lt fs-5 me-1">상단고정</span>
+                                                    <span class="badge bg-primary-lt fs-5 me-1">공지</span>
+                                                    <span class="badge bg-blue-lt fs-5 me-1">임시저장</span>
+                                                    <span class="badge bg-red-lt fs-5 me-1">상품제안</span>
+                                                    <span class="badge bg-orange-lt fs-5 me-1">운영</span>
+                                                    <span class="badge bg-yellow-lt fs-5 me-1">정산</span>
+                                                    <span class="badge bg-pink-lt fs-5 me-1">시스템공지</span>
+                                                </div>
+                                                <a href="#"><span class="badge bg-red-lt fs-5 me-1">시스템공지</span>법인영업몰 시스템 재 구축에 따른 서비스 중단 안내</a>
+                                            </td>
+                                            <td class="text-nowrap">25.04.01</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-start td-truncate text-truncate">
+                                                <a href="#">법인영업몰 시스템 재 구축에 따른 서비스 중단 안내</a>
+                                            </td>
+                                            <td class="text-nowrap">25.04.01</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-start td-truncate text-truncate">
+                                                <a href="#">법인영업몰 시스템 재 구축에 따른 서비스 중단 안내</a>
+                                            </td>
+                                            <td class="text-nowrap">25.04.01</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-start td-truncate text-truncate">
+                                                <a href="#">법인영업몰 시스템 재 구축에 따른 서비스 중단 안내</a>
+                                            </td>
+                                            <td class="text-nowrap">25.04.01</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-start td-truncate text-truncate">
+                                                <a href="#">법인영업몰 시스템 재 구축에 따른 서비스 중단 안내</a>
+                                            </td>
+                                            <td class="text-nowrap">25.04.01</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -369,63 +402,82 @@
                                     <a href="#" class="move-btn">시스템문의 게시판 바로가기</a>
                                 </div>
                             </div>
-                            <div class="list-group list-group-flush lst-qna">
-                                <!-- 답변완료 text-success ,  답변대기 text-muted-->
-                                <a href="#" class="list-group-item list-group-item-action">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <span
-                                        class="btn btn-sm w-5 fs-5 text-light me-2 lst_state float-start btn-muted">
-                                        대기
-                                        </span>
-                                        <span class="subject mt float-start">[로그인] 로그인이 안되는데 어떻게 해야 될까요?</span>
-                                    </div>
-                                </div>
-                                </a>
-                                <a href="#" class="list-group-item list-group-item-action">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <span
-                                        class="btn btn-sm w-5 fs-5 text-light me-2 lst_state float-start btn-muted">
-                                        대기
-                                        </span>
-                                        <span class="subject float-start">[시스템] 시스템이 잘 안되는데 어떻게 해야 될까요?</span>
-                                    </div>
-                                </div>
-                                </a>
-                                <a href="#" class="list-group-item list-group-item-action">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <span
-                                        class="btn btn-sm w-5 fs-5 text-light me-2 lst_state float-start btn-primary">
-                                        완료
-                                        </span>
-                                        <span class="subject float-start">[로그인] 로그인이 안되는데 어떻게 해야 될까요?</span>
-                                    </div>
-                                </div>
-                                </a>
-                                <a href="#" class="list-group-item list-group-item-action">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <span
-                                        class="btn btn-sm w-5 fs-5 text-light me-2 lst_state float-start btn-primary">
-                                        완료
-                                        </span>
-                                        <span class="subject float-start">[시스템] 시스템이 잘 안되는데 어떻게 해야 될까요?</span>
-                                    </div>
-                                </div>
-                                </a>
-                                <a href="#" class="list-group-item list-group-item-action">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <span
-                                        class="btn btn-sm w-5 fs-5 text-light me-2 lst_state float-start btn-primary">
-                                        완료
-                                        </span>
-                                        <span class="subject float-start">[로그인] 로그인이 안되는데 어떻게 해야 될까요?</span>
-                                    </div>
-                                </div>
-                                </a>
+
+                             <div class="notice table-responsive">
+                                <table class="table table-vcenter table-line card-table text-center">
+                                    <colgroup>
+                                        <col>
+                                        <col style="width:20%;">
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th>제목</th>
+                                            <th>답변 상태</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-start td-truncate text-truncate">
+                                                <a href="#">[시스템] 시스템이 잘 안되는데 어떻게 해야 될까요?</a>
+                                            </td>
+                                            <td>
+                                                <span class="text_red fw-semibold">
+                                                    대기
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-start td-truncate text-truncate">
+                                                <a href="#">[로그인] 로그인이 안되는데 어떻게 해야 될까요?</a>
+                                            </td>
+                                            <td>
+                                                <span class="">
+                                                    완료
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-start td-truncate text-truncate">
+                                                <a href="#">[시스템] 시스템이 잘 안되는데 어떻게 해야 될까요?</a>
+                                            </td>
+                                            <td>
+                                                <span class="text_red fw-semibold">
+                                                    대기
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-start td-truncate text-truncate">
+                                                <a href="#">[로그인] 로그인이 안되는데 어떻게 해야 될까요?</a>
+                                            </td>
+                                            <td>
+                                                <span class="">
+                                                    완료
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-start td-truncate text-truncate">
+                                                <a href="#">[시스템] 시스템이 잘 안되는데 어떻게 해야 될까요?</a>
+                                            </td>
+                                            <td>
+                                                <span class="text_red fw-semibold">
+                                                    대기
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-start td-truncate text-truncate">
+                                                <a href="#">[로그인] 로그인이 안되는데 어떻게 해야 될까요?</a>
+                                            </td>
+                                            <td>
+                                                <span class="">
+                                                    완료
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>

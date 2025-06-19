@@ -778,11 +778,15 @@ background-image: var(--tblr-form-select-bg-img), var(--tblr-form-select-bg-icon
 .main_page .card-body{padding:18px;border-radius:12px;}
 .main_page .table.table-line{background-color:#E6E7E9;}
 .main_page .table.table-line tr:nth-child(1) th {color:#000;background-color:#EFEFEF;}
-.main_page .table.table-line tr:nth-child(2) th {font-size:13px; color:#535353;background-color:#F7F7F7;}
+.main_page .table.table-line tr:nth-child(2) th,
+.main_page .table.table-line tbody tr th {font-size:13px !important; color:#535353 !important;background-color:#F7F7F7 !important;}
 .main_page .mode_red{color:#CF3F42 !important;background-color:#FEF6F8 !important;}
 .main_page .mode_blue{color:#137CCE !important;background-color:#F1F9FD !important;}
 .main_page .mode_orange{color:#FF3300 !important;background-color:#FFF5E2 !important;}
+.main_page .text_red{color:#CF3F42 !important;}
+.main_page .text_blue{color:#137CCE !important;}
 .main_page .table-mb tfoot tr{background-color:#3E3E3E;}
 .main_page .table thead th, .markdown > .main_page table thead th{padding:0.6rem;}
 .main_page .notice .table > :not(caption) > * > *, .main_page .notice .markdown > table > :not(caption) > * > *{padding: 0.5rem;}
 .main_page .notice .table.table-line tr:nth-child(1) th{color:#535353;background-color:#EFEFEF;}
+.main_page .avatar{background-size:contain;}
