@@ -115,8 +115,8 @@
                                 <div class="option_item">
                                     <div class="subheader">고객사</div>
                                     <div class="row">
-                                        <div class="col-6">
-                                            <select class="form-select col-6">
+                                        <div class="col-12">
+                                            <select class="form-select">
                                                 <option value="">전체</option>
                                                 <option value="2">정상승인</option>
                                                 <option value="1">가승인</option>
@@ -124,8 +124,8 @@
                                                 <option value="4">만료</option>
                                             </select>
                                         </div>
-                                        <div class="col-6">
-                                            <select class="form-select col-6">
+                                        <div class="col-12">
+                                            <select class="form-select">
                                                 <option value="">전체</option>
                                             </select>
                                         </div>
@@ -138,31 +138,11 @@
                                     </div>
                                 </div>
                                 <div class="option_item">
-                                    <div class="subheader">협력회사</div>
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <select class="form-select col-6">
-                                                <option value="sellName" selected="">업체명</option>
-                                                <option value="sellId">아이디</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-6">
-                                            <input type="text" class="form-control">
-                                        </div>
-                                        <div class="col-12">
-                                            <label class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="partnerOption">
-                                                <span class="form-check-label">매장제외</span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="option_item">
-                                    <div class="subheader">가격대</div>
+                                    <div class="subheader">상품가격</div>
                                     <div class="row">
                                         <div class="col-12">
                                             <select class="form-select col-6">
-                                                <option value="prPriceBuy" selected="">제안가</option>
+                                                <option value="prPriceBuy" selected="">공급가</option>
                                                 <option value="prPriceSell">판매가</option>
                                                 <option value="prPriceInterSell">인터넷가</option>
                                                 <option value="prPriceOpenSell">소비자가</option>
@@ -180,76 +160,67 @@
                                     </div>
                                 </div>
                                 <div class="option_item">
-                                    <div class="subheader">판매가/마진율</div>
+                                    <div class="subheader">협력회사</div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <select class="form-select">
+                                                <option value="" selected="">협력회사명</option>
+                                                <option value="">협력회사코드</option>
+                                                <option value="">MD번호</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12">
+                                            <input type="text" class="form-control">
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" name="searchExcpetSsg" value="1">
+                                                <span class="form-check-label">기획상품</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" name="searchOnlySsg" value="1">
+                                                <span class="form-check-label">매장상품</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="option_item">
+                                    <div class="subheader">과세 구분</div>
+                                    <div>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="" value="" checked="">
+                                            <span class="form-check-label">전체</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="" value="">
+                                            <span class="form-check-label">과세</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="" value="">
+                                            <span class="form-check-label">면세</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="" value="">
+                                            <span class="form-check-label">유가증권</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="option_item">
+                                    <div class="subheader">판매가</div>
                                     <div class="row">
                                         <div class="col-5-5">
-                                            <input type="text" class="form-control">
+                                            <input type="text" class="form-control" name="searchMinPrdPrice" value="">
                                         </div>
                                         <div class="col-1 text-center tilde">
                                             ~
                                         </div>
                                         <div class="col-5-5">
-                                            <input type="text" class="form-control">
+                                            <input type="text" class="form-control" name="searchMaxPrdPrice" value="">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="option_item">
-                                    <div class="subheader">몰 구분</div>
-                                    <div>
-                                        <label class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="giftcode" checked="">
-                                            <span class="form-check-label">전체</span>
-                                        </label>
-                                        <label class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="giftcode" value="1">
-                                            <span class="form-check-label">폐쇄몰</span>
-                                        </label>
-                                        <label class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="giftcode" value="2">
-                                            <span class="form-check-label">포인트몰</span>
-                                        </label>
-                                        <label class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="giftcode" value="3">
-                                            <span class="form-check-label">사은품몰</span>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="option_item">
-                                    <div class="subheader">상품등록</div>
-                                    <div>
-                                        <label class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="copyYn" checked="">
-                                            <span class="form-check-label">전체</span>
-                                        </label>
-                                        <label class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="copyYn" value="1">
-                                            <span class="form-check-label">복사상품</span>
-                                        </label>
-                                        <label class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="copyYn" value="0">
-                                            <span class="form-check-label">원본상품</span>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="option_item">
-                                    <div class="subheader">배송형식</div>
-                                    <div>
-                                        <label class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="srchShipType" checked="">
-                                            <span class="form-check-label">전체</span>
-                                        </label>
-                                        <label class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="srchShipType" value="1">
-                                            <span class="form-check-label">개별배송</span>
-                                        </label>
-                                        <label class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="srchShipType" value="2">
-                                            <span class="form-check-label">일괄배송</span>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="option_item">
-                                    <div class="subheader">배송비부담</div>
+                                    <div class="subheader">배송비</div>
                                     <div>
                                         <label class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="srchShipcharge_type" checked="">
@@ -269,6 +240,58 @@
                                         </label>
                                     </div>
                                 </div>
+                                <div class="option_item">
+                                    <div class="subheader">상품</div>
+                                    <div>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="copyYn" checked="">
+                                            <span class="form-check-label">전체</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="copyYn" value="1">
+                                            <span class="form-check-label">복사상품</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="copyYn" value="0">
+                                            <span class="form-check-label">원본상품</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="option_item aside_50">
+                                    <div class="subheader">상태</div>
+                                    <div>
+                                        <select class="form-select">
+                                            <option value="">전체</option>
+                                            <option value="2" selected="">대기</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="option_item aside_50">
+                                    <div class="subheader">옵션</div>
+                                    <div>
+                                        <select class="form-select" name="searchOptType">
+                                            <option value="" selected="">전체</option>
+                                            <option value="1">상시판매</option>
+                                            <option value="2">수량품</option>
+                                            <option value="7">옵션일체형</option>
+                                            <option value="8">옵션분리형</option>
+                                            <option value="9">옵션독립형</option>
+                                            <option value="5">일시품절</option>
+                                            <option value="6">판매종료</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="option_item aside_50">
+                                    <div class="subheader">재고상태</div>
+                                    <div>
+                                        <select class="form-select">
+                                            <option value="" selected="">전체</option>
+                                            <option value="">판매중</option>
+                                            <option value="">일시품절</option>
+                                            <option value="">판매종료</option>
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="option_item aside_50">
                                     <div class="subheader">포인트사용</div>
                                     <div>
@@ -280,72 +303,65 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="option_item aside_50">
-                                    <div class="subheader">승인</div>
-                                    <div>
-                                        <select class="form-select" disabled>
-                                            <option value="">전체</option>
-                                            <option value="1" selected="">승인</option>
-                                            <option value="2">대기</option>
-                                            <option value="3">반송</option>
-                                            <option value="4">판매종료</option>
-                                            <option value="5">일시품절</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="option_item aside_50">
-                                    <div class="subheader">과세</div>
-                                    <div>
-                                        <select class="form-select">
-                                            <option value="">전체</option>
-                                            <option value="1">과세</option>
-                                            <option value="2">면세</option>
-                                            <option value="3">유가증권</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="option_item aside_50">
-                                    <div class="subheader">옵션(재고관리)</div>
-                                    <div>
-                                        <select class="form-select">
-                                            <option value="">전체</option>
-                                            <option value="1">상시판매</option>
-                                            <option value="4">단품수량품(색상, 사이즈)</option>
-                                            <option value="2">수량품</option>
-                                            <option value="3">단가수량품</option>
-                                            <option value="5">일시품절</option>
-                                            <option value="6">판매종료</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="option_item">
+                                <div class="option_item w80">
                                     <div class="subheader">검색</div>
                                     <div class="row">
-                                        <div class="col-6">
-                                            <select class="form-select">
-                                                <option value="prdNm" selected="">상품명</option>
-                                                <option value="prdCode">상품코드</option>
-                                                <option value="modelNm">모델명</option>
-                                                <option value="sellNm">협력회사명</option>
-                                                <option value="ptnNm">고객사명</option>
-                                            </select>
+                                        <div class="add_remove_remove_group col-12">
+                                            <div class="item mb-1">
+                                                <div class="input-group">
+                                                    <select class="form-select" style="max-width:100px;" name="searchCond2">
+                                                        <option value="1" selected="">상품명</option>
+                                                        <option value="2">상품코드</option>
+                                                        <option value="3">모델명</option>
+                                                        <option value="4">협력회사명</option>
+                                                        <option value="5">고객사명</option>
+                                                    </select>
+                                                    <input type="text" class="form-control" name="searchText2" value="">
+
+
+                                                </div>
+                                            </div>
+                                            <script>
+                                                const group = document.querySelector('.add_remove_remove_group');
+                                                function addSearchItem(elm){
+                                                    const newItem = document.createElement('div');
+                                                    newItem.classList.add('item', 'mb-1');
+                                                    newItem.innerHTML = `
+                                                        <div class="input-group">
+                                                            <select class="form-select" style="max-width:100px;" name="searchCond2">
+                                                                <option value="1" selected>상품명</option>
+                                                                <option value="2">상품코드</option>
+                                                                <option value="3">모델명</option>
+                                                                <option value="4">협력회사명</option>
+                                                                <option value="5">고객사명</option>
+                                                            </select>
+                                                            <input type="text" class="form-control" name="searchText2">
+                                                            <button type="button" class="btn btn-xs btn-warning" onclick="removeSearchItem(this);">삭제</button>
+                                                            <button type="button" class="btn btn-xs btn-secondary" onclick="addSearchItem(this);">추가</button>
+                                                        </div>
+                                                    `;
+                                                    group.appendChild(newItem);
+                                                };
+
+                                                function removeSearchItem(elm){
+                                                    if(group.querySelectorAll('.item').length <= 1){
+                                                        alert('검색은 최소 1개 이상이여야 합니다.');
+                                                        return false;
+                                                    }
+                                                    elm.closest('.item').remove();
+                                                };
+                                            </script>
                                         </div>
-                                        <div class="col-6">
-                                            <input type="text" class="form-control">
+                                        <div class="col-12">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" name="searchNonePtnPrd" value="1">
+                                                <span class="form-check-label">미배정상품</span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" name="searchLockPrd" value="1">
+                                                <span class="form-check-label">잠긴상품</span>
+                                            </label>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="option_item">
-                                    <div class="subheader">검색</div>
-                                    <div>
-                                        <label class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" name="notPtnProduct">
-                                            <span class="form-check-label">미배정상품</span>
-                                        </label>
-                                        <label class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" name="lockyn">
-                                            <span class="form-check-label">잠긴상품</span>
-                                        </label>
                                     </div>
                                 </div>
                             </div>
