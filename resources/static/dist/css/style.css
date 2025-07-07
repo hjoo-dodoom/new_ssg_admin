@@ -123,7 +123,7 @@ transition:all 0.3s;}
 .list_prc + .hover > .m:before{border-left:1px solid #e60000;border-bottom:1px solid #e60000;}
 .list_prc + .hover > .s:before{border-left:1px solid #4e5f9b;border-bottom:1px solid #4e5f9b;}
 .list_prc:hover + .hover{display:block;}
-.thum_hover{display:none;position:absolute;right:-170px;top:50%;transform:translate(0,-50%);width:160px;z-index:10;box-shadow:0 0 10px rgba(0,0,0,.1)}
+.thum_hover{display:none;position:absolute;right:-170px;top:50%;transform:translate(0,-50%);width:500px;height:500px;z-index:10;box-shadow:0 0 10px rgba(0,0,0,.1)}
 .thum_hover img{width:100%;max-width:100%;height:auto;max-height:9999em;}
 .list_link:hover + .thum_hover{display:block;}
 
