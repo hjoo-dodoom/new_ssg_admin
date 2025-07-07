@@ -787,7 +787,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="table-responsive">
+                        <div class="table-responsive tr_cursor">
                             <table class="table table-vcenter table-line card-table text-center table-mb label-control tr_hover">
                                 <thead class="dark">
                                     <tr>
@@ -796,72 +796,53 @@
                                                 <input class="form-check-input check-all" type="checkbox">
                                             </label>
                                         </th>
-                                        <th>고객사명</th>
-                                        <th style="min-width:85px;max-width:85px;">주문일<br/>(체결번호)</th>
-                                        <th>주문자</th>
-                                        <th>결제수단</th>
-                                        <th>총<br/>판매가</th>
-                                        <th>총<br/>배송비</th>
-                                        <th>총<br/>포인트</th>
-                                        <th>총<br/>마일리지</th>
-                                        <th>총<br/>할인쿠폰</th>
-                                        <th>총<br/>주문금액</th>
-                                        <th>실<br/>결제금액</th>
+                                        <th style="min-width:85px;max-width:85px;">주문일시<br/>(체결번호)</th>
                                         <th>주문번호</th>
+                                        <th>고객사</th>
                                         <th>협력회사</th>
-                                        <th style="min-width:170px;max-width:170px;">주문상품</th>
+                                        <th style="min-width:170px;max-width:170px;">상품명</th>
+                                        <th>주문자</th>
+                                        <th>결제방법</th>
                                         <th>수량</th>
-                                        <th>판매가</th>
-                                        <th style="min-width:90px;max-width:90px;width:90px;">주문상태</th>
+                                        <th>실결제액</th>
+                                        <th>총액</th>
+                                        <th style="min-width:90px;max-width:90px;width:90px;">주문처리상태</th>
                                         <th style="min-width:100px;max-width:100px;width:100px;">송장번호</th>
                                         <th style="min-width:50px;max-width:50px;width:50px;">수정</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td colspan="20" class="list-empty">
+                                        <td colspan="14" class="list-empty">
                                             검색된 내역이 존재하지 않습니다.
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td rowspan="3">
+                                    <tr data-point_value="10,000" data-pay="1" data-ssg_money="2" data-mileage="3" data-coupon="4" data-total_amount="50,000" data-final_payment="60,000">
+                                        <td rowspan="2">
                                             <label class="form-check form-check-inline m-0">
                                                 <input class="form-check-input" type="checkbox">
                                             </label>
                                         </td>
-                                        <td rowspan="3">(모바일)<br/>시크릿스토어</td>
-                                        <td rowspan="3" class="text-start">
+                                        <td rowspan="2" class="text-start">
                                             <a href="/resources/static/html/order/order_detail.html" class="list_link">
-                                                2024-05-13<br/>22:22<br/>(K000212448)
+                                                2024-05-13<br/>(K000212448)<br/>[모바일]
                                             </a>
-                                            <button 
-                                                type="button" 
-                                                class="btn btn-sm btn-outline-warning mt-1 w-100"
-                                                onclick="windowPopup('/resources/static/html/popup/order_cancel_pop.html', '750', '650')"
-                                            >
-                                                주문취소
-                                            </button>
                                         </td>
-                                        <td rowspan="3">홍길동<br/>(012345678)</td>
-                                        <td rowspan="3">복합결제</td>
-                                        <td rowspan="3">500,000</td>
-                                        <td rowspan="3">0</td>
-                                        <td rowspan="3">0</td>
-                                        <td rowspan="3">0</td>
-                                        <td rowspan="3">0</td>
-                                        <td rowspan="3">500,000</td>
-                                        <td rowspan="3">500,000</td>
-                                        <td rowspan="2">O00123123123</td>
-                                        <td rowspan="2">베네파트너</td>
+                                        <td rowspan="2" class="text-nowrap">O00123123123</td>
+                                        <td rowspan="2">시크릿스토어</td>
+                                        <td>베네파트너</td>
                                         <td class="text-start">
                                             <a href="/resources/static/html/order/order_detail.html" class="list_link">
                                                 p00001245135<br/>
-                                                바삭바삭밥도둑명풍 완도김
+                                                [산수야] 포기김치 10KG ※ [50세트] 한정수량 특가
                                             </a>
                                             <span class="d-block text-secondary">·기존세트 / 블랙</span>
                                         </td>
-                                        <td>1</td>
-                                        <td>250,500</td>
+                                        <td rowspan="2">홍*동<br/>(ssglkm)</td>
+                                        <td rowspan="2">복합결제</td>
+                                        <td rowspan="2" class="text-nowrap">1</td>
+                                        <td rowspan="2" class="text-nowrap">500,000</td>
+                                        <td rowspan="2" class="text-nowrap">250,500</td>
                                         <td>
                                             <select class="form-select w-100">
                                                 <option value="">결제대기</option>
@@ -891,16 +872,15 @@
                                         </td>
                                         <td><button type="button" class="btn btn-sm btn-outline-primary">수정</button></td>
                                     </tr>
-                                    <tr>
+                                    <tr data-point_value="10,000" data-pay="0" data-ssg_money="0" data-mileage="0" data-coupon="0" data-total_amount="20,000" data-final_payment="10,000">
+                                        <td>돋움</td>
                                         <td class="text-start">
                                             <a href="/resources/static/html/order/order_detail.html" class="list_link">
                                                 P0000000193616<br/>
-                                                [오아] 에어쿨 핸디 미니 무선 휴대용 급속 냉각 아이스 핸드 팬 손 선풍기 충전식 손풍기
+                                                [산수야] 포기김치 10KG ※ [50세트] 한정수량 특가
                                             </a>
                                             <span class="d-block text-secondary">·기존세트 / 블랙</span>
                                         </td>
-                                        <td>1</td>
-                                        <td>250,500</td>
                                         <td>
                                             <select class="form-select w-100">
                                                 <option value="">결제대기</option>
@@ -930,70 +910,19 @@
                                         </td>
                                         <td><button type="button" class="btn btn-sm btn-outline-primary">수정</button></td>
                                     </tr>
-                                    <tr>
-                                        <td>O00000002484588</td>
-                                        <td>제이에스코리아</td>
-                                        <td class="text-start">
-                                            <a href="/resources/static/html/order/order_detail.html" class="list_link">
-                                                P0000000193601<br/>
-                                                [GGS]부스트 헥사곤 에그사각팬21cm
-                                                ※ [50개] 한정수량 특가
-                                            </a>
-                                            <span class="d-block text-secondary">·기존세트 / 블랙</span>
-                                        </td>
-                                        <td>1</td>
-                                        <td>250,500</td>
-                                        <td>
-                                            <select class="form-select w-100">
-                                                <option value="">결제대기</option>
-                                                <option value="">결제완료</option>
-                                                <option value="" selected>주문접수</option>
-                                                <option value="">배송준비중</option>
-                                                <option value="">배송시작</option>
-                                                <option value="">배송중</option>
-                                                <option value="">배송완료</option>
-                                                <option value="">주문취소</option>
-                                                <option value="">전월취소</option>
-                                                <option value="">결제실패</option>
-                                            </select>
-                                            <button 
-                                                type="button" 
-                                                class="btn btn-sm btn-outline-warning mt-1 w-100"
-                                                onclick="windowPopup('/resources/static/html/popup/order_cancel_pop.html', '750', '650')"
-                                            >
-                                                주문취소
-                                            </button>
-                                        </td>
-                                        <td>
-                                            <select class="form-select w-100">
-                                                <option value="">택배사선택</option>
-                                            </select>
-                                            <input type="text" class="form-control mt-1 w-100">
-                                        </td>
-                                        <td><button type="button" class="btn btn-sm btn-outline-primary">수정</button></td>
-                                    </tr>
-                                    <tr>
+                                    <tr data-point_value="20,000" data-pay="0" data-ssg_money="0" data-mileage="0" data-coupon="0" data-total_amount="20,000" data-final_payment="10,000">
                                         <td>
                                             <label class="form-check form-check-inline m-0">
                                                 <input class="form-check-input" type="checkbox">
                                             </label>
                                         </td>
-                                        <td>(PC)<br/>시크릿스토어</td>
                                         <td class="text-start">
                                             <a href="/resources/static/html/order/order_detail.html" class="list_link">
-                                                2024-05-13<br/>22:22<br/>(K000212448)
+                                                2024-05-13<br/>(K000212448)
                                             </a>
                                         </td>
-                                        <td>홍길동<br/>(5345345)</td>
-                                        <td>복합결제</td>
-                                        <td>500,000</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                        <td>500,000</td>
-                                        <td>500,000</td>
-                                        <td>O0000046545645</td>
+                                        <td class="text-nowrap">O0000046545645</td>
+                                        <td>(PC)<br/>시크릿스토어</td>
                                         <td>돋움</td>
                                         <td class="text-start">
                                             <a href="/resources/static/html/order/order_detail.html" class="list_link">
@@ -1002,8 +931,11 @@
                                             </a>
                                             <span class="d-block text-secondary">·기존세트 / 블랙</span>
                                         </td>
-                                        <td>1</td>
-                                        <td>250,500</td>
+                                        <td>홍길동<br/>(ssglkm)</td>
+                                        <td>복합결제</td>
+                                        <td class="text-nowrap">0</td>
+                                        <td class="text-nowrap">500,000</td>
+                                        <td class="text-nowrap">250,500</td>
                                         <td>
                                             <select class="form-select w-100">
                                                 <option value="">결제대기</option>
@@ -1052,22 +984,13 @@
                                                 <input class="form-check-input" type="checkbox">
                                             </label>
                                         </td>
-                                        <td>(PC)<br/>시크릿스토어</td>
                                         <td class="text-start">
                                             <a href="/resources/static/html/order/order_detail.html" class="list_link">
-                                                2024-05-13<br/>22:22<br/>(K00021212)
+                                                2024-05-13<br/>(K00021212)
                                             </a>
                                         </td>
-                                        <td>김길동<br/>(123123)</td>
-                                        <td>SSGPAY</td>
-                                        <td>500,000</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                        <td>500,000</td>
-                                        <td>500,000</td>
-                                        <td>O0000008888</td>
+                                        <td class="text-nowrap">O0000008888</td>
+                                        <td>(PC)<br/>시크릿스토어</td>
                                         <td>돋움</td>
                                         <td class="text-start">
                                             <a href="/resources/static/html/order/order_detail.html" class="list_link">
@@ -1076,8 +999,11 @@
                                             </a>
                                             <span class="d-block text-secondary">·기존세트 / 블랙</span>
                                         </td>
-                                        <td>1</td>
-                                        <td>250,500</td>
+                                        <td>김길동<br/>(123123)</td>
+                                        <td>SSGPAY</td>
+                                        <td class="text-nowrap">1</td>
+                                        <td class="text-nowrap">500,000</td>
+                                        <td class="text-nowrap">250,500</td>
                                         <td>
                                             결제실패<br/>결제중 취소
                                         </td>
@@ -1095,22 +1021,50 @@
                                                 <input class="form-check-input" type="checkbox">
                                             </label>
                                         </td>
-                                        <td>(PC)<br/>시크릿스토어</td>
                                         <td class="text-start">
                                             <a href="/resources/static/html/order/order_detail.html" class="list_link">
-                                                2024-05-13<br/>22:22<br/>(K00021212)
+                                                2024-05-13<br/>(K00021212)
                                             </a>
+                                        </td>
+                                        <td class="text-nowrap">O0000008888</td>
+                                        <td>(PC)<br/>시크릿스토어</td>
+                                        <td>돋움</td>
+                                        <td class="text-start">
+                                            <a href="/resources/static/html/order/order_detail.html" class="list_link">
+                                                p00001245135<br/>
+                                                바삭바삭밥도둑명풍 완도김
+                                            </a>
+                                            <span class="d-block text-secondary">·기존세트 / 블랙</span>
                                         </td>
                                         <td>김길동<br/>(123123)</td>
                                         <td>포인트</td>
-                                        <td>500,000</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                        <td>500,000</td>
-                                        <td>500,000</td>
-                                        <td>O0000008888</td>
+                                        <td class="text-nowrap">0</td>
+                                        <td class="text-nowrap">500,000</td>
+                                        <td class="text-nowrap">250,500</td>
+                                        <td>
+                                            주문취소
+                                        </td>
+                                        <td>
+                                            <select class="form-select w-100">
+                                                <option value="">택배사선택</option>
+                                            </select>
+                                            <input type="text" class="form-control mt-1 w-100">
+                                        </td>
+                                        <td><button type="button" class="btn btn-sm btn-outline-primary">수정</button></td>
+                                    </tr>
+                                    <tr class="bg_pink" data-point_value="20,000" data-pay="0" data-ssg_money="0" data-mileage="0" data-coupon="0" data-total_amount="20,000" data-final_payment="10,000">
+                                        <td>
+                                            <label class="form-check form-check-inline m-0">
+                                                <input class="form-check-input" type="checkbox">
+                                            </label>
+                                        </td>
+                                        <td class="text-start">
+                                            <a href="/resources/static/html/order/order_detail.html" class="list_link">
+                                                2024-05-13<br/>(K00021212)
+                                            </a>
+                                        </td>
+                                        <td class="text-nowrap">O0000008888</td>
+                                        <td>(PC)<br/>시크릿스토어</td>
                                         <td>돋움</td>
                                         <td class="text-start">
                                             <a href="/resources/static/html/order/order_detail.html" class="list_link">
@@ -1119,8 +1073,11 @@
                                             </a>
                                             <span class="d-block text-secondary">·기존세트 / 블랙</span>
                                         </td>
-                                        <td>1</td>
-                                        <td>250,500</td>
+                                        <td>김길동<br/>(123123)</td>
+                                        <td>신용카드</td>
+                                        <td class="text-nowrap">0</td>
+                                        <td class="text-nowrap">250,500</td>
+                                        <td class="text-nowrap">250,500</td>
                                         <td>
                                             주문취소
                                         </td>
@@ -1138,22 +1095,13 @@
                                                 <input class="form-check-input" type="checkbox">
                                             </label>
                                         </td>
-                                        <td>(PC)<br/>시크릿스토어</td>
                                         <td class="text-start">
                                             <a href="/resources/static/html/order/order_detail.html" class="list_link">
-                                                2024-05-13<br/>22:22<br/>(K00021212)
+                                                2024-05-13<br/>(K00021212)
                                             </a>
                                         </td>
-                                        <td>김길동<br/>(123123)</td>
-                                        <td>신용카드</td>
-                                        <td>500,000</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                        <td>500,000</td>
-                                        <td>500,000</td>
-                                        <td>O0000008888</td>
+                                        <td class="text-nowrap">O0000008888</td>
+                                        <td>(PC)<br/>시크릿스토어</td>
                                         <td>돋움</td>
                                         <td class="text-start">
                                             <a href="/resources/static/html/order/order_detail.html" class="list_link">
@@ -1162,51 +1110,11 @@
                                             </a>
                                             <span class="d-block text-secondary">·기존세트 / 블랙</span>
                                         </td>
-                                        <td>1</td>
-                                        <td>250,500</td>
-                                        <td>
-                                            주문취소
-                                        </td>
-                                        <td>
-                                            <select class="form-select w-100">
-                                                <option value="">택배사선택</option>
-                                            </select>
-                                            <input type="text" class="form-control mt-1 w-100">
-                                        </td>
-                                        <td><button type="button" class="btn btn-sm btn-outline-primary">수정</button></td>
-                                    </tr>
-                                    <tr class="bg_pink">
-                                        <td>
-                                            <label class="form-check form-check-inline m-0">
-                                                <input class="form-check-input" type="checkbox">
-                                            </label>
-                                        </td>
-                                        <td>(PC)<br/>시크릿스토어</td>
-                                        <td class="text-start">
-                                            <a href="/resources/static/html/order/order_detail.html" class="list_link">
-                                                2024-05-13<br/>22:22<br/>(K00021212)
-                                            </a>
-                                        </td>
                                         <td>김길동<br/>(123123)</td>
                                         <td>신용카드</td>
-                                        <td>500,000</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                        <td>500,000</td>
-                                        <td>500,000</td>
-                                        <td>O0000008888</td>
-                                        <td>돋움</td>
-                                        <td class="text-start">
-                                            <a href="/resources/static/html/order/order_detail.html" class="list_link">
-                                                p00001245135<br/>
-                                                바삭바삭밥도둑명풍 완도김
-                                            </a>
-                                            <span class="d-block text-secondary">·기존세트 / 블랙</span>
-                                        </td>
-                                        <td>1</td>
-                                        <td>250,500</td>
+                                        <td class="text-nowrap">0</td>
+                                        <td class="text-nowrap">500,000</td>
+                                        <td class="text-nowrap">500,000</td>
                                         <td>
                                             반품완료<br/>주문취소
                                         </td>
@@ -1309,12 +1217,125 @@
         </div>
     </div>
 
+    <div class="cursor_box">
+        <div class="col-12">
+            <div class="col-6 item">
+                <div class="name">포인트</div>
+                <div id="point_value" class="number"></div>
+            </div>
+            <div class="col-6 item">
+                <div class="name">급여공제</div>
+                <div id="pay" class="number"></div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="col-6 item">
+                <div class="name">SSG MONEY</div>
+                <div id="ssg_money" class="number"></div>
+            </div>
+            <div class="col-6 item">
+                <div class="name">마일리지</div>
+                <div id="mileage" class="number"></div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="col-6 item">
+                <div class="name">할인쿠폰</div>
+                <div id="coupon" class="number"></div>
+            </div>
+            <div class="col-6 item">
+                <div class="name">총액</div>
+                <div id="total_amount" class="number"></div>
+            </div>
+        </div>
+        <div class="col-12 item">
+            <div class="name">실결제액</div>
+            <div id="final_payment" class="number"></div>
+        </div>
+    </div>
+
     <div id="footer"></div>
     <script>
         var includePath = "/resources/static/layout/footer.html";
         includeFile(includePath, 'footer');
     </script>
 </div>
+
+<script>
+    // $(window).on({
+
+
+    $(".tr_cursor tbody tr").hover(
+        function () {
+            var $row = $(this);
+            var point_value = $row.data("point_value");
+            var pay = $row.data("pay");
+            var ssg_money = $row.data("ssg_money");
+            var mileage = $row.data("mileage");
+            var coupon = $row.data("coupon");
+            var total_amount = $row.data("total_amount");
+            var final_payment = $row.data("final_payment");
+
+            $("#point_value").html(point_value);
+            $("#pay").html(pay);
+            $("#ssg_money").html(ssg_money);
+            $("#mileage").html(mileage);
+            $("#coupon").html(coupon);
+            $("#total_amount").html(total_amount);
+            $("#final_payment").html(final_payment);
+        },
+        function () {
+            $("#point_value").html("");
+            $("#pay").html("");
+            $("#ssg_money").html("");
+            $("#mileage").html("");
+            $("#coupon").html("");
+            $("#total_amount").html("");
+            $("#final_payment").html("");
+        }
+    );
+
+    $(".tr_cursor tbody tr").on({
+        mousemove: function (e) {
+
+            var $tr = $(this);
+            var $target = $(e.target).closest("td");
+
+            var requiredData = [
+                'point_value',
+                'pay',
+                'ssg_money',
+                'mileage',
+                'coupon',
+                'total_amount',
+                'final_payment'
+            ];
+
+            var hasAnyData = requiredData.some(dataKey => $tr.data(dataKey) !== undefined);
+
+            if($('.cursor_box') && hasAnyData){
+                let left = e.pageX + 30;
+                var $tds = $tr.find("td");
+                var tdIndex = $tds.index($target);
+
+                if (tdIndex >= $tds.length - 3) {
+                    // 마지막 3칸 안쪽 hover시 왼쪽에 위치
+                    left = e.pageX - $(".cursor_box").outerWidth() - 30;
+                }
+
+                $(".cursor_box").css({
+                    top: e.pageY + 10 + "px",
+                    left: left + "px"
+                }).show();
+            }else{
+                $('.cursor_box').hide();
+            }
+        },
+        mouseleave: (e) => {
+            $(".cursor_box").hide();
+        }
+    });
+</script>
 
 <script src="/resources/static/dist/js/tabler.min.js"></script>
 </body>
