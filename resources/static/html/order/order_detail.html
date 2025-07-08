@@ -723,244 +723,175 @@
                 </div>
 
                 <div id="section3" class="col-12">
-                    <div class="card form_area">
-                        <div class="card-header"><h3 class="card-title">최초 주문정보</h3></div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="form_item">
-                                    <div class="subheader mb-1">총 상품금액</div>
-                                    <div class="subcontent">
-                                        <div class="input-group">
-                                            <strong class="input-group-text text bg-info-lt w-25">+</strong>
-                                            <input type="tel" class="form-control" data-amount-comma="" value="30000" readonly>
-                                            <span class="input-group-text text w-25">원</span>
+                    <div class="d-flex">
+                        <div class="card form_area col-6">
+                            <div class="card-header"><h3 class="card-title">최초 주문정보</h3></div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="form_item size_lg">
+                                        <div class="subheader mb-1">주문금액</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="tel" class="form-control" data-amount-comma="" value="185000">
+                                                <span class="input-group-text text w-25">원</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item size_lg">
+                                        <div class="subheader mb-1">실 결제금액</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="tel" class="form-control text-danger" data-amount-comma="" value="20000">
+                                                <span class="input-group-text text w-25">원</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form_item">
-                                    <div class="subheader mb-1">총 배송비</div>
-                                    <div class="subcontent">
-                                        <div class="input-group">
-                                            <strong class="input-group-text text bg-info-lt w-25">+</strong>
-                                            <input type="tel" class="form-control" data-amount-comma="" value="10000" readonly>
-                                            <span class="input-group-text text w-25">원</span>
+                                <div class="row">
+                                    <div class="form_item size_m">
+                                        <div class="subheader mb-1">급여공제</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="tel" class="form-control" data-amount-comma="" value="0">
+                                                <span class="input-group-text text w-25">원</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item size_m">
+                                        <div class="subheader mb-1">SSG MONEY</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="tel" class="form-control" data-amount-comma="" value="0">
+                                                <span class="input-group-text text w-25">원</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item size_m">
+                                        <div class="subheader mb-1">포인트</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="tel" class="form-control" data-amount-comma="" value="185000">
+                                                <span class="input-group-text text w-25">원</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form_item bg-secondary-lt">
-                                    <div class="subheader mb-1">총 주문금액</div>
-                                    <div class="subcontent">
-                                        <div class="input-group">
-                                            <strong class="input-group-text text bg-primary-lt w-25">=</strong>
-                                            <input type="tel" class="form-control" data-amount-comma="" value="185000">
-                                            <span class="input-group-text text w-25">원</span>
+                                <div class="row">
+                                    <div class="form_item size_m">
+                                        <div class="subheader mb-1">마일리지</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="tel" class="form-control" data-amount-comma="" value="0" readonly>
+                                                <span class="input-group-text text w-25">원</span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form_item">
-                                    <div class="subheader mb-1">총 마일리지</div>
-                                    <div class="subcontent">
-                                        <div class="input-group">
-                                            <strong class="input-group-text text bg-info-lt w-25">+</strong>
-                                            <input type="tel" class="form-control" data-amount-comma="" value="0" readonly>
-                                            <span class="input-group-text text w-25">원</span>
+                                    <div class="form_item size_m">
+                                        <div class="subheader mb-1">상품할인</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="tel" class="form-control" data-amount-comma="" value="10000">
+                                                <span class="input-group-text text w-25">원</span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="form_item">
-                                    <div class="subheader mb-1">총 쿠폰</div>
-                                    <div class="subcontent">
-                                        <div class="input-group">
-                                            <strong class="input-group-text text bg-info-lt w-25">+</strong>
-                                            <input type="tel" class="form-control" data-amount-comma="" value="10000" readonly>
-                                            <span class="input-group-text text w-25">원</span>
+                                    <div class="form_item size_m">
+                                        <div class="subheader mb-1">취합(외상)</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="tel" class="form-control" data-amount-comma="" value="0">
+                                                <span class="input-group-text text w-25">원</span>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="form_item bg-secondary-lt">
-                                    <div class="subheader mb-1">총 할인금액</div>
-                                    <div class="subcontent">
-                                        <div class="input-group">
-                                            <strong class="input-group-text text bg-primary-lt w-25">=</strong>
-                                            <input type="tel" class="form-control" data-amount-comma="" value="10000">
-                                            <span class="input-group-text text w-25">원</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form_item">
-                                    <div class="subheader mb-1">포인트</div>
-                                    <div class="subcontent">
-                                        <div class="input-group">
-                                            <input type="tel" class="form-control" data-amount-comma="" value="185000">
-                                            <span class="input-group-text text w-25">원</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form_item">
-                                    <div class="subheader mb-1">급여공제</div>
-                                    <div class="subcontent">
-                                        <div class="input-group">
-                                            <input type="tel" class="form-control" data-amount-comma="" value="0">
-                                            <span class="input-group-text text w-25">원</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form_item">
-                                    <div class="subheader mb-1">SSG MONEY</div>
-                                    <div class="subcontent">
-                                        <div class="input-group">
-                                            <input type="tel" class="form-control" data-amount-comma="" value="0">
-                                            <span class="input-group-text text w-25">원</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form_item">
-                                    <div class="subheader mb-1">외상(취합)</div>
-                                    <div class="subcontent">
-                                        <div class="input-group">
-                                            <input type="tel" class="form-control" data-amount-comma="" value="0">
-                                            <span class="input-group-text text w-25">원</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form_item bg-secondary-lt">
-                                    <div class="subheader mb-1">실 결제금액</div>
-                                    <div class="subcontent">
-                                        <div class="input-group">
-                                            <input type="tel" class="form-control" data-amount-comma="" value="20000">
-                                            <span class="input-group-text text w-25">원</span>
-                                        </div>
-                                        <small class="form-hint text-danger">! 실 결제금액은 신용카드, 실시간계좌이체, 가상계좌, SSGPAY 결제 금액입니다</small>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="card form_area mt-2">
-                        <div class="card-header"><h3 class="card-title">최종 주문정보</h3></div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="form_item">
-                                    <div class="subheader mb-1">총 상품금액</div>
-                                    <div class="subcontent">
-                                        <div class="input-group">
-                                            <strong class="input-group-text text bg-info-lt w-25">+</strong>
-                                            <input type="tel" class="form-control" data-amount-comma="" value="30000" readonly>
-                                            <span class="input-group-text text w-25">원</span>
+                        <div class="card form_area col-6">
+                            <div class="card-header"><h3 class="card-title">최종 주문정보</h3></div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="form_item size_lg">
+                                        <div class="subheader mb-1">주문금액</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="tel" class="form-control" data-amount-comma="" value="185000">
+                                                <span class="input-group-text text w-25">원</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item size_lg">
+                                        <div class="subheader mb-1">실 결제금액</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="tel" class="form-control text-danger" data-amount-comma="" value="20000">
+                                                <span class="input-group-text text w-25">원</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form_item">
-                                    <div class="subheader mb-1">총 배송비</div>
-                                    <div class="subcontent">
-                                        <div class="input-group">
-                                            <strong class="input-group-text text bg-info-lt w-25">+</strong>
-                                            <input type="tel" class="form-control" data-amount-comma="" value="10000" readonly>
-                                            <span class="input-group-text text w-25">원</span>
+                                <div class="row">
+                                    <div class="form_item size_m">
+                                        <div class="subheader mb-1">급여공제</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="tel" class="form-control" data-amount-comma="" value="0">
+                                                <span class="input-group-text text w-25">원</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item size_m">
+                                        <div class="subheader mb-1">SSG MONEY</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="tel" class="form-control" data-amount-comma="" value="0">
+                                                <span class="input-group-text text w-25">원</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_item size_m">
+                                        <div class="subheader mb-1">포인트</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="tel" class="form-control" data-amount-comma="" value="185000">
+                                                <span class="input-group-text text w-25">원</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form_item bg-secondary-lt">
-                                    <div class="subheader mb-1">총 주문금액</div>
-                                    <div class="subcontent">
-                                        <div class="input-group">
-                                            <strong class="input-group-text text bg-primary-lt w-25">=</strong>
-                                            <input type="tel" class="form-control" data-amount-comma="" value="185000">
-                                            <span class="input-group-text text w-25">원</span>
+                                <div class="row">
+                                    <div class="form_item size_m">
+                                        <div class="subheader mb-1">마일리지</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="tel" class="form-control" data-amount-comma="" value="0" readonly>
+                                                <span class="input-group-text text w-25">원</span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form_item">
-                                    <div class="subheader mb-1">총 마일리지</div>
-                                    <div class="subcontent">
-                                        <div class="input-group">
-                                            <strong class="input-group-text text bg-info-lt w-25">+</strong>
-                                            <input type="tel" class="form-control" data-amount-comma="" value="0" readonly>
-                                            <span class="input-group-text text w-25">원</span>
+                                    <div class="form_item size_m">
+                                        <div class="subheader mb-1">상품할인</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="tel" class="form-control" data-amount-comma="" value="0">
+                                                <span class="input-group-text text w-25">원</span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="form_item">
-                                    <div class="subheader mb-1">총 쿠폰</div>
-                                    <div class="subcontent">
-                                        <div class="input-group">
-                                            <strong class="input-group-text text bg-info-lt w-25">+</strong>
-                                            <input type="tel" class="form-control" data-amount-comma="" value="10000" readonly>
-                                            <span class="input-group-text text w-25">원</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form_item bg-secondary-lt">
-                                    <div class="subheader mb-1">총 할인금액</div>
-                                    <div class="subcontent">
-                                        <div class="input-group">
-                                            <strong class="input-group-text text bg-primary-lt w-25">=</strong>
-                                            <input type="tel" class="form-control" data-amount-comma="" value="10000">
-                                            <span class="input-group-text text w-25">원</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form_item">
-                                    <div class="subheader mb-1">포인트</div>
-                                    <div class="subcontent">
-                                        <div class="input-group">
-                                            <input type="tel" class="form-control" data-amount-comma="" value="185000">
-                                            <span class="input-group-text text w-25">원</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form_item">
-                                    <div class="subheader mb-1">급여공제</div>
-                                    <div class="subcontent">
-                                        <div class="input-group">
-                                            <input type="tel" class="form-control" data-amount-comma="" value="0">
-                                            <span class="input-group-text text w-25">원</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form_item">
-                                    <div class="subheader mb-1">SSG MONEY</div>
-                                    <div class="subcontent">
-                                        <div class="input-group">
-                                            <input type="tel" class="form-control" data-amount-comma="" value="0">
-                                            <span class="input-group-text text w-25">원</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form_item">
-                                    <div class="subheader mb-1">외상(취합))</div>
-                                    <div class="subcontent">
-                                        <div class="input-group">
-                                            <input type="tel" class="form-control" data-amount-comma="" value="0">
-                                            <span class="input-group-text text w-25">원</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form_item bg-secondary-lt">
-                                    <div class="subheader mb-1">실 결제금액</div>
-                                    <div class="subcontent">
-                                        <div class="input-group">
-                                            <input type="tel" class="form-control" data-amount-comma="" value="20000">
-                                            <span class="input-group-text text w-25">원</span>
+                                    <div class="form_item size_m">
+                                        <div class="subheader mb-1">취합(외상)</div>
+                                        <div class="subcontent">
+                                            <div class="input-group">
+                                                <input type="tel" class="form-control" data-amount-comma="" value="0">
+                                                <span class="input-group-text text w-25">원</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <small class="form-hint text-danger mt-1">! 실 결제금액은 신용카드, 실시간계좌이체, 가상계좌, SSGPAY 결제 금액입니다</small>
                 </div>
 
                 <div id="section4" class="col-12">

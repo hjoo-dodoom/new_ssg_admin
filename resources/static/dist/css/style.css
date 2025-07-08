@@ -384,6 +384,8 @@ aside .display_type button.active{opacity:1;background-color:#fff;}
 .form-container.grid_grid3 .form_area .form_item{width:33.3333% !important;}
 .form-container.grid_grid2 .form_area .form_item{width:50% !important;}
 
+.form-container.grid_grid4 .form_area .form_item.size_m{width:33.3333% !important;}
+
 .form-container.grid_grid4 .form_area .form_item.size_lg{width:50% !important;}
 .form-container.grid_grid3 .form_area .form_item.size_lg{width:66.6666% !important;}
 .form-container.grid_grid2 .form_area .form_item.size_lg{width:100% !important;}
