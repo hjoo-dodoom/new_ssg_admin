@@ -128,9 +128,12 @@ transition:all 0.3s;}
 .cursor_box > div{display:flex;}
 .cursor_box .item{display:flex; justify-content:space-between; padding:4px; border: 1px solid #ff9d35;}
 
-.thum_hover{display:none;position:absolute;right:-170px;top:50%;transform:translate(0,-50%);width:500px;height:500px;z-index:10;box-shadow:0 0 10px rgba(0,0,0,.1)}
+.thum_hover{display:none;position:absolute;right:-170px;top:50%;transform:translate(0,-50%);width:160px;z-index:10;box-shadow:0 0 10px rgba(0,0,0,.1)}
 .thum_hover img{width:100%;max-width:100%;height:auto;max-height:9999em;}
 .list_link:hover + .thum_hover{display:block;}
+
+#thumb_img_box{display:none; position: absolute; width:160px; height:160px; z-index:10;box-shadow:0 0 10px rgba(0,0,0,.1);}
+#thumb_img_box img{width:100%;max-width:100%;height:auto;max-height:9999em;}
 
 .table-list-subject{display:inline-block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
 

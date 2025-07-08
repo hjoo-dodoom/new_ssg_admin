@@ -345,6 +345,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="table-responsive mt-0">
+                                                       
                                                         <table class="table table-vcenter table-line card-table label-control text-center table-mb">
                                                             <colgroup>
                                                                 <col style="width:45px;">
@@ -396,7 +397,7 @@
                                                                     </td>
                                                                     <td>O000000000</td>
                                                                     <td>3201150</td>
-                                                                    <td class="text-start">
+                                                                    <td class="text-start td_hover_img" data-thumb_img_url="/resources/static/dist/img/img2.jpg">
                                                                         <a href="javascript:;" class="list_link">
                                                                             p00001245135<br/>
                                                                             바삭바삭밥도둑명풍 완도김
@@ -433,7 +434,7 @@
                                                                     </td>
                                                                     <td>O000000000</td>
                                                                     <td>3201150</td>
-                                                                    <td class="text-start">
+                                                                    <td class="text-start td_hover_img" data-thumb_img_url="/resources/static/dist/img/img2.jpg">
                                                                         <a href="javascript:;" class="list_link">
                                                                             p00001245135<br/>
                                                                             바삭바삭밥도둑명풍 완도김
@@ -490,7 +491,7 @@
                                                                     </td>
                                                                     <td>O000000000</td>
                                                                     <td>3201150</td>
-                                                                    <td class="text-start">
+                                                                    <td class="text-start td_hover_img" data-thumb_img_url="/resources/static/dist/img/img2.jpg">
                                                                         <a href="javascript:;" class="list_link">
                                                                             p00001245135<br/>
                                                                             바삭바삭밥도둑명풍 완도김
@@ -630,7 +631,7 @@
                                                                     </td>
                                                                     <td><a href="javascript:;" class="list_link">배네파트너</a></td>
                                                                     <td>3201150</td>
-                                                                    <td class="text-start">
+                                                                    <td class="text-start td_hover_img" data-thumb_img_url="/resources/static/dist/img/img2.jpg">
                                                                         <a href="javascript:;" class="list_link">
                                                                             p00001245135<br/>
                                                                             바삭바삭밥도둑명풍 완도김
@@ -653,7 +654,7 @@
                                                                     </td>
                                                                     <td><a href="javascript:;" class="list_link">배네파트너</a></td>
                                                                     <td>3201150</td>
-                                                                    <td class="text-start">
+                                                                    <td class="text-start td_hover_img" data-thumb_img_url="/resources/static/dist/img/img2.jpg">
                                                                         <a href="javascript:;" class="list_link">
                                                                             p00001245135<br/>
                                                                             바삭바삭밥도둑명풍 완도김
@@ -679,7 +680,7 @@
                                                                     </td>
                                                                     <td><a href="javascript:;" class="list_link">배네파트너</a></td>
                                                                     <td>3201150</td>
-                                                                    <td class="text-start">
+                                                                    <td class="text-start td_hover_img" data-thumb_img_url="/resources/static/dist/img/img2.jpg">
                                                                         <a href="javascript:;" class="list_link">
                                                                             p00001245135<br/>
                                                                             바삭바삭밥도둑명풍 완도김
@@ -1402,6 +1403,11 @@
         </div>
     </div>
 
+    <!-- 테이블 목록 속 hover시 이미지 -->
+    <div id="thumb_img_box">
+        <img src="" alt=""/>
+    </div>
+
     <!-- 공통영역 -->
     <div id="footer"></div>
     <script>
@@ -1569,6 +1575,38 @@ function initLayerPosition(){
     element_layer.style.left = (((window.innerWidth || document.documentElement.clientWidth) - width)/2 - borderWidth) + 'px';
     element_layer.style.top = (((window.innerHeight || document.documentElement.clientHeight) - height)/2 - borderWidth) + 'px';
 }
+</script>
+<script>
+    // 테이블 목록 속 hover시 이미지 보이기
+    $(".td_hover_img").on({
+        mouseenter: function () {
+            const $td = $(this);
+            const offset = $td.offset();
+            const width = $td.outerWidth();
+            const tdHeight = $td.outerHeight();
+
+            const $thumbBox = $("#thumb_img_box");
+            const thumbImgUrl = $td.data("thumb_img_url");
+
+            $thumbBox.find("img").attr("src", thumbImgUrl);
+
+            // 먼저 보여줘야 정확한 높이 측정 가능
+            $thumbBox.css({ display: "block", visibility: "hidden" });
+
+            const thumbBoxHeight = $thumbBox.outerHeight();
+            const top = offset.top + (tdHeight / 2) - (thumbBoxHeight / 2);
+            const left = offset.left + width + 10;
+
+            $thumbBox.css({
+                top: top + "px",
+                left: left + "px",
+                visibility: "visible"
+            });
+        },
+        mouseleave: function () {
+            $("#thumb_img_box").hide().find("img").attr("src", '');
+        }
+    });
 </script>
 <script src="/resources/static/dist/js/tabler.min.js"></script>
 </body>
