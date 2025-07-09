@@ -124,9 +124,13 @@ transition:all 0.3s;}
 .list_prc + .hover > .s:before{border-left:1px solid #4e5f9b;border-bottom:1px solid #4e5f9b;}
 .list_prc:hover + .hover{display:block;}
 
-.cursor_box{display:none; position: absolute; min-width: 200px; border: 1px solid #ff9d35; background-color:#fff;font-size:12px;margin:3px 0;white-space: nowrap;z-index: 10;}
-.cursor_box > div{display:flex;}
-.cursor_box .item{display:flex; justify-content:space-between; padding:4px; border: 1px solid #ff9d35;}
+.cursor_box{display:none; position: absolute; min-width: 140px; border: 1px solid #000000; background-color:#fff;margin:-13px 0;white-space: nowrap;z-index: 10;}
+.cursor_box .item{ position:relative; display:flex; justify-content:space-between; padding:7px; color:#444444; font-size:12px;}
+.cursor_box .item + .item{border-top:1px solid #E6E7E9;}
+.cursor_box .item .cursor_box_before{position:absolute;left:-5px;top:50%; width:8px;height:8px;background-color:#fff;border-left:1px solid #000;border-bottom:1px solid #000;transform: translateY(-50%) rotate(45deg);}
+.cursor_box .item .name{font-weight:500;}
+.cursor_box .item .number{font-weight:600;margin-left:10px;}
+.cursor_box .item .number.big{font-size:13px;}
 
 .thum_hover{display:none;position:absolute;right:-170px;top:50%;transform:translate(0,-50%);width:160px;z-index:10;box-shadow:0 0 10px rgba(0,0,0,.1)}
 .thum_hover img{width:100%;max-width:100%;height:auto;max-height:9999em;}
