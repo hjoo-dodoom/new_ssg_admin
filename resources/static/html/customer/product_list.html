@@ -274,25 +274,20 @@
                     </div>
 
                     <div class="card table-mb-card">
-                        <div class="list-btns justify-content-between table_actions">
-                            <div>
-                                <div class="list_count">
-                                    <span class="check_pred_action">선택한 항목을</span>
-                                    <button type="button" class="btn btn-sm ms-1 btn-outline-warning">
-                                        삭제
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
                         <div class="table-responsive">
                             <table class="table table-vcenter table-line card-table text-center table-mb label-control tr_hover">
+                                <colgroup>
+                                    <col style="width:60px">
+                                    <col style="width:160px">
+                                    <col style="width:110px">
+                                    <col style="width:110px">
+                                    <col>
+                                    <col style="width:100px">
+                                    <col style="width:100px">
+                                    <col style="width:170px">
+                                </colgroup>
                                 <thead class="dark">
                                     <tr>
-                                        <th class="check-all-box" rowspan="2">
-                                            <label class="form-check form-check-inline m-0">
-                                                <input class="form-check-input check-all" type="checkbox">
-                                            </label>
-                                        </th>
                                         <th>번호</th>
                                         <th>고객사</th>
                                         <th>아이디</th>
@@ -301,23 +296,17 @@
                                         <th>답변상태</th>
                                         <th>문자발송</th>
                                         <th>작성일</th>
-                                        <th>삭제</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td colspan="10" class="list-empty">
+                                        <td colspan="8" class="list-empty">
                                             검색 내역이 존재하지 않습니다.
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <label class="form-check form-check-inline m-0">
-                                                <input class="form-check-input" type="checkbox">
-                                            </label>
-                                        </td>
                                         <td>19</td>
-                                        <td class="text-start">국민은행[소모품몰]</td>
+                                        <td class="text-start">삼성화재 RC 생생택배몰</td>
                                         <td>user_id</td>
                                         <td>홍*동</td>
                                         <td class="text-start">
@@ -344,14 +333,6 @@
                                             </button>
                                         </td>
                                         <td>2024-05-29 11:11:11</td>
-                                        <td>
-                                            <button 
-                                                type="button" 
-                                                class="btn btn-xs btn-warning" 
-                                            >
-                                                삭제
-                                            </button>
-                                        </td>
                                     </tr>
                                     <tr class="toggle_tr bg_gray" style="display:none;">
                                         <td class="text-start" colspan="100">
@@ -379,11 +360,6 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <label class="form-check form-check-inline m-0">
-                                                <input class="form-check-input" type="checkbox">
-                                            </label>
-                                        </td>
                                         <td>19</td>
                                         <td class="text-start">국민은행[소모품몰]</td>
                                         <td>user_id</td>
@@ -412,14 +388,6 @@
                                             </button>
                                         </td>
                                         <td>2024-05-29 11:11:11</td>
-                                        <td>
-                                            <button 
-                                                type="button" 
-                                                class="btn btn-xs btn-warning" 
-                                            >
-                                                삭제
-                                            </button>
-                                        </td>
                                     </tr>
                                     <tr class="toggle_tr bg_gray" style="display:none;">
                                         <td class="text-start" colspan="100">
@@ -453,6 +421,11 @@
                                         const tr = button.closest('tr');
                                         const nextTr = tr.nextElementSibling;
                                         const activeTr = tbody.querySelector('tr.active');
+                                        if (activeTr === tr) {
+                                            tr.classList.remove('active');
+                                            if (nextTr) nextTr.style.display = 'none';
+                                            return;
+                                        }
                                         if (activeTr) {
                                             activeTr.classList.remove('active');
                                             activeTr.nextElementSibling.style.display = 'none';
@@ -464,16 +437,6 @@
                                     }
                                 </script>
                             </table>
-                        </div>
-                        <div class="list-btns justify-content-between table_actions">
-                            <div>
-                                <div class="list_count">
-                                    <span class="check_pred_action">선택한 항목을</span>
-                                    <button type="button" class="btn btn-sm ms-1 btn-outline-warning">
-                                        삭제
-                                    </button>
-                                </div>
-                            </div>
                         </div>
                     </div>
 
