@@ -282,6 +282,18 @@
                         </div>
                         <div class="table-responsive">
                             <table class="table table-vcenter table-line card-table text-center table-mb label-control tr_hover">
+                                <colgroup>
+                                    <col style="width:30px">
+                                    <col style="width:60px">
+                                    <col style="width:160px">
+                                    <col style="width:110px">
+                                    <col style="width:110px">
+                                    <col>
+                                    <col style="width:100px">
+                                    <col style="width:100px">
+                                    <col style="width:170px">
+                                    <col style="width:60px">
+                                </colgroup>
                                 <thead class="dark">
                                     <tr>
                                         <th class="check-all-box" rowspan="2">
@@ -295,6 +307,7 @@
                                         <th>작성자</th>
                                         <th>제목</th>
                                         <th>답변상태</th>
+                                        <th>문자발송</th>
                                         <th>작성일</th>
                                         <th>삭제</th>
                                     </tr>
@@ -328,6 +341,15 @@
                                                 onclick="windowPopup('/resources/static/html/popup/answer_pop.html', '700', '800')"
                                             >
                                             답변대기
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button 
+                                                type="button" 
+                                                class="btn btn-xs btn-secondary" 
+                                                onclick="windowPopup('/resources/static/html/popup/sms_pop.html', '450', '600')"
+                                            >
+                                                문자발송
                                             </button>
                                         </td>
                                         <td>2024-05-29 11:11:11</td>
@@ -375,6 +397,15 @@
                                             답변완료
                                             </button>
                                         </td>
+                                        <td>
+                                            <button 
+                                                type="button" 
+                                                class="btn btn-xs btn-secondary" 
+                                                onclick="windowPopup('/resources/static/html/popup/sms_pop.html', '450', '600')"
+                                            >
+                                                문자발송
+                                            </button>
+                                        </td>
                                         <td>2024-05-29 11:11:11</td>
                                         <td>
                                             <button 
@@ -402,6 +433,11 @@
                                         const tr = button.closest('tr');
                                         const nextTr = tr.nextElementSibling;
                                         const activeTr = tbody.querySelector('tr.active');
+                                        if (activeTr === tr) {
+                                            tr.classList.remove('active');
+                                            if (nextTr) nextTr.style.display = 'none';
+                                            return;
+                                        }
                                         if (activeTr) {
                                             activeTr.classList.remove('active');
                                             activeTr.nextElementSibling.style.display = 'none';
