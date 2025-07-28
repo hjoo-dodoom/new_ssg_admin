@@ -112,6 +112,10 @@
                             <div class="row">
                                 <div class="table-responsive">
                                     <table class="table table-vcenter table-line card-table text-center table-mb label-control tr_hover">
+                                        <colgroup>
+                                            <col style="width: 50%;">
+                                            <col style="width: 50%;">
+                                        </colgroup>
                                         <thead class="dark">
                                             <tr>
                                                 <th>기본거래 계약서, 개인정보처리 위탁약정서</th>
@@ -136,7 +140,7 @@
                 </div>
                 <div class="col-12">
                     <div class="card form_area">
-                        <div class="card-header"><h3 class="card-title">정보보안 서약서</h3></div>
+                        <div class="card-header"><h3 class="card-title">보안체크 및 파기확인서</h3></div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="table-responsive">
@@ -150,24 +154,38 @@
                                         </div>
                                     </div>
                                     <table class="table table-vcenter table-line card-table table-mb label-control tr_hover">
+                                        <colgroup>
+                                            <col style="width: 200px;">
+                                            <col>
+                                            <col style="width: 200px;">
+                                            <col>
+                                        </colgroup>
                                         <tbody>
                                             <tr>
                                                 <th class="text-center">보안체크 년/월</th>
-                                                <td>2025년 3월</td>
+                                                <td>2025년 7월</td>
+                                                <th class="text-center">파기확인서 년/월</th>
+                                                <td>2025년 7월</td>
                                             </tr>
                                             <tr>
                                                 <th class="text-center">보안체크</th>
                                                 <td>
-                                                    <strong class="text-primary">인증완료</strong>
-                                                    <button type="button" class="btn btn-sm btn-secondary" onclick="showModal('check_list_popup');">정보보안 체크리스트 작성하기</button>
+                                                    <strong class="text-primary me-1">완료</strong>
+                                                    <button type="button" class="btn btn-sm btn-secondary" onclick="showModal('check_list_popup');">개인정보보호 체크리스트 작성하기</button>
+                                                </td>
+                                                <th class="text-center">파기확인서</th>
+                                                <td>
+                                                    <strong class="text-primary me-1">완료</strong>
+                                                    <button type="button" class="btn btn-sm btn-secondary" onclick="showModal('privacy_destruction');">파기확인서 작성하기</button>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <th class="text-center">안내사항</th>
-                                                <td>
-                                                    • 매달 10일 개인정보보호 체크리스트 작성 후 본인인증을 하셔야 정상적으로 완료됩니다.<br/>
-                                                    • 체크리스트는 담당자 중 한분만 작성하시면 되며, 점검을 안하시면 시스템 이용에 제재가 있습니다.<br/>
-                                                    • 문의: 023406-6938(김미영 부장)
+                                                <td colspan="3">
+                                                    • 매달 10일 개인정보보호 체크리스트 및 파기확인서 작성 후 본인인증을 하셔야 정상적으로 완료됩니다.<br/>
+                                                    • 개인정보보호 체크리스트 및 파기확인서는 담당자 중 한분만 작성하시면 되며, 점검을 안하시면 시스템 이용에 제재가 있습니다.<br/>
+                                                    • 파기확인서는 전월 주문내역/정산내역 다운로드 이력이 있는 협력회사만 작성해주세요.<br/>
+                                                    • 문의 : 02-3406-6938(김미영 부장)
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -179,34 +197,43 @@
                 </div>
                 <div class="col-12">
                     <div class="card form_area">
-                        <div class="card-header"><h3 class="card-title">보안 체크</h3></div>
+                        <div class="card-header"><h3 class="card-title">관리자 정보</h3></div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="table-responsive">
                                     <table class="table table-vcenter table-line card-table text-center table-mb label-control tr_hover">
                                         <thead>
                                             <tr>
-                                                <th>담당자</th>
+                                                <th>번호</th>
+                                                <th>권한</th>
                                                 <th>담당자명</th>
-                                                <th>담당자 휴대폰번호</th>
-                                                <th>인증유무</th>
-                                                <th>인증일자</th>
+                                                <th>휴대폰번호</th>
+                                                <th>권한</th>
+                                                <th>보안서약서</th>
+                                                <th>보안서약서 인증일자</th>
+                                                <th>상태</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <th>영업담당자</th>
-                                                <td>홍길동</td>
+                                                <td>1</td>
+                                                <td>최상위관리자</td>
+                                                <td>홍*동</td>
                                                 <td>010-1234-1234</td>
-                                                <td><strong class="text-primary">인증완료</strong></td>
-                                                <td>2024-03-21 13:02:24</td>
+                                                <td class="text-start">영업담당자, 발주담당자, 세금계산서</td>
+                                                <td><strong class="text-primary">인증</strong></td>
+                                                <td class="text-nowrap">2024-03-21 13:02:24</td>
+                                                <td><strong class="text-primary">정상승인</strong></td>
                                             </tr>
                                             <tr>
-                                                <th>세금계산서담당</th>
-                                                <td>김민수</td>
+                                                <td>2</td>
+                                                <td>일반관리자</td>
+                                                <td>김*동</td>
                                                 <td>010-1234-1234</td>
-                                                <td><strong class="text-primary">인증완료</strong></td>
-                                                <td>2024-03-21 13:02:24</td>
+                                                <td class="text-start">세금계산서</td>
+                                                <td><strong class="text-primary">인증</strong></td>
+                                                <td class="text-nowrap">2024-03-21 13:02:24</td>
+                                                <td><strong class="text-primary">정상승인</strong></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -231,8 +258,24 @@
                                         </div>
                                     </div>
                                     <table class="table table-vcenter table-line card-table text-center table-mb label-control tr_hover">
-                                        <thead class="dark">
+                                        <colgroup>
+                                            <col style="width: 7.6%;">
+                                            <col style="width: 7.6%;">
+                                            <col style="width: 7.6%;">
+                                            <col style="width: 7.6%;">
+                                            <col style="width: 7.6%;">
+                                            <col style="width: 7.6%;">
+                                            <col style="width: 7.6%;">
+                                            <col style="width: 7.6%;">
+                                            <col style="width: 7.6%;">
+                                            <col style="width: 7.6%;">
+                                            <col style="width: 7.6%;">
+                                            <col style="width: 7.6%;">
+                                            <col style="width: 7.6%;">
+                                        </colgroup>
+                                        <thead>
                                             <tr>
+                                                <th>구분</th>
                                                 <th>1월</th>
                                                 <th>2월</th>
                                                 <th>3월</th>
@@ -249,19 +292,35 @@
                                         </thead>
                                         <tbody>
                                             <tr>
+                                                <th>체크리스트</th>
+                                                <td>
+                                                    <a href="javascript:;" class="list_link text-primary"
+                                                    onclick="windowPopup('/resources/static/html/popup/security_check_history_pop.html', '700', '550')"
+                                                    >01-02</a>
+                                                </td>
                                                 <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th>파기확인서</th>
                                                 <td></td>
                                                 <td></td>
                                                 <td>
                                                     <a href="javascript:;" class="list_link text-primary"
-                                                    onclick="windowPopup('/resources/static/html/popup/security_check_history_pop.html', '700', '550')"
-                                                    >04-03</a>
+                                                    onclick="windowPopup('/resources/static/html/popup/destroy_check_pop.html', '700', '550')"
+                                                    >03-10</a>
                                                 </td>
-                                                <td>
-                                                    <a href="javascript:;" class="list_link text-primary"
-                                                    onclick="windowPopup('/resources/static/html/popup/security_check_history_pop.html', '700', '550')"
-                                                    >05-07</a>
-                                                </td>
+                                                <td></td>
+                                                <td></td>
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
