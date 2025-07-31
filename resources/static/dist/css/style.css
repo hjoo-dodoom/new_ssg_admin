@@ -784,6 +784,7 @@ background-image: var(--tblr-form-select-bg-img), var(--tblr-form-select-bg-icon
 .move-btn{display:inline-block;width:24px;height:24px;border:none;text-indent: -999em;overflow:hidden;background-repeat:no-repeat;background-position:center center;background-size:24px;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icons-tabler-outline icon-tabler-chevron-right'%3E%3Cpath stroke='none' d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M9 6l6 6l-6 6' /%3E%3C/svg%3E");}
 
+tbody .fixed_cell, tfoot .fixed_cell{background-color:inherit; outline: 1px solid #cbcbcb;}
 
 .main_page a{color:#000;}
 .main_page .card{border-radius:12px;}
