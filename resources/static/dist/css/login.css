@@ -14,8 +14,11 @@ body.login_page{overflow-y:auto;}
 .admin_login .login_content .content .al_title p{margin-top:13px;color:#333;font-size:16px;}
 .admin_login .login_content .bottom{width: 100%; margin-top:auto; text-align: center;}
 .admin_login .login_content .bottom .links{display: flex; justify-content: center; margin-bottom: 10px;}
-.admin_login .login_content .bottom a{color:#F22C2D;font-size: 16px;}
+.admin_login .login_content .bottom a{color:#D80C18;font-size: 15px;}
 .admin_login .login_content .bottom a:hover{text-decoration: underline;}
+.admin_login .login_content .bottom .links.type_logo{justify-content: space-between; align-items: center; margin-bottom: 24px;}
+.admin_login .login_content .bottom .links.type_logo .ft_logo{display: block; line-height: 0;}
+.admin_login .login_content .bottom .links.type_logo .ft_logo img{display: block; height: 18px;}
 .admin_login .login_content .copy{padding-top:25px;border-top:1px solid #E2E2E2;text-align: center;color:#888;font-size:14px;width:100%;}
 .admin_login.total .login_content{background-position: right -50px bottom -20px;background-repeat: no-repeat;background-image: url('/resources/static/dist/img/login_banner_form_bg.jpg');}
 
